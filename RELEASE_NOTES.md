@@ -8,6 +8,8 @@
 - Dedicated game folders for Forest Fortune, Sweet Wins, Deep Dive, Choco Boom, Fruit Elixir and Passion Paradise.
 - Lead delivery adapter layer prepared for console, Resend, HubSpot, Pipedrive and custom providers.
 - Top-level error boundary and polished 404 state.
+- Organization structured data.
+- Sitemap entries for all game detail routes.
 
 ### Improved
 
@@ -16,12 +18,15 @@
 - Game artwork uses the source aspect ratio to avoid unnecessary crop.
 - Metadata base, sitemap and robots use shared site URL configuration.
 - Contact form handles loading, success, validation, server error, network failure and duplicate-submit states.
+- Removed obsolete prototype components, placeholder localized content and planning-only wireframe documentation.
+- Contact page now gives qualified B2B visitors clearer guidance on what to include.
+- Mobile menu closes cleanly after contact CTA navigation.
 
 ### Verified
 
 - `pnpm lint`: passed.
 - `pnpm build`: passed.
-- Production route smoke-test passed for all required launch routes, sitemap and robots.
+- Production route smoke-test passed for all required launch routes, all game detail routes, sitemap, robots, legacy redirects and lead API states.
 - Copy checked against the local brochure and official public OpenGamer site. Unconfirmed RTP, volatility, fixed timelines, shipped counts, regulated market availability, client logos, partner names and certifications remain unpublished.
 
 ### Remaining
@@ -31,4 +36,4 @@
 - Confirm CRM/email provider and credentials outside source control.
 - Confirm game-level metadata before showing RTP, volatility, format, release status or certification details.
 - Run screenshot-based visual QA in an environment with a working Playwright or Chrome automation runtime.
-- Create Vercel preview once Vercel CLI is installed and authenticated.
+- Create Vercel preview once the device login flow is completed.

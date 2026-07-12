@@ -25,11 +25,14 @@
 - Contact form now catches network/API failures client-side and keeps accessible validation feedback for required fields and consent.
 - Copy was reviewed against the local brochure and official public OpenGamer website. Shipped counts, RTP bands, fixed timelines, regulated market availability, partner/client logos and certifications remain unpublished until approved.
 - Local smoke QA covered all required routes against `next start`.
+- Final sprint cleanup removed obsolete prototype files and reduced launch page bundle sizes.
+- SEO pass added Organization structured data and sitemap entries for all game detail pages.
+- UX pass improved mobile menu close behavior, contact guidance and visible validation styling.
 - Screenshot automation was attempted, but Playwright browser binaries were unavailable and the local Chrome runtime closed under automation sandbox constraints. Structural smoke checks and code-level layout review were completed.
 - Final lint: passed.
 - Final production build: passed.
-- Production smoke-test: passed for `/`, `/services`, `/games`, `/games/forest-fortune`, `/technology`, `/about`, `/contact`, `/privacy-policy`, `/terms-of-use`, `/cookie-policy`, `/sitemap.xml`, `/robots.txt`.
-- Vercel CLI and npm were not available in PATH, so no preview deployment was created from this machine.
+- Production smoke-test: passed for `/`, `/services`, `/games`, all six game detail routes, `/technology`, `/about`, `/contact`, legal pages, `/sitemap.xml`, `/robots.txt`, legacy redirects and lead API states.
+- Vercel CLI and npm were not available in PATH. Vercel CLI 55.0.0 was available through `pnpm dlx`, but no saved credentials were found and the device login flow requires user authentication.
 - Legal entity details, social ownership review, CRM/email provider and final legal copy still require owner confirmation.
 
 ## Current Preview Readiness
@@ -40,3 +43,5 @@
 - Metadata base: `NEXT_PUBLIC_SITE_URL`, then `VERCEL_URL`, then local fallback.
 - Required preview environment variables: `NEXT_PUBLIC_SITE_URL`, `LEAD_EMAIL_TO`, `LEAD_PROVIDER=console`.
 - No production domain deployment has been created.
+- Preview deployment command after Vercel authentication:
+  `env PATH=/Users/macbook/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH /Users/macbook/Library/pnpm/bin/pnpm dlx vercel@latest`

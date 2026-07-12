@@ -21,6 +21,11 @@
 - External demo links preserve `target` and `rel` attributes through the shared button component.
 - Game artwork cards use the source artwork aspect ratio to avoid unnecessary cropping.
 - Local route smoke-test passed against the production preview server.
+- Obsolete prototype components, placeholder content files and planning-only wireframe docs removed.
+- Sitemap includes all game detail URLs.
+- Organization structured data added using confirmed company details only.
+- Contact page includes clearer B2B enquiry guidance.
+- Mobile menu closes after tapping the contact CTA.
 
 ## Pending Factual Items
 
@@ -38,12 +43,13 @@
 - Install command: `pnpm install`.
 - Output: default Next.js Vercel output.
 - Preview command if Vercel CLI is installed and authenticated: `vercel`.
-- If Vercel CLI is unavailable: `npm install -g vercel`, then `vercel login`, then `vercel`.
+- If global Vercel CLI is unavailable on this machine, use:
+  `env PATH=/Users/macbook/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH /Users/macbook/Library/pnpm/bin/pnpm dlx vercel@latest`
 - Required environment variable: `LEAD_EMAIL_TO=mn@open-gamer.com`.
 - Recommended preview environment variable: `NEXT_PUBLIC_SITE_URL=https://your-vercel-preview-url.vercel.app`.
 - Current lead provider variable: `LEAD_PROVIDER=console`.
 - No credentials are hardcoded.
-- Current machine status: `vercel` and `npm` are unavailable in PATH, so preview deployment was not created locally.
+- Current machine status: `vercel` and `npm` are unavailable in PATH. Vercel CLI 55.0.0 runs through `pnpm dlx`, but no saved Vercel credentials were found and the device login flow requires user authentication.
 
 ## Asset Migration Reminder
 
@@ -64,5 +70,7 @@
 
 - `pnpm lint`: passed.
 - `pnpm build`: passed.
-- Smoke-tested: `/`, `/services`, `/games`, `/games/forest-fortune`, `/technology`, `/about`, `/contact`, `/privacy-policy`, `/terms-of-use`, `/cookie-policy`, `/sitemap.xml`, `/robots.txt`.
+- Smoke-tested: `/`, `/services`, `/games`, all six game detail routes, `/technology`, `/about`, `/contact`, `/privacy-policy`, `/terms-of-use`, `/cookie-policy`, `/sitemap.xml`, `/robots.txt`.
+- Smoke-tested legacy redirects: `/capabilities`, `/portfolio`, `/studios`, `/studios/engineering`, `/ru`, `/es`, `/ru/portfolio`, `/es/capabilities`.
+- Smoke-tested lead API validation and valid submission path.
 - Automated screenshot capture was blocked by the local browser runtime; rerun visual screenshot QA after Playwright browsers or a compatible Chrome automation environment is available.
