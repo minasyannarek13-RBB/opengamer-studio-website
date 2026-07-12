@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+import { company } from "@/content/company";
 import { siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -27,10 +28,29 @@ export const metadata: Metadata = {
   }
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: company.name,
+  url: company.website,
+  logo: `${siteUrl}/assets/brand/opengamer-logo.png`,
+  email: company.email,
+  telephone: company.phone,
+  address: company.address,
+  sameAs: company.social.map((item) => item.href)
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </body>
     </html>
   );
 }
