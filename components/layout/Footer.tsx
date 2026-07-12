@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { company, logoAsset } from "@/content/company";
-import { legalNavigation, mainNavigation } from "@/content/navigation";
+import { footerCompanyNavigation, legalNavigation } from "@/content/navigation";
 
 export function Footer() {
   return (
@@ -23,7 +23,7 @@ export function Footer() {
           <div>
             <h2 className="text-sm font-semibold text-white">Company</h2>
             <div className="mt-4 grid gap-3 text-sm text-slate-400">
-              {mainNavigation.map((route) => (
+              {footerCompanyNavigation.map((route) => (
                 <Link key={route.href} href={route.href} className="hover:text-white">
                   {route.label}
                 </Link>

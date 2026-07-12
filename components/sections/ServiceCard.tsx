@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/Button";
 import type { ServiceItem } from "@/content/services";
 
 export function ServiceCard({ service }: { service: ServiceItem }) {
+  const href = service.title === "Live Casino Development" ? "/services/live-casino-development" : "/contact";
+  const label = service.title === "Live Casino Development" ? "View service details" : "Discuss this service";
+
   return (
     <article className="rounded-lg border border-line bg-white/[0.04] p-5 transition-colors hover:border-white/20">
       <h3 className="text-xl font-semibold text-white">{service.title}</h3>
@@ -14,8 +17,8 @@ export function ServiceCard({ service }: { service: ServiceItem }) {
           </li>
         ))}
       </ul>
-      <Button href="/contact" variant="link" className="mt-5">
-        Discuss this service
+      <Button href={href} variant="link" className="mt-5">
+        {label}
       </Button>
     </article>
   );

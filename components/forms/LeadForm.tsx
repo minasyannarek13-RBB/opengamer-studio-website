@@ -2,7 +2,7 @@
 
 import { type FormEvent, useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { companyTypes, contactMethods, projectStages, serviceInterests } from "@/content/contact";
+import { companyTypes, contactMethods, projectStages, serviceInterests, type ServiceInterestGroup } from "@/content/contact";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 type LeadResponse = {
@@ -181,7 +181,7 @@ function Select({
 }: {
   label: string;
   name: string;
-  options: string[];
+  options: string[] | ServiceInterestGroup[];
   required?: boolean;
   error?: string;
 }) {
@@ -198,11 +198,21 @@ function Select({
         className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-emerald aria-[invalid=true]:border-red-400/70"
       >
         <option value="">Select</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
+        {options.map((option) =>
+          typeof option === "string" ? (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ) : (
+            <optgroup key={option.label} label={option.label}>
+              {option.options.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </optgroup>
+          )
+        )}
       </select>
       {error ? (
         <span id={errorId} className="text-xs text-red-300">

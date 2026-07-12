@@ -6,7 +6,7 @@ export type Game = {
   imageHeight: number;
   shortDescription: string;
   category?: string[];
-  status?: "Live" | "In Development" | "Roadmap";
+  status?: "In Development" | "Roadmap";
   demoUrl?: string;
   format?: string;
   rtp?: string;
@@ -73,6 +73,16 @@ export const games: Game[] = [
     shortDescription: "A tropical slot title from the confirmed OpenGamer portfolio.",
     category: ["Slot Game"],
     demoUrl: "https://open-gamer.com/games/view?code=passion-paradise-5"
+  },
+  {
+    title: "Dragon Rush",
+    slug: "dragon-rush",
+    image: "/assets/games/dragon-rush/artwork.webp",
+    imageWidth: 600,
+    imageHeight: 420,
+    shortDescription: "A dragon-themed slot title from the confirmed OpenGamer portfolio.",
+    category: ["Slot Game"],
+    demoUrl: "https://open-gamer.com/games/view?code=dragon-rush"
   }
 ];
 

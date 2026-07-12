@@ -10,8 +10,10 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { ProjectCard } from "@/components/sections/ProjectCard";
 import { architectureFlow, coreCapabilities, developmentProcess, partnershipModels, whyOpenGamer } from "@/content/services";
 import { games } from "@/content/games";
+import { portfolioProjects } from "@/content/portfolio";
 
 const studioSignals = ["Game production", "RGS technology", "Integration support", "QA and launch support"];
 
@@ -115,6 +117,19 @@ export default function HomePage() {
         <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {games.map((game) => (
             <GameCard key={game.slug} game={game} />
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeader
+          eyebrow="Proprietary Projects"
+          title="Original Concepts in Development"
+          description="Beyond client production, OpenGamer is developing its own live casino format and product concepts."
+        />
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          {portfolioProjects.map((project) => (
+            <ProjectCard key={project.title} {...project} />
           ))}
         </div>
       </Section>

@@ -6,3 +6,6 @@ qa/lighthouse*.json
 node_modules/
 *.log
 .DS_Store
+public/assets/projects/elementals/**
+!public/assets/projects/elementals/
+!public/assets/projects/elementals/guardian.jpeg
