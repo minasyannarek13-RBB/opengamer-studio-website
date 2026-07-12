@@ -28,11 +28,14 @@
 - Final sprint cleanup removed obsolete prototype files and reduced launch page bundle sizes.
 - SEO pass added Organization structured data and sitemap entries for all game detail pages.
 - UX pass improved mobile menu close behavior, contact guidance and visible validation styling.
-- Screenshot automation was attempted, but Playwright browser binaries were unavailable and the local Chrome runtime closed under automation sandbox constraints. Structural smoke checks and code-level layout review were completed.
+- Visual QA automation is now available through `pnpm qa:visual`; Playwright Chromium is installed in a project-local ignored cache.
+- Latest local visual QA captured 75 screenshots across desktop, tablet and mobile viewports with zero scripted failures.
+- Latest performance QA measured Lighthouse scores: local `/` 100/100/100/100, local `/games` 98/100/100/100, local `/contact` 100/100/100/100, deployed `/` 99/100/100/100.
 - Final lint: passed.
 - Final production build: passed.
 - Production smoke-test: passed for `/`, `/services`, `/games`, all six game detail routes, `/technology`, `/about`, `/contact`, legal pages, `/sitemap.xml`, `/robots.txt`, legacy redirects and lead API states.
 - Vercel CLI and npm were not available in PATH. Vercel CLI 55.0.0 was available through `pnpm dlx`, but no saved credentials were found and the device login flow requires user authentication.
+- Deployed preview `https://opengamer-studio-prototype.vercel.app` is publicly accessible and not protected by Vercel Authentication.
 - Legal entity details, social ownership review, CRM/email provider and final legal copy still require owner confirmation.
 
 ## Current Preview Readiness

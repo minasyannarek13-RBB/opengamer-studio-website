@@ -6,7 +6,9 @@
 - Game artwork uses local optimized WebP assets and the confirmed 10:7 source artwork ratio to avoid unnecessary crop.
 - Header, footer and CTA patterns are consistent across `/`, `/services`, `/games`, `/technology`, `/about`, `/contact` and legal pages.
 - Contact page now includes practical B2B enquiry guidance without unsupported response-time promises.
-- Automated screenshot capture could not be completed because Playwright browser binaries were unavailable and the local Chrome automation runtime closed under sandbox constraints.
+- Playwright visual QA now runs through `pnpm qa:visual`.
+- Latest local run captured 75 screenshots across desktop, tablet and mobile viewports with zero scripted failures.
+- Screenshots are generated under `qa/screenshots/desktop`, `qa/screenshots/tablet` and `qa/screenshots/mobile` and are ignored from Git.
 
 ## Performance Review
 
@@ -14,7 +16,10 @@
 - Launch page JS stayed small after cleanup: primary launch routes are about 1.95 kB route size with 112 kB first-load JS; `/contact` is about 3.54 kB route size with 114 kB first-load JS.
 - Obsolete prototype components, placeholder localized content and wireframe code were removed.
 - All public imagery is local and served through Next.js Image where rendered.
-- Lighthouse scoring could not be executed because browser automation was blocked in this environment.
+- Lighthouse local `/`: Performance 100, Accessibility 100, Best Practices 100, SEO 100. LCP 1.6 s, CLS 0, TBT 20 ms.
+- Lighthouse local `/games`: Performance 98, Accessibility 100, Best Practices 100, SEO 100. LCP 2.3 s, CLS 0, TBT 20 ms.
+- Lighthouse local `/contact`: Performance 100, Accessibility 100, Best Practices 100, SEO 100. LCP 1.9 s, CLS 0, TBT 30 ms.
+- Lighthouse deployed `/`: Performance 99, Accessibility 100, Best Practices 100, SEO 100. LCP 1.6 s, CLS 0, TBT 20 ms.
 
 ## SEO Review
 
@@ -38,6 +43,7 @@
 - Passed routes: `/`, `/services`, `/games`, `/games/forest-fortune`, `/games/sweet-wins`, `/games/deep-dive`, `/games/choco-boom`, `/games/fruit-elixir`, `/games/passion-paradise`, `/technology`, `/about`, `/contact`, `/privacy-policy`, `/terms-of-use`, `/cookie-policy`, `/sitemap.xml`, `/robots.txt`.
 - Passed redirects: `/capabilities`, `/portfolio`, `/studios`, `/studios/engineering`, `/ru`, `/es`, `/ru/portfolio`, `/es/capabilities`.
 - Lead API returned `400` for missing required fields and `200` for a valid smoke-test payload with `LEAD_PROVIDER=console`.
+- Deployed preview route check passed for all required routes.
 
 ## Remaining Factual Information
 
@@ -50,15 +56,15 @@
 ## Known Limitations
 
 - No real CRM/email delivery is connected; the current `console` provider is a silent preview-safe sink.
-- Screenshot-based visual QA and Lighthouse scoring require a working browser automation runtime.
-- No Vercel preview URL exists yet because Vercel device authentication is required.
+- Updated Vercel deployment still requires CLI authentication from this environment.
 
 ## Deployment Status
 
 - Production deployment: not created.
-- Preview deployment: not created.
-- Vercel CLI status: global `vercel` is unavailable; `npm` is unavailable; Vercel CLI 55.0.0 runs through `pnpm dlx`.
-- Authentication status: no saved Vercel credentials found. The CLI started a device login flow and waited for user authentication.
+- Existing preview URL: `https://opengamer-studio-prototype.vercel.app`.
+- Preview access status: public, HTTP 200, no deployment protection observed.
+- Updated preview deployment: pending until Vercel CLI authentication is available.
+- Vercel CLI status: global `vercel` is unavailable; `npm` is unavailable; Vercel CLI runs through `pnpm dlx`.
 
 ## Preview Command
 
@@ -70,6 +76,5 @@ env PATH=/Users/macbook/.cache/codex-runtimes/codex-primary-runtime/dependencies
 ## Future Recommendations
 
 - Complete Vercel authentication and create a preview deployment.
-- Run Lighthouse and screenshot QA in a browser automation environment with Playwright browsers installed.
 - Connect the approved lead provider adapter.
 - Replace preview-safe legal text with counsel-approved legal copy before production domain launch.

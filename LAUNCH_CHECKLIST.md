@@ -26,6 +26,12 @@
 - Organization structured data added using confirmed company details only.
 - Contact page includes clearer B2B enquiry guidance.
 - Mobile menu closes after tapping the contact CTA.
+- Visual QA script added: `pnpm qa:visual`.
+- Playwright Chromium visual QA completed locally across 1440x1000, 1024x900, 768x1024, 390x844 and 375x812.
+- Lighthouse checks completed for local `/`, `/games`, `/contact` and deployed `/`.
+- Games page accessibility issue fixed by correcting filter ARIA and heading order.
+- Legal pages now show a last-updated line and narrower reading width.
+- Contact form now has grouped sections and required/optional field indicators.
 
 ## Pending Factual Items
 
@@ -35,6 +41,7 @@
 - Confirm whether all social links should remain public.
 - Confirm final local asset ownership and filenames.
 - Confirm whether public contact email should use the brochure email `mn@open-gamer.com`, the official site email `info@open-gamer.com`, or both.
+- Confirm final legal entity/data controller details for legal pages.
 
 ## Deployment Notes
 
@@ -73,4 +80,5 @@
 - Smoke-tested: `/`, `/services`, `/games`, all six game detail routes, `/technology`, `/about`, `/contact`, `/privacy-policy`, `/terms-of-use`, `/cookie-policy`, `/sitemap.xml`, `/robots.txt`.
 - Smoke-tested legacy redirects: `/capabilities`, `/portfolio`, `/studios`, `/studios/engineering`, `/ru`, `/es`, `/ru/portfolio`, `/es/capabilities`.
 - Smoke-tested lead API validation and valid submission path.
-- Automated screenshot capture was blocked by the local browser runtime; rerun visual screenshot QA after Playwright browsers or a compatible Chrome automation environment is available.
+- Latest Playwright setup succeeded with a project-local browser cache ignored from Git.
+- Latest local visual QA: 75 screenshots, zero scripted failures.

@@ -21,12 +21,19 @@
 - Removed obsolete prototype components, placeholder localized content and planning-only wireframe documentation.
 - Contact page now gives qualified B2B visitors clearer guidance on what to include.
 - Mobile menu closes cleanly after contact CTA navigation.
+- Added repeatable Playwright screenshot QA script.
+- Contact form now uses contact/project fieldsets with required and optional field indicators.
+- Legal pages now show last-updated formatting and improved reading width.
+- Games page filter ARIA and heading order fixed for Lighthouse accessibility.
 
 ### Verified
 
 - `pnpm lint`: passed.
 - `pnpm build`: passed.
 - Production route smoke-test passed for all required launch routes, all game detail routes, sitemap, robots, legacy redirects and lead API states.
+- Deployed preview route check passed for all required routes.
+- Local visual QA generated 75 screenshots with zero scripted failures after scroll/decode handling for lazy-loaded images.
+- Lighthouse: local `/` 100 performance, 100 accessibility, 100 best practices, 100 SEO; local `/games` 98/100/100/100; local `/contact` 100/100/100/100; deployed `/` 99/100/100/100.
 - Copy checked against the local brochure and official public OpenGamer site. Unconfirmed RTP, volatility, fixed timelines, shipped counts, regulated market availability, client logos, partner names and certifications remain unpublished.
 
 ### Remaining
@@ -35,5 +42,4 @@
 - Confirm final contact email strategy.
 - Confirm CRM/email provider and credentials outside source control.
 - Confirm game-level metadata before showing RTP, volatility, format, release status or certification details.
-- Run screenshot-based visual QA in an environment with a working Playwright or Chrome automation runtime.
 - Create Vercel preview once the device login flow is completed.
