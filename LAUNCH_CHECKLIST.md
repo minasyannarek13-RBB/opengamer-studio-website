@@ -53,10 +53,15 @@
 - If global Vercel CLI is unavailable on this machine, use:
   `env PATH=/Users/macbook/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH /Users/macbook/Library/pnpm/bin/pnpm dlx vercel@latest`
 - Required environment variable: `LEAD_EMAIL_TO=mn@open-gamer.com`.
-- Recommended preview environment variable: `NEXT_PUBLIC_SITE_URL=https://your-vercel-preview-url.vercel.app`.
+- Recommended preview environment variable: `NEXT_PUBLIC_SITE_URL=https://opengamer-studio-prototype.vercel.app`.
 - Current lead provider variable: `LEAD_PROVIDER=console`.
 - No credentials are hardcoded.
-- Current machine status: `vercel` and `npm` are unavailable in PATH. Vercel CLI 55.0.0 runs through `pnpm dlx`, but no saved Vercel credentials were found and the device login flow requires user authentication.
+- Updated preview deployment completed through `pnpm dlx vercel@latest`.
+- Public preview alias: `https://opengamer-studio-prototype.vercel.app`.
+- Vercel deployment id: `dpl_4dGhRfpztkntssFdw3aNrzUskGSw`.
+- Unique deployment URL: `https://opengamer-studio-prototype-q1bm6m0xm-open-gamer.vercel.app` (ready, Vercel SSO protected).
+- Inspector URL: `https://vercel.com/open-gamer/opengamer-studio-prototype/4dGhRfpztkntssFdw3aNrzUskGSw`.
+- `.vercelignore` excludes local QA/browser artifacts from future uploads.
 
 ## Asset Migration Reminder
 
@@ -82,3 +87,4 @@
 - Smoke-tested lead API validation and valid submission path.
 - Latest Playwright setup succeeded with a project-local browser cache ignored from Git.
 - Latest local visual QA: 75 screenshots, zero scripted failures.
+- Deployed public preview smoke-test passed after alias update.

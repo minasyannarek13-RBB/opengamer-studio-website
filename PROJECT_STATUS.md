@@ -34,8 +34,11 @@
 - Final lint: passed.
 - Final production build: passed.
 - Production smoke-test: passed for `/`, `/services`, `/games`, all six game detail routes, `/technology`, `/about`, `/contact`, legal pages, `/sitemap.xml`, `/robots.txt`, legacy redirects and lead API states.
-- Vercel CLI and npm were not available in PATH. Vercel CLI 55.0.0 was available through `pnpm dlx`, but no saved credentials were found and the device login flow requires user authentication.
-- Deployed preview `https://opengamer-studio-prototype.vercel.app` is publicly accessible and not protected by Vercel Authentication.
+- Updated Vercel preview deployment completed through `pnpm dlx vercel@latest`.
+- Public preview alias `https://opengamer-studio-prototype.vercel.app` now serves deployment `dpl_4dGhRfpztkntssFdw3aNrzUskGSw`.
+- Unique Vercel deployment URL `https://opengamer-studio-prototype-q1bm6m0xm-open-gamer.vercel.app` is ready but protected by Vercel SSO.
+- Deployed public preview smoke-test passed for all required routes after alias update.
+- `.vercelignore` excludes local Playwright browsers, screenshots, Lighthouse reports, install caches and build output from future preview uploads.
 - Legal entity details, social ownership review, CRM/email provider and final legal copy still require owner confirmation.
 
 ## Current Preview Readiness
@@ -46,5 +49,6 @@
 - Metadata base: `NEXT_PUBLIC_SITE_URL`, then `VERCEL_URL`, then local fallback.
 - Required preview environment variables: `NEXT_PUBLIC_SITE_URL`, `LEAD_EMAIL_TO`, `LEAD_PROVIDER=console`.
 - No production domain deployment has been created.
-- Preview deployment command after Vercel authentication:
+- Preview deployment command used:
   `env PATH=/Users/macbook/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH /Users/macbook/Library/pnpm/bin/pnpm dlx vercel@latest`
+- Preview inspector: `https://vercel.com/open-gamer/opengamer-studio-prototype/4dGhRfpztkntssFdw3aNrzUskGSw`.

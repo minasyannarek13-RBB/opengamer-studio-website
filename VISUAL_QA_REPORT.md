@@ -6,6 +6,9 @@
 - Access status: public HTTP 200.
 - Deployment protection: not observed.
 - Required deployed routes loaded successfully: `/`, `/services`, `/games`, all six game detail pages, `/technology`, `/about`, `/contact`, legal pages, `/sitemap.xml`, `/robots.txt`.
+- Updated preview deployment id: `dpl_4dGhRfpztkntssFdw3aNrzUskGSw`.
+- Unique deployment URL: `https://opengamer-studio-prototype-q1bm6m0xm-open-gamer.vercel.app` is ready but Vercel SSO protected.
+- Public alias `https://opengamer-studio-prototype.vercel.app` was updated and smoke-tested after deployment.
 
 ## Visual Test Setup
 
@@ -81,6 +84,5 @@
 
 ## Remaining Production Blockers
 
-- Vercel authentication is still required to deploy the updated preview from this environment.
 - Production domain deployment is intentionally not performed.
 - Final legal and CRM details are production blockers, not preview blockers.

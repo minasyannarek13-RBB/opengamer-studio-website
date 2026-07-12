@@ -35,6 +35,8 @@
 - Local visual QA generated 75 screenshots with zero scripted failures after scroll/decode handling for lazy-loaded images.
 - Lighthouse: local `/` 100 performance, 100 accessibility, 100 best practices, 100 SEO; local `/games` 98/100/100/100; local `/contact` 100/100/100/100; deployed `/` 99/100/100/100.
 - Copy checked against the local brochure and official public OpenGamer site. Unconfirmed RTP, volatility, fixed timelines, shipped counts, regulated market availability, client logos, partner names and certifications remain unpublished.
+- Updated Vercel preview deployed as `dpl_4dGhRfpztkntssFdw3aNrzUskGSw`; public alias `https://opengamer-studio-prototype.vercel.app` smoke-tested after alias update.
+- `.vercelignore` added so local QA/browser artifacts are not uploaded on future preview deployments.
 
 ### Remaining
 
@@ -42,4 +44,4 @@
 - Confirm final contact email strategy.
 - Confirm CRM/email provider and credentials outside source control.
 - Confirm game-level metadata before showing RTP, volatility, format, release status or certification details.
-- Create Vercel preview once the device login flow is completed.
+- Keep production domain deployment blocked until legal and lead delivery details are approved.

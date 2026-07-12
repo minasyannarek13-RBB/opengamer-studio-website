@@ -56,15 +56,19 @@
 ## Known Limitations
 
 - No real CRM/email delivery is connected; the current `console` provider is a silent preview-safe sink.
-- Updated Vercel deployment still requires CLI authentication from this environment.
+- Unique Vercel deployment URL is ready but protected by Vercel SSO; the public alias below is accessible.
 
 ## Deployment Status
 
 - Production deployment: not created.
-- Existing preview URL: `https://opengamer-studio-prototype.vercel.app`.
+- Public preview URL: `https://opengamer-studio-prototype.vercel.app`.
 - Preview access status: public, HTTP 200, no deployment protection observed.
-- Updated preview deployment: pending until Vercel CLI authentication is available.
-- Vercel CLI status: global `vercel` is unavailable; `npm` is unavailable; Vercel CLI runs through `pnpm dlx`.
+- Updated preview deployment: completed.
+- Vercel deployment id: `dpl_4dGhRfpztkntssFdw3aNrzUskGSw`.
+- Unique deployment URL: `https://opengamer-studio-prototype-q1bm6m0xm-open-gamer.vercel.app` (ready, Vercel SSO protected).
+- Inspector URL: `https://vercel.com/open-gamer/opengamer-studio-prototype/4dGhRfpztkntssFdw3aNrzUskGSw`.
+- Public preview alias route smoke-test passed after alias update.
+- `.vercelignore` excludes local Playwright browsers, screenshots, Lighthouse reports, install caches and build output from future Vercel uploads.
 
 ## Preview Command
 
@@ -75,6 +79,5 @@ env PATH=/Users/macbook/.cache/codex-runtimes/codex-primary-runtime/dependencies
 
 ## Future Recommendations
 
-- Complete Vercel authentication and create a preview deployment.
 - Connect the approved lead provider adapter.
 - Replace preview-safe legal text with counsel-approved legal copy before production domain launch.

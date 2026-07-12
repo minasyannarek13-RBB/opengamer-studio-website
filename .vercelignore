@@ -1,0 +1,8 @@
+.playwright-browsers/
+qa/screenshots/
+qa/lighthouse*.json
+.pnpm-store/
+.next/
+node_modules/
+*.log
+.DS_Store
