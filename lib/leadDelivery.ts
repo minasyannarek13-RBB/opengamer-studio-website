@@ -48,15 +48,7 @@ export async function deliverLead(payload: LeadPayload): Promise<DeliveryResult>
 }
 
 async function deliverToConsole(payload: LeadPayload): Promise<DeliveryResult> {
-  if (process.env.NODE_ENV === "development") {
-    console.info("OpenGamer lead submission", {
-      recipient: process.env.LEAD_EMAIL_TO || "mn@open-gamer.com",
-      fullName: payload.fullName,
-      company: payload.company,
-      email: payload.email,
-      serviceInterest: payload.serviceInterest
-    });
-  }
+  void payload;
 
   return { ok: true };
 }

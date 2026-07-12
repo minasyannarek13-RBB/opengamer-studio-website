@@ -1,8 +1,8 @@
-# OpenGamer Studio Website Prototype
+# OpenGamer Studio Website
 
-This is a separate prototype project for the future corporate website on `opengamer.studio`.
+This is the preview-ready OpenGamer corporate website project for a future `opengamer.studio` deployment.
 
-It is not the current OpenGamer website and does not contain final design, final copy or final product claims.
+The site uses confirmed OpenGamer positioning, locally stored official assets and factual launch copy. Unconfirmed game metadata, certifications, client names and regulated-market claims are intentionally excluded.
 
 ## Stack
 
@@ -10,7 +10,7 @@ It is not the current OpenGamer website and does not contain final design, final
 - TypeScript
 - Tailwind CSS
 - App Router
-- Multilingual-ready routing: English, Russian and Spanish
+- Redirect support for previous English, Russian and Spanish route variants
 
 ## Local Run
 
@@ -23,13 +23,12 @@ Default URL: `http://localhost:3000`
 
 ## Purpose
 
-Create a clean, scalable structure before final design and content production.
+Present OpenGamer as a premium B2B iGaming technology studio covering game production, RGS technology, integration and dedicated delivery teams.
 
 ## Current Scope
 
-- Route structure
-- Shared layout components
-- Shared section components
-- Placeholder localized content files
-- SEO helper structure
-- Documentation scaffolding
+- Launch pages for company, services, games, technology, contact and legal routes
+- Localized official brand and game assets
+- SEO metadata, sitemap, robots and canonical URL support
+- Contact form validation and provider-ready lead delivery adapter
+- Preview deployment readiness for Vercel

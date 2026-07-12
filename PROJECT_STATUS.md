@@ -6,8 +6,8 @@
 - Stack: Next.js 15, TypeScript, App Router, Tailwind CSS, React 19.
 - Existing routes before implementation: `/`, `/about`, `/capabilities`, `/contact`, `/portfolio`, `/studios`, `/technology`, localized `ru` and `es` variants, and studio detail routes.
 - Required launch routes missing before implementation: `/services`, `/games`, `/privacy-policy`, `/terms-of-use`, `/cookie-policy`.
-- Existing reusable components: header, footer, hero, page template, cards, buttons, sections, portfolio and technology preview blocks.
-- Existing issue: public pages were prototype/wireframe style, not launch-ready.
+- Existing reusable components were audited and reduced to the production component set.
+- Earlier prototype routes now redirect to the launch surface.
 - Existing remote assets confirmed from official OpenGamer site: logo, favicon, OG image and game artwork from `open-gamer.com` / `cdn.open-gamer.com`.
 - Official logo, favicon, OG image and six game artworks have been localized under `/public/assets`.
 - Current build after audit: passed with bundled Node runtime.
@@ -18,7 +18,8 @@
 - Launch content now uses typed source files under `/content`.
 - Launch UI now uses local image paths only for brand, favicon, OG and game artwork.
 - Original source JPG/PNG files are preserved beside optimized WebP game artwork.
-- Legacy prototype routes redirect to launch routes to avoid public placeholder pages.
+- Legacy prototype routes redirect to launch routes.
+- Obsolete prototype components, localized draft content and planning-only documentation have been removed from the production repo.
 - Lead delivery now uses a provider abstraction with `console`, `resend`, `hubspot`, `pipedrive` and `custom` provider targets reserved for future implementation.
 - Premium polish pass completed across shared UI components, homepage, launch page hero bands, game cards, contact form states, 404 and error handling.
 - Contact form now catches network/API failures client-side and keeps accessible validation feedback for required fields and consent.
