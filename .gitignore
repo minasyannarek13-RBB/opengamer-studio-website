@@ -7,3 +7,7 @@ dist/
 !.env.example
 *.log
 .DS_Store
+.vercel
+.playwright-browsers/
+qa/screenshots/
+qa/lighthouse*.json
