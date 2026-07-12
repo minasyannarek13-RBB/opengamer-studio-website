@@ -66,39 +66,47 @@ export function LeadForm() {
         <label htmlFor="website_url">Website URL</label>
         <input id="website_url" name="website_url" tabIndex={-1} autoComplete="off" />
       </div>
-      <div className="grid gap-5 md:grid-cols-2">
-        <Field label="Full name" name="fullName" required error={errors.fullName} />
-        <Field label="Company" name="company" required error={errors.company} />
-        <Field label="Business email" name="email" type="email" required error={errors.email} />
-        <Field label="Job title" name="jobTitle" required error={errors.jobTitle} />
-        <Select label="Company type" name="companyType" options={companyTypes} required error={errors.companyType} />
-        <Select label="Service of interest" name="serviceInterest" options={serviceInterests} required error={errors.serviceInterest} />
-        <Field label="Website" name="website" type="url" />
-        <Select label="Preferred contact method" name="preferredContactMethod" options={contactMethods} />
-        <Select label="Project stage" name="projectStage" options={projectStages} />
-        <Field label="Expected launch" name="expectedLaunch" />
-        <Field label="Number of games" name="numberOfGames" />
-        <Field label="Existing platform" name="existingPlatform" />
-        <Field label="Target markets" name="targetMarkets" />
-        <Field label="Required integration" name="requiredIntegration" />
-        <Field label="Budget range" name="budgetRange" />
-      </div>
-      <label className="grid gap-2 text-sm font-medium text-slate-200">
-        Project description
-        <textarea
-          name="projectDescription"
-          required
-          aria-invalid={Boolean(errors.projectDescription)}
-          aria-describedby={errors.projectDescription ? "projectDescription-error" : undefined}
-          rows={5}
-          className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-emerald aria-[invalid=true]:border-red-400/70"
-        />
-        {errors.projectDescription ? (
-          <span id="projectDescription-error" className="text-xs text-red-300">
-            {errors.projectDescription}
-          </span>
-        ) : null}
-      </label>
+      <fieldset className="grid gap-5">
+        <legend className="text-base font-semibold text-white">Contact details</legend>
+        <div className="grid gap-5 md:grid-cols-2">
+          <Field label="Full name" name="fullName" required error={errors.fullName} />
+          <Field label="Company" name="company" required error={errors.company} />
+          <Field label="Business email" name="email" type="email" required error={errors.email} />
+          <Field label="Job title" name="jobTitle" required error={errors.jobTitle} />
+          <Select label="Company type" name="companyType" options={companyTypes} required error={errors.companyType} />
+          <Field label="Website" name="website" type="url" />
+        </div>
+      </fieldset>
+      <fieldset className="grid gap-5 border-t border-white/10 pt-5">
+        <legend className="text-base font-semibold text-white">Project context</legend>
+        <div className="grid gap-5 md:grid-cols-2">
+          <Select label="Service of interest" name="serviceInterest" options={serviceInterests} required error={errors.serviceInterest} />
+          <Select label="Preferred contact method" name="preferredContactMethod" options={contactMethods} />
+          <Select label="Project stage" name="projectStage" options={projectStages} />
+          <Field label="Expected launch" name="expectedLaunch" />
+          <Field label="Number of games" name="numberOfGames" />
+          <Field label="Existing platform" name="existingPlatform" />
+          <Field label="Target markets" name="targetMarkets" />
+          <Field label="Required integration" name="requiredIntegration" />
+          <Field label="Budget range" name="budgetRange" />
+        </div>
+        <label className="grid gap-2 text-sm font-medium text-slate-200">
+          <LabelText label="Project description" required />
+          <textarea
+            name="projectDescription"
+            required
+            aria-invalid={Boolean(errors.projectDescription)}
+            aria-describedby={errors.projectDescription ? "projectDescription-error" : undefined}
+            rows={5}
+            className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-emerald aria-[invalid=true]:border-red-400/70"
+          />
+          {errors.projectDescription ? (
+            <span id="projectDescription-error" className="text-xs text-red-300">
+              {errors.projectDescription}
+            </span>
+          ) : null}
+        </label>
+      </fieldset>
       <label className="flex gap-3 text-sm leading-6 text-slate-300">
         <input
           name="consent"
@@ -146,7 +154,7 @@ function Field({
 
   return (
     <label className="grid gap-2 text-sm font-medium text-slate-200">
-      {label}
+      <LabelText label={label} required={required} />
       <input
         name={name}
         type={type}
@@ -181,7 +189,7 @@ function Select({
 
   return (
     <label className="grid gap-2 text-sm font-medium text-slate-200">
-      {label}
+      <LabelText label={label} required={required} />
       <select
         name={name}
         required={required}
@@ -202,5 +210,22 @@ function Select({
         </span>
       ) : null}
     </label>
+  );
+}
+
+function LabelText({ label, required }: { label: string; required: boolean }) {
+  return (
+    <span className="flex items-center justify-between gap-3">
+      <span>
+        {label}
+        {required ? (
+          <span className="text-emerald" aria-hidden="true">
+            {" "}
+            *
+          </span>
+        ) : null}
+      </span>
+      {!required ? <span className="text-xs font-normal text-slate-500">Optional</span> : null}
+    </span>
   );
 }

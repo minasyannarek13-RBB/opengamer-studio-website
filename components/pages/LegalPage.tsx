@@ -17,10 +17,11 @@ export function LegalPage({ title, sections }: LegalPageProps) {
           <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-400">
             Public website terms for business enquiries and informational use. Final legal review is required before production launch.
           </p>
+          <p className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Last updated: July 12, 2026</p>
         </Container>
       </section>
       <Section>
-        <div className="grid gap-6">
+        <div className="grid max-w-5xl gap-6">
           {sections.map(([heading, body]) => (
             <section key={heading} className="rounded-lg border border-line bg-white/[0.04] p-6">
               <h2 className="text-xl font-semibold text-white">{heading}</h2>

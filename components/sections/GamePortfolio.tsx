@@ -15,7 +15,8 @@ export function GamePortfolio() {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2" role="list" aria-label="Game category filters">
+      <h2 className="sr-only">Available games</h2>
+      <div className="flex flex-wrap gap-2" aria-label="Game category filters">
         {gameCategories.map((category) => (
           <button
             key={category}
@@ -42,4 +43,3 @@ export function GamePortfolio() {
     </div>
   );
 }
-
