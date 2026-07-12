@@ -25,7 +25,8 @@ export const metadata: Metadata = {
 export default function LiveCasinoDevelopmentPage() {
   return (
     <SiteShell>
-      <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_12%,rgba(35,196,131,0.12),transparent_24rem)]" />
         <Container>
           <SectionHeader
             eyebrow="Service 14"
@@ -50,13 +51,13 @@ export default function LiveCasinoDevelopmentPage() {
       </Section>
       <Section className="bg-black/20">
         <SectionHeader eyebrow="Featured Projects" title="ELEMENTALS" description="Premium four-realm show game concept currently in development." />
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <ProjectCard {...portfolioProjects[0]} />
         </div>
       </Section>
       <Section>
         <SectionHeader eyebrow="FAQ" title="Live Casino Scope" />
-        <div className="mt-8 grid gap-4 lg:grid-cols-2">
+        <div className="mt-10 grid gap-4 lg:grid-cols-2">
           <Card>
             <h2 className="text-xl font-semibold text-white">Does OpenGamer operate a live studio?</h2>
             <p className="mt-3 text-sm leading-6 text-slate-300">

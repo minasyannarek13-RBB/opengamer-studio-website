@@ -60,15 +60,15 @@ export default function TechnologyPage() {
       </Section>
       <Section>
         <SectionHeader title="Integration Workflow" description="No fixed integration timeline is promised before technical discovery." />
-        <div className="mt-8">
+        <div className="mt-10">
           <ProcessTimeline items={integrationWorkflow.map((title) => ({ title }))} />
         </div>
       </Section>
       <Section className="bg-black/20">
         <SectionHeader title="Technology Principles" />
-        <div className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {technologyPrinciples.map((principle) => (
-            <div key={principle} className="rounded-lg border border-line bg-white/[0.04] p-4 text-sm text-slate-200 transition-colors hover:border-white/20">
+            <div key={principle} className="premium-card rounded-lg border border-line bg-white/[0.045] p-4 text-sm text-slate-200 transition duration-300 hover:-translate-y-0.5 hover:border-white/20">
               {principle}
             </div>
           ))}

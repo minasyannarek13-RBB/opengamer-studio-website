@@ -17,7 +17,7 @@ export function Header({ locale }: { locale: Locale }) {
   const isActiveRoute = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname?.startsWith(`${href}/`));
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/88 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/88 shadow-[0_12px_44px_rgba(0,0,0,0.22)] backdrop-blur-xl">
       <Container className="flex min-h-20 items-center justify-between gap-4">
         <Link href={getLocalizedPath(locale, "/")} className="flex items-center gap-3 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
           <Image
@@ -37,7 +37,7 @@ export function Header({ locale }: { locale: Locale }) {
               key={route.href}
               href={route.href}
               aria-current={isActiveRoute(route.href) ? "page" : undefined}
-              className="rounded-full px-1 text-sm font-medium text-slate-300 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:text-emerald"
+              className="rounded-full px-2 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:bg-emerald/10 aria-[current=page]:text-emerald"
             >
               {route.label}
             </Link>
@@ -50,7 +50,7 @@ export function Header({ locale }: { locale: Locale }) {
           </Button>
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white transition-colors hover:border-emerald/50 lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] text-white transition-colors hover:border-emerald/50 lg:hidden"
             aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isOpen}
             onClick={() => setIsOpen((value) => !value)}

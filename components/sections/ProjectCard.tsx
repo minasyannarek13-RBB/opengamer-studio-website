@@ -14,7 +14,7 @@ type ProjectCardProps = {
 
 export function ProjectCard({ title, tagline, description, status, href, cta, image, imageAlt }: ProjectCardProps) {
   return (
-    <article className="group overflow-hidden rounded-lg border border-line bg-white/[0.04] transition-colors hover:border-white/20 focus-within:border-emerald/50">
+    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06] focus-within:border-emerald/50">
       <div className="relative aspect-[4/3] overflow-hidden bg-black/35">
         {image ? (
           <Image
@@ -41,12 +41,12 @@ export function ProjectCard({ title, tagline, description, status, href, cta, im
           </div>
         )}
       </div>
-      <div className="p-5">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         {status ? <span className="rounded-full border border-emerald/30 px-3 py-1 text-xs text-emerald">{status}</span> : null}
         <h3 className="mt-4 text-xl font-semibold text-white">{title}</h3>
         <p className="mt-1 text-sm font-medium text-slate-300">{tagline}</p>
         <p className="mt-3 text-sm leading-6 text-slate-400">{description}</p>
-        <Button href={href} variant="link" className="mt-5">
+        <Button href={href} variant="link" className="mt-auto pt-5">
           {cta}
         </Button>
       </div>

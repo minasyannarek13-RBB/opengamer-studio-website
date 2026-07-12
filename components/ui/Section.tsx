@@ -9,7 +9,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section className={`py-14 sm:py-20 ${className}`}>
+    <section className={`premium-section py-16 sm:py-24 ${className}`}>
       <Container>{children}</Container>
     </section>
   );

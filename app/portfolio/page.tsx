@@ -19,7 +19,8 @@ export const metadata: Metadata = {
 export default function PortfolioPage() {
   return (
     <SiteShell>
-      <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_10%,rgba(35,196,131,0.12),transparent_25rem)]" />
         <Container>
           <SectionHeader
             eyebrow="Portfolio"
@@ -31,7 +32,7 @@ export default function PortfolioPage() {
       </section>
       <Section>
         <SectionHeader eyebrow="Casino Games" title="Slot Game Portfolio" description="Confirmed slot titles built by OpenGamer." />
-        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {games.slice(0, 3).map((game) => (
             <GameCard key={game.slug} game={game} />
           ))}
@@ -42,13 +43,13 @@ export default function PortfolioPage() {
       </Section>
       <Section className="bg-black/20">
         <SectionHeader eyebrow="Live Casino & Show Games" title="Original Live Casino Concepts" description="Original live casino and show-game concepts, starting with ELEMENTALS." />
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <ProjectCard {...portfolioProjects[0]} />
         </div>
       </Section>
       <Section>
         <SectionHeader eyebrow="Platforms & Applications" title="Live Casino Product Concepts" description="Product concepts extending Live Casino into new engagement models." />
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <ProjectCard {...portfolioProjects[1]} />
         </div>
       </Section>

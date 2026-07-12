@@ -16,14 +16,17 @@ export const metadata: Metadata = {
 export default function LcAppPage() {
   return (
     <SiteShell>
-      <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_14%,rgba(37,99,235,0.13),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.04),transparent_42%)]" />
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1fr] lg:items-center">
-          <div>
+          <div className="reveal">
             <span className="rounded-full border border-emerald/30 px-3 py-1 text-xs text-emerald">Product Concept — In Development</span>
             <h1 className="mt-5 text-5xl font-semibold tracking-normal text-white sm:text-6xl">LC App</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">A B2B social engagement layer for Live Casino.</p>
           </div>
-          <ConceptPhone />
+          <div className="reveal">
+            <ConceptPhone />
+          </div>
         </Container>
       </section>
       <Section>
@@ -44,7 +47,7 @@ export default function LcAppPage() {
       </Section>
       <Section className="bg-black/20">
         <SectionHeader eyebrow="Product Concept" title="Communication + Discovery + Gameplay" />
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
           {lcAppConcepts.map((concept) => (
             <Card key={concept}>
               <h3 className="text-xl font-semibold text-white">{concept}</h3>
@@ -77,7 +80,7 @@ export default function LcAppPage() {
 
 function ConceptPhone() {
   return (
-    <div className="mx-auto w-full max-w-sm rounded-[2.25rem] border border-emerald/30 bg-black/35 p-4 shadow-[0_24px_80px_rgba(46,230,166,0.13)]">
+    <div className="premium-card mx-auto w-full max-w-sm rounded-[2.25rem] border border-emerald/30 bg-black/35 p-4 shadow-[0_24px_80px_rgba(46,230,166,0.13)]">
       <div className="rounded-[1.75rem] border border-white/10 bg-ink p-5">
         <p className="text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald">Concept UI</p>
         <div className="mt-5 grid gap-3">

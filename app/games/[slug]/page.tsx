@@ -49,6 +49,9 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
     ["Title", game.title],
     ["Category", game.category?.join(", ") || "Slot Game"]
   ];
+  const gameIndex = games.findIndex((item) => item.slug === game.slug);
+  const previousGame = games[(gameIndex - 1 + games.length) % games.length];
+  const nextGame = games[(gameIndex + 1) % games.length];
 
   return (
     <SiteShell>
@@ -69,7 +72,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
               </Button>
             </div>
           </div>
-          <div className="overflow-hidden rounded-lg border border-line bg-white/[0.04]">
+          <div className="premium-card overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_22px_80px_rgba(0,0,0,0.26)]">
             <Image
               src={game.image}
               alt={`${game.title} artwork`}
@@ -103,6 +106,18 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
             </p>
           </Card>
         </div>
+        <nav className="mt-8 grid gap-4 sm:grid-cols-2" aria-label="Game navigation">
+          {[previousGame, nextGame].map((item) => (
+            <Card key={item.slug}>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">Related Game</p>
+              <h2 className="mt-3 text-xl font-semibold text-white">{item.title}</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-400">{item.shortDescription}</p>
+              <Button href={`/games/${item.slug}`} variant="link" className="mt-5">
+                View Game
+              </Button>
+            </Card>
+          ))}
+        </nav>
       </Section>
       <CTASection
         title="Build a Game with Similar Production Quality"

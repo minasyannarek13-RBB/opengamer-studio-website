@@ -10,7 +10,7 @@ export function GameCard({ game }: { game: Game }) {
   ].filter(Boolean) as [string, string][];
 
   return (
-    <article className="group overflow-hidden rounded-lg border border-line bg-white/[0.04] transition-colors hover:border-white/20 focus-within:border-emerald/50">
+    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06] focus-within:border-emerald/50">
       <div className="relative aspect-[10/7] overflow-hidden bg-black/40">
         <Image
           src={game.image}
@@ -20,9 +20,9 @@ export function GameCard({ game }: { game: Game }) {
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/65 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/75 to-transparent" />
       </div>
-      <div className="p-5">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div className="flex flex-wrap items-center gap-2">
           {game.category?.map((category) => (
             <span key={category} className="rounded-full border border-emerald/30 px-3 py-1 text-xs text-emerald">
@@ -33,7 +33,7 @@ export function GameCard({ game }: { game: Game }) {
             <span className="rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">{game.status}</span>
           ) : null}
         </div>
-        <h3 className="mt-4 text-xl font-semibold text-white">{game.title}</h3>
+        <h3 className="mt-4 text-xl font-semibold text-white sm:text-2xl">{game.title}</h3>
         <p className="mt-2 text-sm leading-6 text-slate-400">{game.shortDescription}</p>
         {metadata.length ? (
           <dl className="mt-4 grid gap-2 text-sm">
@@ -45,7 +45,7 @@ export function GameCard({ game }: { game: Game }) {
             ))}
           </dl>
         ) : null}
-        <div className="mt-5 flex flex-wrap items-center gap-3">
+        <div className="mt-auto flex flex-wrap items-center gap-3 pt-5">
           {game.demoUrl ? (
             <Button href={game.demoUrl} variant="secondary" className="min-h-10 px-4" target="_blank" rel="noreferrer">
               Play Demo

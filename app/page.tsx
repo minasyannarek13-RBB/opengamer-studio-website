@@ -39,9 +39,10 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <SiteShell>
-      <section className="relative overflow-hidden border-b border-white/10 py-14 sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden border-b border-white/10 py-16 sm:py-24 lg:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(35,196,131,0.16),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.04),transparent_38%)]" />
         <Container className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div>
+          <div className="reveal">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">Full-Cycle iGaming Development Studio</p>
             <h1 className="mt-5 max-w-4xl text-5xl font-semibold tracking-normal text-white sm:text-6xl lg:text-7xl">
               Casino Game Development and RGS Technology
@@ -52,7 +53,7 @@ export default function HomePage() {
             </p>
             <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-2">
               {studioSignals.map((signal) => (
-                <div key={signal} className="rounded-lg border border-white/10 bg-white/[0.045] px-4 py-3 text-sm font-medium text-slate-200">
+                <div key={signal} className="rounded-lg border border-white/10 bg-white/[0.055] px-4 py-3 text-sm font-medium text-slate-200 shadow-[0_12px_36px_rgba(0,0,0,0.18)]">
                   {signal}
                 </div>
               ))}
@@ -64,14 +65,14 @@ export default function HomePage() {
               </Button>
             </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="reveal grid gap-4 sm:grid-cols-2">
             {games.slice(0, 4).map((game, index) => (
               <div
                 key={game.slug}
                 className={
                   index % 2
-                    ? "relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.05] shadow-[0_18px_50px_rgba(0,0,0,0.28)] sm:translate-y-8"
-                    : "relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.05] shadow-[0_18px_50px_rgba(0,0,0,0.28)]"
+                    ? "premium-card relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] shadow-[0_18px_60px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1 sm:translate-y-8"
+                    : "premium-card relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] shadow-[0_18px_60px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1"
                 }
               >
                 <div className="aspect-[10/7] overflow-hidden">
@@ -97,7 +98,7 @@ export default function HomePage() {
 
       <Section>
         <SectionHeader title="One Studio. Full Production Capability." description="A single delivery structure across game production, mathematics, engineering, integration and support." />
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {coreCapabilities.map((item) => (
             <Card key={item.title}>
               <h3 className="text-lg font-semibold text-white">{item.title}</h3>
@@ -114,7 +115,7 @@ export default function HomePage() {
             Explore Our Games
           </Button>
         </div>
-        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {games.map((game) => (
             <GameCard key={game.slug} game={game} />
           ))}
@@ -127,7 +128,7 @@ export default function HomePage() {
           title="Original Concepts in Development"
           description="Beyond client production, OpenGamer is developing its own live casino format and product concepts."
         />
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
           {portfolioProjects.map((project) => (
             <ProjectCard key={project.title} {...project} />
           ))}
@@ -152,14 +153,14 @@ export default function HomePage() {
 
       <Section className="bg-black/20">
         <SectionHeader eyebrow="Process" title="Development Process" description="A repeatable delivery pipeline from first discovery through launch and support." />
-        <div className="mt-8">
+        <div className="mt-10">
           <ProcessTimeline items={developmentProcess} />
         </div>
       </Section>
 
       <Section>
         <SectionHeader eyebrow="Partnership Models" title="Ways to Work Together" description="Engagements are structured around the business outcome, not a fixed package." />
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {partnershipModels.map((model) => (
             <Card key={model}>
               <h3 className="text-lg font-semibold text-white">{model}</h3>
@@ -170,9 +171,9 @@ export default function HomePage() {
 
       <Section className="bg-black/20">
         <SectionHeader eyebrow="Why OpenGamer" title="Built for Long-Term B2B Delivery" />
-        <div className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {whyOpenGamer.map((item) => (
-            <div key={item} className="rounded-lg border border-line bg-white/[0.04] p-4 text-sm text-slate-200">
+            <div key={item} className="premium-card rounded-lg border border-line bg-white/[0.045] p-4 text-sm text-slate-200 transition duration-300 hover:-translate-y-0.5 hover:border-white/20">
               {item}
             </div>
           ))}

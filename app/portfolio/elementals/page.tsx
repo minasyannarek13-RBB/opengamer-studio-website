@@ -25,9 +25,10 @@ export const metadata: Metadata = {
 export default function ElementalsPage() {
   return (
     <SiteShell>
-      <section className="overflow-hidden border-b border-white/10 bg-black/20 py-16 sm:py-24">
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/20 py-16 sm:py-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_74%_18%,rgba(35,196,131,0.14),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.04),transparent_44%)]" />
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1fr] lg:items-center">
-          <div>
+          <div className="reveal">
             <span className="rounded-full border border-emerald/30 px-3 py-1 text-xs text-emerald">In Development</span>
             <h1 className="mt-5 text-5xl font-semibold tracking-normal text-white sm:text-6xl">ELEMENTALS</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
@@ -41,7 +42,7 @@ export default function ElementalsPage() {
             </div>
           </div>
           {elementals.image ? (
-            <div className="overflow-hidden rounded-lg border border-line bg-white/[0.04]">
+            <div className="premium-card reveal overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_24px_90px_rgba(0,0,0,0.3)]">
               <Image src={elementals.image} alt={elementals.imageAlt} width={800} height={600} priority className="h-full w-full object-cover" sizes="(min-width: 1024px) 48vw, 100vw" />
             </div>
           ) : null}
@@ -65,7 +66,7 @@ export default function ElementalsPage() {
       </Section>
       <Section className="bg-black/20">
         <SectionHeader eyebrow="The Great Wheel" title="The Core Mechanic" description="The Great Wheel routes play into the base game and four elemental bonus rounds. Final mechanics are in development and not yet published." />
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {elementalsRealms.map((realm) => (
             <Card key={realm.title} className={`bg-gradient-to-br ${realm.tone}`}>
               <h3 className="text-xl font-semibold text-white">{realm.title}</h3>
