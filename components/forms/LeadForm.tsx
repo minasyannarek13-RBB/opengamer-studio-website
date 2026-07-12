@@ -56,7 +56,12 @@ export function LeadForm() {
   }
 
   return (
-    <form onSubmit={submit} noValidate className="grid gap-5 rounded-lg border border-line bg-white/[0.04] p-6">
+    <form
+      onSubmit={submit}
+      noValidate
+      aria-busy={state === "submitting"}
+      className="grid gap-5 rounded-lg border border-line bg-white/[0.04] p-6"
+    >
       <div className="hidden">
         <label htmlFor="website_url">Website URL</label>
         <input id="website_url" name="website_url" tabIndex={-1} autoComplete="off" />
@@ -86,7 +91,7 @@ export function LeadForm() {
           aria-invalid={Boolean(errors.projectDescription)}
           aria-describedby={errors.projectDescription ? "projectDescription-error" : undefined}
           rows={5}
-          className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-emerald"
+          className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-emerald aria-[invalid=true]:border-red-400/70"
         />
         {errors.projectDescription ? (
           <span id="projectDescription-error" className="text-xs text-red-300">
@@ -148,7 +153,7 @@ function Field({
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-emerald"
+        className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-emerald aria-[invalid=true]:border-red-400/70"
       />
       {error ? (
         <span id={errorId} className="text-xs text-red-300">
@@ -182,7 +187,7 @@ function Select({
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-emerald"
+        className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-emerald aria-[invalid=true]:border-red-400/70"
       >
         <option value="">Select</option>
         {options.map((option) => (

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import type { Locale } from "@/content/types";
+import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { logoAsset } from "@/content/company";
@@ -77,7 +77,7 @@ export function Header({ locale }: { locale: Locale }) {
                 {route.label}
               </Link>
             ))}
-            <Button href={getLocalizedPath(locale, "/contact")} className="mt-2 w-full">
+            <Button href={getLocalizedPath(locale, "/contact")} className="mt-2 w-full" onClick={() => setIsOpen(false)}>
               Discuss a Project
             </Button>
           </Container>
