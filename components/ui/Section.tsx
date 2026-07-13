@@ -11,7 +11,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section id={id} className={`premium-section py-16 sm:py-24 ${className}`}>
+    <section id={id} className={`premium-section py-16 sm:py-24 ${className}`} data-scroll-reveal>
       <Container>{children}</Container>
     </section>
   );

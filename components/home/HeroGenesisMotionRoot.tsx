@@ -46,7 +46,7 @@ export function HeroGenesisMotionRoot({ children, className, motionMode = "first
     }
 
     const isReturningMode = motionMode === "returning" || hasSeenHero;
-    const duration = isReturningMode ? 520 : 2200;
+    const duration = isReturningMode ? 520 : 2280;
 
     timers.frameId = window.requestAnimationFrame(() => {
       setMotionState(isReturningMode ? "returning" : "playing");

@@ -32,6 +32,7 @@ export async function generateMetadata({ params }: GameDetailProps): Promise<Met
     openGraph: {
       title: `${game.title} | OpenGamer Studio`,
       description: game.shortDescription,
+      url: `/games/${game.slug}`,
       images: [{ url: game.image, width: game.imageWidth, height: game.imageHeight, alt: `${game.title} artwork` }]
     }
   };

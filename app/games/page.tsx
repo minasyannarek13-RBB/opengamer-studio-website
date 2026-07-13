@@ -9,7 +9,13 @@ import { Section } from "@/components/ui/Section";
 export const metadata: Metadata = {
   title: "Games | OpenGamer Studio",
   description: "Complete confirmed OpenGamer slot game portfolio with official artwork and demo links.",
-  alternates: { canonical: "/games" }
+  alternates: { canonical: "/games" },
+  openGraph: {
+    title: "Games | OpenGamer Studio",
+    description: "Complete confirmed OpenGamer slot game portfolio with official artwork and demo links.",
+    url: "/games",
+    type: "website"
+  }
 };
 
 export default function GamesPage() {

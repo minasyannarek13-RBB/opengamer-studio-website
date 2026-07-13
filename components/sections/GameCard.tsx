@@ -10,7 +10,7 @@ export function GameCard({ game }: { game: Game }) {
   ].filter(Boolean) as [string, string][];
 
   return (
-    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06] focus-within:border-emerald/50">
+    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06] focus-within:-translate-y-1 focus-within:border-emerald/50">
       <div className="relative aspect-[10/7] overflow-hidden bg-black/40">
         <Image
           src={game.image}
@@ -18,7 +18,7 @@ export function GameCard({ game }: { game: Game }) {
           width={game.imageWidth}
           height={game.imageHeight}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03] group-focus-within:scale-[1.03]"
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/75 to-transparent" />
       </div>
@@ -34,7 +34,7 @@ export function GameCard({ game }: { game: Game }) {
           ) : null}
         </div>
         <h3 className="mt-4 text-xl font-semibold text-white sm:text-2xl">{game.title}</h3>
-        <p className="mt-2 text-sm leading-6 text-slate-400">{game.shortDescription}</p>
+        <p className="mt-2 min-h-12 text-sm leading-6 text-slate-400">{game.shortDescription}</p>
         {metadata.length ? (
           <dl className="mt-4 grid gap-2 text-sm">
             {metadata.map(([label, value]) => (
@@ -51,7 +51,7 @@ export function GameCard({ game }: { game: Game }) {
               Play Demo
             </Button>
           ) : null}
-          <Button href={`/games/${game.slug}`} variant="link">
+          <Button href={`/games/${game.slug}`} variant="link" aria-label={`View details for ${game.title}`}>
             Details
           </Button>
         </div>

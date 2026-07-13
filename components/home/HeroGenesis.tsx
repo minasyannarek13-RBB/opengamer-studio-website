@@ -99,22 +99,49 @@ function CoreObject() {
         <svg viewBox="0 0 260 260" className="h-full w-full drop-shadow-[0_34px_90px_rgba(0,0,0,0.62)]">
           <defs>
             <linearGradient id="coreShell" x1="20" y1="20" x2="240" y2="240">
-              <stop stopColor="#1a2a23" />
+              <stop stopColor="#1b2b24" />
+              <stop offset="0.52" stopColor="#102019" />
               <stop offset="1" stopColor="#07110d" />
             </linearGradient>
             <linearGradient id="coreGlass" x1="75" y1="60" x2="190" y2="205">
-              <stop stopColor="rgba(255,255,255,0.24)" />
-              <stop offset="1" stopColor="rgba(46,230,166,0.14)" />
+              <stop stopColor="rgba(255,255,255,0.25)" />
+              <stop offset="0.55" stopColor="rgba(46,230,166,0.13)" />
+              <stop offset="1" stopColor="rgba(5,16,11,0.4)" />
             </linearGradient>
+            <radialGradient id="coreSignal" cx="50%" cy="50%" r="54%">
+              <stop stopColor="rgba(46,230,166,0.62)" />
+              <stop offset="0.6" stopColor="rgba(46,230,166,0.14)" />
+              <stop offset="1" stopColor="rgba(46,230,166,0)" />
+            </radialGradient>
           </defs>
-          <path d="M113 19h34l23 66-40 28-40-28 23-66Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.14)" />
-          <path d="M241 113v34l-66 23-28-40 28-40 66 23Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.14)" />
-          <path d="M147 241h-34l-23-66 40-28 40 28-23 66Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.14)" />
-          <path d="M19 147v-34l66-23 28 40-28 40-66-23Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.14)" />
-          <path d="M82 82h96v96H82z" rx="24" fill="url(#coreGlass)" stroke="rgba(46,230,166,0.36)" />
-          <path d="M103 108h54M103 130h54M103 152h32M130 98v70" stroke="rgba(255,255,255,0.23)" strokeWidth="1" />
-          <circle cx="130" cy="130" r="22" fill="rgba(46,230,166,0.18)" stroke="rgba(46,230,166,0.55)" />
-          <circle cx="153" cy="151" r="8" fill="rgba(246,200,95,0.38)" />
+          <g data-genesis-part="core-modules">
+            <path d="M107 20h46c9 0 16 7 16 16v47c0 5-3 10-7 13l-32 22-32-22c-4-3-7-8-7-13V36c0-9 7-16 16-16Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.15)" />
+            <path d="M240 107v46c0 9-7 16-16 16h-47c-5 0-10-3-13-7l-22-32 22-32c3-4 8-7 13-7h47c9 0 16 7 16 16Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.15)" />
+            <path d="M153 240h-46c-9 0-16-7-16-16v-47c0-5 3-10 7-13l32-22 32 22c4 3 7 8 7 13v47c0 9-7 16-16 16Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.15)" />
+            <path d="M20 153v-46c0-9 7-16 16-16h47c5 0 10 3 13 7l22 32-22 32c-3 4-8 7-13 7H36c-9 0-16-7-16-16Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.15)" />
+          </g>
+          <g data-genesis-part="core-glass">
+            <rect x="78" y="78" width="104" height="104" rx="28" fill="url(#coreGlass)" stroke="rgba(46,230,166,0.34)" />
+            <rect x="91" y="91" width="78" height="78" rx="20" fill="rgba(3,12,8,0.42)" stroke="rgba(255,255,255,0.12)" />
+          </g>
+          <g data-genesis-part="core-engineering">
+            <path d="M103 108h54M103 130h54M103 152h54M130 99v62" stroke="rgba(255,255,255,0.22)" strokeWidth="1" />
+            <path d="M109 116l21 14 26-17M109 144l21-14 26 17" stroke="rgba(46,230,166,0.24)" strokeWidth="1" />
+            <circle cx="109" cy="116" r="2.8" fill="rgba(46,230,166,0.7)" />
+            <circle cx="130" cy="130" r="3.2" fill="rgba(46,230,166,0.82)" />
+            <circle cx="156" cy="113" r="2.8" fill="rgba(46,230,166,0.7)" />
+            <circle cx="109" cy="144" r="2.8" fill="rgba(46,230,166,0.64)" />
+            <circle cx="156" cy="147" r="2.8" fill="rgba(46,230,166,0.64)" />
+          </g>
+          <circle cx="130" cy="130" r="42" fill="url(#coreSignal)" />
+          <circle cx="130" cy="130" r="22" fill="rgba(46,230,166,0.14)" stroke="rgba(46,230,166,0.55)" />
+          <circle cx="153" cy="151" r="7" fill="rgba(246,200,95,0.42)" />
+          <g data-genesis-part="core-mark">
+            <rect x="111" y="115" width="38" height="30" rx="7" fill="rgba(2,9,7,0.72)" stroke="rgba(46,230,166,0.68)" />
+            <rect x="118" y="122" width="6" height="16" rx="2" fill="rgba(46,230,166,0.86)" />
+            <rect x="127" y="122" width="6" height="16" rx="2" fill="rgba(46,230,166,0.86)" />
+            <rect x="136" y="122" width="6" height="16" rx="2" fill="rgba(46,230,166,0.86)" />
+          </g>
         </svg>
       </div>
     </div>

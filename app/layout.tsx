@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { company } from "@/content/company";
 import { siteUrl } from "@/lib/site";
+import { ScrollRevealController } from "@/components/motion/ScrollRevealController";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
+        <ScrollRevealController />
         {children}
         <script
           type="application/ld+json"
