@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
 import { ProjectCard } from "@/components/sections/ProjectCard";
 import { architectureFlow, developmentProcess, partnershipModels, whyOpenGamer } from "@/content/services";
-import { games } from "@/content/games";
+import { featuredGames, games } from "@/content/games";
 import { portfolioProjects } from "@/content/portfolio";
 import { capabilitiesUniverse, futureProducts, integrationItems, lifecycleStages, technologyCoreItems } from "@/content/home";
 
@@ -35,8 +35,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const featuredGames = games.slice(0, 6);
-  const heroGame = games[0];
+  const heroGame = games.find((game) => game.slug === "forest-fortune") || games[0];
 
   return (
     <SiteShell>
@@ -48,7 +47,7 @@ export default function HomePage() {
           title="One Accountable Product, Creative and Engineering Team"
           description="OpenGamer brings casino game development, art, mathematics, RGS-related engineering, integration and support into one delivery structure."
         />
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 lg:grid-cols-3" data-reveal-group="cards">
           {["Development studio", "Technology partner", "Game product company"].map((item) => (
             <Card key={item} tone="strong">
               <h3 className="text-xl font-semibold text-white">{item}</h3>
@@ -66,7 +65,7 @@ export default function HomePage() {
           title="From Product Direction to Launch Support"
           description="The delivery model connects product thinking, production craft and technical execution without splitting accountability across unrelated vendors."
         />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
           {lifecycleStages.map((stage) => (
             <Card key={stage.title}>
               <h3 className="text-lg font-semibold text-white">{stage.title}</h3>
@@ -82,7 +81,7 @@ export default function HomePage() {
           title="Full-Cycle Capabilities. One Studio."
           description="The website shows each commercial capability clearly without turning OpenGamer into a generic outsourcing catalogue."
         />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
           {capabilitiesUniverse.map((item) => (
             <div key={item} className="rounded-lg border border-line bg-white/[0.045] p-4 text-sm font-medium text-slate-200">
               {item}
@@ -103,7 +102,7 @@ export default function HomePage() {
             Explore Our Games
           </Button>
         </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3" data-reveal-group="cards">
           {featuredGames.map((game) => (
             <GameCard key={game.slug} game={game} />
           ))}
@@ -116,7 +115,7 @@ export default function HomePage() {
           title="Built Around the Game and the Operating Layer"
           description="OpenGamer combines player-facing production with the technical layers needed to integrate, operate and support casino content."
         />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
           {technologyCoreItems.map((item) => (
             <Card key={item.title}>
               <h3 className="text-lg font-semibold text-white">{item.title}</h3>
@@ -140,7 +139,7 @@ export default function HomePage() {
           </div>
           <div className="grid gap-6">
             <ArchitectureDiagram items={architectureFlow} />
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid gap-3 sm:grid-cols-2" data-reveal-group="cards">
               {integrationItems.map((item) => (
                 <div key={item} className="rounded-lg border border-line bg-white/[0.045] px-4 py-3 text-sm text-slate-300">
                   {item}
@@ -153,7 +152,7 @@ export default function HomePage() {
 
       <Section>
         <SectionHeader eyebrow="Partnership Models" title="Ways to Work Together" description="Engagements are structured around the business outcome, not a fixed package." />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
           {partnershipModels.map((model) => (
             <Card key={model}>
               <h3 className="text-lg font-semibold text-white">{model}</h3>
@@ -168,7 +167,7 @@ export default function HomePage() {
           title="Product Concepts Beyond Standard Slot Delivery"
           description="OpenGamer is building a broader portfolio around live casino concepts, social engagement layers and original product IP."
         />
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 lg:grid-cols-3" data-reveal-group="cards">
           {futureProducts.map((item) => (
             <Card key={item.title}>
               <h3 className="text-xl font-semibold text-white">{item.title}</h3>
@@ -179,7 +178,7 @@ export default function HomePage() {
             </Card>
           ))}
         </div>
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 lg:grid-cols-2" data-reveal-group="cards">
           {portfolioProjects.map((project) => (
             <ProjectCard key={project.title} {...project} />
           ))}
@@ -195,7 +194,7 @@ export default function HomePage() {
 
       <Section className="bg-black/20">
         <SectionHeader eyebrow="Why OpenGamer" title="Built for Long-Term B2B Delivery" />
-        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
           {whyOpenGamer.map((item) => (
             <div key={item} className="premium-card rounded-lg border border-line bg-white/[0.045] p-4 text-sm text-slate-200 transition duration-300 hover:-translate-y-0.5 hover:border-white/20">
               {item}

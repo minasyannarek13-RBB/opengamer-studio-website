@@ -8,7 +8,7 @@ import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = {
   title: "Games | OpenGamer Studio",
-  description: "Confirmed OpenGamer slot game portfolio with official artwork and demo links.",
+  description: "Complete confirmed OpenGamer slot game portfolio with official artwork and demo links.",
   alternates: { canonical: "/games" }
 };
 
@@ -20,7 +20,7 @@ export default function GamesPage() {
           <SectionHeader
             eyebrow="Games"
             title="Slot Game Portfolio"
-            description="A focused portfolio of confirmed OpenGamer titles using official artwork. Optional game metadata stays hidden until approved."
+            description="The complete confirmed OpenGamer game catalogue from the public portfolio, using official artwork and demo links. Optional game metadata stays hidden until approved."
             headingLevel="h1"
           />
         </Container>

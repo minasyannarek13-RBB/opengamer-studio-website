@@ -1,5 +1,5 @@
 import { spawn, spawnSync } from "node:child_process";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
@@ -16,16 +16,17 @@ const target = targetArg?.split("=")[1] || "local";
 const skipBuild = args.has("--skip-build");
 const noServer = args.has("--no-server");
 
+function readGameRoutes() {
+  const gamesContent = readFileSync(join(root, "content", "games.ts"), "utf8");
+  const slugs = [...gamesContent.matchAll(/slug: "([^"]+)"/g)].map((match) => match[1]);
+  return slugs.map((slug) => [`/games/${slug}`, `game-${slug}`]);
+}
+
 const routes = [
   ["/", "home"],
   ["/services", "services"],
   ["/games", "games"],
-  ["/games/forest-fortune", "game-forest-fortune"],
-  ["/games/sweet-wins", "game-sweet-wins"],
-  ["/games/deep-dive", "game-deep-dive"],
-  ["/games/choco-boom", "game-choco-boom"],
-  ["/games/fruit-elixir", "game-fruit-elixir"],
-  ["/games/passion-paradise", "game-passion-paradise"],
+  ...readGameRoutes(),
   ["/technology", "technology"],
   ["/about", "about"],
   ["/contact", "contact"],
