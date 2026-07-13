@@ -1,24 +1,22 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { ArchitectureDiagram } from "@/components/sections/ArchitectureDiagram";
 import { CTASection } from "@/components/sections/CTASection";
 import { GameCard } from "@/components/sections/GameCard";
+import { HeroGenesis } from "@/components/home/HeroGenesis";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { ProjectCard } from "@/components/sections/ProjectCard";
-import { architectureFlow, coreCapabilities, developmentProcess, partnershipModels, whyOpenGamer } from "@/content/services";
+import { architectureFlow, developmentProcess, partnershipModels, whyOpenGamer } from "@/content/services";
 import { games } from "@/content/games";
 import { portfolioProjects } from "@/content/portfolio";
-
-const studioSignals = ["Game production", "RGS technology", "Integration support", "QA and launch support"];
+import { capabilitiesUniverse, futureProducts, integrationItems, lifecycleStages, technologyCoreItems } from "@/content/home";
 
 export const metadata: Metadata = {
-  title: "OpenGamer Studio | iGaming Development Studio",
+  title: "OpenGamer Studio | Game Development, Engineered for Scale",
   description:
     "OpenGamer designs, develops and delivers casino games and gaming technology for operators, aggregators, platforms and game providers.",
   alternates: { canonical: "/" },
@@ -37,69 +35,89 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  const featuredGames = games.slice(0, 6);
+  const heroGame = games[0];
+
   return (
     <SiteShell>
-      <section className="relative overflow-hidden border-b border-white/10 py-16 sm:py-24 lg:py-28">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(35,196,131,0.16),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.04),transparent_38%)]" />
-        <Container className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div className="reveal">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">Full-Cycle iGaming Development Studio</p>
-            <h1 className="mt-5 max-w-4xl text-5xl font-semibold tracking-normal text-white sm:text-6xl lg:text-7xl">
-              Casino Game Development and RGS Technology
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              OpenGamer designs, develops and delivers casino games and gaming technology for operators, aggregators,
-              platforms and game providers.
-            </p>
-            <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-2">
-              {studioSignals.map((signal) => (
-                <div key={signal} className="rounded-lg border border-white/10 bg-white/[0.055] px-4 py-3 text-sm font-medium text-slate-200 shadow-[0_12px_36px_rgba(0,0,0,0.18)]">
-                  {signal}
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/contact">Discuss a Project</Button>
-              <Button href="/games" variant="secondary">
-                Explore Games
-              </Button>
-            </div>
-          </div>
-          <div className="reveal grid gap-4 sm:grid-cols-2">
-            {games.slice(0, 4).map((game, index) => (
-              <div
-                key={game.slug}
-                className={
-                  index % 2
-                    ? "premium-card relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] shadow-[0_18px_60px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1 sm:translate-y-8"
-                    : "premium-card relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.055] shadow-[0_18px_60px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-1"
-                }
-              >
-                <div className="aspect-[10/7] overflow-hidden">
-                  <Image
-                    src={game.image}
-                    alt={`${game.title} artwork`}
-                    width={game.imageWidth}
-                    height={game.imageHeight}
-                    sizes="(min-width: 1024px) 22vw, 50vw"
-                    className="h-full w-full object-cover"
-                    priority={index < 2}
-                  />
-                </div>
-                <div className="p-4">
-                  <p className="text-sm font-semibold text-white">{game.title}</p>
-                  <p className="mt-1 text-xs text-slate-500">Confirmed OpenGamer title</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <HeroGenesis featuredGame={heroGame} />
 
       <Section>
-        <SectionHeader title="One Studio. Full Production Capability." description="A single delivery structure across game production, mathematics, engineering, integration and support." />
+        <SectionHeader
+          eyebrow="OpenGamer Positioning"
+          title="One Accountable Product, Creative and Engineering Team"
+          description="OpenGamer brings casino game development, art, mathematics, RGS-related engineering, integration and support into one delivery structure."
+        />
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {["Development studio", "Technology partner", "Game product company"].map((item) => (
+            <Card key={item} tone="strong">
+              <h3 className="text-xl font-semibold text-white">{item}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-400">
+                Built for operators, aggregators, platforms, game providers and strategic partners that need credible B2B delivery.
+              </p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="bg-black/20">
+        <SectionHeader
+          eyebrow="Full Game Lifecycle"
+          title="From Product Direction to Launch Support"
+          description="The delivery model connects product thinking, production craft and technical execution without splitting accountability across unrelated vendors."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {lifecycleStages.map((stage) => (
+            <Card key={stage.title}>
+              <h3 className="text-lg font-semibold text-white">{stage.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-400">{stage.description}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeader
+          eyebrow="Capabilities Universe"
+          title="Full-Cycle Capabilities. One Studio."
+          description="The website shows each commercial capability clearly without turning OpenGamer into a generic outsourcing catalogue."
+        />
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {coreCapabilities.map((item) => (
+          {capabilitiesUniverse.map((item) => (
+            <div key={item} className="rounded-lg border border-line bg-white/[0.045] p-4 text-sm font-medium text-slate-200">
+              {item}
+            </div>
+          ))}
+        </div>
+        <div className="mt-8">
+          <Button href="/services" variant="secondary">
+            Explore Services
+          </Button>
+        </div>
+      </Section>
+
+      <Section className="bg-black/20">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <SectionHeader eyebrow="Featured Games" title="Confirmed Game Portfolio" description="Official OpenGamer titles using local optimized artwork and public demo links where available." />
+          <Button href="/games" variant="secondary">
+            Explore Our Games
+          </Button>
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {featuredGames.map((game) => (
+            <GameCard key={game.slug} game={game} />
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeader
+          eyebrow="Technology Core"
+          title="Built Around the Game and the Operating Layer"
+          description="OpenGamer combines player-facing production with the technical layers needed to integrate, operate and support casino content."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {technologyCoreItems.map((item) => (
             <Card key={item.title}>
               <h3 className="text-lg font-semibold text-white">{item.title}</h3>
               <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
@@ -109,52 +127,27 @@ export default function HomePage() {
       </Section>
 
       <Section className="bg-black/20">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeader eyebrow="Featured Games" title="Game Portfolio" description="Confirmed OpenGamer titles using official public artwork and local optimized assets." />
-          <Button href="/games" variant="secondary">
-            Explore Our Games
-          </Button>
-        </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {games.map((game) => (
-            <GameCard key={game.slug} game={game} />
-          ))}
-        </div>
-      </Section>
-
-      <Section>
-        <SectionHeader
-          eyebrow="Proprietary Projects"
-          title="Original Concepts in Development"
-          description="Beyond client production, OpenGamer is developing its own live casino format and product concepts."
-        />
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          {portfolioProjects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
-          ))}
-        </div>
-      </Section>
-
-      <Section>
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1fr] lg:items-start">
           <div>
             <SectionHeader
-              eyebrow="Technology"
-              title="Technology Behind Every Title"
-              description="OpenGamer supports the technical layer behind casino games, from player client and API connectivity to RGS, game logic, wallet communication, reporting and monitoring."
+              eyebrow="RGS and Integration"
+              title="Connectivity Without Unsupported Promises"
+              description="OpenGamer supports RGS-related development, API connectivity, wallet flows, reporting and monitoring while avoiding fixed timeline or certification guarantees before technical discovery."
             />
             <Button href="/technology" variant="secondary" className="mt-6">
               Explore Our Technology
             </Button>
           </div>
-          <ArchitectureDiagram items={architectureFlow} />
-        </div>
-      </Section>
-
-      <Section className="bg-black/20">
-        <SectionHeader eyebrow="Process" title="Development Process" description="A repeatable delivery pipeline from first discovery through launch and support." />
-        <div className="mt-10">
-          <ProcessTimeline items={developmentProcess} />
+          <div className="grid gap-6">
+            <ArchitectureDiagram items={architectureFlow} />
+            <div className="grid gap-3 sm:grid-cols-2">
+              {integrationItems.map((item) => (
+                <div key={item} className="rounded-lg border border-line bg-white/[0.045] px-4 py-3 text-sm text-slate-300">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -166,6 +159,37 @@ export default function HomePage() {
               <h3 className="text-lg font-semibold text-white">{model}</h3>
             </Card>
           ))}
+        </div>
+      </Section>
+
+      <Section className="bg-black/20">
+        <SectionHeader
+          eyebrow="Live Casino and Future Products"
+          title="Product Concepts Beyond Standard Slot Delivery"
+          description="OpenGamer is building a broader portfolio around live casino concepts, social engagement layers and original product IP."
+        />
+        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          {futureProducts.map((item) => (
+            <Card key={item.title}>
+              <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
+              <Button href={item.href} variant="link" className="mt-5">
+                View details
+              </Button>
+            </Card>
+          ))}
+        </div>
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          {portfolioProjects.map((project) => (
+            <ProjectCard key={project.title} {...project} />
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeader eyebrow="Production Process" title="A Controlled Path from Discovery to Support" description="The public process follows the approved eight-stage structure without fixed certification or integration timing claims." />
+        <div className="mt-10">
+          <ProcessTimeline items={developmentProcess} />
         </div>
       </Section>
 

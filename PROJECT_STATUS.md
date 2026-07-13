@@ -46,7 +46,7 @@
 - Build command: `pnpm build`.
 - Start command: `pnpm start`.
 - Output mode: default Next.js Vercel output.
-- Metadata base: `NEXT_PUBLIC_SITE_URL`, then `VERCEL_URL`, then local fallback.
+- Metadata base: `NEXT_PUBLIC_SITE_URL`, then stable fallback `https://open-gamer.com`.
 - Required preview environment variables: `NEXT_PUBLIC_SITE_URL`, `LEAD_EMAIL_TO`, `LEAD_PROVIDER=console`.
 - No production domain deployment has been created.
 - Preview deployment command used:

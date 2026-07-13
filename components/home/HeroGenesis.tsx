@@ -1,0 +1,122 @@
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { HeroGenesisMotionRoot } from "@/components/home/HeroGenesisMotionRoot";
+import type { Game } from "@/content/games";
+
+type HeroGenesisProps = {
+  featuredGame: Game;
+  motionMode?: "firstVisit" | "returning";
+};
+
+export function HeroGenesis({ featuredGame, motionMode = "firstVisit" }: HeroGenesisProps) {
+  return (
+    <HeroGenesisMotionRoot className="relative isolate overflow-hidden border-b border-white/10 py-16 sm:py-20 lg:min-h-[760px] lg:py-28" motionMode={motionMode}>
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.028),transparent_34%),radial-gradient(circle_at_70%_42%,rgba(46,230,166,0.11),transparent_27rem)]" />
+      <div aria-hidden="true" data-genesis-part="background-grid" className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.032)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(circle_at_67%_44%,black,transparent_72%)]" />
+
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div className="max-w-3xl" data-genesis-part="content">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald" data-genesis-part="eyebrow">Full-Cycle iGaming Studio</p>
+          <h1 className="mt-5 text-5xl font-semibold leading-[0.98] tracking-normal text-white sm:text-6xl lg:text-7xl" data-genesis-part="headline">
+            We Engineer the Future of iGaming.
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300" data-genesis-part="supporting-copy">
+            Full-cycle game development, technology and production solutions for operators, aggregators and game providers.
+          </p>
+          <div className="mt-8 flex flex-col gap-4" data-genesis-part="actions">
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button href="/services" className="w-full sm:w-auto">
+                Explore Our Capabilities
+              </Button>
+              <Button href="/games" variant="secondary" className="w-full sm:w-auto">
+                View Our Games
+              </Button>
+            </div>
+            <Link href="/contact" className="text-sm font-semibold text-emerald underline-offset-4 transition hover:translate-x-0.5 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
+              Start a Project
+            </Link>
+          </div>
+        </div>
+
+        <div className="relative min-h-[430px] sm:min-h-[540px] lg:min-h-[560px]" data-genesis-part="visual">
+          <div aria-hidden="true" data-genesis-part="visual-grid" className="absolute inset-0 subtle-grid [mask-image:radial-gradient(circle_at_56%_42%,black,transparent_68%)]" />
+          <NodeLattice />
+          <CoreObject />
+          <div aria-hidden="true" data-genesis-part="thread" className="absolute left-[10%] top-[48%] hidden h-px w-[36%] rotate-[-8deg] bg-gradient-to-r from-transparent via-emerald/50 to-transparent sm:block" />
+          <div aria-hidden="true" data-genesis-part="thread" className="absolute right-[14%] top-[56%] h-px w-[30%] rotate-[10deg] bg-gradient-to-r from-transparent via-emerald/42 to-transparent" />
+
+          <div data-genesis-part="artwork" className="absolute bottom-7 right-2 w-[56%] max-w-[300px] overflow-hidden rounded-lg border border-white/12 bg-black/45 shadow-[0_22px_70px_rgba(0,0,0,0.36)] sm:right-4 sm:w-[38%] lg:bottom-12 lg:right-2">
+            <div className="relative aspect-[10/7]">
+              <Image
+                src={featuredGame.image}
+                alt={`${featuredGame.title} artwork`}
+                width={featuredGame.imageWidth}
+                height={featuredGame.imageHeight}
+                sizes="(min-width: 1024px) 28vw, 70vw"
+                priority
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+                <p className="text-sm font-semibold text-white">{featuredGame.title}</p>
+                <p className="text-xs text-slate-300">Player-facing product layer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </HeroGenesisMotionRoot>
+  );
+}
+
+function NodeLattice() {
+  const nodes = [
+    "left-[7%] top-[18%]",
+    "left-[22%] top-[35%]",
+    "left-[12%] top-[64%]",
+    "right-[30%] top-[16%]",
+    "right-[10%] top-[39%]",
+    "right-[18%] bottom-[18%]"
+  ];
+
+  return (
+    <div aria-hidden="true" data-genesis-part="nodes" className="absolute inset-0">
+      {nodes.map((position) => (
+        <span key={position} className={`absolute h-2.5 w-2.5 rounded-full border border-emerald/50 bg-emerald/20 shadow-[0_0_18px_rgba(46,230,166,0.2)] ${position}`} />
+      ))}
+      <svg className="absolute inset-0 h-full w-full opacity-55" viewBox="0 0 640 460" fill="none">
+        <path data-genesis-part="thread-path" d="M70 92 L175 162 L116 286 L320 215 L492 108 L562 188 L512 365 L320 215" stroke="rgba(46,230,166,0.22)" strokeWidth="1" />
+        <path data-genesis-part="thread-path" d="M175 162 L492 108 M116 286 L512 365" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
+      </svg>
+    </div>
+  );
+}
+
+function CoreObject() {
+  return (
+    <div aria-hidden="true" data-genesis-part="core" className="absolute left-1/2 top-[42%] h-64 w-64 -translate-x-1/2 -translate-y-1/2 sm:h-80 sm:w-80 lg:left-[54%] lg:h-[23rem] lg:w-[23rem]">
+      <div data-genesis-part="core-shell" className="h-full w-full">
+        <svg viewBox="0 0 260 260" className="h-full w-full drop-shadow-[0_34px_90px_rgba(0,0,0,0.62)]">
+          <defs>
+            <linearGradient id="coreShell" x1="20" y1="20" x2="240" y2="240">
+              <stop stopColor="#1a2a23" />
+              <stop offset="1" stopColor="#07110d" />
+            </linearGradient>
+            <linearGradient id="coreGlass" x1="75" y1="60" x2="190" y2="205">
+              <stop stopColor="rgba(255,255,255,0.24)" />
+              <stop offset="1" stopColor="rgba(46,230,166,0.14)" />
+            </linearGradient>
+          </defs>
+          <path d="M113 19h34l23 66-40 28-40-28 23-66Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.14)" />
+          <path d="M241 113v34l-66 23-28-40 28-40 66 23Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.14)" />
+          <path d="M147 241h-34l-23-66 40-28 40 28-23 66Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.14)" />
+          <path d="M19 147v-34l66-23 28 40-28 40-66-23Z" fill="url(#coreShell)" stroke="rgba(255,255,255,0.14)" />
+          <path d="M82 82h96v96H82z" rx="24" fill="url(#coreGlass)" stroke="rgba(46,230,166,0.36)" />
+          <path d="M103 108h54M103 130h54M103 152h32M130 98v70" stroke="rgba(255,255,255,0.23)" strokeWidth="1" />
+          <circle cx="130" cy="130" r="22" fill="rgba(46,230,166,0.18)" stroke="rgba(46,230,166,0.55)" />
+          <circle cx="153" cy="151" r="8" fill="rgba(246,200,95,0.38)" />
+        </svg>
+      </div>
+    </div>
+  );
+}

@@ -27,7 +27,7 @@ export default function ServicesPage() {
         </Container>
       </section>
       {serviceGroups.map((group, index) => (
-        <Section key={group.title} className={index % 2 ? "bg-black/20" : ""}>
+        <Section key={group.title} id={group.title === "Strategic Development" ? "live-casino-development" : undefined} className={index % 2 ? "bg-black/20" : ""}>
           <div className="grid gap-8 lg:grid-cols-[0.35fr_1fr]">
             <SectionHeader eyebrow={group.eyebrow} title={group.title} description={group.description} />
             <div className="grid gap-5">

@@ -33,6 +33,10 @@ export const coreCapabilities = [
     description: "Aggregator, platform and operator connectivity with sandbox, QA and launch support."
   },
   {
+    title: "Live Casino Development",
+    description: "Show-game concepts, wheel formats, live UX and studio product design."
+  },
+  {
     title: "Dedicated Teams",
     description: "Embedded specialists across front-end, back-end, game design, art, QA and delivery."
   }
@@ -211,11 +215,11 @@ export const serviceGroups: ServiceGroup[] = [
 
 export const partnershipModels = [
   "Custom Development",
-  "Fixed-Scope Production",
   "Dedicated Team",
-  "White-Label Games",
+  "White Label",
   "Co-Development",
-  "Long-Term Technology Partnership"
+  "Technology Partnership",
+  "Long-Term Studio Partnership"
 ];
 
 export const whyOpenGamer = [
@@ -232,11 +236,10 @@ export const whyOpenGamer = [
 export const developmentProcess = [
   { title: "Discovery", description: "Scope, business model and technical context are clarified." },
   { title: "Planning", description: "Delivery structure, roadmap and dependencies are defined." },
-  { title: "Game Design", description: "Mechanics, user experience and feature logic are shaped." },
-  { title: "Art & Mathematics", description: "Visual production and math models move in parallel." },
+  { title: "Design", description: "Mechanics, user experience, art direction and feature logic are shaped." },
   { title: "Development", description: "Front-end, back-end and game logic are implemented." },
   { title: "Quality Assurance", description: "Functional, regression and device testing are executed." },
-  { title: "Integration", description: "Sandbox, wallet and partner flows are validated." },
+  { title: "Certification Preparation", description: "Documentation, RNG preparation and lab coordination are prepared where required." },
   { title: "Launch", description: "Production release is coordinated with the partner." },
   { title: "Support", description: "Monitoring, updates and live operations continue post-launch." }
 ];
@@ -281,4 +284,3 @@ export const technologyPrinciples = [
   "Integration flexibility",
   "Security-aware development"
 ];
-

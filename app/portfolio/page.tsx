@@ -41,13 +41,13 @@ export default function PortfolioPage() {
           Explore Games
         </Button>
       </Section>
-      <Section className="bg-black/20">
+      <Section id="elementals" className="bg-black/20">
         <SectionHeader eyebrow="Live Casino & Show Games" title="Original Live Casino Concepts" description="Original live casino and show-game concepts, starting with ELEMENTALS." />
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <ProjectCard {...portfolioProjects[0]} />
         </div>
       </Section>
-      <Section>
+      <Section id="lc-app">
         <SectionHeader eyebrow="Platforms & Applications" title="Live Casino Product Concepts" description="Product concepts extending Live Casino into new engagement models." />
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <ProjectCard {...portfolioProjects[1]} />
