@@ -10,22 +10,22 @@ export function GameCard({ game }: { game: Game }) {
   ].filter(Boolean) as [string, string][];
 
   return (
-    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.06] focus-within:-translate-y-0.5 focus-within:border-emerald/50">
-      <div className="image-frame relative aspect-[10/7] overflow-hidden bg-black/40">
+    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.058] focus-within:-translate-y-0.5 focus-within:border-emerald/50">
+      <div className="image-frame relative aspect-[10/7] overflow-hidden bg-black/45">
         <Image
           src={game.image}
           alt={`${game.title} artwork`}
           width={game.imageWidth}
           height={game.imageHeight}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="h-full w-full object-contain p-1 transition duration-500 group-hover:scale-[1.025] group-focus-within:scale-[1.025]"
+          className="h-full w-full object-contain p-2 transition duration-500 group-hover:scale-[1.018] group-focus-within:scale-[1.018]"
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/78 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/82 to-transparent" />
       </div>
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div className="flex flex-wrap items-center gap-2">
           {game.category?.map((category) => (
-            <span key={category} className="rounded-full border border-emerald/30 px-3 py-1 text-xs text-emerald">
+            <span key={category} className="premium-status rounded-full px-3 py-1 text-xs">
               {category}
             </span>
           ))}

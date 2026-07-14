@@ -183,10 +183,10 @@ export default function HomePage() {
           title="Product Concepts Beyond Standard Slot Delivery"
           description="OpenGamer is building a broader portfolio around live casino concepts, social engagement layers and original product IP."
         />
-        <div className="mt-10 grid gap-6 lg:grid-cols-3" data-reveal-group="cards">
-          {futureProducts.map((item) => (
-            <Card key={item.title}>
-              {item.title === "Live Casino Development" ? <LiveCasinoTechnicalVisual /> : null}
+        <div className="mt-10 grid gap-6 lg:grid-cols-[0.78fr_1.22fr]" data-reveal-group="cards">
+          {futureProducts.filter((item) => item.title === "Live Casino Development").map((item) => (
+            <Card key={item.title} className="h-full">
+              <LiveCasinoTechnicalVisual />
               <h3 className="text-xl font-semibold text-white">{item.title}</h3>
               <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
               <Button href={item.href} variant="link" className="mt-5">
@@ -194,11 +194,11 @@ export default function HomePage() {
               </Button>
             </Card>
           ))}
-        </div>
-        <div className="mt-10 grid gap-6 lg:grid-cols-2" data-reveal-group="cards">
-          {portfolioProjects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
-          ))}
+          <div className="grid gap-6 lg:grid-cols-2">
+            {portfolioProjects.map((project) => (
+              <ProjectCard key={project.title} {...project} />
+            ))}
+          </div>
         </div>
       </Section>
 

@@ -26,10 +26,10 @@ export default function ElementalsPage() {
   return (
     <SiteShell>
       <section className="relative overflow-hidden border-b border-white/10 bg-black/20 py-16 sm:py-24">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_74%_18%,rgba(35,196,131,0.14),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.04),transparent_44%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_74%_18%,rgba(35,196,131,0.105),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.035),transparent_44%)]" />
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1fr] lg:items-center">
           <div className="reveal">
-            <span className="rounded-full border border-emerald/30 px-3 py-1 text-xs text-emerald">In Development</span>
+            <span className="premium-status rounded-full px-3 py-1 text-xs">In Development</span>
             <h1 className="mt-5 text-5xl font-semibold tracking-normal text-white sm:text-6xl">ELEMENTALS</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
               A premium Live Casino show game built around four elemental realms and the Great Wheel.
@@ -42,7 +42,7 @@ export default function ElementalsPage() {
             </div>
           </div>
           {elementals.image ? (
-            <div className="premium-card surface-hairline image-frame reveal overflow-hidden rounded-lg border border-line bg-white/[0.045]">
+            <div className="premium-card surface-hairline image-frame reveal overflow-hidden rounded-lg border border-line bg-white/[0.04] shadow-[0_28px_100px_rgba(0,0,0,0.4)]">
               <Image src={elementals.image} alt={elementals.imageAlt} width={1536} height={1024} priority className="h-full w-full object-cover" sizes="(min-width: 1024px) 48vw, 100vw" />
             </div>
           ) : null}
@@ -56,7 +56,7 @@ export default function ElementalsPage() {
         />
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch" data-reveal-group="cards">
           <Card tone="strong" className="overflow-hidden p-0">
-            <div className="image-frame relative aspect-[16/10] bg-black/30 lg:aspect-auto lg:h-full">
+            <div className="image-frame relative aspect-[16/10] bg-black/38 lg:aspect-auto lg:h-full">
               <Image src={elementalsWheelImage} alt="ELEMENTALS Great Wheel artwork" width={1024} height={1024} className="h-full w-full object-cover" sizes="(min-width: 1024px) 52vw, 100vw" />
             </div>
           </Card>
@@ -76,9 +76,9 @@ export default function ElementalsPage() {
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
           {elementalsRealms.map((realm) => (
             <Card key={realm.title} className={`bg-gradient-to-br ${realm.tone} p-0`}>
-              <div className="image-frame relative aspect-[4/5] overflow-hidden bg-black/35">
+              <div className="image-frame relative aspect-[4/5] overflow-hidden bg-black/42">
                 <Image src={realm.portalImage} alt={`${realm.title} elemental portal`} width={1024} height={1024} className="h-full w-full object-cover" sizes="(min-width: 1024px) 22vw, 50vw" />
-                <div className="absolute left-4 top-4 h-16 w-16 overflow-hidden rounded-lg border border-white/15 bg-black/55 shadow-[0_16px_50px_rgba(0,0,0,0.35)]">
+                <div className="image-frame absolute left-4 top-4 h-16 w-16 overflow-hidden rounded-lg border border-white/15 bg-black/60 shadow-[0_16px_50px_rgba(0,0,0,0.42)]">
                   <Image src={realm.iconImage} alt={`${realm.title} elemental icon`} width={1024} height={1024} className="h-full w-full object-cover" sizes="64px" />
                 </div>
               </div>
@@ -95,7 +95,7 @@ export default function ElementalsPage() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
           {elementalsRealms.map((realm) => (
             <Card key={realm.guardianImage} className="overflow-hidden p-0">
-              <div className="image-frame relative aspect-square bg-black/35">
+              <div className="image-frame relative aspect-square bg-black/42">
                 <Image src={realm.guardianImage} alt={`${realm.title} elemental guardian`} width={1024} height={1024} className="h-full w-full object-cover" sizes="(min-width: 1024px) 28vw, 100vw" />
               </div>
               <div className="p-5">

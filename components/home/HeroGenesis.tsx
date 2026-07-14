@@ -14,14 +14,14 @@ export function HeroGenesis({ featuredGame, productGames = [featuredGame], motio
   const productPanels = productGames.slice(0, 4);
 
   return (
-    <HeroGenesisMotionRoot className="relative isolate overflow-hidden border-b border-white/10 py-16 sm:py-20 lg:min-h-[760px] lg:py-28" motionMode={motionMode}>
-      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.026),transparent_34%),radial-gradient(circle_at_69%_41%,rgba(46,230,166,0.105),transparent_27rem),radial-gradient(circle_at_52%_50%,rgba(255,255,255,0.04),transparent_20rem)]" />
-      <div aria-hidden="true" data-genesis-part="background-grid" className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.032)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(circle_at_67%_44%,black,transparent_72%)]" />
+    <HeroGenesisMotionRoot className="relative isolate overflow-hidden border-b border-white/10 py-16 sm:py-20 lg:min-h-[780px] lg:py-28" motionMode={motionMode}>
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.025),transparent_34%),radial-gradient(circle_at_68%_42%,rgba(46,230,166,0.095),transparent_26rem),radial-gradient(circle_at_53%_50%,rgba(255,255,255,0.035),transparent_18rem)]" />
+      <div aria-hidden="true" data-genesis-part="background-grid" className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.036)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(circle_at_67%_44%,black,transparent_70%)]" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
         <div className="max-w-3xl" data-genesis-part="content">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald" data-genesis-part="eyebrow">Full-Cycle iGaming Studio</p>
-          <h1 className="text-balance mt-5 text-5xl font-semibold leading-[0.98] tracking-normal text-white sm:text-6xl lg:text-7xl" data-genesis-part="headline">
+          <p className="premium-kicker text-xs font-semibold uppercase" data-genesis-part="eyebrow">Full-Cycle iGaming Studio</p>
+          <h1 className="text-balance mt-5 text-5xl font-semibold leading-[0.96] tracking-normal text-white sm:text-6xl lg:text-7xl" data-genesis-part="headline">
             We Engineer the Future of iGaming.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300" data-genesis-part="supporting-copy">
@@ -42,8 +42,8 @@ export function HeroGenesis({ featuredGame, productGames = [featuredGame], motio
           </div>
         </div>
 
-        <div className="relative min-h-[430px] sm:min-h-[540px] lg:min-h-[560px]" data-genesis-part="visual">
-          <div aria-hidden="true" className="absolute left-1/2 top-[42%] h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.045] bg-black/[0.08] blur-0" />
+        <div className="relative min-h-[430px] sm:min-h-[540px] lg:min-h-[580px]" data-genesis-part="visual">
+          <div aria-hidden="true" className="absolute left-1/2 top-[42%] h-[76%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.05] bg-black/[0.1] shadow-[inset_0_0_80px_rgba(46,230,166,0.035)] blur-0" />
           <div aria-hidden="true" data-genesis-part="visual-grid" className="absolute inset-0 subtle-grid [mask-image:radial-gradient(circle_at_56%_42%,black,transparent_68%)]" />
           <NodeLattice />
           <CoreObject />
@@ -51,7 +51,7 @@ export function HeroGenesis({ featuredGame, productGames = [featuredGame], motio
           <div aria-hidden="true" data-genesis-part="thread" className="absolute right-[14%] top-[56%] h-px w-[30%] rotate-[10deg] bg-gradient-to-r from-transparent via-emerald/42 to-transparent" />
           <ProductPanels games={productPanels} />
 
-          <div data-genesis-part="artwork" className="image-frame surface-hairline absolute bottom-7 right-2 w-[52%] max-w-[270px] overflow-hidden rounded-lg border border-white/12 bg-black/45 shadow-[0_22px_70px_rgba(0,0,0,0.36)] sm:right-4 sm:w-[34%] lg:bottom-12 lg:right-2">
+          <div data-genesis-part="artwork" className="image-frame surface-hairline absolute bottom-7 right-2 w-[52%] max-w-[280px] overflow-hidden rounded-lg border border-white/12 bg-black/45 shadow-[0_24px_80px_rgba(0,0,0,0.44)] sm:right-4 sm:w-[34%] lg:bottom-12 lg:right-2">
             <div className="relative aspect-[10/7]">
               <Image
                 src={featuredGame.image}
@@ -76,10 +76,10 @@ export function HeroGenesis({ featuredGame, productGames = [featuredGame], motio
 
 function ProductPanels({ games }: { games: Game[] }) {
   const positions = [
-    "left-[7%] top-[10%] w-[34%] max-w-[176px]",
+    "left-[12%] top-[10%] w-[34%] max-w-[176px]",
     "right-[4%] top-[8%] w-[31%] max-w-[164px]",
-    "left-[2%] bottom-[13%] hidden w-[30%] max-w-[156px] sm:block",
-    "right-[31%] bottom-[2%] hidden w-[26%] max-w-[142px] md:block"
+    "left-[20%] bottom-[13%] hidden w-[30%] max-w-[156px] 2xl:block",
+    "right-[12%] bottom-[2%] hidden w-[26%] max-w-[142px] 2xl:block"
   ];
 
   return (
@@ -88,7 +88,7 @@ function ProductPanels({ games }: { games: Game[] }) {
         <div
           key={game.slug}
           data-genesis-part="product-panel"
-          className={`image-frame absolute overflow-hidden rounded-md border border-white/12 bg-black/50 shadow-[0_14px_48px_rgba(0,0,0,0.34)] transition duration-300 hover:border-emerald/30 ${positions[index]}`}
+          className={`image-frame absolute overflow-hidden rounded-md border border-white/12 bg-black/52 shadow-[0_16px_56px_rgba(0,0,0,0.42)] transition duration-300 hover:border-emerald/30 ${positions[index]}`}
         >
           <div className="relative aspect-[10/7]">
             <Image
@@ -98,7 +98,7 @@ function ProductPanels({ games }: { games: Game[] }) {
               height={game.imageHeight}
               sizes="(min-width: 1024px) 12vw, 30vw"
               priority={index === 0}
-              className="h-full w-full object-contain"
+            className="h-full w-full object-contain p-1"
             />
           </div>
         </div>
@@ -122,7 +122,7 @@ function NodeLattice() {
       {nodes.map((position) => (
         <span key={position} className={`absolute h-2.5 w-2.5 rounded-full border border-emerald/50 bg-emerald/20 shadow-[0_0_18px_rgba(46,230,166,0.2)] ${position}`} />
       ))}
-      <svg className="absolute inset-0 h-full w-full opacity-55" viewBox="0 0 640 460" fill="none">
+      <svg className="absolute inset-0 h-full w-full opacity-50" viewBox="0 0 640 460" fill="none">
         <path data-genesis-part="thread-path" d="M70 92 L175 162 L116 286 L320 215 L492 108 L562 188 L512 365 L320 215" stroke="rgba(46,230,166,0.22)" strokeWidth="1" />
         <path data-genesis-part="thread-path" d="M175 162 L492 108 M116 286 L512 365" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
       </svg>
@@ -132,9 +132,9 @@ function NodeLattice() {
 
 function CoreObject() {
   return (
-    <div aria-hidden="true" data-genesis-part="core" className="absolute left-1/2 top-[42%] h-64 w-64 -translate-x-1/2 -translate-y-1/2 sm:h-80 sm:w-80 lg:left-[54%] lg:h-[23rem] lg:w-[23rem]">
+    <div aria-hidden="true" data-genesis-part="core" className="absolute left-1/2 top-[42%] h-64 w-64 -translate-x-1/2 -translate-y-1/2 sm:h-80 sm:w-80 lg:left-[54%] lg:h-[23.5rem] lg:w-[23.5rem]">
       <div data-genesis-part="core-shell" className="h-full w-full">
-        <svg viewBox="0 0 260 260" className="h-full w-full drop-shadow-[0_34px_90px_rgba(0,0,0,0.62)]">
+        <svg viewBox="0 0 260 260" className="h-full w-full drop-shadow-[0_36px_98px_rgba(0,0,0,0.68)]">
           <defs>
             <linearGradient id="coreShell" x1="20" y1="20" x2="240" y2="240">
               <stop stopColor="#1b2b24" />
