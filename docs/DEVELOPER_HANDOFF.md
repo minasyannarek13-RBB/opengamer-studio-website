@@ -101,7 +101,6 @@ Production is intentionally excluded from this handoff. Do not run `vercel deplo
 - Legal-page approval.
 - Final Core geometry for OPEN GAMER GENESIS.
 - Whether LC App receives additional production screenshots later.
-- Whether missing LC App product-lineup asset should be supplied.
 
 ## Do Not Represent as Confirmed
 

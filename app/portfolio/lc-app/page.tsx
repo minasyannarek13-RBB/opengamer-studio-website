@@ -4,10 +4,9 @@ import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { lcAppAssets, lcAppDisclaimer, lcAppOverview } from "@/content/portfolio";
+import { lcAppAssets } from "@/content/portfolio";
 
 export const metadata: Metadata = {
   title: "LC App | B2B Social Layer for Live Casino — OpenGamer",
@@ -91,11 +90,7 @@ export default function LcAppPage() {
             />
             <span className="mt-6 inline-flex rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">Concept UI</span>
           </div>
-          <Card tone="strong">
-            <h2 className="text-2xl font-semibold text-white">Portfolio Overview</h2>
-            <p className="mt-4 leading-7 text-slate-300">{lcAppOverview}</p>
-            <p className="mt-4 text-sm leading-6 text-slate-400">{lcAppDisclaimer}</p>
-          </Card>
+          <ConceptImage asset={lcAppAssets.productLineup} priority={false} />
         </div>
       </Section>
 
