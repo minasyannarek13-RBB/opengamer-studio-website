@@ -1,4 +1,5 @@
 .playwright-browsers/
+incoming/
 qa/screenshots/
 qa/lighthouse*.json
 .pnpm-store/
@@ -6,6 +7,3 @@ qa/lighthouse*.json
 node_modules/
 *.log
 .DS_Store
-public/assets/projects/elementals/**
-!public/assets/projects/elementals/
-!public/assets/projects/elementals/guardian.jpeg

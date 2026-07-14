@@ -20,9 +20,9 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    linear-gradient(180deg, rgba(12, 18, 28, 0.82), rgba(5, 6, 8, 0) 21rem),
-    radial-gradient(circle at top left, rgba(35, 196, 131, 0.14), transparent 30rem),
-    radial-gradient(circle at 82% 4%, rgba(56, 189, 248, 0.08), transparent 24rem),
+    linear-gradient(180deg, rgba(9, 18, 14, 0.92), rgba(5, 16, 11, 0.1) 24rem, rgba(5, 16, 11, 0) 44rem),
+    radial-gradient(circle at 16% 0%, rgba(46, 230, 166, 0.11), transparent 28rem),
+    radial-gradient(circle at 82% 7%, rgba(255, 255, 255, 0.045), transparent 22rem),
     #050608;
   color: #f8fafc;
   font-family: Inter, "Space Grotesk", Arial, sans-serif;
@@ -67,6 +67,7 @@ a {
 .premium-section {
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.035);
 }
 
 .premium-section::before {
@@ -75,14 +76,15 @@ a {
   inset: 0;
   content: "";
   background:
-    radial-gradient(circle at 18% 0%, rgba(35, 196, 131, 0.08), transparent 26rem),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 12rem);
-  opacity: 0.76;
+    radial-gradient(circle at 18% 0%, rgba(46, 230, 166, 0.06), transparent 24rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.026), transparent 11rem);
+  opacity: 0.72;
 }
 
 .premium-card {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .premium-card::before {
@@ -91,9 +93,12 @@ a {
   inset: 0;
   content: "";
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 34%, rgba(35, 196, 131, 0.08));
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.11), transparent 34%, rgba(46, 230, 166, 0.075)),
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.08), transparent 38%);
   opacity: 0;
   transition: opacity 220ms ease;
+  z-index: -1;
 }
 
 .premium-card:hover::before,
@@ -103,6 +108,22 @@ a {
 
 .reveal {
   animation: reveal-up 560ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.surface-hairline {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 24px 80px rgba(0, 0, 0, 0.24);
+}
+
+.image-frame {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 42%),
+    rgba(0, 0, 0, 0.35);
+}
+
+.text-balance {
+  text-wrap: balance;
 }
 
 body[data-scroll-reveal-ready] [data-scroll-reveal]:not(.is-visible) {
@@ -169,6 +190,10 @@ body[data-scroll-reveal-ready] [data-reveal-group].is-visible > *:nth-child(n + 
   transform-origin: 130px 130px;
 }
 
+[data-genesis-root] [data-genesis-part="product-panel"] {
+  transform-origin: center;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   [data-genesis-root][data-motion-state="playing"] [data-genesis-part="background-grid"] {
     animation: genesis-background-grid 760ms var(--genesis-ease) both;
@@ -192,35 +217,51 @@ body[data-scroll-reveal-ready] [data-reveal-group].is-visible > *:nth-child(n + 
   }
 
   [data-genesis-root][data-motion-state="playing"] [data-genesis-part="nodes"] {
-    animation: genesis-fade-in 520ms var(--genesis-ease) 780ms both;
+    animation: genesis-node-activate 560ms var(--genesis-ease) 760ms both;
   }
 
   [data-genesis-root][data-motion-state="playing"] [data-genesis-part="thread"] {
-    animation: genesis-thread-reveal 620ms var(--genesis-ease) 920ms both;
+    animation: genesis-thread-reveal 620ms var(--genesis-ease) 1220ms both;
   }
 
   [data-genesis-root][data-motion-state="playing"] [data-genesis-part="thread-path"] {
-    animation: genesis-thread-draw 780ms linear 800ms both;
+    animation: genesis-thread-draw 780ms linear 1040ms both;
+  }
+
+  [data-genesis-root][data-motion-state="playing"] [data-genesis-part="product-panel"] {
+    animation: genesis-panel-reveal 560ms var(--genesis-ease) 980ms both;
+  }
+
+  [data-genesis-root][data-motion-state="playing"] [data-genesis-part="product-panel"]:nth-child(2) {
+    animation-delay: 1080ms;
+  }
+
+  [data-genesis-root][data-motion-state="playing"] [data-genesis-part="product-panel"]:nth-child(3) {
+    animation-delay: 1180ms;
+  }
+
+  [data-genesis-root][data-motion-state="playing"] [data-genesis-part="product-panel"]:nth-child(4) {
+    animation-delay: 1280ms;
   }
 
   [data-genesis-root][data-motion-state="playing"] [data-genesis-part="artwork"] {
-    animation: genesis-panel-reveal 620ms var(--genesis-ease) 1120ms both;
+    animation: genesis-panel-reveal 620ms var(--genesis-ease) 1380ms both;
   }
 
   [data-genesis-root][data-motion-state="playing"] [data-genesis-part="eyebrow"] {
-    animation: genesis-copy-reveal 420ms var(--genesis-ease) 1480ms both;
+    animation: genesis-copy-reveal 420ms var(--genesis-ease) 1760ms both;
   }
 
   [data-genesis-root][data-motion-state="playing"] [data-genesis-part="headline"] {
-    animation: genesis-copy-reveal 500ms var(--genesis-ease) 1580ms both;
+    animation: genesis-copy-reveal 500ms var(--genesis-ease) 1860ms both;
   }
 
   [data-genesis-root][data-motion-state="playing"] [data-genesis-part="supporting-copy"] {
-    animation: genesis-copy-reveal 480ms var(--genesis-ease) 1700ms both;
+    animation: genesis-copy-reveal 480ms var(--genesis-ease) 1980ms both;
   }
 
   [data-genesis-root][data-motion-state="playing"] [data-genesis-part="actions"] {
-    animation: genesis-actions-reveal 420ms var(--genesis-ease) 1820ms both;
+    animation: genesis-actions-reveal 420ms var(--genesis-ease) 2100ms both;
   }
 
   [data-genesis-root][data-motion-state="returning"] [data-genesis-part="background-grid"] {
@@ -234,6 +275,7 @@ body[data-scroll-reveal-ready] [data-reveal-group].is-visible > *:nth-child(n + 
   [data-genesis-root][data-motion-state="returning"] [data-genesis-part="core-shell"],
   [data-genesis-root][data-motion-state="returning"] [data-genesis-part="core-mark"],
   [data-genesis-root][data-motion-state="returning"] [data-genesis-part="nodes"],
+  [data-genesis-root][data-motion-state="returning"] [data-genesis-part="product-panel"],
   [data-genesis-root][data-motion-state="returning"] [data-genesis-part="artwork"],
   [data-genesis-root][data-motion-state="returning"] [data-genesis-part="eyebrow"],
   [data-genesis-root][data-motion-state="returning"] [data-genesis-part="headline"],
@@ -244,6 +286,10 @@ body[data-scroll-reveal-ready] [data-reveal-group].is-visible > *:nth-child(n + 
 
   [data-genesis-root][data-motion-state="returning"] [data-genesis-part="thread"] {
     animation: genesis-fade-in 420ms var(--genesis-ease) both;
+  }
+
+  [data-genesis-root][data-motion-state="returning"] [data-genesis-part="thread-path"] {
+    animation: genesis-thread-draw 420ms linear both;
   }
 }
 
@@ -271,6 +317,17 @@ body[data-scroll-reveal-ready] [data-reveal-group].is-visible > *:nth-child(n + 
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes genesis-node-activate {
+  from {
+    opacity: 0;
+    filter: saturate(0.75);
+  }
+  to {
+    opacity: 1;
+    filter: saturate(1);
   }
 }
 
@@ -319,11 +376,11 @@ body[data-scroll-reveal-ready] [data-reveal-group].is-visible > *:nth-child(n + 
 @keyframes genesis-panel-reveal {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(10px) scale(0.985);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 

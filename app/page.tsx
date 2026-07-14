@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
 import { ProjectCard } from "@/components/sections/ProjectCard";
 import { architectureFlow, developmentProcess, partnershipModels, whyOpenGamer } from "@/content/services";
-import { featuredGames, games } from "@/content/games";
+import { featuredGames, games, heroProductGames } from "@/content/games";
 import { portfolioProjects } from "@/content/portfolio";
 import { capabilitiesUniverse, futureProducts, integrationItems, lifecycleStages, technologyCoreItems } from "@/content/home";
 
@@ -39,7 +39,7 @@ export default function HomePage() {
 
   return (
     <SiteShell>
-      <HeroGenesis featuredGame={heroGame} />
+      <HeroGenesis featuredGame={heroGame} productGames={heroProductGames} />
 
       <Section>
         <SectionHeader
@@ -48,11 +48,27 @@ export default function HomePage() {
           description="OpenGamer brings casino game development, art, mathematics, RGS-related engineering, integration and support into one delivery structure."
         />
         <div className="mt-10 grid gap-4 lg:grid-cols-3" data-reveal-group="cards">
-          {["Development studio", "Technology partner", "Game product company"].map((item) => (
-            <Card key={item} tone="strong">
-              <h3 className="text-xl font-semibold text-white">{item}</h3>
+          {[
+            {
+              title: "Development Studio",
+              description:
+                "Game design, mathematics, art, front-end and back-end engineering delivered through one accountable production pipeline — from concept to a launch-ready build."
+            },
+            {
+              title: "Technology Partner",
+              description:
+                "OpenGamer develops game technology, RGS-related infrastructure, integration workflows and engineering services for casino content production and distribution."
+            },
+            {
+              title: "Game Product Company",
+              description:
+                "Beyond client work, OpenGamer develops and distributes its own casino game portfolio alongside original product concepts currently in development."
+            }
+          ].map((item) => (
+            <Card key={item.title} tone="strong" className="h-full">
+              <h3 className="text-balance text-xl font-semibold text-white">{item.title}</h3>
               <p className="mt-3 text-sm leading-6 text-slate-400">
-                Built for operators, aggregators, platforms, game providers and strategic partners that need credible B2B delivery.
+                {item.description}
               </p>
             </Card>
           ))}
@@ -83,7 +99,7 @@ export default function HomePage() {
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
           {capabilitiesUniverse.map((item) => (
-            <div key={item} className="rounded-lg border border-line bg-white/[0.045] p-4 text-sm font-medium text-slate-200">
+            <div key={item} className="premium-card surface-hairline rounded-lg border border-line bg-white/[0.045] p-4 text-sm font-medium text-slate-200 transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.06]">
               {item}
             </div>
           ))}
@@ -141,7 +157,7 @@ export default function HomePage() {
             <ArchitectureDiagram items={architectureFlow} />
             <div className="grid gap-3 sm:grid-cols-2" data-reveal-group="cards">
               {integrationItems.map((item) => (
-                <div key={item} className="rounded-lg border border-line bg-white/[0.045] px-4 py-3 text-sm text-slate-300">
+                <div key={item} className="premium-card rounded-lg border border-line bg-white/[0.045] px-4 py-3 text-sm text-slate-300 transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.06]">
                   {item}
                 </div>
               ))}
@@ -170,6 +186,7 @@ export default function HomePage() {
         <div className="mt-10 grid gap-6 lg:grid-cols-3" data-reveal-group="cards">
           {futureProducts.map((item) => (
             <Card key={item.title}>
+              {item.title === "Live Casino Development" ? <LiveCasinoTechnicalVisual /> : null}
               <h3 className="text-xl font-semibold text-white">{item.title}</h3>
               <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
               <Button href={item.href} variant="link" className="mt-5">
@@ -208,5 +225,21 @@ export default function HomePage() {
         description="Tell us what you want to build, integrate, modernize or scale. Our team will review the requirements and propose the appropriate engagement model."
       />
     </SiteShell>
+  );
+}
+
+function LiveCasinoTechnicalVisual() {
+  return (
+    <div aria-hidden="true" className="surface-hairline mb-5 overflow-hidden rounded-lg border border-emerald/20 bg-black/30 p-4">
+      <div className="relative h-28">
+        <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-emerald/45 to-transparent" />
+        <div className="absolute left-[10%] top-[18%] h-12 w-20 rounded-md border border-white/12 bg-white/[0.045]" />
+        <div className="absolute left-[38%] top-[33%] h-14 w-14 rounded-full border border-emerald/35 bg-emerald/10 shadow-[0_0_30px_rgba(46,230,166,0.14)]" />
+        <div className="absolute right-[10%] top-[16%] h-16 w-24 rounded-md border border-white/12 bg-white/[0.045]" />
+        <span className="absolute left-[18%] top-[43%] h-2 w-2 rounded-full bg-emerald/70" />
+        <span className="absolute left-[48%] top-[49%] h-2 w-2 rounded-full bg-emerald/90" />
+        <span className="absolute right-[20%] top-[43%] h-2 w-2 rounded-full bg-emerald/70" />
+      </div>
+    </div>
   );
 }

@@ -12,7 +12,7 @@ export function Section({
 }) {
   return (
     <section id={id} className={`premium-section py-16 sm:py-24 ${className}`} data-scroll-reveal>
-      <Container>{children}</Container>
+      <Container className="relative z-10">{children}</Container>
     </section>
   );
 }

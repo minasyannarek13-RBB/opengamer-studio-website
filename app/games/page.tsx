@@ -21,7 +21,8 @@ export const metadata: Metadata = {
 export default function GamesPage() {
   return (
     <SiteShell>
-      <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-24">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(46,230,166,0.09),transparent_22rem),linear-gradient(180deg,rgba(255,255,255,0.035),transparent_58%)]" />
         <Container>
           <SectionHeader
             eyebrow="Games"

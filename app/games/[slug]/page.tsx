@@ -80,7 +80,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
               width={game.imageWidth}
               height={game.imageHeight}
               priority
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
               sizes="(min-width: 1024px) 48vw, 100vw"
             />
           </div>

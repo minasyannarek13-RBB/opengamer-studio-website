@@ -6,19 +6,22 @@ import type { Game } from "@/content/games";
 
 type HeroGenesisProps = {
   featuredGame: Game;
+  productGames?: Game[];
   motionMode?: "firstVisit" | "returning";
 };
 
-export function HeroGenesis({ featuredGame, motionMode = "firstVisit" }: HeroGenesisProps) {
+export function HeroGenesis({ featuredGame, productGames = [featuredGame], motionMode = "firstVisit" }: HeroGenesisProps) {
+  const productPanels = productGames.slice(0, 4);
+
   return (
     <HeroGenesisMotionRoot className="relative isolate overflow-hidden border-b border-white/10 py-16 sm:py-20 lg:min-h-[760px] lg:py-28" motionMode={motionMode}>
-      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.028),transparent_34%),radial-gradient(circle_at_70%_42%,rgba(46,230,166,0.11),transparent_27rem)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.026),transparent_34%),radial-gradient(circle_at_69%_41%,rgba(46,230,166,0.105),transparent_27rem),radial-gradient(circle_at_52%_50%,rgba(255,255,255,0.04),transparent_20rem)]" />
       <div aria-hidden="true" data-genesis-part="background-grid" className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.032)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(circle_at_67%_44%,black,transparent_72%)]" />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
         <div className="max-w-3xl" data-genesis-part="content">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald" data-genesis-part="eyebrow">Full-Cycle iGaming Studio</p>
-          <h1 className="mt-5 text-5xl font-semibold leading-[0.98] tracking-normal text-white sm:text-6xl lg:text-7xl" data-genesis-part="headline">
+          <h1 className="text-balance mt-5 text-5xl font-semibold leading-[0.98] tracking-normal text-white sm:text-6xl lg:text-7xl" data-genesis-part="headline">
             We Engineer the Future of iGaming.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300" data-genesis-part="supporting-copy">
@@ -40,13 +43,15 @@ export function HeroGenesis({ featuredGame, motionMode = "firstVisit" }: HeroGen
         </div>
 
         <div className="relative min-h-[430px] sm:min-h-[540px] lg:min-h-[560px]" data-genesis-part="visual">
+          <div aria-hidden="true" className="absolute left-1/2 top-[42%] h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.045] bg-black/[0.08] blur-0" />
           <div aria-hidden="true" data-genesis-part="visual-grid" className="absolute inset-0 subtle-grid [mask-image:radial-gradient(circle_at_56%_42%,black,transparent_68%)]" />
           <NodeLattice />
           <CoreObject />
           <div aria-hidden="true" data-genesis-part="thread" className="absolute left-[10%] top-[48%] hidden h-px w-[36%] rotate-[-8deg] bg-gradient-to-r from-transparent via-emerald/50 to-transparent sm:block" />
           <div aria-hidden="true" data-genesis-part="thread" className="absolute right-[14%] top-[56%] h-px w-[30%] rotate-[10deg] bg-gradient-to-r from-transparent via-emerald/42 to-transparent" />
+          <ProductPanels games={productPanels} />
 
-          <div data-genesis-part="artwork" className="absolute bottom-7 right-2 w-[56%] max-w-[300px] overflow-hidden rounded-lg border border-white/12 bg-black/45 shadow-[0_22px_70px_rgba(0,0,0,0.36)] sm:right-4 sm:w-[38%] lg:bottom-12 lg:right-2">
+          <div data-genesis-part="artwork" className="image-frame surface-hairline absolute bottom-7 right-2 w-[52%] max-w-[270px] overflow-hidden rounded-lg border border-white/12 bg-black/45 shadow-[0_22px_70px_rgba(0,0,0,0.36)] sm:right-4 sm:w-[34%] lg:bottom-12 lg:right-2">
             <div className="relative aspect-[10/7]">
               <Image
                 src={featuredGame.image}
@@ -55,7 +60,7 @@ export function HeroGenesis({ featuredGame, motionMode = "firstVisit" }: HeroGen
                 height={featuredGame.imageHeight}
                 sizes="(min-width: 1024px) 28vw, 70vw"
                 priority
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3">
                 <p className="text-sm font-semibold text-white">{featuredGame.title}</p>
@@ -66,6 +71,39 @@ export function HeroGenesis({ featuredGame, motionMode = "firstVisit" }: HeroGen
         </div>
       </div>
     </HeroGenesisMotionRoot>
+  );
+}
+
+function ProductPanels({ games }: { games: Game[] }) {
+  const positions = [
+    "left-[7%] top-[10%] w-[34%] max-w-[176px]",
+    "right-[4%] top-[8%] w-[31%] max-w-[164px]",
+    "left-[2%] bottom-[13%] hidden w-[30%] max-w-[156px] sm:block",
+    "right-[31%] bottom-[2%] hidden w-[26%] max-w-[142px] md:block"
+  ];
+
+  return (
+    <div aria-label="Selected OpenGamer product artwork" data-genesis-part="product-panels">
+      {games.map((game, index) => (
+        <div
+          key={game.slug}
+          data-genesis-part="product-panel"
+          className={`image-frame absolute overflow-hidden rounded-md border border-white/12 bg-black/50 shadow-[0_14px_48px_rgba(0,0,0,0.34)] transition duration-300 hover:border-emerald/30 ${positions[index]}`}
+        >
+          <div className="relative aspect-[10/7]">
+            <Image
+              src={game.image}
+              alt={`${game.title} artwork`}
+              width={game.imageWidth}
+              height={game.imageHeight}
+              sizes="(min-width: 1024px) 12vw, 30vw"
+              priority={index === 0}
+              className="h-full w-full object-contain"
+            />
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 

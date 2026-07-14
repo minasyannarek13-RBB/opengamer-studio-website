@@ -33,7 +33,7 @@ export default function PortfolioPage() {
       <Section>
         <SectionHeader eyebrow="Casino Games" title="Slot Game Portfolio" description="Confirmed slot titles built by OpenGamer." />
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {games.slice(0, 3).map((game) => (
+          {games.map((game) => (
             <GameCard key={game.slug} game={game} />
           ))}
         </div>

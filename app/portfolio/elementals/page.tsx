@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { elementalsRealms, portfolioProjects } from "@/content/portfolio";
+import { elementalsRealms, elementalsWheelImage, portfolioProjects } from "@/content/portfolio";
 
 const elementals = portfolioProjects[0];
 
@@ -42,22 +42,29 @@ export default function ElementalsPage() {
             </div>
           </div>
           {elementals.image ? (
-            <div className="premium-card reveal overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_24px_90px_rgba(0,0,0,0.3)]">
-              <Image src={elementals.image} alt={elementals.imageAlt} width={800} height={600} priority className="h-full w-full object-cover" sizes="(min-width: 1024px) 48vw, 100vw" />
+            <div className="premium-card surface-hairline image-frame reveal overflow-hidden rounded-lg border border-line bg-white/[0.045]">
+              <Image src={elementals.image} alt={elementals.imageAlt} width={1536} height={1024} priority className="h-full w-full object-cover" sizes="(min-width: 1024px) 48vw, 100vw" />
             </div>
           ) : null}
         </Container>
       </section>
       <Section>
-        <div className="grid gap-6 lg:grid-cols-2">
-          <Card tone="strong">
+        <SectionHeader
+          eyebrow="Product Overview"
+          title="The Great Wheel at the Center"
+          description="The Great Wheel anchors the product concept and connects the four elemental realms into one show-game structure."
+        />
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch" data-reveal-group="cards">
+          <Card tone="strong" className="overflow-hidden p-0">
+            <div className="image-frame relative aspect-[16/10] bg-black/30 lg:aspect-auto lg:h-full">
+              <Image src={elementalsWheelImage} alt="ELEMENTALS Great Wheel artwork" width={1024} height={1024} className="h-full w-full object-cover" sizes="(min-width: 1024px) 52vw, 100vw" />
+            </div>
+          </Card>
+          <Card className="h-full">
             <h2 className="text-2xl font-semibold text-white">One Wheel. Four Realms.</h2>
             <p className="mt-4 leading-7 text-slate-300">
               ELEMENTALS combines a central Great Wheel with four elemental bonus realms, presented through a dealer-host format and a cinematic, ritual-inspired world.
             </p>
-          </Card>
-          <Card>
-            <h2 className="text-2xl font-semibold text-white">The Nexus</h2>
             <p className="mt-4 leading-7 text-slate-300">
               The Nexus is the central world connecting all four realms — the setting for the base game and the point every bonus round returns to.
             </p>
@@ -65,18 +72,41 @@ export default function ElementalsPage() {
         </div>
       </Section>
       <Section className="bg-black/20">
-        <SectionHeader eyebrow="The Great Wheel" title="The Core Mechanic" description="The Great Wheel routes play into the base game and four elemental bonus rounds. Final mechanics are in development and not yet published." />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <SectionHeader eyebrow="Four Realms" title="Realm Gateways" description="Each realm has a distinct visual identity. Final mechanics are in development and not yet published." />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
           {elementalsRealms.map((realm) => (
-            <Card key={realm.title} className={`bg-gradient-to-br ${realm.tone}`}>
-              <h3 className="text-xl font-semibold text-white">{realm.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{realm.description}</p>
+            <Card key={realm.title} className={`bg-gradient-to-br ${realm.tone} p-0`}>
+              <div className="image-frame relative aspect-[4/5] overflow-hidden bg-black/35">
+                <Image src={realm.portalImage} alt={`${realm.title} elemental portal`} width={1024} height={1024} className="h-full w-full object-cover" sizes="(min-width: 1024px) 22vw, 50vw" />
+                <div className="absolute left-4 top-4 h-16 w-16 overflow-hidden rounded-lg border border-white/15 bg-black/55 shadow-[0_16px_50px_rgba(0,0,0,0.35)]">
+                  <Image src={realm.iconImage} alt={`${realm.title} elemental icon`} width={1024} height={1024} className="h-full w-full object-cover" sizes="64px" />
+                </div>
+              </div>
+              <div className="p-5">
+                <h3 className="text-xl font-semibold text-white">{realm.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-300">{realm.description}</p>
+              </div>
             </Card>
           ))}
         </div>
       </Section>
       <Section>
-        <div className="grid gap-6 lg:grid-cols-3">
+        <SectionHeader eyebrow="Four Guardians" title="Guardian Presentation" description="The guardian direction supports the premium ritual tone without presenting the concept as launched or finalized." />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
+          {elementalsRealms.map((realm) => (
+            <Card key={realm.guardianImage} className="overflow-hidden p-0">
+              <div className="image-frame relative aspect-square bg-black/35">
+                <Image src={realm.guardianImage} alt={`${realm.title} elemental guardian`} width={1024} height={1024} className="h-full w-full object-cover" sizes="(min-width: 1024px) 28vw, 100vw" />
+              </div>
+              <div className="p-5">
+                <h3 className="text-xl font-semibold text-white">{realm.title} Guardian</h3>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </Section>
+      <Section className="bg-black/20">
+        <div className="grid gap-6 lg:grid-cols-3" data-reveal-group="cards">
           <Card>
             <h2 className="text-xl font-semibold text-white">Built to Differentiate, Not Clone</h2>
             <p className="mt-3 text-sm leading-6 text-slate-300">
@@ -91,7 +121,7 @@ export default function ElementalsPage() {
           </Card>
           <Card>
             <h2 className="text-xl font-semibold text-white">Product Status</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">Mechanics, mathematics, launch timing and certification are not yet finalized.</p>
+            <p className="mt-3 text-sm leading-6 text-slate-300">In Development. Mechanics, mathematics, launch timing and certification are not yet finalized.</p>
           </Card>
         </div>
       </Section>

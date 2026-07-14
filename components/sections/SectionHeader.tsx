@@ -15,7 +15,7 @@ export function SectionHeader({ eyebrow, title, description, align = "left", hea
       {eyebrow ? (
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-emerald">{eyebrow}</p>
       ) : null}
-      <Heading className={headingLevel === "h1" ? "max-w-5xl text-4xl font-semibold tracking-normal text-white sm:text-5xl lg:text-6xl" : "max-w-4xl text-3xl font-semibold tracking-normal text-white sm:text-4xl"}>
+      <Heading className={headingLevel === "h1" ? "text-balance max-w-5xl text-4xl font-semibold leading-[1.04] tracking-normal text-white sm:text-5xl lg:text-6xl" : "text-balance max-w-4xl text-3xl font-semibold leading-[1.08] tracking-normal text-white sm:text-4xl"}>
         {title}
       </Heading>
       {description ? <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">{description}</p> : null}

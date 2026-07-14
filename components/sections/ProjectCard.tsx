@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 
 type ProjectCardProps = {
   title: string;
+  category?: string;
   tagline: string;
   description: string;
   status?: string;
@@ -12,10 +13,10 @@ type ProjectCardProps = {
   imageAlt: string;
 };
 
-export function ProjectCard({ title, tagline, description, status, href, cta, image, imageAlt }: ProjectCardProps) {
+export function ProjectCard({ title, category, tagline, description, status, href, cta, image, imageAlt }: ProjectCardProps) {
   return (
-    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06] focus-within:border-emerald/50">
-      <div className="relative aspect-[4/3] overflow-hidden bg-black/35">
+    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.06] focus-within:border-emerald/50">
+      <div className="image-frame relative aspect-[4/3] overflow-hidden bg-black/35">
         {image ? (
           <Image
             src={image}
@@ -23,7 +24,7 @@ export function ProjectCard({ title, tagline, description, status, href, cta, im
             width={800}
             height={600}
             sizes="(min-width: 1024px) 34vw, 100vw"
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            className="h-full w-full object-contain p-1 transition duration-500 group-hover:scale-[1.025]"
           />
         ) : (
           <div className="flex h-full items-center justify-center p-8">
@@ -42,7 +43,10 @@ export function ProjectCard({ title, tagline, description, status, href, cta, im
         )}
       </div>
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        {status ? <span className="rounded-full border border-emerald/30 px-3 py-1 text-xs text-emerald">{status}</span> : null}
+        <div className="flex flex-wrap gap-2">
+          {category ? <span className="w-fit rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">{category}</span> : null}
+          {status ? <span className="w-fit rounded-full border border-emerald/30 px-3 py-1 text-xs text-emerald">{status}</span> : null}
+        </div>
         <h3 className="mt-4 text-xl font-semibold text-white">{title}</h3>
         <p className="mt-1 text-sm font-medium text-slate-300">{tagline}</p>
         <p className="mt-3 text-sm leading-6 text-slate-400">{description}</p>

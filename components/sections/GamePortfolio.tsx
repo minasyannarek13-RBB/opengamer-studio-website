@@ -22,7 +22,7 @@ export function GamePortfolio() {
   return (
     <div>
       <h2 className="sr-only">Available games</h2>
-      <div className="grid gap-4 rounded-lg border border-white/10 bg-white/[0.035] p-4 shadow-[0_18px_56px_rgba(0,0,0,0.18)] sm:grid-cols-[1fr_auto] sm:items-center">
+      <div className="premium-card grid gap-4 rounded-lg border border-white/10 bg-white/[0.04] p-4 shadow-[0_18px_56px_rgba(0,0,0,0.18)] sm:grid-cols-[1fr_auto] sm:items-center">
         <label className="relative block">
           <span className="sr-only">Search games</span>
           <input
@@ -30,7 +30,7 @@ export function GamePortfolio() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search the confirmed game catalogue"
-            className="min-h-12 w-full rounded-full border border-white/15 bg-black/30 px-5 pr-24 text-sm text-white outline-none transition placeholder:text-slate-500 hover:border-white/25 focus:border-emerald/60 focus:ring-2 focus:ring-emerald/25"
+            className="min-h-12 w-full rounded-full border border-white/15 bg-black/35 px-5 pr-24 text-sm text-white outline-none transition placeholder:text-slate-500 hover:border-white/25 focus:border-emerald/60 focus:ring-2 focus:ring-emerald/25"
           />
           {query ? (
             <button
@@ -54,7 +54,7 @@ export function GamePortfolio() {
           ))}
         </div>
       ) : (
-        <div className="mt-8 rounded-lg border border-line bg-white/[0.04] p-6" role="status">
+        <div className="premium-card mt-8 rounded-lg border border-line bg-white/[0.04] p-6" role="status">
           <p className="text-sm font-semibold text-white">No matching game found.</p>
           <p className="mt-2 text-sm leading-6 text-slate-300">
             Clear the search field to return to the full confirmed OpenGamer portfolio.

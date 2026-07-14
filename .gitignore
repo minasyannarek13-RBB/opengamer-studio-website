@@ -12,3 +12,4 @@ dist/
 .playwright-browsers/
 qa/screenshots/
 qa/lighthouse*.json
+incoming/

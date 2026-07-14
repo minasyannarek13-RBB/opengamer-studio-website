@@ -19,17 +19,20 @@ export function HeroGenesisMotionRoot({ children, className, motionMode = "first
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const timers: { frameId?: number; timeoutId?: number } = {};
 
-    const markComplete = () => {
-      if (timers.timeoutId) {
-        window.clearTimeout(timers.timeoutId);
-      }
-
+    const markSeen = () => {
       try {
         window.sessionStorage.setItem(SESSION_KEY, "1");
       } catch {
         // Storage can be unavailable in private or restricted contexts.
       }
+    };
 
+    const markComplete = () => {
+      if (timers.timeoutId) {
+        window.clearTimeout(timers.timeoutId);
+      }
+
+      markSeen();
       setMotionState("complete");
     };
 
@@ -46,7 +49,7 @@ export function HeroGenesisMotionRoot({ children, className, motionMode = "first
     }
 
     const isReturningMode = motionMode === "returning" || hasSeenHero;
-    const duration = isReturningMode ? 520 : 2280;
+    const duration = isReturningMode ? 560 : 2520;
 
     timers.frameId = window.requestAnimationFrame(() => {
       setMotionState(isReturningMode ? "returning" : "playing");
@@ -60,9 +63,22 @@ export function HeroGenesisMotionRoot({ children, className, motionMode = "first
       }
     };
 
+    const handlePageShow = () => {
+      try {
+        if (window.sessionStorage.getItem(SESSION_KEY) === "1") {
+          setMotionState("complete");
+        }
+      } catch {
+        setMotionState("complete");
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("pagehide", markComplete);
+    window.addEventListener("pageshow", handlePageShow);
 
     return () => {
+      markSeen();
       if (timers.frameId) {
         window.cancelAnimationFrame(timers.frameId);
       }
@@ -70,6 +86,8 @@ export function HeroGenesisMotionRoot({ children, className, motionMode = "first
         window.clearTimeout(timers.timeoutId);
       }
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("pagehide", markComplete);
+      window.removeEventListener("pageshow", handlePageShow);
     };
   }, [motionMode]);
 
