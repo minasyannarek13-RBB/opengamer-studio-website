@@ -177,6 +177,66 @@ a {
   color: var(--signal);
 }
 
+.elementals-page {
+  --realm-fire: rgba(245, 97, 49, 0.18);
+  --realm-water: rgba(59, 167, 232, 0.14);
+  --realm-earth: rgba(124, 176, 88, 0.13);
+  --realm-air: rgba(213, 231, 232, 0.13);
+}
+
+.elementals-hero {
+  background:
+    radial-gradient(circle at 72% 28%, rgba(245, 164, 72, 0.11), transparent 23rem),
+    radial-gradient(circle at 52% 68%, rgba(46, 230, 166, 0.075), transparent 25rem),
+    linear-gradient(180deg, rgba(20, 12, 6, 0.5), rgba(5, 8, 7, 0.86));
+}
+
+.elementals-stage-frame {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(245, 164, 72, 0.13), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.42));
+}
+
+.elementals-realm-card {
+  background:
+    radial-gradient(circle at 50% 0%, var(--realm-accent, rgba(46, 230, 166, 0.12)), transparent 58%),
+    rgba(255, 255, 255, 0.04);
+}
+
+.elementals-system-line {
+  background: linear-gradient(90deg, transparent, rgba(245, 164, 72, 0.42), rgba(46, 230, 166, 0.28), transparent);
+}
+
+.lc-app-page {
+  --product-blue: rgba(77, 137, 255, 0.12);
+  --product-signal: rgba(46, 230, 166, 0.12);
+}
+
+.lc-app-hero {
+  background:
+    radial-gradient(circle at 76% 18%, var(--product-blue), transparent 24rem),
+    radial-gradient(circle at 56% 72%, var(--product-signal), transparent 28rem),
+    linear-gradient(180deg, rgba(8, 13, 15, 0.92), rgba(5, 10, 9, 0.94));
+}
+
+.lc-device-stage {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018)),
+    radial-gradient(circle at 50% 100%, rgba(46, 230, 166, 0.1), transparent 56%),
+    rgba(0, 0, 0, 0.38);
+}
+
+.lc-phone-frame {
+  margin-inline: auto;
+  max-width: min(22rem, 100%);
+}
+
+.project-cta-band {
+  background:
+    radial-gradient(circle at 75% 0%, rgba(46, 230, 166, 0.075), transparent 24rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+}
+
 .text-balance {
   text-wrap: balance;
 }

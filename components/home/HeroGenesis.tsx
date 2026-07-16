@@ -15,7 +15,7 @@ export function HeroGenesis({ featuredGame, productGames = [featuredGame], motio
 
   return (
     <HeroGenesisMotionRoot className="relative isolate overflow-hidden border-b border-white/10 py-16 sm:py-20 lg:min-h-[780px] lg:py-28" motionMode={motionMode}>
-      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.025),transparent_34%),radial-gradient(circle_at_68%_42%,rgba(46,230,166,0.095),transparent_26rem),radial-gradient(circle_at_53%_50%,rgba(255,255,255,0.035),transparent_18rem)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.025),transparent_34%),radial-gradient(circle_at_69%_42%,rgba(46,230,166,0.082),transparent_25rem),radial-gradient(circle_at_53%_50%,rgba(255,255,255,0.028),transparent_18rem)]" />
       <div aria-hidden="true" data-genesis-part="background-grid" className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.036)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(circle_at_67%_44%,black,transparent_70%)]" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
@@ -43,7 +43,7 @@ export function HeroGenesis({ featuredGame, productGames = [featuredGame], motio
         </div>
 
         <div className="relative min-h-[430px] sm:min-h-[540px] lg:min-h-[580px]" data-genesis-part="visual">
-          <div aria-hidden="true" className="absolute left-1/2 top-[42%] h-[76%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.05] bg-black/[0.1] shadow-[inset_0_0_80px_rgba(46,230,166,0.035)] blur-0" />
+          <div aria-hidden="true" className="absolute left-1/2 top-[42%] h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.052] bg-black/[0.12] shadow-[inset_0_0_74px_rgba(46,230,166,0.032)] blur-0" />
           <div aria-hidden="true" data-genesis-part="visual-grid" className="absolute inset-0 subtle-grid [mask-image:radial-gradient(circle_at_56%_42%,black,transparent_68%)]" />
           <NodeLattice />
           <CoreObject />
@@ -51,7 +51,7 @@ export function HeroGenesis({ featuredGame, productGames = [featuredGame], motio
           <div aria-hidden="true" data-genesis-part="thread" className="absolute right-[14%] top-[56%] h-px w-[30%] rotate-[10deg] bg-gradient-to-r from-transparent via-emerald/42 to-transparent" />
           <ProductPanels games={productPanels} />
 
-          <div data-genesis-part="artwork" className="image-frame surface-hairline absolute bottom-7 right-2 w-[52%] max-w-[280px] overflow-hidden rounded-lg border border-white/12 bg-black/45 shadow-[0_24px_80px_rgba(0,0,0,0.44)] sm:right-4 sm:w-[34%] lg:bottom-12 lg:right-2">
+          <div data-genesis-part="artwork" className="image-frame surface-hairline absolute bottom-7 right-2 w-[52%] max-w-[280px] overflow-hidden rounded-lg border border-white/14 bg-black/48 shadow-[0_24px_80px_rgba(0,0,0,0.46)] sm:right-4 sm:w-[34%] lg:bottom-12 lg:right-2">
             <div className="relative aspect-[10/7]">
               <Image
                 src={featuredGame.image}
@@ -76,8 +76,8 @@ export function HeroGenesis({ featuredGame, productGames = [featuredGame], motio
 
 function ProductPanels({ games }: { games: Game[] }) {
   const positions = [
-    "left-[12%] top-[10%] w-[34%] max-w-[176px]",
-    "right-[4%] top-[8%] w-[31%] max-w-[164px]",
+    "left-[10%] top-[9%] w-[33%] max-w-[172px]",
+    "right-[4%] top-[9%] w-[30%] max-w-[160px]",
     "left-[20%] bottom-[13%] hidden w-[30%] max-w-[156px] 2xl:block",
     "right-[12%] bottom-[2%] hidden w-[26%] max-w-[142px] 2xl:block"
   ];
@@ -98,7 +98,7 @@ function ProductPanels({ games }: { games: Game[] }) {
               height={game.imageHeight}
               sizes="(min-width: 1024px) 12vw, 30vw"
               priority={index === 0}
-            className="h-full w-full object-contain p-1"
+              className="h-full w-full object-contain p-1"
             />
           </div>
         </div>

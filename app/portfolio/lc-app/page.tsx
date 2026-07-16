@@ -49,9 +49,10 @@ const conceptSections = [
 export default function LcAppPage() {
   return (
     <SiteShell>
-      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-24">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_14%,rgba(46,230,166,0.1),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.035),transparent_42%)]" />
-        <Container className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+      <main className="lc-app-page">
+      <section className="lc-app-hero relative overflow-hidden border-b border-white/10 py-16 sm:py-24">
+        <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(255,255,255,0.034)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.024)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
+        <Container className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
           <div className="reveal">
             <span className="premium-status rounded-full px-3 py-1 text-xs uppercase tracking-[0.16em]">Proprietary Project</span>
             <h1 className="mt-5 text-5xl font-semibold tracking-normal text-white sm:text-6xl">A Social Layer for Live Casino</h1>
@@ -66,14 +67,14 @@ export default function LcAppPage() {
               Discuss the LC App Concept
             </Button>
           </div>
-          <div className="premium-card surface-hairline image-frame reveal overflow-hidden rounded-lg border border-line bg-white/[0.04] shadow-[0_28px_100px_rgba(0,0,0,0.38)]">
+          <div className="lc-device-stage premium-card surface-hairline image-frame reveal overflow-hidden rounded-lg border border-line p-2 shadow-[0_34px_118px_rgba(0,0,0,0.44)]">
             <Image
               src={lcAppAssets.deviceEcosystem.src}
               alt={lcAppAssets.deviceEcosystem.alt}
               width={lcAppAssets.deviceEcosystem.width}
               height={lcAppAssets.deviceEcosystem.height}
               priority
-              className="h-full w-full object-contain"
+              className="h-full w-full rounded-md object-contain"
               sizes="(min-width: 1024px) 55vw, 100vw"
             />
           </div>
@@ -81,7 +82,7 @@ export default function LcAppPage() {
       </section>
 
       <Section>
-        <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
           <div>
             <SectionHeader
               eyebrow="Product Direction"
@@ -96,8 +97,8 @@ export default function LcAppPage() {
 
       {conceptSections.map((section, index) => (
         <Section key={section.title} className={index % 2 === 0 ? "bg-black/20" : undefined}>
-          <div className={`grid gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-center ${index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
-            <div>
+          <div className={`grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center ${index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+            <div className="lg:max-w-xl">
               <SectionHeader eyebrow={section.eyebrow} title={section.title} description={section.copy} />
               <span className="mt-6 inline-flex rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">Concept UI</span>
             </div>
@@ -109,11 +110,14 @@ export default function LcAppPage() {
       <Section className="bg-black/20">
         <div className="grid gap-8 lg:grid-cols-[1.14fr_0.86fr] lg:items-center">
           <ConceptImage asset={lcAppAssets.desktopExperience} priority={false} />
-          <SectionHeader
-            eyebrow="Cross-Device Experience"
-            title="Designed Beyond a Single Screen"
-            description="The concept explores a consistent experience across desktop, laptop and mobile environments while keeping live play and communication connected."
-          />
+          <div className="lg:max-w-xl">
+            <SectionHeader
+              eyebrow="Cross-Device Experience"
+              title="Designed Beyond a Single Screen"
+              description="The concept explores a consistent experience across desktop, laptop and mobile environments while keeping live play and communication connected."
+            />
+            <span className="mt-6 inline-flex rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">Concept UI</span>
+          </div>
         </div>
       </Section>
 
@@ -123,14 +127,15 @@ export default function LcAppPage() {
         ctaLabel="Discuss the LC App Concept"
         ctaHref="/contact"
       />
+      </main>
     </SiteShell>
   );
 }
 
 function ConceptImage({ asset, tall = false, wide = false, priority = false }: { asset: { src: string; width: number; height: number; alt: string }; tall?: boolean; wide?: boolean; priority?: boolean }) {
   return (
-    <div className={`premium-card surface-hairline image-frame overflow-hidden rounded-lg border border-line bg-white/[0.04] shadow-[0_22px_80px_rgba(0,0,0,0.3)] ${wide ? "lg:shadow-[0_30px_110px_rgba(0,0,0,0.38)]" : ""}`}>
-      <div className={`relative bg-black/38 ${tall ? "mx-auto max-h-[760px] max-w-sm" : ""}`}>
+    <div className={`lc-device-stage premium-card surface-hairline image-frame overflow-hidden rounded-lg border border-line p-2 shadow-[0_22px_80px_rgba(0,0,0,0.3)] ${wide ? "lg:shadow-[0_30px_110px_rgba(0,0,0,0.38)]" : ""}`}>
+      <div className={`relative overflow-hidden rounded-md bg-black/38 ${tall ? "lc-phone-frame max-h-[760px]" : ""}`}>
         <Image
           src={asset.src}
           alt={asset.alt}
