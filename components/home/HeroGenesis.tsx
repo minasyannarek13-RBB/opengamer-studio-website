@@ -97,7 +97,6 @@ function ProductPanels({ games }: { games: Game[] }) {
               width={game.imageWidth}
               height={game.imageHeight}
               sizes="(min-width: 1024px) 12vw, 30vw"
-              priority={index === 0}
               className="h-full w-full object-contain p-1"
             />
           </div>

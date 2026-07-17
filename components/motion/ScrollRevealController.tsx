@@ -19,6 +19,7 @@ export function ScrollRevealController() {
 
     const initId = window.setTimeout(() => {
       const elements = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR));
+      let pendingCount = elements.length;
 
       if (reducedMotion || !("IntersectionObserver" in window)) {
         elements.forEach(revealElement);
@@ -29,6 +30,7 @@ export function ScrollRevealController() {
 
       fallbackId = window.setTimeout(() => {
         elements.forEach(revealElement);
+        observer?.disconnect();
       }, 2200);
 
       observer = new IntersectionObserver(
@@ -37,6 +39,10 @@ export function ScrollRevealController() {
             if (!entry.isIntersecting) return;
             revealElement(entry.target);
             observer?.unobserve(entry.target);
+            pendingCount -= 1;
+            if (pendingCount <= 0) {
+              observer?.disconnect();
+            }
           });
         },
         { rootMargin: "0px 0px -12% 0px", threshold: 0.08 }

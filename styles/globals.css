@@ -85,6 +85,8 @@ a {
   position: relative;
   overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, 0.042);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 760px;
 }
 
 .premium-section::before {
@@ -114,7 +116,9 @@ a {
     linear-gradient(135deg, rgba(255, 255, 255, 0.105), transparent 38%, rgba(46, 230, 166, 0.062)),
     radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.072), transparent 42%);
   opacity: 0;
-  transition: opacity 220ms ease;
+  transition-property: opacity;
+  transition-duration: 220ms;
+  transition-timing-function: ease;
   z-index: -1;
 }
 
