@@ -32,7 +32,7 @@ export default function PortfolioPage() {
       </section>
       <Section>
         <SectionHeader eyebrow="Featured Projects" title="Original Product Concepts" description="Original live casino and product concepts currently presented for discussion and development." />
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 lg:grid-cols-2" data-reveal-group="cards">
           {portfolioProjects.map((project) => (
             <ProjectCard key={project.title} {...project} />
           ))}
@@ -40,7 +40,7 @@ export default function PortfolioPage() {
       </Section>
       <Section className="bg-black/20">
         <SectionHeader eyebrow="Casino Games" title="Selected Slot Games" description="A curated view of selected OpenGamer slot titles. The full catalogue is available on the Games page." />
-        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3" data-reveal-group="cards">
           {featuredGames.map((game) => (
             <GameCard key={game.slug} game={game} />
           ))}

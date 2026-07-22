@@ -13,7 +13,7 @@ export function GameCard({ game }: { game: Game }) {
   ].filter(Boolean) as [string, string][];
 
   return (
-    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.058] focus-within:-translate-y-0.5 focus-within:border-emerald/50">
+    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.058] hover:shadow-[0_22px_70px_rgba(0,0,0,0.28)] focus-within:-translate-y-0.5 focus-within:border-emerald/50 focus-within:shadow-[0_22px_70px_rgba(0,0,0,0.28)]">
       <div className="image-frame relative aspect-[10/7] overflow-hidden bg-black/45">
         <Image
           src={game.image}
@@ -21,7 +21,7 @@ export function GameCard({ game }: { game: Game }) {
           width={game.imageWidth}
           height={game.imageHeight}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="h-full w-full object-contain p-2 transition duration-500 group-hover:scale-[1.018] group-focus-within:scale-[1.018]"
+          className="h-full w-full object-contain p-2 transition duration-500 group-hover:scale-[1.03] group-focus-within:scale-[1.03]"
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/82 to-transparent" />
       </div>
@@ -37,6 +37,9 @@ export function GameCard({ game }: { game: Game }) {
           ) : null}
           {demoStatus ? (
             <span className="rounded-full border border-emerald/25 bg-emerald/[0.06] px-3 py-1 text-xs text-emerald">{demoStatus}</span>
+          ) : null}
+          {game.lineCount ? (
+            <span className="rounded-full border border-white/15 bg-black/20 px-3 py-1 text-xs text-slate-300">{game.lineCount}</span>
           ) : null}
         </div>
         <h3 className="mt-4 text-xl font-semibold text-white sm:text-2xl">{game.title}</h3>

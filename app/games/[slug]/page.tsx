@@ -54,6 +54,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
     ["Category", game.category?.join(", ") || "Slot Game"],
     commercialStatus ? ["Commercial Status", commercialStatus] : null,
     demoStatus ? ["Demo Status", demoStatus] : null,
+    game.lineCount ? ["Line Count", game.lineCount] : null,
     game.variants?.length ? ["Series Variants", game.variants.join(", ")] : null
   ].filter(Boolean) as [string, string][];
   const gameIndex = games.findIndex((item) => item.slug === game.slug);
@@ -79,7 +80,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
               </Button>
             </div>
           </div>
-          <div className="premium-card overflow-hidden rounded-lg border border-line bg-white/[0.045] shadow-[0_22px_80px_rgba(0,0,0,0.26)]">
+          <div className="premium-card image-frame aspect-[10/7] overflow-hidden rounded-lg border border-line bg-white/[0.045] p-2 shadow-[0_22px_80px_rgba(0,0,0,0.26)]">
             <Image
               src={game.image}
               alt={`${game.title} artwork`}

@@ -15,7 +15,7 @@ const config: Config = {
         graphite: "#11151c",
         cobalt: "#2563eb",
         cyan: "#38bdf8",
-        emerald: "#23c483"
+        emerald: "#2ee6a6"
       },
       fontFamily: {
         sans: ["Inter", "Space Grotesk", "Arial", "sans-serif"]

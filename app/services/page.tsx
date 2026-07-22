@@ -48,7 +48,7 @@ export default function ServicesPage() {
         <Section key={group.title} id={toServiceId(group.title)} className={index % 2 ? "bg-black/20" : ""}>
           <div className="grid gap-8 lg:grid-cols-[0.35fr_1fr]">
             <SectionHeader eyebrow={group.eyebrow} title={group.title} description={group.description} />
-            <div className="grid gap-5">
+            <div className="grid gap-5" data-reveal-group="cards">
               {group.items.map((service) => (
                 <ServiceCard key={service.title} service={service} />
               ))}

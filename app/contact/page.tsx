@@ -35,7 +35,7 @@ export default function ContactPage() {
       </section>
       <Section>
         <div className="grid gap-8 lg:grid-cols-[0.38fr_1fr]">
-          <aside className="grid gap-5">
+          <aside className="grid gap-5" data-reveal-group="cards">
             <Card tone="strong">
               <h2 className="text-xl font-semibold text-white">Business Contact</h2>
               <div className="mt-5 grid gap-3 text-sm text-slate-300">

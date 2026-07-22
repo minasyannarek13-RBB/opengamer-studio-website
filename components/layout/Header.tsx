@@ -14,9 +14,20 @@ import { getLocalizedPath } from "@/lib/routes";
 export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isMenuMounted, setIsMenuMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileNavRef = useRef<HTMLElement>(null);
   const isActiveRoute = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname?.startsWith(`${href}/`));
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsMenuMounted(true);
+      return;
+    }
+
+    const timeout = window.setTimeout(() => setIsMenuMounted(false), 260);
+    return () => window.clearTimeout(timeout);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -80,24 +91,28 @@ export function Header({ locale }: { locale: Locale }) {
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.055] text-white transition duration-200 hover:border-emerald/50 hover:bg-white/[0.09] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 lg:hidden"
-            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.055] text-white transition duration-200 hover:border-emerald/50 hover:bg-white/[0.09] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 active:scale-[0.99] lg:hidden"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
             onClick={() => setIsOpen((value) => !value)}
           >
-            <span className="grid gap-1.5">
-              <span className="h-px w-5 bg-current" />
-              <span className="h-px w-5 bg-current" />
-              <span className="h-px w-5 bg-current" />
-            </span>
+            <svg className="menu-signal" data-open={isOpen} viewBox="0 0 20 20" aria-hidden="true">
+              <line className="menu-signal__bar menu-signal__bar--left" x1="4" y1="5" x2="4" y2="15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <line className="menu-signal__bar menu-signal__bar--center" x1="10" y1="3" x2="10" y2="17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <line className="menu-signal__bar menu-signal__bar--right" x1="16" y1="5" x2="16" y2="15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
           </button>
         </div>
       </Container>
-      {isOpen ? (
+      {isMenuMounted ? (
         <nav
+          id="mobile-navigation"
           ref={mobileNavRef}
-          className="border-t border-white/10 bg-ink/96 shadow-[0_22px_60px_rgba(0,0,0,0.36)] lg:hidden"
+          className="mobile-nav-panel border-t border-white/10 bg-ink/96 shadow-[0_22px_60px_rgba(0,0,0,0.36)] lg:hidden"
+          data-state={isOpen ? "open" : "closed"}
           aria-label="Mobile navigation"
+          aria-hidden={!isOpen}
         >
           <Container className="grid gap-2 py-4">
             {mainNavigation.map((route) => (

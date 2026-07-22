@@ -81,7 +81,7 @@ export default function LcAppPage() {
       </section>
 
       <Section>
-        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center" data-reveal-group="cards">
           <div>
             <SectionHeader
               eyebrow="Product Direction"
@@ -96,7 +96,7 @@ export default function LcAppPage() {
 
       {conceptSections.map((section, index) => (
         <Section key={section.title} className={index % 2 === 0 ? "bg-black/20" : undefined}>
-          <div className={`grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center ${index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+          <div className={`grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center ${index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`} data-reveal-group="cards">
             <div className="lg:max-w-xl">
               <SectionHeader eyebrow={section.eyebrow} title={section.title} description={section.copy} />
               <span className="mt-6 inline-flex rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">Concept UI</span>
@@ -107,7 +107,7 @@ export default function LcAppPage() {
       ))}
 
       <Section className="bg-black/20">
-        <div className="grid gap-8 lg:grid-cols-[1.14fr_0.86fr] lg:items-center">
+        <div className="grid gap-8 lg:grid-cols-[1.14fr_0.86fr] lg:items-center" data-reveal-group="cards">
           <ConceptImage asset={lcAppAssets.desktopExperience} priority={false} />
           <div className="lg:max-w-xl">
             <SectionHeader

@@ -15,7 +15,7 @@ type ProjectCardProps = {
 
 export function ProjectCard({ title, category, tagline, description, status, href, cta, image, imageAlt }: ProjectCardProps) {
   return (
-    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.058] focus-within:border-emerald/50">
+    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.058] hover:shadow-[0_22px_70px_rgba(0,0,0,0.28)] focus-within:border-emerald/50 focus-within:shadow-[0_22px_70px_rgba(0,0,0,0.28)]">
       <div className="image-frame relative aspect-[4/3] overflow-hidden bg-black/42">
         {image ? (
           <Image
@@ -24,7 +24,7 @@ export function ProjectCard({ title, category, tagline, description, status, hre
             width={800}
             height={600}
             sizes="(min-width: 1024px) 34vw, 100vw"
-            className="h-full w-full object-contain p-2 transition duration-500 group-hover:scale-[1.018]"
+            className="h-full w-full object-contain p-2 transition duration-500 group-hover:scale-[1.03] group-focus-within:scale-[1.03]"
           />
         ) : (
           <div className="flex h-full items-center justify-center p-8">

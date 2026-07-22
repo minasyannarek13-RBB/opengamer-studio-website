@@ -65,7 +65,7 @@ export default function TechnologyPage() {
       <Section>
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1fr]">
           <SectionHeader title="Technology Capabilities" description="A practical technology scope for building, integrating and supporting casino game products." />
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2" data-reveal-group="cards">
             {technologyCapabilities.map((item) => (
               <Card key={item}>
                 <p className="text-sm font-medium text-slate-100">{item}</p>
@@ -76,7 +76,7 @@ export default function TechnologyPage() {
       </Section>
       <Section className="bg-black/20">
         <SectionHeader title="Front-End Game Engineering" description="Client-side production for responsive casino game experiences across desktop and mobile environments." />
-        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
           {frontEndCapabilities.map((item) => (
             <Card key={item}>
               <p className="text-sm font-medium text-slate-100">{item}</p>
@@ -86,7 +86,7 @@ export default function TechnologyPage() {
       </Section>
       <Section>
         <SectionHeader title="Backend and RGS-Related Capabilities" description="Backend engineering for session flows, wallet communication, game logic and partner connectivity." />
-        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
           {backendCapabilities.map((item) => (
             <Card key={item}>
               <p className="text-sm font-medium text-slate-100">{item}</p>
@@ -111,7 +111,7 @@ export default function TechnologyPage() {
       </Section>
       <Section className="bg-black/20">
         <SectionHeader title="Engagement Models" description="Technology work can be scoped as a project, support stream or dedicated team depending on partner needs." />
-        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-5" data-reveal-group="cards">
           {engagementModels.map((model) => (
             <div key={model} className="premium-card rounded-lg border border-line bg-white/[0.045] p-4 text-sm text-slate-200 transition duration-300 hover:-translate-y-0.5 hover:border-white/20">
               {model}
@@ -121,7 +121,7 @@ export default function TechnologyPage() {
       </Section>
       <Section>
         <SectionHeader title="Engineering Principles" />
-        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
           {technologyPrinciples.map((principle) => (
             <div key={principle} className="premium-card rounded-lg border border-line bg-white/[0.045] p-4 text-sm text-slate-200 transition duration-300 hover:-translate-y-0.5 hover:border-white/20">
               {principle}

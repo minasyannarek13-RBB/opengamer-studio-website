@@ -14,6 +14,7 @@ export type Game = {
   rtp?: string;
   volatility?: string;
   variants?: string[];
+  lineCount?: string;
   seriesSlug?: string;
   isVariant?: boolean;
 };
@@ -97,9 +98,9 @@ export const games: Game[] = [
   {
     title: "Dragon Rush",
     slug: "dragon-rush",
-    image: "/assets/games/dragon-rush/artwork.jpg",
-    imageWidth: 1920,
-    imageHeight: 1080,
+    image: "/assets/games/dragon-rush/source.jpg",
+    imageWidth: 600,
+    imageHeight: 420,
     shortDescription: "A dragon-themed slot title from the OpenGamer catalogue.",
     category: ["Slot Game"],
     commercialStatus: "portfolio",
@@ -110,9 +111,9 @@ export const games: Game[] = [
   {
     title: "Forest Fortune",
     slug: "forest-fortune",
-    image: "/assets/games/forest-fortune/artwork.jpg",
-    imageWidth: 1920,
-    imageHeight: 1080,
+    image: "/assets/games/forest-fortune/source.jpg",
+    imageWidth: 600,
+    imageHeight: 420,
     shortDescription: "Enter a magical realm in Forest Fortune, where mystical scrolls unlock free spins and enchanted wins.",
     category: ["Slot Game"],
     commercialStatus: "portfolio",
@@ -130,6 +131,7 @@ export const games: Game[] = [
     category: ["Slot Game"],
     commercialStatus: "portfolio",
     demoStatus: "verified",
+    lineCount: "40 Lines",
     seriesSlug: "fruit-elixir",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}fruit-elixir-40`,
@@ -145,6 +147,7 @@ export const games: Game[] = [
     category: ["Slot Game"],
     commercialStatus: "portfolio",
     demoStatus: "verified",
+    lineCount: "20 Lines",
     seriesSlug: "fruit-elixir",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}fruit-elixir-20`,
@@ -160,6 +163,7 @@ export const games: Game[] = [
     category: ["Slot Game"],
     commercialStatus: "portfolio",
     demoStatus: "verified",
+    lineCount: "10 Lines",
     seriesSlug: "fruit-elixir",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}fruit-elixir-10`,
@@ -175,6 +179,7 @@ export const games: Game[] = [
     category: ["Slot Game"],
     commercialStatus: "portfolio",
     demoStatus: "verified",
+    lineCount: "5 Lines",
     variants: ["5 paylines", "10 paylines", "20 paylines", "40 paylines"],
     demoUrl: `${officialGamesBaseUrl}fruit-elixir-5`,
     sourceUrl: `${officialGamesBaseUrl}fruit-elixir-5`
@@ -200,6 +205,7 @@ export const games: Game[] = [
     category: ["Slot Game"],
     commercialStatus: "portfolio",
     demoStatus: "verified",
+    lineCount: "40 Lines",
     seriesSlug: "passion-paradise",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}passion-paradise-40`,
@@ -215,6 +221,7 @@ export const games: Game[] = [
     category: ["Slot Game"],
     commercialStatus: "portfolio",
     demoStatus: "verified",
+    lineCount: "20 Lines",
     seriesSlug: "passion-paradise",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}passion-paradise-20`,
@@ -230,6 +237,7 @@ export const games: Game[] = [
     category: ["Slot Game"],
     commercialStatus: "portfolio",
     demoStatus: "verified",
+    lineCount: "10 Lines",
     seriesSlug: "passion-paradise",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}passion-paradise-10`,
@@ -245,6 +253,7 @@ export const games: Game[] = [
     category: ["Slot Game"],
     commercialStatus: "portfolio",
     demoStatus: "verified",
+    lineCount: "5 Lines",
     variants: ["5 paylines", "10 paylines", "20 paylines", "40 paylines"],
     demoUrl: `${officialGamesBaseUrl}passion-paradise-5`,
     sourceUrl: `${officialGamesBaseUrl}passion-paradise-5`
@@ -263,9 +272,9 @@ export const games: Game[] = [
   {
     title: "Sweet Wins",
     slug: "sweet-wins",
-    image: "/assets/games/sweet-wins/artwork.jpg",
-    imageWidth: 768,
-    imageHeight: 431,
+    image: "/assets/games/sweet-wins/source.jpg",
+    imageWidth: 600,
+    imageHeight: 420,
     shortDescription: "A candy-themed slot title from the OpenGamer catalogue.",
     category: ["Slot Game"],
     commercialStatus: "portfolio",

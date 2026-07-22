@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black/40 py-14 sm:py-16">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[1.45fr_0.72fr_0.72fr_1fr]">
+        <div className="grid gap-10 lg:grid-cols-[1.45fr_0.72fr_0.72fr_1fr]" data-scroll-reveal>
           <div>
             <Image
               src={logoAsset.src}
