@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     title: "OpenGamer Studio | Game Development, Engineered for Scale",
-    description: "Full-cycle iGaming development studio for custom slot game development, RGS technology and casino game integration.",
+    description: "Casino game development, product engineering and integration support.",
     url: "/",
     siteName: "OpenGamer Studio",
     type: "website"
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "OpenGamer Studio",
-    description: "Casino game development, RGS technology and integration support."
+    description: "Casino game development, product engineering and integration support."
   }
 };
 

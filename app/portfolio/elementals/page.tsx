@@ -26,18 +26,18 @@ export const metadata: Metadata = {
 export default function ElementalsPage() {
   return (
     <SiteShell>
-      <main className="elementals-page">
+      <div className="elementals-page">
       <section className="elementals-hero relative overflow-hidden border-b border-white/10 py-16 sm:py-24">
         <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.024)_1px,transparent_1px)] [background-size:80px_80px] [mask-image:radial-gradient(circle_at_68%_44%,black,transparent_72%)]" />
         <Container className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
           <div className="reveal">
-            <span className="premium-status rounded-full px-3 py-1 text-xs">In Development</span>
+            <span className="premium-status rounded-full px-3 py-1 text-xs">{elementals.status}</span>
             <h1 className="mt-5 text-5xl font-semibold tracking-normal text-white sm:text-6xl">ELEMENTALS</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
               A premium Live Casino show game built around four elemental realms and the Great Wheel.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/contact">Discuss ELEMENTALS Partnership</Button>
+              <Button href="/contact?interest=elementals">Discuss the Project</Button>
               <Button href="/services/live-casino-development" variant="secondary">
                 View Live Casino Development
               </Button>
@@ -137,16 +137,40 @@ export default function ElementalsPage() {
           </Card>
           <Card>
             <h2 className="text-xl font-semibold text-white">Product Status</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">In Development. Mechanics, mathematics, launch timing and certification are not yet finalized.</p>
+            <p className="mt-3 text-sm leading-6 text-slate-300">In development. Mechanics, mathematics, launch timing and certification are not yet finalized.</p>
           </Card>
         </div>
       </Section>
+      <Section>
+        <SectionHeader eyebrow="Development Status" title="Current Public Status" description="ELEMENTALS is presented as an original Live Casino show-game concept in development." />
+        <div className="mt-10 grid gap-4 md:grid-cols-2" data-reveal-group="cards">
+          {[
+            ["Product format", "Live Casino show-game concept"],
+            ["Development status", "In development"],
+            ["Commercial status", "Open for project discussion"],
+            ["Certification status", "Not published"]
+          ].map(([label, value]) => (
+            <Card key={label}>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald">{label}</p>
+              <p className="mt-3 text-base text-slate-200">{value}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+      <Section className="bg-black/20">
+        <SectionHeader
+          eyebrow="Partnership Direction"
+          title="Built for Provider or Operator-Led Development"
+          description="The concept can support discussions around show-game product development, studio production planning, provider collaboration or co-development."
+        />
+      </Section>
       <CTASection
-        title="Discuss an ELEMENTALS Partnership"
+        title="Discuss the Project"
         description="Discuss studio production, provider collaboration or a co-development partnership for ELEMENTALS."
-        ctaLabel="Discuss ELEMENTALS Partnership"
+        ctaLabel="Discuss the Project"
+        ctaHref="/contact?interest=elementals"
       />
-      </main>
+      </div>
     </SiteShell>
   );
 }

@@ -35,6 +35,15 @@ export function GameCard({ game }: { game: Game }) {
         </div>
         <h3 className="mt-4 text-xl font-semibold text-white sm:text-2xl">{game.title}</h3>
         <p className="mt-2 min-h-12 text-sm leading-6 text-slate-400">{game.shortDescription}</p>
+        {game.variants?.length ? (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {game.variants.map((variant) => (
+              <span key={variant} className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-slate-300">
+                {variant}
+              </span>
+            ))}
+          </div>
+        ) : null}
         {metadata.length ? (
           <dl className="mt-4 grid gap-2 text-sm">
             {metadata.map(([label, value]) => (

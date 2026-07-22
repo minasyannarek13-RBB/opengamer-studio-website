@@ -25,8 +25,8 @@ export const coreCapabilities = [
     description: "Paytable modelling, RTP configuration, volatility design and feature balancing."
   },
   {
-    title: "RGS Technology",
-    description: "Session handling, wallet connectivity, game logic, reporting and monitoring layers."
+    title: "RGS-Related Engineering",
+    description: "Session handling, wallet connectivity, game logic, reporting and operational visibility."
   },
   {
     title: "Game Integration",
@@ -44,18 +44,19 @@ export const coreCapabilities = [
 
 export const serviceGroups: ServiceGroup[] = [
   {
-    eyebrow: "Group 01",
-    title: "Game Production",
-    description: "Full-cycle production for new titles and branded portfolio expansion.",
+    eyebrow: "Primary Area 01",
+    title: "Slot Game Development",
+    description: "Casino game production across concept, design, mathematics, art, front-end, backend and launch support.",
     items: [
       {
         title: "Slot Game Development",
-        description: "End-to-end slot game production across design, front-end, back-end and launch support.",
+        description: "End-to-end slot game production for custom, branded, white-label or portfolio expansion projects.",
         capabilities: [
           "Custom slot development",
           "Turnkey slot production",
           "Branded games",
           "White-label games",
+          "Exclusive game builds",
           "Front-end development",
           "Back-end development",
           "HTML5 development",
@@ -66,8 +67,8 @@ export const serviceGroups: ServiceGroup[] = [
         ]
       },
       {
-        title: "Mathematics & Game Design",
-        description: "Mathematical models and feature systems tuned for player experience and operator economics.",
+        title: "Game Mathematics and Feature Design",
+        description: "Mathematical models and feature systems shaped for player experience and game production requirements.",
         capabilities: [
           "Slot mathematics",
           "Paytable modelling",
@@ -84,7 +85,7 @@ export const serviceGroups: ServiceGroup[] = [
         ]
       },
       {
-        title: "Game Art Production",
+        title: "Game Art, UI and Animation",
         description: "Original visual production from world concept to animated in-game assets.",
         capabilities: [
           "Concept art",
@@ -103,28 +104,47 @@ export const serviceGroups: ServiceGroup[] = [
     ]
   },
   {
-    eyebrow: "Group 02",
-    title: "Technology & Integration",
-    description: "RGS, APIs and connectivity support for operators, aggregators and platforms.",
+    eyebrow: "Primary Area 02",
+    title: "Backend and RGS-Related Development",
+    description: "Backend engineering for game sessions, wallet communication, game logic and RGS-related environments.",
     items: [
       {
-        title: "Remote Gaming Server",
-        description: "Technology layer for game sessions, logic, wallet communication and operational reporting.",
+        title: "Backend and RGS-Related Engineering",
+        description: "Engineering support for session handling, game logic, wallet communication and operational reporting layers.",
         capabilities: [
-          "RGS development",
+          "RGS-related development",
           "Session management",
           "Wallet connectivity",
           "Bonus support",
           "Free spins support",
           "Reporting",
-          "Monitoring",
+          "Operational visibility",
           "API development",
           "Operator and aggregator connectivity"
         ]
       },
       {
+        title: "RNG and Certification Preparation Support",
+        description: "Preparation support for RNG-related implementation, documentation, QA and independent laboratory submission workflows.",
+        capabilities: [
+          "RNG-related development",
+          "RNG integration support",
+          "Certification preparation support",
+          "Documentation support",
+          "Pre-submission QA",
+          "Independent laboratory testing support"
+        ]
+      }
+    ]
+  },
+  {
+    eyebrow: "Primary Area 03",
+    title: "Integration and Technical Delivery",
+    description: "Technical delivery support for connecting games with partner platforms, aggregators and operator environments.",
+    items: [
+      {
         title: "Game Integration",
-        description: "Structured technical launch support from documentation exchange to production monitoring.",
+        description: "Structured technical launch support from documentation exchange to release coordination.",
         capabilities: [
           "Aggregator integration",
           "Platform integration",
@@ -134,80 +154,53 @@ export const serviceGroups: ServiceGroup[] = [
           "Wallet integration",
           "Bonus compatibility",
           "QA",
-          "Deployment",
+          "Release coordination",
           "Technical launch support"
         ]
+      },
+      {
+        title: "Reskin and Legacy Game Modernization",
+        description: "Technical and visual updates for existing titles, including theme, UI, asset and mobile-performance improvements.",
+        capabilities: ["Theme replacement", "Art replacement", "UI redesign", "Symbol replacement", "Audio replacement", "Localization", "Performance optimization", "Technical refactoring"]
       }
     ]
   },
   {
-    eyebrow: "Group 03",
-    title: "Portfolio Services",
-    description: "Ways to expand or refresh a casino game portfolio without a full internal studio buildout.",
+    eyebrow: "Primary Area 04",
+    title: "Live Casino Product Development",
+    description: "Original live casino product design, show-game concepts, wheel formats and studio UX direction.",
     items: [
-      {
-        title: "White-Label Solutions",
-        description: "Ready-made or exclusive games adapted for a partner brand.",
-        capabilities: ["White-label slot games", "Exclusive games", "Private portfolios", "Branded content", "Localization"]
-      },
-      {
-        title: "Reskin Services",
-        description: "New art, UI, symbols and audio for proven game mechanics.",
-        capabilities: ["Theme replacement", "Art replacement", "UI redesign", "Symbol replacement", "Audio replacement", "Localization"]
-      },
-      {
-        title: "Legacy Game Modernization",
-        description: "Technical and visual updates that extend the commercial life of existing titles.",
-        capabilities: ["UI refresh", "Performance optimization", "Mobile adaptation", "Feature expansion", "Technical refactoring"]
-      }
-    ]
-  },
-  {
-    eyebrow: "Group 04",
-    title: "Quality & Support",
-    description: "Testing, certification preparation and post-launch operating support.",
-    items: [
-      {
-        title: "Quality Assurance",
-        description: "Structured functional, regression, compatibility and performance testing.",
-        capabilities: ["Functional testing", "Regression testing", "Performance testing", "Device compatibility", "Load testing"]
-      },
-      {
-        title: "Certification Support",
-        description: "Certification preparation and laboratory coordination for game submissions.",
-        capabilities: ["RNG preparation", "Compliance support", "Documentation", "Lab assistance", "Pre-submission QA"]
-      },
-      {
-        title: "Live Operations",
-        description: "Maintenance, updates and continuous improvements after launch.",
-        capabilities: ["Maintenance", "Updates", "Bug fixing", "Continuous improvements", "Analytics"]
-      }
-    ]
-  },
-  {
-    eyebrow: "Group 05",
-    title: "Strategic Development",
-    description: "Specialist teams and consulting for partners building or scaling iGaming products.",
-    items: [
-      {
-        title: "Dedicated Development Teams",
-        description: "Embedded teams working inside partner-defined product and sprint workflows.",
-        capabilities: ["Front-end developers", "Back-end developers", "Game designers", "Artists", "Animators", "QA engineers", "Producers", "Technical leads"]
-      },
-      {
-        title: "Technical Consulting",
-        description: "Architecture, studio setup and product consulting for iGaming technology decisions.",
-        capabilities: ["Architecture", "Studio setup", "Product consulting", "Technology strategy"]
-      },
       {
         title: "Live Casino Development",
-        description: "Original live casino product design, show formats, wheel games and studio UX concepts.",
+        description: "Live casino product design, show formats, wheel games and studio UX concepts for partner-led production environments.",
         capabilities: ["Live casino game design", "Live show games", "Wheel games", "Game shows", "Live UX", "Streaming concepts", "Presenter experience", "Studio product design"]
       },
       {
-        title: "AI-assisted iGaming Workflows",
-        description: "Practical automation and analysis support for production, QA, content and operations workflows.",
-        capabilities: ["QA automation support", "Content workflow assistance", "Analytics support", "Localization support", "Internal tooling"]
+        title: "Original Show-Game Formats",
+        description: "Concept and product design for original show-game formats, bonus rounds, visual systems and presenter-led experiences.",
+        capabilities: ["Format design", "Bonus concept design", "World and theme direction", "User experience", "Studio flow", "Presenter interaction"]
+      }
+    ]
+  },
+  {
+    eyebrow: "Primary Area 05",
+    title: "Dedicated Teams and Product Support",
+    description: "Specialist teams, QA, post-launch product support and advisory for partners building or scaling iGaming products.",
+    items: [
+      {
+        title: "Dedicated Development Teams",
+        description: "Embedded specialists working inside partner-defined product and sprint workflows.",
+        capabilities: ["Front-end developers", "Back-end developers", "Game designers", "Artists", "Animators", "QA engineers", "Producers", "Technical leads"]
+      },
+      {
+        title: "Quality Assurance and Post-Launch Product Support",
+        description: "Functional testing, regression coverage, device compatibility checks, maintenance and structured post-release improvements.",
+        capabilities: ["Functional testing", "Regression testing", "Performance testing", "Device compatibility", "Maintenance", "Updates", "Bug fixing", "Continuous improvements"]
+      },
+      {
+        title: "Product and Technical Advisory",
+        description: "Architecture, product structure and technical advisory for iGaming technology decisions.",
+        capabilities: ["Architecture", "Product consulting", "Technology strategy", "Delivery planning"]
       }
     ]
   }
@@ -241,26 +234,22 @@ export const developmentProcess = [
   { title: "Quality Assurance", description: "Functional, regression and device testing are executed." },
   { title: "Certification Preparation", description: "Documentation, RNG preparation and lab coordination are prepared where required." },
   { title: "Launch", description: "Production release is coordinated with the partner." },
-  { title: "Support", description: "Monitoring, updates and live operations continue post-launch." }
+  { title: "Support", description: "Operational visibility, updates and post-launch support continue after release." }
 ];
 
 export const architectureFlow = [
   "Player Client",
   "Operator or Aggregator",
-  "OpenGamer API Layer",
-  "RGS and Game Logic",
-  "Wallet, Reporting and Monitoring"
+  "API and Game Services",
+  "Backend and Game Logic",
+  "Wallet, Reporting and Support Interfaces"
 ];
 
 export const technologyArchitectureFlow = [
-  "Player",
-  "Game Client",
-  "Operator or Aggregator",
-  "API Layer",
-  "RGS",
-  "Game Logic and RNG",
-  "Wallet and Transactions",
-  "Reporting and Monitoring"
+  "Player Environment",
+  "Partner Environment",
+  "Game Technology Layer",
+  "Operational Layer"
 ];
 
 export const integrationWorkflow = [
@@ -270,8 +259,8 @@ export const integrationWorkflow = [
   "Wallet and game-flow testing",
   "QA",
   "Partner approval",
-  "Production launch",
-  "Monitoring and support"
+  "Release Coordination",
+  "Post-release support"
 ];
 
 export const technologyPrinciples = [
@@ -279,7 +268,7 @@ export const technologyPrinciples = [
   "Modular development",
   "Responsive delivery",
   "Controlled releases",
-  "Monitoring",
+  "Operational visibility",
   "Maintainability",
   "Integration flexibility",
   "Security-aware development"

@@ -29,7 +29,7 @@ export default function LiveCasinoDevelopmentPage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_12%,rgba(35,196,131,0.12),transparent_24rem)]" />
         <Container>
           <SectionHeader
-            eyebrow="Service 14"
+            eyebrow="Live Casino Development"
             title="Live Casino Development"
             description="Original live casino product design — from studio-based table games to next-generation show formats built around original bonus mechanics and strong visual identity, not template clones."
             headingLevel="h1"

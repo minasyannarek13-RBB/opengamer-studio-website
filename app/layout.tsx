@@ -4,13 +4,31 @@ import { company } from "@/content/company";
 import { siteUrl } from "@/lib/site";
 import { ScrollRevealController } from "@/components/motion/ScrollRevealController";
 
+const isPreviewEnvironment =
+  process.env.VERCEL_ENV === "preview" ||
+  (Boolean(process.env.VERCEL_URL) && process.env.VERCEL_ENV !== "production") ||
+  (Boolean(process.env.NEXT_PUBLIC_SITE_URL) && process.env.NEXT_PUBLIC_SITE_URL !== "https://open-gamer.com");
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: "OpenGamer Studio | iGaming Development Studio",
     template: "%s"
   },
-  description: "Full-cycle iGaming development studio for casino game development, RGS technology and integration.",
+  description: "An iGaming development studio focused on casino games, technology, integrations and product delivery.",
+  robots: isPreviewEnvironment
+    ? {
+        index: false,
+        follow: false,
+        googleBot: {
+          index: false,
+          follow: false
+        }
+      }
+    : {
+        index: true,
+        follow: true
+      },
   icons: {
     apple: "/assets/brand/apple-touch-icon.png",
     icon: [

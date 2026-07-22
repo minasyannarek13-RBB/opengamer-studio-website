@@ -49,22 +49,21 @@ const conceptSections = [
 export default function LcAppPage() {
   return (
     <SiteShell>
-      <main className="lc-app-page">
+      <div className="lc-app-page">
       <section className="lc-app-hero relative overflow-hidden border-b border-white/10 py-16 sm:py-24">
         <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(255,255,255,0.034)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.024)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
         <Container className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
           <div className="reveal">
-            <span className="premium-status rounded-full px-3 py-1 text-xs uppercase tracking-[0.16em]">Proprietary Project</span>
             <h1 className="mt-5 text-5xl font-semibold tracking-normal text-white sm:text-6xl">A Social Layer for Live Casino</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
               LC App is a product concept exploring how live tables, player communities, creator-led experiences and communication could exist within one connected B2B product layer.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <span className="premium-status rounded-full px-3 py-1 text-xs">Product Concept — In Development</span>
+              <span className="premium-status rounded-full px-3 py-1 text-xs">Product Concept · In Development</span>
               <span className="rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">Concept UI</span>
             </div>
-            <Button href="/contact" className="mt-8">
-              Discuss the LC App Concept
+            <Button href="/contact?interest=lc-app" className="mt-8">
+              Discuss the Project
             </Button>
           </div>
           <div className="lc-device-stage premium-card surface-hairline image-frame reveal overflow-hidden rounded-lg border border-line p-2 shadow-[0_34px_118px_rgba(0,0,0,0.44)]">
@@ -124,10 +123,10 @@ export default function LcAppPage() {
       <CTASection
         title="A Product Concept in Development"
         description="LC App is currently presented as a product direction rather than a launched application. OpenGamer is open to discussing product development, operator collaboration and strategic technology partnerships around the concept."
-        ctaLabel="Discuss the LC App Concept"
-        ctaHref="/contact"
+        ctaLabel="Discuss the Project"
+        ctaHref="/contact?interest=lc-app"
       />
-      </main>
+      </div>
     </SiteShell>
   );
 }

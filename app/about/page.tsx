@@ -8,7 +8,7 @@ import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = {
   title: "About | OpenGamer Studio",
-  description: "OpenGamer is a full-cycle iGaming development studio creating casino games and gaming technology for B2B partners.",
+  description: "OpenGamer is an iGaming development studio creating casino games, product concepts and technology support for B2B partners.",
   alternates: { canonical: "/about" }
 };
 
@@ -16,12 +16,12 @@ const aboutSections = [
   {
     title: "What OpenGamer Is",
     description:
-      "OpenGamer brings game design, mathematics, visual production, front-end and back-end engineering, integration and live operations into one delivery structure — a single accountable team rather than a chain of separate vendors."
+      "OpenGamer brings game design, mathematics, visual production, front-end and back-end engineering, integration and post-launch product support into one delivery structure."
   },
   {
     title: "What We Build",
     description:
-      "Custom and branded slot titles, proprietary game technology and original live casino concepts — including ELEMENTALS, a premium show-game concept currently in development. A verified game portfolio is available on the Games page."
+      "Custom and branded slot titles, RGS-related engineering support and original live casino concepts, including ELEMENTALS, a premium show-game concept currently in development."
   },
   {
     title: "How We Work",
@@ -35,6 +35,15 @@ const aboutSections = [
   }
 ];
 
+const workingPrinciples = [
+  "Product Before Output",
+  "Defined Responsibility",
+  "Modular Delivery",
+  "Technical Transparency",
+  "Industry-Specific Execution",
+  "Long-Term Maintainability"
+];
+
 export default function AboutPage() {
   return (
     <SiteShell>
@@ -44,7 +53,7 @@ export default function AboutPage() {
           <SectionHeader
             eyebrow="About OpenGamer"
             title="Engineering iGaming Products, End to End"
-            description="OpenGamer is a full-cycle iGaming development studio creating casino games and gaming technology for operators, aggregators, platforms and game providers."
+            description="OpenGamer is an iGaming development studio creating casino games, product concepts and technology support for operators, aggregators, platforms and game providers."
             headingLevel="h1"
           />
         </Container>
@@ -55,6 +64,16 @@ export default function AboutPage() {
             <Card key={section.title} className="h-full">
               <h2 className="text-balance text-2xl font-semibold text-white">{section.title}</h2>
               <p className="mt-4 leading-7 text-slate-300">{section.description}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+      <Section className="bg-black/20">
+        <SectionHeader title="How OpenGamer Works" description="Delivery is structured around clear responsibility, technical transparency and maintainable product outcomes." />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
+          {workingPrinciples.map((principle) => (
+            <Card key={principle} className="h-full">
+              <h2 className="text-xl font-semibold text-white">{principle}</h2>
             </Card>
           ))}
         </div>

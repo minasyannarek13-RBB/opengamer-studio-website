@@ -6,7 +6,7 @@ export const company = {
   phone: "+44 78 7441 9126",
   address: "9 Abraham de Veerstraat, Willemstad, Curaçao, Index 3421",
   description:
-    "A full-cycle iGaming development studio delivering casino games, RGS technology, integrations and dedicated product teams for operators, aggregators, platforms and game providers.",
+    "OpenGamer is an iGaming game and software development studio supporting casino game production, front-end and backend engineering, integrations, original product concepts and dedicated delivery teams.",
   social: [
     { label: "LinkedIn", href: "https://www.linkedin.com/company/opengamer" },
     { label: "Instagram", href: "https://www.instagram.com/open_gamer777" },

@@ -9,7 +9,7 @@ export const lifecycleStages = [
   },
   {
     title: "Build",
-    description: "Front-end, back-end, RGS connectivity, game logic and assets move through one delivery flow."
+    description: "Front-end, back-end, RGS-related connectivity, game logic and assets move through one delivery flow."
   },
   {
     title: "Launch",
@@ -22,7 +22,7 @@ export const capabilitiesUniverse = [
   "Front-end and back-end engineering",
   "Mathematics and game design",
   "Game art and animation",
-  "OpenGamer RGS",
+  "RGS-related engineering",
   "RNG and certification preparation",
   "Aggregator and operator integration",
   "Live Casino product development",

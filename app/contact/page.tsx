@@ -9,14 +9,14 @@ import { company } from "@/content/company";
 
 export const metadata: Metadata = {
   title: "Contact | OpenGamer Studio",
-  description: "Contact OpenGamer to discuss custom slot game development, RGS technology, casino game integration or a dedicated iGaming development team.",
+  description: "Contact OpenGamer to discuss casino game development, RGS-related engineering, integrations or a dedicated iGaming development team.",
   alternates: { canonical: "/contact" }
 };
 
 const enquiryGuidance = [
   "Project type and commercial goal",
   "Target platform, aggregator or operator context",
-  "Required game, RGS or integration scope",
+  "Required game, RGS-related or integration scope",
   "Current stage and key launch dependencies"
 ];
 

@@ -51,5 +51,7 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.json({ message: "Request received. OpenGamer will review the project details." });
+  return NextResponse.json({
+    message: "OpenGamer will review the project information and follow up using the email address provided."
+  });
 }

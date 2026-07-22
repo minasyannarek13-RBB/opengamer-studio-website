@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/pages/LegalPage";
 
 export const metadata: Metadata = {
   title: "Cookie Policy | OpenGamer Studio",
-  description: "OpenGamer cookie policy page pending legal review.",
+  description: "Information about cookies and tracking on the OpenGamer website.",
   alternates: { canonical: "/cookie-policy" }
 };
 
@@ -20,4 +20,3 @@ export default function CookiePolicyPage() {
     />
   );
 }
-

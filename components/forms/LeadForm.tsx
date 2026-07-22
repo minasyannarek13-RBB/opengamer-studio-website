@@ -1,6 +1,6 @@
 "use client";
 
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { companyTypes, contactMethods, projectStages, serviceInterests, type ServiceInterestGroup } from "@/content/contact";
 
@@ -14,6 +14,15 @@ export function LeadForm() {
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [serviceDefault, setServiceDefault] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const mappedInterest = mapInterestToService(params.get("interest") || params.get("service"));
+    if (mappedInterest) {
+      setServiceDefault(mappedInterest);
+    }
+  }, []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,7 +54,7 @@ export function LeadForm() {
 
     if (response.ok) {
       setState("success");
-      setMessage(result.message || "Request received. OpenGamer will review the project details.");
+      setMessage(result.message || "OpenGamer will review the project information and follow up using the email address provided.");
       form.reset();
       return;
     }
@@ -71,16 +80,22 @@ export function LeadForm() {
         <div className="grid gap-5 md:grid-cols-2">
           <Field label="Full name" name="fullName" required error={errors.fullName} />
           <Field label="Company" name="company" required error={errors.company} />
-          <Field label="Business email" name="email" type="email" required error={errors.email} />
+          <Field label="Work email" name="email" type="email" required error={errors.email} />
           <Field label="Job title" name="jobTitle" required error={errors.jobTitle} />
           <Select label="Company type" name="companyType" options={companyTypes} required error={errors.companyType} />
-          <Field label="Website" name="website" type="url" />
+          <Field label="Reference link" name="website" type="url" />
         </div>
       </fieldset>
+      <div className="rounded-lg border border-emerald/20 bg-emerald/[0.06] p-4 text-sm leading-6 text-slate-300">
+        <p className="font-semibold text-white">What Helps Us Review the Request</p>
+        <p className="mt-2">
+          Include the project type, target platform or partner environment, integration context, current stage and any key dependencies that may affect scope.
+        </p>
+      </div>
       <fieldset className="grid gap-5 border-t border-white/10 pt-5">
         <legend className="text-base font-semibold text-white">Project context</legend>
         <div className="grid gap-5 md:grid-cols-2">
-          <Select label="Service of interest" name="serviceInterest" options={serviceInterests} required error={errors.serviceInterest} />
+          <Select label="Primary area of interest" name="serviceInterest" options={serviceInterests} required error={errors.serviceInterest} defaultValue={serviceDefault} />
           <Select label="Preferred contact method" name="preferredContactMethod" options={contactMethods} />
           <Select label="Project stage" name="projectStage" options={projectStages} />
           <Field label="Expected launch" name="expectedLaunch" />
@@ -91,7 +106,7 @@ export function LeadForm() {
           <Field label="Budget range" name="budgetRange" />
         </div>
         <label className="grid gap-2 text-sm font-medium text-slate-200">
-          <LabelText label="Project description" required />
+          <LabelText label="Project context" required />
           <textarea
             name="projectDescription"
             required
@@ -117,7 +132,7 @@ export function LeadForm() {
           className="mt-1 h-4 w-4 accent-emerald"
         />
         <span>
-          I agree that OpenGamer may use this information to respond to my business enquiry.
+          I agree that OpenGamer may use this information to respond to my business enquiry. See the Privacy Policy for details.
           {errors.consent ? (
             <span id="consent-error" className="mt-1 block text-xs text-red-300">
               {errors.consent}
@@ -125,13 +140,17 @@ export function LeadForm() {
           ) : null}
         </span>
       </label>
+      <p className="rounded-lg border border-white/10 bg-black/20 p-4 text-sm leading-6 text-slate-400">
+        Project information is reviewed as a business enquiry. Do not submit credentials, regulated player data or confidential source materials through this form.
+      </p>
       <Button type="submit" disabled={state === "submitting"} className="w-full md:w-fit">
-        {state === "submitting" ? "Sending..." : "Send Project Request"}
+        {state === "submitting" ? "Submitting..." : "Submit Project Enquiry"}
       </Button>
       {message ? (
-        <p className={state === "success" ? "text-sm text-emerald" : "text-sm text-red-300"} role="status" aria-live="polite">
-          {message}
-        </p>
+        <div className={state === "success" ? "text-sm text-emerald" : "text-sm text-red-300"} role="status" aria-live="polite">
+          {state === "success" ? <p className="font-semibold text-white">Your Enquiry Has Been Submitted</p> : null}
+          <p className={state === "success" ? "mt-1" : undefined}>{message}</p>
+        </div>
       ) : null}
     </form>
   );
@@ -177,13 +196,15 @@ function Select({
   name,
   options,
   required = false,
-  error
+  error,
+  defaultValue = ""
 }: {
   label: string;
   name: string;
   options: string[] | ServiceInterestGroup[];
   required?: boolean;
   error?: string;
+  defaultValue?: string;
 }) {
   const errorId = `${name}-error`;
 
@@ -191,7 +212,9 @@ function Select({
     <label className="grid gap-2 text-sm font-medium text-slate-200">
       <LabelText label={label} required={required} />
       <select
+        key={defaultValue || "empty"}
         name={name}
+        defaultValue={defaultValue}
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
@@ -221,6 +244,25 @@ function Select({
       ) : null}
     </label>
   );
+}
+
+function mapInterestToService(value: string | null) {
+  switch (value) {
+    case "elementals":
+      return "ELEMENTALS Partnership";
+    case "lc-app":
+      return "LC App Partnership";
+    case "slot-development":
+      return "Custom Slot Development";
+    case "technology":
+      return "RGS-Related Development";
+    case "live-casino":
+      return "Live Casino Development";
+    case "integration":
+      return "Game Integration";
+    default:
+      return "";
+  }
 }
 
 function LabelText({ label, required }: { label: string; required: boolean }) {

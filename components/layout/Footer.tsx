@@ -62,7 +62,7 @@ export function Footer() {
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>Copyright © 2026 OpenGamer. All rights reserved.</p>
-          <p>iGaming technology, game production and integration support.</p>
+          <p>Casino game development, product engineering and integration support.</p>
         </div>
       </Container>
     </footer>

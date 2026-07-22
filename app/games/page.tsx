@@ -8,13 +8,14 @@ import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = {
   title: "Games | OpenGamer Studio",
-  description: "Complete confirmed OpenGamer slot game portfolio with official artwork and demo links.",
+  description: "OpenGamer slot game catalogue with local artwork, selected public demos and series presentation.",
   alternates: { canonical: "/games" },
   openGraph: {
     title: "Games | OpenGamer Studio",
-    description: "Complete confirmed OpenGamer slot game portfolio with official artwork and demo links.",
+    description: "OpenGamer slot game catalogue with selected public demos and series presentation.",
     url: "/games",
-    type: "website"
+    type: "website",
+    images: [{ url: "/assets/brand/opengamer-og.png", width: 1200, height: 630, alt: "OpenGamer games portfolio" }]
   }
 };
 
@@ -26,8 +27,8 @@ export default function GamesPage() {
         <Container>
           <SectionHeader
             eyebrow="Games"
-            title="Slot Game Portfolio"
-            description="The complete confirmed OpenGamer game catalogue from the public portfolio, using official artwork and demo links. Optional game metadata stays hidden until approved."
+            title="OpenGamer Slot Game Catalogue"
+            description="A catalogue of OpenGamer slot titles and selected series, presented with local artwork and public demo links where available."
             headingLevel="h1"
           />
         </Container>
@@ -36,8 +37,9 @@ export default function GamesPage() {
         <GamePortfolio />
       </Section>
       <CTASection
-        title="Build a New Title or Expand a Portfolio"
-        description="OpenGamer can support custom slot development, white-label games, reskins, modernization and integration-ready production."
+        title="Discuss Game Content"
+        description="OpenGamer can support custom slot development, white-label delivery, reskins, modernization and integration-ready production."
+        ctaLabel="Discuss Game Content"
       />
     </SiteShell>
   );

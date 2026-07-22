@@ -20,7 +20,7 @@ export const serviceInterests: ServiceInterestGroup[] = [
   },
   {
     label: "Technology & Integration",
-    options: ["RGS Development", "Game Integration"]
+    options: ["RGS-Related Development", "Game Integration"]
   },
   {
     label: "Portfolio Services",
@@ -28,11 +28,11 @@ export const serviceInterests: ServiceInterestGroup[] = [
   },
   {
     label: "Quality & Support",
-    options: ["Quality Assurance", "Certification Support", "Live Operations"]
+    options: ["Quality Assurance", "Certification Preparation Support", "Post-Launch Product Support"]
   },
   {
     label: "Strategic Development",
-    options: ["Technical Consulting", "Dedicated Development Team", "AI-Assisted iGaming Workflows"]
+    options: ["Product and Technical Advisory", "Dedicated Development Team"]
   },
   {
     label: "Live Casino",

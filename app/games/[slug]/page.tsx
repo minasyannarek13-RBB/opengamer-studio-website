@@ -46,10 +46,12 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
     notFound();
   }
 
-  const confirmedFacts = [
+  const gameDetails = [
     ["Title", game.title],
-    ["Category", game.category?.join(", ") || "Slot Game"]
-  ];
+    ["Category", game.category?.join(", ") || "Slot Game"],
+    game.status ? ["Status", game.status] : null,
+    game.variants?.length ? ["Series Variants", game.variants.join(", ")] : null
+  ].filter(Boolean) as [string, string][];
   const gameIndex = games.findIndex((item) => item.slug === game.slug);
   const previousGame = games[(gameIndex - 1 + games.length) % games.length];
   const nextGame = games[(gameIndex + 1) % games.length];
@@ -69,7 +71,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
                 </Button>
               ) : null}
               <Button href="/contact" variant="secondary">
-                Discuss Similar Game
+                Discuss Game Content
               </Button>
             </div>
           </div>
@@ -89,9 +91,9 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
       <Section>
         <div className="grid gap-6 lg:grid-cols-[0.45fr_1fr]">
           <Card>
-            <h2 className="text-xl font-semibold text-white">Confirmed Information</h2>
+            <h2 className="text-xl font-semibold text-white">Game Details</h2>
             <dl className="mt-5 grid gap-3 text-sm">
-              {confirmedFacts.map(([label, value]) => (
+              {gameDetails.map(([label, value]) => (
                 <div key={label} className="flex justify-between gap-4 border-t border-white/10 pt-3">
                   <dt className="text-slate-500">{label}</dt>
                   <dd className="text-right text-slate-200">{value}</dd>
@@ -102,8 +104,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
           <Card>
             <h2 className="text-xl font-semibold text-white">Additional Metadata</h2>
             <p className="mt-3 text-sm leading-7 text-slate-300">
-              RTP, volatility, release status, format, mechanics and certification details are intentionally omitted
-              until approved game-level information is available.
+              RTP, volatility, mechanics, certification details and commercial availability are shared only when confirmed for a specific business discussion.
             </p>
           </Card>
         </div>
@@ -121,8 +122,9 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
         </nav>
       </Section>
       <CTASection
-        title="Build a Game with Similar Production Quality"
+        title="Discuss Game Content"
         description="Share the target theme, mechanics, platform and integration context. OpenGamer will propose the right production model."
+        ctaLabel="Discuss Game Content"
       />
     </SiteShell>
   );
