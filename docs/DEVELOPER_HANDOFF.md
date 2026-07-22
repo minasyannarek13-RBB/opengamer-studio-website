@@ -8,7 +8,7 @@ Final pushed commit SHA: see final delivery report / `git rev-parse HEAD`
 
 ## Current Project State
 
-The site is a Next.js 15 / React 19 / TypeScript website for OpenGamer Studio. It includes the redesigned homepage, complete game catalogue, ELEMENTALS portfolio page, LC App concept page, services, technology, about, contact and legal placeholder pages.
+The site is a Next.js 15 / React 19 / TypeScript website for OpenGamer Studio. It includes the redesigned homepage, complete game catalogue, ELEMENTALS portfolio page, LC App concept page, services, technology, about, contact and legal pages.
 
 Production deployment is not approved. The current deployment is preview-only.
 
@@ -88,10 +88,28 @@ Production is intentionally excluded from this handoff. Do not run `vercel deplo
 
 ## Contact Form and Analytics
 
-- Current lead delivery default: `LEAD_PROVIDER=console`.
-- Reserved providers exist in code but are not configured: `resend`, `hubspot`, `pipedrive`, `custom`.
+- Current lead delivery default: `LEAD_PROVIDER=none`.
+- `console` is local/preview only and is blocked in production. `resend` is implemented; `hubspot`, `pipedrive` and `custom` are reserved but not configured.
 - Analytics provider is not confirmed.
 - Cookie consent provider is not confirmed.
+
+## Founder Decisions Required Before Production
+
+| ID | Decision | Current safe behaviour | Options | Recommended default | Required evidence | Production impact | Owner |
+|---|---|---|---|---|---|---|---|
+| FD-01 | Lead-delivery provider | Form returns an honest delivery error until configured. | Resend, HubSpot, Pipedrive, custom backend | Resend | Provider account, API key, sender domain status | Blocks production enquiry capture | Founder |
+| FD-02 | Production recipient email | `.env.example` keeps `LEAD_EMAIL_TO=mn@open-gamer.com`. | `mn@open-gamer.com`, shared inbox, CRM intake address | Shared business inbox if available | Confirmed recipient access | Blocks reliable lead routing | Founder |
+| FD-03 | Public corporate email | Site currently shows `mn@open-gamer.com`. | `mn@open-gamer.com`, `info@open-gamer.com`, another approved address | Keep current until confirmed | Approved public contact email | Affects footer/contact/legal copy | Founder |
+| FD-04 | Public telephone | Site currently shows the existing hardcoded phone. | Keep, replace, remove | Keep only if owner-approved | Confirmed public phone use | Affects contact trust and privacy | Founder |
+| FD-05 | Legal entity name | Legal pages avoid naming a final legal entity. | Current legal entity, trading name only | Trading name only until legal approval | Company registration source | Blocks legal-page approval | Founder/legal |
+| FD-06 | Registration number | Not published. | Publish, omit | Omit until verified | Registration extract | Blocks final legal footer if required | Founder/legal |
+| FD-07 | Registered address wording | Address is shown as contact text, not registered-office wording. | Registered office, business contact address, remove | Keep neutral contact text | Address approval and wording | Affects footer/contact/legal accuracy | Founder/legal |
+| FD-08 | Public social links | LinkedIn, Instagram, YouTube and Facebook render from content. | Keep all, LinkedIn only, remove selected links | Keep LinkedIn only if uncertain | Confirmed active official channels | Affects footer trust links | Founder |
+| FD-09 | Legal-page approval | Pages state legal details remain pending review. | Approve current, revise with counsel | Review with counsel before production | Legal review sign-off | Blocks production readiness | Founder/legal |
+| FD-10 | Commercial status per game | Demo status only where a demo URL exists; no commercial availability claim. | Per-game status labels | No commercial label until confirmed | Approved game availability matrix | Blocks sales-language expansion | Founder/commercial |
+| FD-11 | Approved demo links | Buttons render only for configured public demo URLs. | Keep, replace, remove per game | Keep only verified public demos | Demo URL review | Affects Games QA and external links | Founder/product |
+| FD-12 | Public wording for RGS-related development | Site uses RGS-related/backend engineering wording. | Keep qualified wording, reduce further, approve stronger wording | Keep qualified wording | Technical capability approval | Affects Services/Technology claims | Founder/CTO |
+| FD-13 | Public wording for RNG-related development | Site uses RNG-related/certification preparation support wording. | Keep qualified wording, reduce further, approve stronger wording | Keep qualified wording | Technical and compliance approval | Affects Services/Technology claims | Founder/CTO/legal |
 
 ## Open Founder Decisions
 
