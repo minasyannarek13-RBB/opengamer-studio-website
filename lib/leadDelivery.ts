@@ -16,6 +16,8 @@ export type LeadPayload = {
   targetMarkets?: string;
   requiredIntegration?: string;
   budgetRange?: string;
+  sourcePage?: string;
+  contextParameter?: string;
 };
 
 type DeliveryResult = {
@@ -23,78 +25,46 @@ type DeliveryResult = {
   message?: string;
 };
 
-type LeadProvider = "none" | "console" | "resend" | "hubspot" | "pipedrive" | "custom";
+type ContactDeliveryConfig = {
+  apiKey?: string;
+  recipientEmail?: string;
+  fromEmail?: string;
+  replyToDomain?: string;
+};
 
 export async function deliverLead(payload: LeadPayload): Promise<DeliveryResult> {
-  const provider = (process.env.LEAD_PROVIDER || "none") as LeadProvider;
-
-  switch (provider) {
-    case "none":
-      return {
-        ok: false,
-        message: "Lead delivery is not configured yet."
-      };
-    case "console":
-      return deliverToConsole(payload);
-    case "resend":
-      return deliverToResend(payload);
-    case "hubspot":
-    case "pipedrive":
-    case "custom":
-      return {
-        ok: false,
-        message: `Lead provider "${provider}" is not configured yet.`
-      };
-    default:
-      return {
-        ok: false,
-        message: `Lead provider "${provider}" is not supported.`
-      };
-  }
+  return deliverToResend(payload, getContactDeliveryConfig());
 }
 
-async function deliverToConsole(payload: LeadPayload): Promise<DeliveryResult> {
-  if (process.env.NODE_ENV === "production") {
+export function getContactDeliveryConfig(): ContactDeliveryConfig {
+  return {
+    apiKey: process.env.RESEND_API_KEY?.trim(),
+    recipientEmail: process.env.CONTACT_RECIPIENT_EMAIL?.trim(),
+    fromEmail: process.env.CONTACT_FROM_EMAIL?.trim(),
+    replyToDomain: process.env.CONTACT_REPLY_TO_DOMAIN?.trim().toLowerCase()
+  };
+}
+
+export async function deliverToResend(
+  payload: LeadPayload,
+  config: ContactDeliveryConfig = getContactDeliveryConfig()
+): Promise<DeliveryResult> {
+  if (!config.apiKey || !config.recipientEmail || !config.fromEmail) {
     return {
       ok: false,
-      message: "Console lead delivery is disabled in production."
+      message: "Contact delivery is not configured yet."
     };
   }
 
-  console.info("OpenGamer lead received in preview/local mode", {
-    company: payload.company,
-    serviceInterest: payload.serviceInterest,
-    projectStage: payload.projectStage || "Not specified"
-  });
-
-  return { ok: true };
-}
-
-async function deliverToResend(payload: LeadPayload): Promise<DeliveryResult> {
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.LEAD_EMAIL_TO;
-  const from = process.env.LEAD_EMAIL_FROM || "OpenGamer Website <website@open-gamer.com>";
-
-  if (!apiKey || !to) {
-    return {
-      ok: false,
-      message: "Resend lead delivery requires RESEND_API_KEY and LEAD_EMAIL_TO."
-    };
-  }
+  const email = buildResendEmail(payload, config);
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${config.apiKey}`,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      from,
-      to,
-      reply_to: payload.email,
-      subject: `OpenGamer enquiry: ${payload.company}`,
-      text: formatLead(payload)
-    })
+    body: JSON.stringify(email)
   });
 
   if (!response.ok) {
@@ -107,17 +77,40 @@ async function deliverToResend(payload: LeadPayload): Promise<DeliveryResult> {
   return { ok: true };
 }
 
-function formatLead(payload: LeadPayload) {
+export function buildResendEmail(payload: LeadPayload, config: ContactDeliveryConfig = getContactDeliveryConfig()) {
+  return {
+    from: config.fromEmail,
+    to: config.recipientEmail,
+    reply_to: getReplyTo(payload.email, config.replyToDomain),
+    subject: `OpenGamer Enquiry — ${payload.serviceInterest} — ${payload.company || payload.fullName}`,
+    text: formatLead(payload, new Date().toISOString())
+  };
+}
+
+function getReplyTo(email: string, allowedDomain?: string) {
+  if (!allowedDomain) {
+    return email;
+  }
+
+  const domain = email.split("@")[1]?.toLowerCase();
+  return domain === allowedDomain ? email : undefined;
+}
+
+function formatLead(payload: LeadPayload, timestamp: string) {
   return [
     `Full Name: ${payload.fullName}`,
-    `Company: ${payload.company}`,
     `Work Email: ${payload.email}`,
+    `Company: ${payload.company}`,
+    `Primary Area: ${payload.serviceInterest}`,
+    `Project Stage: ${payload.projectStage || "Not provided"}`,
+    `Reference Link: ${payload.website || "Not provided"}`,
+    `Source Page: ${payload.sourcePage || "Not provided"}`,
+    `Context Parameter: ${payload.contextParameter || "Not provided"}`,
+    `Timestamp: ${timestamp}`,
+    "",
     `Job Title: ${payload.jobTitle}`,
     `Company Type: ${payload.companyType}`,
-    `Primary Area of Interest: ${payload.serviceInterest}`,
-    `Reference Link: ${payload.website || "Not provided"}`,
     `Preferred Contact Method: ${payload.preferredContactMethod || "Not provided"}`,
-    `Project Stage: ${payload.projectStage || "Not provided"}`,
     `Expected Launch: ${payload.expectedLaunch || "Not provided"}`,
     `Number of Games: ${payload.numberOfGames || "Not provided"}`,
     `Existing Platform: ${payload.existingPlatform || "Not provided"}`,

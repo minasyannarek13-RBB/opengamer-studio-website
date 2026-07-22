@@ -53,10 +53,8 @@ const organizationSchema = {
   name: company.name,
   url: company.website,
   logo: `${siteUrl}/assets/brand/opengamer-logo.png`,
-  email: company.email,
-  telephone: company.phone,
-  address: company.address,
-  sameAs: company.social.map((item) => item.href)
+  ...(company.email ? { email: company.email } : {}),
+  ...(company.social.length ? { sameAs: company.social.map((item) => item.href) } : {})
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

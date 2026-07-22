@@ -1,8 +1,11 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import type { Game } from "@/content/games";
+import { getGameCommercialStatusLabel, getGameDemoStatusLabel, getVerifiedDemoUrl, type Game } from "@/content/games";
 
 export function GameCard({ game }: { game: Game }) {
+  const commercialStatus = getGameCommercialStatusLabel(game);
+  const demoStatus = getGameDemoStatusLabel(game);
+  const demoUrl = getVerifiedDemoUrl(game);
   const metadata = [
     game.format ? ["Format", game.format] : null,
     game.rtp ? ["RTP", game.rtp] : null,
@@ -29,8 +32,11 @@ export function GameCard({ game }: { game: Game }) {
               {category}
             </span>
           ))}
-          {game.status ? (
-            <span className="rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">{game.status}</span>
+          {commercialStatus ? (
+            <span className="rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">{commercialStatus}</span>
+          ) : null}
+          {demoStatus ? (
+            <span className="rounded-full border border-emerald/25 bg-emerald/[0.06] px-3 py-1 text-xs text-emerald">{demoStatus}</span>
           ) : null}
         </div>
         <h3 className="mt-4 text-xl font-semibold text-white sm:text-2xl">{game.title}</h3>
@@ -55,8 +61,8 @@ export function GameCard({ game }: { game: Game }) {
           </dl>
         ) : null}
         <div className="mt-auto flex flex-wrap items-center gap-3 pt-5">
-          {game.demoUrl ? (
-            <Button href={game.demoUrl} variant="secondary" className="min-h-10 px-4" target="_blank" rel="noreferrer">
+          {demoUrl ? (
+            <Button href={demoUrl} variant="secondary" className="min-h-10 px-4" target="_blank" rel="noopener noreferrer">
               Play Demo
             </Button>
           ) : null}

@@ -43,21 +43,25 @@ export function Footer() {
           <div>
             <h2 className="text-sm font-semibold text-white">Contact</h2>
             <div className="mt-4 grid gap-3 text-sm text-slate-400">
-              <a href={`mailto:${company.email}`} className="hover:text-white">
-                {company.email}
-              </a>
-              <a href={`tel:${company.phone.replaceAll(" ", "")}`} className="hover:text-white">
-                {company.phone}
-              </a>
-              <p>{company.address}</p>
-            </div>
-            <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-400">
-              {company.social.map((item) => (
-                <a key={item.label} href={item.href} target="_blank" rel="noreferrer" className="hover:text-white">
-                  {item.label}
+              {company.email ? (
+                <a href={`mailto:${company.email}`} className="hover:text-white">
+                  {company.email}
                 </a>
-              ))}
+              ) : (
+                <Link href="/contact" className="hover:text-white">
+                  Project enquiry form
+                </Link>
+              )}
             </div>
+            {company.social.length ? (
+              <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-400">
+                {company.social.map((item) => (
+                  <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">

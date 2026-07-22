@@ -88,23 +88,36 @@ Production is intentionally excluded from this handoff. Do not run `vercel deplo
 
 ## Contact Form and Analytics
 
-- Current lead delivery default: `LEAD_PROVIDER=none`.
-- `console` is local/preview only and is blocked in production. `resend` is implemented; `hubspot`, `pipedrive` and `custom` are reserved but not configured.
+- Contact delivery uses Resend through `lib/leadDelivery.ts`.
+- Successful form submission requires `RESEND_API_KEY`, `CONTACT_RECIPIENT_EMAIL` and `CONTACT_FROM_EMAIL`.
+- `CONTACT_RECIPIENT_EMAIL` is server-only and must not be exposed in public UI.
+- `CONTACT_FROM_EMAIL` must use a sender address from a verified Resend domain.
+- Optional public values: `NEXT_PUBLIC_CONTACT_EMAIL` and `NEXT_PUBLIC_LINKEDIN_URL`.
 - Analytics provider is not confirmed.
 - Cookie consent provider is not confirmed.
+
+Resend setup:
+
+1. Create or access the Resend account.
+2. Verify the sending domain in Resend.
+3. Create a Resend API key.
+4. Configure `CONTACT_FROM_EMAIL` with the verified sending domain.
+5. Configure `CONTACT_RECIPIENT_EMAIL` with the approved inbox.
+6. Test delivery in preview.
+7. Configure the same approved variables for production only after review.
 
 ## Founder Decisions Required Before Production
 
 | ID | Decision | Current safe behaviour | Options | Recommended default | Required evidence | Production impact | Owner |
 |---|---|---|---|---|---|---|---|
-| FD-01 | Lead-delivery provider | Form returns an honest delivery error until configured. | Resend, HubSpot, Pipedrive, custom backend | Resend | Provider account, API key, sender domain status | Blocks production enquiry capture | Founder |
-| FD-02 | Production recipient email | `.env.example` keeps `LEAD_EMAIL_TO=mn@open-gamer.com`. | `mn@open-gamer.com`, shared inbox, CRM intake address | Shared business inbox if available | Confirmed recipient access | Blocks reliable lead routing | Founder |
-| FD-03 | Public corporate email | Site currently shows `mn@open-gamer.com`. | `mn@open-gamer.com`, `info@open-gamer.com`, another approved address | Keep current until confirmed | Approved public contact email | Affects footer/contact/legal copy | Founder |
-| FD-04 | Public telephone | Site currently shows the existing hardcoded phone. | Keep, replace, remove | Keep only if owner-approved | Confirmed public phone use | Affects contact trust and privacy | Founder |
+| FD-01 | Lead-delivery provider | Form returns an honest delivery error until Resend is configured. | Resend | Resend | Provider account, API key, sender domain status | Blocks production enquiry capture | Founder |
+| FD-02 | Production recipient email | `CONTACT_RECIPIENT_EMAIL` is required server-only config. | Approved business inbox | Shared business inbox if available | Confirmed recipient access | Blocks reliable lead routing | Founder |
+| FD-03 | Public corporate email | Public email renders only from `NEXT_PUBLIC_CONTACT_EMAIL`. | Approved public contact address, or hidden | Hide until confirmed | Approved public contact email | Affects footer/contact/legal copy | Founder |
+| FD-04 | Public telephone | Not published. | Omit | Omit | Founder approval if ever reintroduced | Avoids unconfirmed public personal contact data | Founder |
 | FD-05 | Legal entity name | Legal pages avoid naming a final legal entity. | Current legal entity, trading name only | Trading name only until legal approval | Company registration source | Blocks legal-page approval | Founder/legal |
 | FD-06 | Registration number | Not published. | Publish, omit | Omit until verified | Registration extract | Blocks final legal footer if required | Founder/legal |
-| FD-07 | Registered address wording | Address is shown as contact text, not registered-office wording. | Registered office, business contact address, remove | Keep neutral contact text | Address approval and wording | Affects footer/contact/legal accuracy | Founder/legal |
-| FD-08 | Public social links | LinkedIn, Instagram, YouTube and Facebook render from content. | Keep all, LinkedIn only, remove selected links | Keep LinkedIn only if uncertain | Confirmed active official channels | Affects footer trust links | Founder |
+| FD-07 | Registered address wording | Address is not published until confirmed. | Registered office, business contact address, remove | Hide until confirmed | Address approval and wording | Affects footer/contact/legal accuracy | Founder/legal |
+| FD-08 | Public social links | LinkedIn only, controlled by `NEXT_PUBLIC_LINKEDIN_URL`. | LinkedIn URL, or hidden | LinkedIn only | Confirmed active official LinkedIn URL | Affects footer trust links | Founder |
 | FD-09 | Legal-page approval | Pages state legal details remain pending review. | Approve current, revise with counsel | Review with counsel before production | Legal review sign-off | Blocks production readiness | Founder/legal |
 | FD-10 | Commercial status per game | Demo status only where a demo URL exists; no commercial availability claim. | Per-game status labels | No commercial label until confirmed | Approved game availability matrix | Blocks sales-language expansion | Founder/commercial |
 | FD-11 | Approved demo links | Buttons render only for configured public demo URLs. | Keep, replace, remove per game | Keep only verified public demos | Demo URL review | Affects Games QA and external links | Founder/product |

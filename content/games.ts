@@ -6,7 +6,8 @@ export type Game = {
   imageHeight: number;
   shortDescription: string;
   category?: string[];
-  status?: "In Development" | "Roadmap" | "Demo Available" | "Available for Commercial Discussion";
+  commercialStatus?: "portfolio" | "commercial-discussion" | "in-development" | "concept";
+  demoStatus?: "verified" | "unavailable";
   demoUrl?: string;
   sourceUrl?: string;
   format?: string;
@@ -19,6 +20,44 @@ export type Game = {
 
 const officialGamesBaseUrl = "https://open-gamer.com/games/view?code=";
 
+export function getGameCommercialStatusLabel(game: Game) {
+  switch (game.commercialStatus) {
+    case "portfolio":
+      return "Portfolio Title";
+    case "commercial-discussion":
+      return "Available for Commercial Discussion";
+    case "in-development":
+      return "In Development";
+    case "concept":
+      return "Concept";
+    default:
+      return null;
+  }
+}
+
+export function getGameDemoStatusLabel(game: Game) {
+  return hasVerifiedDemo(game) ? "Demo Available" : null;
+}
+
+export function hasVerifiedDemo(game: Game) {
+  return game.demoStatus === "verified" && Boolean(getVerifiedDemoUrl(game));
+}
+
+export function getVerifiedDemoUrl(game: Game) {
+  if (!game.demoUrl) {
+    return null;
+  }
+
+  try {
+    const url = new URL(game.demoUrl);
+    return url.protocol === "https:" && url.hostname === "open-gamer.com" && url.pathname === "/games/view" && url.searchParams.has("code")
+      ? game.demoUrl
+      : null;
+  } catch {
+    return null;
+  }
+}
+
 export const games: Game[] = [
   {
     title: "Cake Bonanza",
@@ -27,7 +66,9 @@ export const games: Game[] = [
     imageWidth: 1920,
     imageHeight: 1080,
     shortDescription: "A dessert-themed slot title from the OpenGamer catalogue.",
-    category: ["Slot Game"]
+    category: ["Slot Game"],
+    commercialStatus: "portfolio",
+    demoStatus: "unavailable"
   },
   {
     title: "Deep Dive",
@@ -37,7 +78,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "Explore the ocean depths in Deep Dive, where sticky wilds and treasure chests unlock big wins.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     demoUrl: `${officialGamesBaseUrl}deep-dive`,
     sourceUrl: `${officialGamesBaseUrl}deep-dive`
   },
@@ -48,7 +90,9 @@ export const games: Game[] = [
     imageWidth: 1920,
     imageHeight: 1080,
     shortDescription: "A dragon-and-fruit themed slot title from the OpenGamer catalogue.",
-    category: ["Slot Game"]
+    category: ["Slot Game"],
+    commercialStatus: "portfolio",
+    demoStatus: "unavailable"
   },
   {
     title: "Dragon Rush",
@@ -58,7 +102,8 @@ export const games: Game[] = [
     imageHeight: 1080,
     shortDescription: "A dragon-themed slot title from the OpenGamer catalogue.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     demoUrl: `${officialGamesBaseUrl}dragon-rush`,
     sourceUrl: `${officialGamesBaseUrl}dragon-rush`
   },
@@ -70,7 +115,8 @@ export const games: Game[] = [
     imageHeight: 1080,
     shortDescription: "Enter a magical realm in Forest Fortune, where mystical scrolls unlock free spins and enchanted wins.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     demoUrl: `${officialGamesBaseUrl}forest-fortune`,
     sourceUrl: `${officialGamesBaseUrl}forest-fortune`
   },
@@ -82,7 +128,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "Packed with punchy multipliers and buy bonus thrills, this 40-payline fruit slot delivers big.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     seriesSlug: "fruit-elixir",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}fruit-elixir-40`,
@@ -96,7 +143,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "Spin your way to flavorful wins with 20 paylines, buyable bonuses, and juicy multipliers.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     seriesSlug: "fruit-elixir",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}fruit-elixir-20`,
@@ -110,7 +158,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "A vibrant fruit slot with 10 paylines, rewarding multipliers, and instant bonus access.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     seriesSlug: "fruit-elixir",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}fruit-elixir-10`,
@@ -124,7 +173,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "Classic fruit visuals meet explosive multipliers and bonus buys on 5 paylines.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     variants: ["5 paylines", "10 paylines", "20 paylines", "40 paylines"],
     demoUrl: `${officialGamesBaseUrl}fruit-elixir-5`,
     sourceUrl: `${officialGamesBaseUrl}fruit-elixir-5`
@@ -136,7 +186,9 @@ export const games: Game[] = [
     imageWidth: 1920,
     imageHeight: 1080,
     shortDescription: "A fantasy gem-themed slot title from the OpenGamer catalogue.",
-    category: ["Slot Game"]
+    category: ["Slot Game"],
+    commercialStatus: "portfolio",
+    demoStatus: "unavailable"
   },
   {
     title: "Passion Paradise 40L",
@@ -146,7 +198,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "Experience a fruit slot frenzy with 40 paylines of juicy, fast-paced spins.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     seriesSlug: "passion-paradise",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}passion-paradise-40`,
@@ -160,7 +213,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "Bright fruits and 20 paylines deliver nonstop excitement in this classic slot.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     seriesSlug: "passion-paradise",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}passion-paradise-20`,
@@ -174,7 +228,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "Savor the fruity thrills with 10 paylines of retro-style spinning fun and classic charm.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     seriesSlug: "passion-paradise",
     isVariant: true,
     demoUrl: `${officialGamesBaseUrl}passion-paradise-10`,
@@ -188,7 +243,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "A timeless fruit slot with 5 paylines for quick and classic reel action.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     variants: ["5 paylines", "10 paylines", "20 paylines", "40 paylines"],
     demoUrl: `${officialGamesBaseUrl}passion-paradise-5`,
     sourceUrl: `${officialGamesBaseUrl}passion-paradise-5`
@@ -200,7 +256,9 @@ export const games: Game[] = [
     imageWidth: 1920,
     imageHeight: 1080,
     shortDescription: "A royal fruit-themed slot title from the OpenGamer catalogue.",
-    category: ["Slot Game"]
+    category: ["Slot Game"],
+    commercialStatus: "portfolio",
+    demoStatus: "unavailable"
   },
   {
     title: "Sweet Wins",
@@ -210,7 +268,8 @@ export const games: Game[] = [
     imageHeight: 431,
     shortDescription: "A candy-themed slot title from the OpenGamer catalogue.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     demoUrl: `${officialGamesBaseUrl}sweet-wins`,
     sourceUrl: `${officialGamesBaseUrl}sweet-wins`
   },
@@ -222,7 +281,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "An ancient-temple themed slot title from the OpenGamer catalogue.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     demoUrl: `${officialGamesBaseUrl}aztecs`,
     sourceUrl: `${officialGamesBaseUrl}aztecs`
   },
@@ -234,7 +294,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "A confectionery slot title from the OpenGamer catalogue.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     demoUrl: `${officialGamesBaseUrl}choco-boom`,
     sourceUrl: `${officialGamesBaseUrl}choco-boom`
   },
@@ -246,7 +307,8 @@ export const games: Game[] = [
     imageHeight: 420,
     shortDescription: "A western-themed slot title from the OpenGamer catalogue.",
     category: ["Slot Game"],
-    status: "Demo Available",
+    commercialStatus: "portfolio",
+    demoStatus: "verified",
     demoUrl: `${officialGamesBaseUrl}rich-or-dead`,
     sourceUrl: `${officialGamesBaseUrl}rich-or-dead`
   }

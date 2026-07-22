@@ -15,10 +15,15 @@ export function LeadForm() {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [serviceDefault, setServiceDefault] = useState("");
+  const [sourceContext, setSourceContext] = useState({ sourcePage: "/contact", contextParameter: "" });
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const mappedInterest = mapInterestToService(params.get("interest") || params.get("service"));
+    setSourceContext({
+      sourcePage: window.location.pathname,
+      contextParameter: window.location.search || ""
+    });
     if (mappedInterest) {
       setServiceDefault(mappedInterest);
     }
@@ -48,7 +53,7 @@ export function LeadForm() {
       result = (await response.json()) as LeadResponse;
     } catch {
       setState("error");
-      setMessage("The request could not be sent. Please try again or email OpenGamer directly.");
+      setMessage("The request could not be sent. Please try again.");
       return;
     }
 
@@ -75,6 +80,8 @@ export function LeadForm() {
         <label htmlFor="website_url">Website URL</label>
         <input id="website_url" name="website_url" tabIndex={-1} autoComplete="off" />
       </div>
+      <input type="hidden" name="sourcePage" value={sourceContext.sourcePage} />
+      <input type="hidden" name="contextParameter" value={sourceContext.contextParameter} />
       <fieldset className="grid gap-5">
         <legend className="text-base font-semibold text-white">Contact details</legend>
         <div className="grid gap-5 md:grid-cols-2">

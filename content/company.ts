@@ -1,18 +1,23 @@
+const configuredPublicEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "";
+const configuredLinkedInUrl = process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() || "https://www.linkedin.com/company/opengamer";
+
+function isValidLinkedInUrl(url: string) {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" && parsed.hostname.replace(/^www\./, "") === "linkedin.com";
+  } catch {
+    return false;
+  }
+}
+
 export const company = {
   name: "OpenGamer Studio",
   shortName: "OpenGamer",
   website: "https://open-gamer.com",
-  email: "mn@open-gamer.com",
-  phone: "+44 78 7441 9126",
-  address: "9 Abraham de Veerstraat, Willemstad, Curaçao, Index 3421",
+  email: configuredPublicEmail,
   description:
     "OpenGamer is an iGaming game and software development studio supporting casino game production, front-end and backend engineering, integrations, original product concepts and dedicated delivery teams.",
-  social: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/opengamer" },
-    { label: "Instagram", href: "https://www.instagram.com/open_gamer777" },
-    { label: "YouTube", href: "https://youtube.com/@opengamer-777" },
-    { label: "Facebook", href: "https://www.facebook.com/OpenGamer777" }
-  ],
+  social: isValidLinkedInUrl(configuredLinkedInUrl) ? [{ label: "LinkedIn", href: configuredLinkedInUrl }] : [],
   leadership: [
     { name: "Hayk", role: "CEO" },
     { name: "Narek", role: "Business Development & Strategy" },

@@ -39,13 +39,18 @@ export default function ContactPage() {
             <Card tone="strong">
               <h2 className="text-xl font-semibold text-white">Business Contact</h2>
               <div className="mt-5 grid gap-3 text-sm text-slate-300">
-                <a href={`mailto:${company.email}`} className="hover:text-white">
-                  {company.email}
-                </a>
-                <a href={`tel:${company.phone.replaceAll(" ", "")}`} className="hover:text-white">
-                  {company.phone}
-                </a>
-                <p>{company.address}</p>
+                {company.email ? (
+                  <a href={`mailto:${company.email}`} className="hover:text-white">
+                    {company.email}
+                  </a>
+                ) : (
+                  <p>Use the form to send project, technology and portfolio enquiries.</p>
+                )}
+                {company.social.map((item) => (
+                  <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                    {item.label}
+                  </a>
+                ))}
               </div>
             </Card>
             <Card>

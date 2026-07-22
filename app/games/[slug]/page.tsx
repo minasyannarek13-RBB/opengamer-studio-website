@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { games } from "@/content/games";
+import { games, getGameCommercialStatusLabel, getGameDemoStatusLabel, getVerifiedDemoUrl } from "@/content/games";
 
 type GameDetailProps = {
   params: Promise<{ slug: string }>;
@@ -46,10 +46,14 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
     notFound();
   }
 
+  const demoUrl = getVerifiedDemoUrl(game);
+  const commercialStatus = getGameCommercialStatusLabel(game);
+  const demoStatus = getGameDemoStatusLabel(game);
   const gameDetails = [
     ["Title", game.title],
     ["Category", game.category?.join(", ") || "Slot Game"],
-    game.status ? ["Status", game.status] : null,
+    commercialStatus ? ["Commercial Status", commercialStatus] : null,
+    demoStatus ? ["Demo Status", demoStatus] : null,
     game.variants?.length ? ["Series Variants", game.variants.join(", ")] : null
   ].filter(Boolean) as [string, string][];
   const gameIndex = games.findIndex((item) => item.slug === game.slug);
@@ -65,8 +69,8 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
             <h1 className="mt-4 text-4xl font-semibold tracking-normal text-white sm:text-5xl">{game.title}</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">{game.shortDescription}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              {game.demoUrl ? (
-                <Button href={game.demoUrl} target="_blank" rel="noreferrer">
+              {demoUrl ? (
+                <Button href={demoUrl} target="_blank" rel="noopener noreferrer">
                   Play Demo
                 </Button>
               ) : null}

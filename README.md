@@ -64,9 +64,24 @@ pnpm qa:visual -- --skip-build
 ## Environment Variables
 
 - `NEXT_PUBLIC_SITE_URL` — canonical site URL for metadata, sitemap and robots. Defaults to `https://open-gamer.com`.
-- `LEAD_PROVIDER` — optional contact-form delivery provider. Current default is `console`; `resend`, `hubspot`, `pipedrive` and `custom` are reserved but not configured.
+- `RESEND_API_KEY` — server-only Resend API key. Required for successful contact-form delivery.
+- `CONTACT_RECIPIENT_EMAIL` — server-only recipient inbox for business enquiries. Required; not exposed publicly.
+- `CONTACT_FROM_EMAIL` — server-only sender address from a verified Resend sending domain. Required.
+- `CONTACT_REPLY_TO_DOMAIN` — optional server-only allowlist for submitted Reply-To email domains.
+- `NEXT_PUBLIC_CONTACT_EMAIL` — optional public contact email rendered in footer/contact/legal copy when configured.
+- `NEXT_PUBLIC_LINKEDIN_URL` — optional public LinkedIn URL. Only valid HTTPS LinkedIn URLs render.
 
 Do not commit `.env*`, `.vercel`, credentials, tokens or private source files.
+
+Resend setup:
+
+1. Create or access the Resend account.
+2. Verify the sending domain in Resend.
+3. Create a Resend API key.
+4. Set `CONTACT_FROM_EMAIL` to an address on the verified sending domain.
+5. Set `CONTACT_RECIPIENT_EMAIL` to the approved business inbox.
+6. Test the contact form in preview.
+7. Configure the same approved variables for production only after production review.
 
 ## Deployment Notes
 
@@ -102,7 +117,7 @@ Production deployment is not approved yet.
 ## Known Gaps
 
 - Production domain is not connected in this task.
-- Contact-form delivery provider is not configured beyond the console adapter.
+- Contact-form delivery requires Resend credentials and an approved recipient inbox.
 - Analytics and cookie-consent tooling are not confirmed.
 - Legal pages still require final legal review.
 - LC App remains a product concept, not a launched product.
