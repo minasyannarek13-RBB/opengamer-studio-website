@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { games } from "@/content/games";
+import { localizedLocales } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
 const routes = [
@@ -20,8 +21,9 @@ const routes = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const gameRoutes = games.map((game) => `/games/${game.slug}`);
+  const localizedHomeRoutes = localizedLocales.map((locale) => `/${locale}`);
 
-  return [...routes, ...gameRoutes].map((route) => ({
+  return [...routes, ...localizedHomeRoutes, ...gameRoutes].map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: route === "/" ? "weekly" : "monthly",

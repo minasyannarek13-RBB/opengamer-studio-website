@@ -4,12 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { Locale } from "@/lib/i18n";
+import { localeLabels, locales, type Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { logoAsset } from "@/content/company";
-import { mainNavigation } from "@/content/navigation";
-import { getLocalizedPath } from "@/lib/routes";
+import { getLocalizedHomePath, getLocalizedPath, navRoutes, stripLocaleFromPath } from "@/lib/routes";
+
+const ctaLabel: Record<Locale, string> = {
+  en: "Discuss a Project",
+  ru: "Обсудить проект",
+  hy: "Քննարկել նախագիծը",
+  es: "Hablar de un proyecto",
+  pt: "Discutir um projeto"
+};
 
 export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
@@ -17,7 +24,8 @@ export function Header({ locale }: { locale: Locale }) {
   const [isMenuMounted, setIsMenuMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileNavRef = useRef<HTMLElement>(null);
-  const isActiveRoute = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname?.startsWith(`${href}/`));
+  const activePath = stripLocaleFromPath(pathname || "/");
+  const isActiveRoute = (href: string) => (href === "/" ? activePath === "/" : activePath === href || activePath.startsWith(`${href}/`));
 
   useEffect(() => {
     if (isOpen) {
@@ -72,21 +80,34 @@ export function Header({ locale }: { locale: Locale }) {
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
-          {mainNavigation.map((route) => (
+          {navRoutes.map((route) => (
             <Link
-              key={route.href}
-              href={route.href}
-              aria-current={isActiveRoute(route.href) ? "page" : undefined}
+              key={route.path}
+              href={getLocalizedHomePath(locale, route.path)}
+              aria-current={isActiveRoute(route.path) ? "page" : undefined}
               className="rounded-full px-3 py-2 text-sm font-medium text-slate-300 transition duration-200 hover:bg-white/[0.055] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:bg-emerald/10 aria-[current=page]:text-emerald"
             >
-              {route.label}
+              {route.label[locale]}
             </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-3">
+          <div className="hidden items-center rounded-full border border-white/10 bg-white/[0.045] p-1 lg:flex" aria-label="Language selector">
+            {locales.map((item) => (
+              <Link
+                key={item}
+              href={getLocalizedHomePath(item, activePath)}
+                aria-current={item === locale ? "true" : undefined}
+                className="min-h-9 rounded-full px-3 py-2 text-xs font-semibold text-slate-400 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=true]:bg-emerald/12 aria-[current=true]:text-emerald"
+                hrefLang={item}
+              >
+                {localeLabels[item]}
+              </Link>
+            ))}
+          </div>
           <Button href={getLocalizedPath(locale, "/contact")} className="hidden sm:inline-flex">
-            Discuss a Project
+            {ctaLabel[locale]}
           </Button>
           <button
             ref={menuButtonRef}
@@ -115,19 +136,33 @@ export function Header({ locale }: { locale: Locale }) {
           aria-hidden={!isOpen}
         >
           <Container className="grid gap-2 py-4">
-            {mainNavigation.map((route) => (
+            {navRoutes.map((route) => (
               <Link
-                key={route.href}
-                href={route.href}
-                aria-current={isActiveRoute(route.href) ? "page" : undefined}
+                key={route.path}
+                href={getLocalizedHomePath(locale, route.path)}
+                aria-current={isActiveRoute(route.path) ? "page" : undefined}
                 className="rounded-lg px-3 py-3 text-sm font-medium text-slate-200 transition hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:bg-emerald/10 aria-[current=page]:text-emerald"
                 onClick={() => setIsOpen(false)}
               >
-                {route.label}
+                {route.label[locale]}
               </Link>
             ))}
+            <div className="mt-2 flex flex-wrap gap-2 rounded-lg border border-white/10 bg-white/[0.035] p-2" aria-label="Language selector">
+              {locales.map((item) => (
+                <Link
+                  key={item}
+                  href={getLocalizedHomePath(item, activePath)}
+                  aria-current={item === locale ? "true" : undefined}
+                  className="min-h-11 flex-1 rounded-full px-3 py-3 text-center text-xs font-semibold text-slate-300 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=true]:bg-emerald/12 aria-[current=true]:text-emerald"
+                  hrefLang={item}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {localeLabels[item]}
+                </Link>
+              ))}
+            </div>
             <Button href={getLocalizedPath(locale, "/contact")} className="mt-2 w-full" onClick={() => setIsOpen(false)}>
-              Discuss a Project
+              {ctaLabel[locale]}
             </Button>
           </Container>
         </nav>

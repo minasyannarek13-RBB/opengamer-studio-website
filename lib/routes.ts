@@ -7,12 +7,12 @@ export type RouteItem = {
 };
 
 export const routes: RouteItem[] = [
-  { path: "/", nav: true, label: { en: "Home", ru: "Главная", es: "Inicio" } },
-  { path: "/services", nav: true, label: { en: "Services", ru: "Услуги", es: "Servicios" } },
-  { path: "/games", nav: true, label: { en: "Games", ru: "Игры", es: "Juegos" } },
-  { path: "/technology", nav: true, label: { en: "Technology", ru: "Технологии", es: "Tecnologia" } },
-  { path: "/about", nav: true, label: { en: "About", ru: "О компании", es: "Empresa" } },
-  { path: "/contact", nav: true, label: { en: "Contact", ru: "Контакты", es: "Contacto" } }
+  { path: "/", nav: true, label: { en: "Home", ru: "Главная", hy: "Գլխավոր", es: "Inicio", pt: "Inicio" } },
+  { path: "/games", nav: true, label: { en: "Games", ru: "Игры", hy: "Խաղեր", es: "Juegos", pt: "Jogos" } },
+  { path: "/portfolio", nav: true, label: { en: "Projects", ru: "Проекты", hy: "Նախագծեր", es: "Proyectos", pt: "Projetos" } },
+  { path: "/services", nav: true, label: { en: "Services", ru: "Услуги", hy: "Ծառայություններ", es: "Servicios", pt: "Serviços" } },
+  { path: "/about", nav: true, label: { en: "Studio", ru: "Студия", hy: "Ստուդիա", es: "Estudio", pt: "Estúdio" } },
+  { path: "/contact", nav: true, label: { en: "Contact", ru: "Контакты", hy: "Կապ", es: "Contacto", pt: "Contato" } }
 ];
 
 export const navRoutes = routes.filter((route) => route.nav);
@@ -22,4 +22,31 @@ export function getLocalizedPath(locale: Locale, path: string): string {
     return path;
   }
   return path === "/" ? `/${locale}` : `/${locale}${path}`;
+}
+
+export function getLocalizedHomePath(locale: Locale, path: string): string {
+  if (path === "/") {
+    return getLocalizedPath(locale, path);
+  }
+
+  const localeReadyPaths = ["/about", "/portfolio", "/technology", "/contact"];
+  if (localeReadyPaths.includes(path)) {
+    return getLocalizedPath(locale, path);
+  }
+
+  return path;
+}
+
+export function stripLocaleFromPath(pathname: string): string {
+  const parts = pathname.split("/").filter(Boolean);
+  if (!parts.length) {
+    return "/";
+  }
+
+  const [first, ...rest] = parts;
+  if (["ru", "hy", "es", "pt"].includes(first)) {
+    return rest.length ? `/${rest.join("/")}` : "/";
+  }
+
+  return pathname;
 }
