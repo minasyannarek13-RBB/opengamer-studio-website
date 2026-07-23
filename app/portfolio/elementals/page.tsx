@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { elementalsRealms, elementalsWheelImage, portfolioProjects } from "@/content/portfolio";
+import { elementalsExpositions, elementalsRealms, elementalsWheelImage, portfolioProjects } from "@/content/portfolio";
 
 const elementals = portfolioProjects[0];
 
@@ -73,6 +73,38 @@ export default function ElementalsPage() {
               The Nexus is the central world connecting all four realms — the setting for the base game and the point every bonus round returns to.
             </p>
           </Card>
+        </div>
+      </Section>
+      <Section className="bg-black/20">
+        <SectionHeader eyebrow="Visual Expositions" title="ELEMENTALS World Presentation" description="Selected concept frames showing the Nexus, the studio wheel and the four realm directions." />
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]" data-reveal-group="cards">
+          {elementalsExpositions
+            .filter((item) => item.featured)
+            .map((item) => (
+              <Card key={item.title} tone="strong" className="elementals-stage-frame overflow-hidden p-0">
+                <div className="image-frame relative aspect-[3/2] bg-black/42 lg:h-full lg:min-h-[520px]">
+                  <Image src={item.image} alt={item.alt} width={item.width} height={item.height} className="h-full w-full object-cover" sizes="(min-width: 1024px) 54vw, 100vw" />
+                </div>
+                <div className="p-5">
+                  <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-slate-300">{item.description}</p>
+                </div>
+              </Card>
+            ))}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {elementalsExpositions
+              .filter((item) => !item.featured)
+              .map((item) => (
+                <Card key={item.title} className="overflow-hidden p-0">
+                  <div className="image-frame relative aspect-[16/10] bg-black/42">
+                    <Image src={item.image} alt={item.alt} width={item.width} height={item.height} className="h-full w-full object-cover transition duration-500 hover:scale-[1.025]" sizes="(min-width: 1024px) 20vw, 50vw" />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-base font-semibold text-white">{item.title}</h3>
+                  </div>
+                </Card>
+              ))}
+          </div>
         </div>
       </Section>
       <Section className="bg-black/20">

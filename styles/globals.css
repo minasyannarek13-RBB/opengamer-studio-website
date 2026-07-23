@@ -235,13 +235,29 @@ a {
   --realm-water: rgba(59, 167, 232, 0.14);
   --realm-earth: rgba(124, 176, 88, 0.13);
   --realm-air: rgba(213, 231, 232, 0.13);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.elementals-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(5, 7, 6, 0.3), rgba(5, 7, 6, 0.92) 34rem, rgba(5, 7, 6, 0.96)),
+    radial-gradient(circle at 52% 14%, rgba(245, 164, 72, 0.18), transparent 34rem),
+    url("/assets/projects/elementals/elementals-page-background.webp") top center / min(1800px, 146vw) auto no-repeat;
+  opacity: 0.62;
+  pointer-events: none;
 }
 
 .elementals-hero {
   background:
-    radial-gradient(circle at 72% 28%, rgba(245, 164, 72, 0.11), transparent 23rem),
-    radial-gradient(circle at 52% 68%, rgba(46, 230, 166, 0.075), transparent 25rem),
-    linear-gradient(180deg, rgba(20, 12, 6, 0.5), rgba(5, 8, 7, 0.86));
+    radial-gradient(circle at 72% 28%, rgba(245, 164, 72, 0.12), transparent 23rem),
+    radial-gradient(circle at 52% 68%, rgba(46, 230, 166, 0.08), transparent 25rem),
+    linear-gradient(180deg, rgba(12, 8, 5, 0.38), rgba(5, 8, 7, 0.82));
 }
 
 .elementals-stage-frame {

@@ -58,6 +58,58 @@ export const elementalsRealms = [
 
 export const elementalsWheelImage = "/assets/projects/elementals/great-wheel.jpg";
 
+export const elementalsExpositions = [
+  {
+    title: "Nexus Studio Wheel",
+    description: "A studio-facing composition showing the Great Wheel, host position and four realm portals in one presentation frame.",
+    image: "/assets/projects/elementals/expositions/nexus-studio-wheel.webp",
+    alt: "ELEMENTALS studio exposition with the Great Wheel, host position and four elemental portals.",
+    width: 1086,
+    height: 724,
+    featured: true
+  },
+  {
+    title: "The Nexus",
+    description: "Central ritual chamber direction for the base world connecting Fire, Water, Earth and Air.",
+    image: "/assets/projects/elementals/expositions/nexus-stage.webp",
+    alt: "ELEMENTALS Nexus stage with four elemental portals and central wheel.",
+    width: 1200,
+    height: 676
+  },
+  {
+    title: "Fire Realm",
+    description: "A volcanic bonus-realm direction built around heat, stone, ritual fire and high-contrast lighting.",
+    image: "/assets/projects/elementals/expositions/fire-realm.webp",
+    alt: "ELEMENTALS Fire Realm visual exposition with volcanic stone and ritual fire.",
+    width: 1200,
+    height: 676
+  },
+  {
+    title: "Water Realm",
+    description: "A water-realm direction using glass columns, ceremonial symbols and deep blue cinematic lighting.",
+    image: "/assets/projects/elementals/expositions/water-realm.webp",
+    alt: "ELEMENTALS Water Realm visual exposition with water columns and ceremonial symbols.",
+    width: 1200,
+    height: 676
+  },
+  {
+    title: "Earth Realm",
+    description: "An earth-realm direction focused on stone pillars, green energy and temple-like containment.",
+    image: "/assets/projects/elementals/expositions/earth-realm.webp",
+    alt: "ELEMENTALS Earth Realm visual exposition with stone pillars and green elemental energy.",
+    width: 1200,
+    height: 676
+  },
+  {
+    title: "Air Realm",
+    description: "An air-realm direction based on levitating ritual platforms, wind motion and storm-lit architecture.",
+    image: "/assets/projects/elementals/expositions/air-realm.webp",
+    alt: "ELEMENTALS Air Realm visual exposition with floating platforms and wind energy.",
+    width: 1200,
+    height: 676
+  }
+];
+
 export const lcAppAssets = {
   deviceEcosystem: {
     src: "/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp",
