@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CTASection } from "@/components/sections/CTASection";
+import { StudioGameSignature } from "@/components/games/StudioGameSignature";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { ServiceCard } from "@/components/sections/ServiceCard";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -42,6 +43,7 @@ export default function ServicesPage() {
               </a>
             ))}
           </nav>
+          <StudioGameSignature context="services" variant="inline" className="mt-8 max-w-2xl" />
         </Container>
       </section>
       {serviceGroups.map((group, index) => (

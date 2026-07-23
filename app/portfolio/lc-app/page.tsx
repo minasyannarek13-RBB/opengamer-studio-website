@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { CTASection } from "@/components/sections/CTASection";
+import { StudioGameSignature } from "@/components/games/StudioGameSignature";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Button } from "@/components/ui/Button";
@@ -118,6 +119,7 @@ export default function LcAppPage() {
             <span className="mt-6 inline-flex rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">Concept UI</span>
           </div>
         </div>
+        <StudioGameSignature context="lcApp" variant="related-game" className="mt-10 max-w-3xl" />
       </Section>
 
       <CTASection

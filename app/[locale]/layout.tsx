@@ -1,10 +1,8 @@
 import { notFound } from "next/navigation";
-import { isLocalizedLocale, localizedLocales } from "@/lib/i18n";
-
-export const dynamicParams = false;
+import { isLocale, locales } from "@/lib/i18n";
 
 export function generateStaticParams() {
-  return localizedLocales.map((locale) => ({ locale }));
+  return locales.map((locale) => ({ locale }));
 }
 
 export default async function LocaleLayout({
@@ -13,7 +11,7 @@ export default async function LocaleLayout({
 }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>) {
   const { locale } = await params;
 
-  if (!isLocalizedLocale(locale)) {
+  if (!isLocale(locale)) {
     notFound();
   }
 

@@ -1,6 +1,11 @@
-export type Locale = "en" | "ru" | "hy" | "es" | "pt";
+export const SUPPORTED_LOCALES = ["en", "ru", "hy", "es", "pt"] as const;
+export const PUBLIC_LOCALES = ["en"] as const;
 
-export const locales: Locale[] = ["en", "ru", "hy", "es", "pt"];
+export type Locale = (typeof SUPPORTED_LOCALES)[number];
+export type PublicLocale = (typeof PUBLIC_LOCALES)[number];
+
+export const locales: Locale[] = [...SUPPORTED_LOCALES];
+export const publicLocales: PublicLocale[] = [...PUBLIC_LOCALES];
 export const localizedLocales: Locale[] = ["ru", "hy", "es", "pt"];
 export const defaultLocale: Locale = "en";
 

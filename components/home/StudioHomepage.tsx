@@ -6,13 +6,18 @@ import { ProjectShowcaseSlider } from "@/components/home/ProjectShowcaseSlider";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
-import { featuredGames } from "@/content/games";
-import { homepageCopy } from "@/content/studioHomepage";
+import { StudioGameSignature } from "@/components/games/StudioGameSignature";
+import { games, type Game } from "@/content/games";
+import { homepageCopy, homepageFeaturedGameSlugs } from "@/content/studioHomepage";
 import type { Locale } from "@/lib/i18n";
 import { getLocalizedHomePath } from "@/lib/routes";
 
 export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
   const copy = homepageCopy[locale] || homepageCopy.en;
+  const homepageGames = homepageFeaturedGameSlugs
+    .map((slug) => games.find((game) => game.slug === slug))
+    .filter((game): game is Game => Boolean(game))
+    .slice(0, 4);
 
   return (
     <>
@@ -22,12 +27,11 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
         <SectionHeader {...copy.sections.capabilities} />
         <div className="mt-10 grid gap-5 lg:grid-cols-3" data-reveal-group="cards">
           {copy.capabilities.map((group) => (
-            <Card key={group.title} tone="strong" className="h-full">
+            <Card key={group.title} tone="strong" className="capability-area h-full">
               <h2 className="text-xl font-semibold text-white">{group.title}</h2>
-              <div className="mt-5 grid gap-2">
+              <div className="mt-5 flex flex-wrap gap-2">
                 {group.items.map((item) => (
-                  <div key={item} className="flex min-h-11 items-center gap-3 rounded-md border border-white/10 bg-black/18 px-3 py-2 text-sm text-slate-300">
-                    <span className="h-2 w-2 rounded-full bg-emerald/85" aria-hidden="true" />
+                  <div key={item} className="rounded-full border border-white/10 bg-black/18 px-3 py-2 text-sm text-slate-300">
                     {item}
                   </div>
                 ))}
@@ -39,8 +43,8 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
 
       <Section className="bg-black/20">
         <SectionHeader {...copy.sections.projects} />
-        <div className="mt-10 grid gap-6 lg:grid-cols-3" data-reveal-group="cards">
-          {copy.projects.map((project) => (
+        <div className="homepage-projects mt-10" data-reveal-group="cards">
+          {copy.projects.map((project, index) => (
             <article key={project.title} className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.045] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30 hover:bg-white/[0.06]">
               <div className="image-frame relative aspect-[16/10] overflow-hidden bg-black/45">
                 <Image
@@ -49,7 +53,7 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
                   width={1200}
                   height={676}
                   sizes="(min-width: 1024px) 33vw, 100vw"
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]"
+                  className={`h-full w-full transition duration-500 group-hover:scale-[1.025] ${index === 1 ? "object-contain p-4" : "object-cover"}`}
                 />
               </div>
               <div className="flex flex-1 flex-col p-5">
@@ -79,9 +83,12 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
           </Button>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4" data-reveal-group="cards">
-          {featuredGames.slice(0, 4).map((game) => (
+          {homepageGames.map((game) => (
             <GameCard key={game.slug} game={game} />
           ))}
+        </div>
+        <div className="mt-8">
+          <StudioGameSignature context="home" variant="inline" />
         </div>
       </Section>
 
@@ -101,7 +108,8 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
       <Section>
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <SectionHeader {...copy.sections.technology} />
-          <div className="studio-tech-map" data-reveal-group="cards">
+          <div className="studio-tech-map studio-tech-map--home" data-reveal-group="cards">
+            <div className="studio-tech-map__core" aria-hidden="true">OpenGamer Delivery</div>
             {copy.technology.map((item) => (
               <Card key={item.title} className="studio-tech-map__node">
                 <h2 className="text-lg font-semibold text-white">{item.title}</h2>

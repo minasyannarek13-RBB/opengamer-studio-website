@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArchitectureDiagram } from "@/components/sections/ArchitectureDiagram";
 import { CTASection } from "@/components/sections/CTASection";
+import { StudioGameSignature } from "@/components/games/StudioGameSignature";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -60,6 +61,7 @@ export default function TechnologyPage() {
             description="OpenGamer supports casino game production with front-end engineering, backend services, RGS-related development, integration workflows and delivery support."
             headingLevel="h1"
           />
+          <StudioGameSignature context="technology" variant="inline" className="mt-8 max-w-2xl" />
         </Container>
       </section>
       <Section>

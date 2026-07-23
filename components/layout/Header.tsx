@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { localeLabels, locales, type Locale } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { logoAsset } from "@/content/company";
@@ -93,19 +93,6 @@ export function Header({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <div className="hidden items-center rounded-full border border-white/10 bg-white/[0.045] p-1 lg:flex" aria-label="Language selector">
-            {locales.map((item) => (
-              <Link
-                key={item}
-              href={getLocalizedHomePath(item, activePath)}
-                aria-current={item === locale ? "true" : undefined}
-                className="min-h-9 rounded-full px-3 py-2 text-xs font-semibold text-slate-400 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=true]:bg-emerald/12 aria-[current=true]:text-emerald"
-                hrefLang={item}
-              >
-                {localeLabels[item]}
-              </Link>
-            ))}
-          </div>
           <Button href={getLocalizedPath(locale, "/contact")} className="hidden sm:inline-flex">
             {ctaLabel[locale]}
           </Button>
@@ -147,20 +134,6 @@ export function Header({ locale }: { locale: Locale }) {
                 {route.label[locale]}
               </Link>
             ))}
-            <div className="mt-2 flex flex-wrap gap-2 rounded-lg border border-white/10 bg-white/[0.035] p-2" aria-label="Language selector">
-              {locales.map((item) => (
-                <Link
-                  key={item}
-                  href={getLocalizedHomePath(item, activePath)}
-                  aria-current={item === locale ? "true" : undefined}
-                  className="min-h-11 flex-1 rounded-full px-3 py-3 text-center text-xs font-semibold text-slate-300 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=true]:bg-emerald/12 aria-[current=true]:text-emerald"
-                  hrefLang={item}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {localeLabels[item]}
-                </Link>
-              ))}
-            </div>
             <Button href={getLocalizedPath(locale, "/contact")} className="mt-2 w-full" onClick={() => setIsOpen(false)}>
               {ctaLabel[locale]}
             </Button>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { CTASection } from "@/components/sections/CTASection";
+import { StudioGameSignature } from "@/components/games/StudioGameSignature";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Button } from "@/components/ui/Button";
@@ -195,6 +196,7 @@ export default function ElementalsPage() {
           title="Built for Provider or Operator-Led Development"
           description="The concept can support discussions around show-game product development, studio production planning, provider collaboration or co-development."
         />
+        <StudioGameSignature context="elementals" variant="related-game" className="mt-8 max-w-3xl" />
       </Section>
       <CTASection
         title="Discuss the Project"

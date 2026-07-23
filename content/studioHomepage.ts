@@ -13,7 +13,9 @@ export type HomeSlide = {
   imageAlt: string;
   imageWidth: number;
   imageHeight: number;
-  theme: "studio" | "slots" | "elementals" | "lc" | "tech" | "brand";
+  visualType: "studio-ecosystem" | "game-stack" | "elementals" | "device-ecosystem" | "technology-system" | "custom-product";
+  labels: string[];
+  theme: "studio" | "slots" | "elementals" | "lc" | "technology" | "custom";
 };
 
 type HomeCopy = {
@@ -66,6 +68,8 @@ const baseSlides = {
     imageWidth: 1200,
     imageHeight: 630,
     theme: "studio" as const,
+    visualType: "studio-ecosystem" as const,
+    labels: ["Games", "Products", "Technology"],
     primaryHref: "/services",
     secondaryHref: "/games"
   },
@@ -75,6 +79,8 @@ const baseSlides = {
     imageWidth: 600,
     imageHeight: 420,
     theme: "slots" as const,
+    visualType: "game-stack" as const,
+    labels: ["Concept", "Mathematics", "Frontend", "Backend"],
     primaryHref: "/games",
     secondaryHref: "/contact"
   },
@@ -84,6 +90,8 @@ const baseSlides = {
     imageWidth: 1200,
     imageHeight: 676,
     theme: "elementals" as const,
+    visualType: "elementals" as const,
+    labels: ["Live Casino", "Game Show", "Original IP"],
     primaryHref: "/portfolio/elementals",
     secondaryHref: "/services/live-casino-development"
   },
@@ -93,6 +101,8 @@ const baseSlides = {
     imageWidth: 1672,
     imageHeight: 941,
     theme: "lc" as const,
+    visualType: "device-ecosystem" as const,
+    labels: ["Social Layer", "Engagement", "Live Casino"],
     primaryHref: "/portfolio/lc-app",
     secondaryHref: "/contact"
   },
@@ -101,7 +111,9 @@ const baseSlides = {
     imageAlt: "Deep Dive game artwork representing frontend and backend production",
     imageWidth: 600,
     imageHeight: 420,
-    theme: "tech" as const,
+    theme: "technology" as const,
+    visualType: "technology-system" as const,
+    labels: ["Frontend", "Backend", "API", "Integration"],
     primaryHref: "/technology",
     secondaryHref: "/services"
   },
@@ -110,11 +122,15 @@ const baseSlides = {
     imageAlt: "Choco Boom slot artwork representing branded and custom games",
     imageWidth: 600,
     imageHeight: 420,
-    theme: "brand" as const,
+    theme: "custom" as const,
+    visualType: "custom-product" as const,
+    labels: ["Branded Games", "Custom Builds", "Flexible Scope"],
     primaryHref: "/contact",
     secondaryHref: "/games"
   }
 };
+
+export const homepageFeaturedGameSlugs = ["forest-fortune", "deep-dive", "dragon-rush", "sweet-wins"];
 
 export const homepageCopy: Record<Locale, HomeCopy> = {
   en: {
@@ -139,7 +155,7 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       capabilities: {
         eyebrow: "Studio capabilities",
         title: "Complete products or selected production stages.",
-        description: "OpenGamer can support one discipline, several production layers or a full-cycle game and product build."
+        description: "OpenGamer can support one production layer, several connected disciplines or a complete game and product build."
       },
       projects: {
         eyebrow: "Featured projects",
@@ -148,8 +164,8 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       },
       games: {
         eyebrow: "Games portfolio",
-        title: "Confirmed game titles with real artwork.",
-        description: "Explore selected OpenGamer slot titles and demo links where public demos are available."
+        title: "Explore selected games from the OpenGamer portfolio.",
+        description: "Selected slot titles show the studio's game production work, with public demos where available."
       },
       process: {
         eyebrow: "Development process",
@@ -168,8 +184,8 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       },
       why: {
         eyebrow: "Why OpenGamer",
-        title: "Built for serious B2B delivery.",
-        description: "The studio combines product, creative and engineering work without unsupported market claims."
+        title: "One studio across product, creative and engineering.",
+        description: "OpenGamer connects product strategy, game production and engineering in one coordinated delivery process."
       },
       cta: {
         eyebrow: "Commercial conversation",
@@ -182,10 +198,10 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       {
         id: "studio",
         category: "OpenGamer Studio",
-        title: "Games, products and technology in one studio.",
-        description: "OpenGamer creates casino games, product concepts, custom software and iGaming technology layers.",
-        primary: "View Services",
-        secondary: "Play Games",
+        title: "We build games, products and technology for iGaming.",
+        description: "From game concepts and mathematics to frontend, backend and complete product development.",
+        primary: "Explore Our Work",
+        secondary: "Discuss a Project",
         ...baseSlides.studio
       },
       {
@@ -194,7 +210,7 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
         title: "Portfolio titles with local game artwork.",
         description: "Selected OpenGamer slot titles are presented with real assets and demo links where confirmed.",
         primary: "Explore Games",
-        secondary: "Discuss Licensing",
+        secondary: "Discuss a Project",
         ...baseSlides.slots
       },
       {
@@ -245,20 +261,16 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       { title: "Game Portfolio", category: "Slot game catalogue", status: "Portfolio Games", description: "Selected OpenGamer titles with real artwork and confirmed demos where available.", href: "/games", cta: "View Games", image: "/assets/games/deep-dive/artwork.jpg", imageAlt: "Deep Dive slot artwork" }
     ],
     process: [
-      { title: "Product idea", description: "Clarify the business goal, audience and production scope." },
-      { title: "Concept and mechanics", description: "Define rules, player experience, features and format." },
-      { title: "Mathematics and logic", description: "Shape the model, game behavior and backend logic needs." },
-      { title: "Visual design", description: "Translate the product into art direction, UI and presentation." },
-      { title: "Frontend development", description: "Build responsive game or product interfaces for target environments." },
-      { title: "Backend development", description: "Implement services, APIs, game state and supporting systems." },
-      { title: "Integration and QA", description: "Prepare wallet, session, reporting and validation flows." },
-      { title: "Delivery and support", description: "Package the build and support the next technical phase." }
+      { title: "Define", description: "Product idea, audience, commercial objective and production scope." },
+      { title: "Design", description: "Mechanics, mathematics, art direction, UX and presentation." },
+      { title: "Build", description: "Frontend, backend, game logic, APIs and product interfaces." },
+      { title: "Deliver", description: "Integration, QA, packaging and technical support for the next phase." }
     ],
     technology: [
       { title: "Frontend", description: "HTML5 game clients, responsive interfaces and product UI." },
       { title: "Backend", description: "Game logic, services, APIs and operational support layers." },
       { title: "Mathematics", description: "Models and logic prepared for casino game production." },
-      { title: "RNG / RGS", description: "RNG and RGS-related development support without unsupported certification claims." },
+      { title: "RNG / RGS", description: "RNG- and RGS-related development prepared around the required technical scope." },
       { title: "Integrations", description: "Wallet, session, operator, aggregator and reverse-integration workflows." },
       { title: "Custom products", description: "Casino software, branded games and product concepts." }
     ],
@@ -268,7 +280,7 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       { title: "Full game production", description: "Concept, production, engineering and delivery managed together." },
       { title: "Licensing or partnership", description: "Commercial discussions around games, IP, portfolio or strategic cooperation." }
     ],
-    why: ["Multi-product studio, not a one-game company", "Real game artwork and project materials", "Product, creative and engineering thinking combined", "Flexible commercial engagement models"]
+    why: ["Multi-product capability across games, original concepts and technology", "One coordinated team across product, creative and engineering", "Flexible delivery scope from one layer to complete development", "Original work developed within the OpenGamer ecosystem"]
   },
   ru: {} as HomeCopy,
   hy: {} as HomeCopy,

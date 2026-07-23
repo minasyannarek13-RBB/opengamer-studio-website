@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CTASection } from "@/components/sections/CTASection";
 import { GameCard } from "@/components/sections/GameCard";
+import { StudioGameSignature } from "@/components/games/StudioGameSignature";
 import { ProjectCard } from "@/components/sections/ProjectCard";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -25,9 +26,10 @@ export default function PortfolioPage() {
           <SectionHeader
             eyebrow="OpenGamer Portfolio"
             title="Games and Product Concepts Built for iGaming"
-            description="Selected casino games and original product concepts presented with safe public information and local visual assets."
+            description="Selected casino games and original product concepts from the OpenGamer studio ecosystem."
             headingLevel="h1"
           />
+          <StudioGameSignature context="portfolio" variant="inline" className="mt-8 max-w-2xl" />
         </Container>
       </section>
       <Section>

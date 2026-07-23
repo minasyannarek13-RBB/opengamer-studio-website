@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { HeroVisual } from "@/components/home/hero-visuals/HeroVisuals";
 import type { Locale } from "@/lib/i18n";
 import type { HomeSlide } from "@/content/studioHomepage";
 import { getLocalizedHomePath } from "@/lib/routes";
@@ -79,7 +79,7 @@ export function ProjectShowcaseSlider({ slides, locale, labels }: { slides: Home
       onTouchEnd={onTouchEnd}
     >
       <div className="studio-showcase__ambient" aria-hidden="true" />
-      <div className="relative z-10 mx-auto grid min-h-[calc(100svh-5rem)] w-full max-w-7xl gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:py-14">
+      <div className="relative z-10 mx-auto grid min-h-[calc(100svh-5rem)] w-full max-w-7xl gap-8 px-5 pb-12 pt-24 sm:px-8 sm:py-14 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
         <div className="max-w-2xl">
           <div className="flex flex-wrap items-center gap-3">
             <span className="premium-status rounded-full px-3 py-1 text-xs">{activeSlide.category}</span>
@@ -112,23 +112,13 @@ export function ProjectShowcaseSlider({ slides, locale, labels }: { slides: Home
         <div className="studio-showcase__visual-wrap">
           {slides.map((slide, index) => (
             <div key={slide.id} className="studio-showcase__visual" data-active={index === active} aria-hidden={index !== active}>
-              <Image
-                src={slide.image}
-                alt={slide.imageAlt}
-                width={slide.imageWidth}
-                height={slide.imageHeight}
-                priority={index === 0}
-                sizes="(min-width: 1024px) 56vw, 100vw"
-                className="h-full w-full object-cover"
-              />
+              <HeroVisual slide={slide} priority={index === 0} />
             </div>
           ))}
           <div className="studio-showcase__chips" aria-hidden="true">
-            <span>Game design</span>
-            <span>Frontend</span>
-            <span>Backend</span>
-            <span>RGS</span>
-            <span>API</span>
+            {activeSlide.labels.map((label) => (
+              <span key={label}>{label}</span>
+            ))}
           </div>
         </div>
 
@@ -143,25 +133,26 @@ export function ProjectShowcaseSlider({ slides, locale, labels }: { slides: Home
                   key={slide.id}
                   type="button"
                   aria-current={index === active ? "true" : undefined}
-                  className="min-h-11 rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-left text-xs font-semibold text-slate-300 transition hover:border-emerald/40 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=true]:border-emerald/45 aria-[current=true]:bg-emerald/10 aria-[current=true]:text-emerald"
+                  className="studio-showcase__tab min-h-11 rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-left text-xs font-semibold text-slate-300 transition hover:border-emerald/40 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=true]:border-emerald/45 aria-[current=true]:bg-emerald/10 aria-[current=true]:text-emerald"
                   onClick={() => {
                     setIsPaused(true);
                     setActive(index);
                   }}
                 >
-                  {slide.category}
+                  <span className="studio-showcase__tab-index">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="studio-showcase__tab-label">{slide.category}</span>
                 </button>
               ))}
             </div>
             <div className="flex gap-2">
               <button type="button" className="studio-showcase__control" aria-label={labels.previousLabel} onClick={() => navigate(-1)}>
-                Prev
+                <ArrowIcon direction="left" />
               </button>
               <button type="button" className="studio-showcase__control min-w-28" onClick={() => setIsPaused((value) => !value)}>
                 {isPaused ? labels.playLabel : labels.pauseLabel}
               </button>
               <button type="button" className="studio-showcase__control" aria-label={labels.nextLabel} onClick={() => navigate(1)}>
-                Next
+                <ArrowIcon direction="right" />
               </button>
             </div>
           </div>
@@ -171,5 +162,13 @@ export function ProjectShowcaseSlider({ slides, locale, labels }: { slides: Home
         {activeSlide.category}: {activeSlide.title}
       </span>
     </section>
+  );
+}
+
+function ArrowIcon({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" className={direction === "left" ? "rotate-180" : ""}>
+      <path d="M6.75 3.75 12 9l-5.25 5.25" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }

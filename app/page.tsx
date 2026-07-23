@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { StudioHomepage } from "@/components/home/StudioHomepage";
 import { homepageCopy } from "@/content/studioHomepage";
-import { locales } from "@/lib/i18n";
-import { getLocalizedPath } from "@/lib/routes";
 
 const copy = homepageCopy.en;
 
@@ -11,8 +9,7 @@ export const metadata: Metadata = {
   title: copy.meta.title,
   description: copy.meta.description,
   alternates: {
-    canonical: "/",
-    languages: Object.fromEntries(locales.map((locale) => [locale, getLocalizedPath(locale, "/")]))
+    canonical: "/"
   },
   openGraph: {
     title: copy.meta.ogTitle,

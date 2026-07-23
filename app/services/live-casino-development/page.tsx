@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CTASection } from "@/components/sections/CTASection";
+import { StudioGameSignature } from "@/components/games/StudioGameSignature";
 import { ProjectCard } from "@/components/sections/ProjectCard";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -37,6 +38,7 @@ export default function LiveCasinoDevelopmentPage() {
           <Button href="/contact" className="mt-8">
             Discuss a Live Casino Concept
           </Button>
+          <StudioGameSignature context="liveCasino" variant="inline" className="mt-8 max-w-2xl" />
         </Container>
       </section>
       <Section>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CTASection } from "@/components/sections/CTASection";
+import { StudioGameSignature } from "@/components/games/StudioGameSignature";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Card } from "@/components/ui/Card";
@@ -56,6 +57,7 @@ export default function AboutPage() {
             description="OpenGamer is an iGaming development studio creating casino games, product concepts and technology support for operators, aggregators, platforms and game providers."
             headingLevel="h1"
           />
+          <StudioGameSignature context="about" variant="inline" className="mt-8 max-w-2xl" />
         </Container>
       </section>
       <Section>
