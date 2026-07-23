@@ -207,8 +207,8 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       {
         id: "slots",
         category: "Slot Games Portfolio",
-        title: "Portfolio titles with local game artwork.",
-        description: "Selected OpenGamer slot titles are presented with real assets and demo links where confirmed.",
+        title: "We create slot games that stand out.",
+        description: "From concept and mathematics to visuals, frontend and backend delivery.",
         primary: "Explore Games",
         secondary: "Discuss a Project",
         ...baseSlides.slots
@@ -216,7 +216,7 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       {
         id: "elementals",
         category: "Premium Game-Show Concept",
-        title: "ELEMENTALS as one original product direction.",
+        title: "Four elements. One original show.",
         description: "A cinematic Live Casino show-game concept built around the Great Wheel and four elemental realms.",
         primary: "Explore ELEMENTALS",
         secondary: "Live Casino Development",
@@ -225,7 +225,7 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       {
         id: "lc-app",
         category: "Product Concept",
-        title: "LC App expands the studio beyond individual games.",
+        title: "A social layer for Live Casino.",
         description: "A B2B social engagement layer concept for existing Live Casino operators and providers.",
         primary: "View LC App",
         secondary: "Contact OpenGamer",
@@ -234,8 +234,8 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       {
         id: "technology",
         category: "Frontend and Backend Development",
-        title: "Engineering support around the game and operating layer.",
-        description: "Frontend, backend, game logic, APIs and RGS-related work can be delivered as selected stages or full production.",
+        title: "Technology behind the game experience.",
+        description: "Frontend, backend, APIs and integrations delivered as selected layers or complete production.",
         primary: "View Technology",
         secondary: "View Services",
         ...baseSlides.tech
@@ -243,8 +243,8 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       {
         id: "custom-products",
         category: "Branded Games and Custom Products",
-        title: "Custom development for brands, operators and partners.",
-        description: "OpenGamer can shape branded games, custom slot work and product builds around commercial goals.",
+        title: "From idea to a unique gaming product.",
+        description: "Custom games and product development shaped around brand and commercial goals.",
         primary: "Discuss a Project",
         secondary: "View Portfolio",
         ...baseSlides.brand

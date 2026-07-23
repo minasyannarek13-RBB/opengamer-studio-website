@@ -148,8 +148,8 @@ export function ProjectShowcaseSlider({ slides, locale, labels }: { slides: Home
               <button type="button" className="studio-showcase__control" aria-label={labels.previousLabel} onClick={() => navigate(-1)}>
                 <ArrowIcon direction="left" />
               </button>
-              <button type="button" className="studio-showcase__control min-w-28" onClick={() => setIsPaused((value) => !value)}>
-                {isPaused ? labels.playLabel : labels.pauseLabel}
+              <button type="button" className="studio-showcase__control" aria-label={isPaused ? labels.playLabel : labels.pauseLabel} onClick={() => setIsPaused((value) => !value)}>
+                <PlayPauseIcon isPaused={isPaused} />
               </button>
               <button type="button" className="studio-showcase__control" aria-label={labels.nextLabel} onClick={() => navigate(1)}>
                 <ArrowIcon direction="right" />
@@ -169,6 +169,22 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" className={direction === "left" ? "rotate-180" : ""}>
       <path d="M6.75 3.75 12 9l-5.25 5.25" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function PlayPauseIcon({ isPaused }: { isPaused: boolean }) {
+  if (isPaused) {
+    return (
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+        <path d="M6 4.5v9l7-4.5-7-4.5Z" fill="currentColor" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+      <path d="M6.25 4.5v9M11.75 4.5v9" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
