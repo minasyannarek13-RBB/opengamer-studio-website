@@ -142,7 +142,7 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
     },
     hero: {
       kicker: "Multi-product iGaming studio",
-      heading: "We build games, products and technology for iGaming.",
+      heading: "We build iGaming games, products and technology for operators and providers.",
       intro: "From game concepts and mathematics to frontend, backend, integrations and complete product development.",
       playLabel: "Start autoplay",
       pauseLabel: "Pause autoplay",
@@ -198,7 +198,7 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       {
         id: "studio",
         category: "OpenGamer Studio",
-        title: "We build games, products and technology for iGaming.",
+        title: "We build iGaming games, products and technology for operators and providers.",
         description: "From game concepts and mathematics to frontend, backend and complete product development.",
         primary: "Explore Our Work",
         secondary: "Discuss a Project",

@@ -12,6 +12,33 @@ import { homepageCopy, homepageFeaturedGameSlugs } from "@/content/studioHomepag
 import type { Locale } from "@/lib/i18n";
 import { getLocalizedHomePath } from "@/lib/routes";
 
+const homepageProofItems = [
+  {
+    title: "Forest Fortune",
+    type: "Slot portfolio",
+    image: "/assets/games/forest-fortune/artwork.webp",
+    href: "/games/forest-fortune"
+  },
+  {
+    title: "Deep Dive",
+    type: "Slot portfolio",
+    image: "/assets/games/deep-dive/artwork.webp",
+    href: "/games/deep-dive"
+  },
+  {
+    title: "ELEMENTALS",
+    type: "Live Casino concept",
+    image: "/assets/projects/elementals/expositions/nexus-stage.webp",
+    href: "/portfolio/elementals"
+  },
+  {
+    title: "LC App",
+    type: "Product concept",
+    image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp",
+    href: "/portfolio/lc-app"
+  }
+];
+
 export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
   const copy = homepageCopy[locale] || homepageCopy.en;
   const homepageGames = homepageFeaturedGameSlugs
@@ -22,6 +49,24 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
   return (
     <>
       <ProjectShowcaseSlider slides={copy.slides} locale={locale} labels={copy.hero} />
+
+      <div className="homepage-proof-strip" aria-label="Selected OpenGamer work">
+        <div className="homepage-proof-strip__inner">
+          <div className="homepage-proof-strip__copy">
+            <span>Selected work</span>
+            <strong>Games and projects already visible in the studio ecosystem.</strong>
+          </div>
+          <div className="homepage-proof-strip__items">
+            {homepageProofItems.map((item) => (
+              <Link key={item.title} href={getLocalizedHomePath(locale, item.href)} className="homepage-proof-card">
+                <Image src={item.image} alt="" width={600} height={420} sizes="(min-width: 1024px) 132px, 42vw" className="homepage-proof-card__image" />
+                <span>{item.type}</span>
+                <strong>{item.title}</strong>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <Section className="studio-section-top">
         <SectionHeader {...copy.sections.capabilities} />

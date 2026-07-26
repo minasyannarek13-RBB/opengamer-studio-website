@@ -1457,6 +1457,109 @@ body[data-scroll-reveal-ready] [data-reveal-group].is-visible > *:nth-child(n + 
   outline-offset: 2px;
 }
 
+.homepage-proof-strip {
+  border-block: 1px solid rgb(255 255 255 / 0.08);
+  background:
+    radial-gradient(circle at 18% 0%, rgb(46 230 166 / 0.12), transparent 22rem),
+    linear-gradient(180deg, rgb(255 255 255 / 0.035), rgb(0 0 0 / 0.14));
+}
+
+.homepage-proof-strip__inner {
+  display: grid;
+  gap: 1.25rem;
+  align-items: center;
+  width: min(100% - 2.5rem, 80rem);
+  margin-inline: auto;
+  padding-block: 1.35rem;
+}
+
+.homepage-proof-strip__copy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.homepage-proof-strip__copy span {
+  color: rgb(46 230 166);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.homepage-proof-strip__copy strong {
+  max-width: 28rem;
+  color: rgb(248 250 252);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.18;
+}
+
+.homepage-proof-strip__items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.homepage-proof-card {
+  display: grid;
+  min-width: 0;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 0.85rem;
+  background: rgb(255 255 255 / 0.045);
+  padding: 0.45rem;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.homepage-proof-card:hover,
+.homepage-proof-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgb(46 230 166 / 0.42);
+  background: rgb(255 255 255 / 0.065);
+  outline: none;
+}
+
+.homepage-proof-card__image {
+  width: 100%;
+  aspect-ratio: 10 / 7;
+  border-radius: 0.62rem;
+  object-fit: cover;
+}
+
+.homepage-proof-card span {
+  margin-top: 0.45rem;
+  overflow: hidden;
+  color: rgb(46 230 166 / 0.88);
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.homepage-proof-card strong {
+  margin-top: 0.18rem;
+  overflow: hidden;
+  color: rgb(248 250 252);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .homepage-proof-strip__inner {
+    grid-template-columns: minmax(15rem, 0.42fr) minmax(0, 1fr);
+  }
+
+  .homepage-proof-strip__items {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 .studio-process {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
