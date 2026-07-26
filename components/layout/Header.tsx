@@ -85,7 +85,7 @@ export function Header({ locale }: { locale: Locale }) {
               key={route.path}
               href={getLocalizedHomePath(locale, route.path)}
               aria-current={isActiveRoute(route.path) ? "page" : undefined}
-              className="rounded-full px-3 py-2 text-sm font-medium text-slate-300 transition duration-200 hover:bg-white/[0.055] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:bg-emerald/10 aria-[current=page]:text-emerald"
+              className="inline-flex min-h-11 items-center rounded-full px-3 py-2 text-sm font-medium text-slate-300 transition duration-200 hover:bg-white/[0.055] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:bg-emerald/10 aria-[current=page]:text-emerald"
             >
               {route.label[locale]}
             </Link>

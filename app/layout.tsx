@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { company } from "@/content/company";
 import { siteUrl } from "@/lib/site";
@@ -47,6 +47,11 @@ export const metadata: Metadata = {
   }
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1
+};
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -62,6 +67,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body>
         <ScrollRevealController />
+        <div id="site-status" className="sr-only" role="status" aria-live="polite" aria-atomic="true" />
         {children}
         <script
           type="application/ld+json"

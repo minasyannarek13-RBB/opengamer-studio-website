@@ -37,7 +37,7 @@ export function GamePortfolio() {
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="absolute right-2 top-1/2 min-h-8 -translate-y-1/2 rounded-full border border-white/10 px-3 text-xs font-semibold text-slate-300 transition hover:border-emerald/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+              className="absolute right-2 top-1/2 min-h-11 -translate-y-1/2 rounded-full border border-white/10 px-4 text-xs font-semibold text-slate-300 transition hover:border-emerald/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
             >
               Clear
             </button>

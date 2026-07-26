@@ -91,6 +91,11 @@ export function ProjectShowcaseSlider({ slides, locale, labels }: { slides: Home
             {activeSlide.title}
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">{activeSlide.description}</p>
+          <div className="studio-showcase__value-pills" aria-label="OpenGamer capabilities in this slide">
+            {activeSlide.labels.slice(0, 3).map((label) => (
+              <span key={label}>{label}</span>
+            ))}
+          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href={getLocalizedHomePath(locale, activeSlide.primaryHref)}
