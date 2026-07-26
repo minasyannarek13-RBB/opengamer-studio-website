@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import type { HomeSlide } from "@/content/studioHomepage";
 
@@ -46,6 +47,24 @@ function StudioUniverseVisual() {
           <span key={index} style={{ "--i": index } as CSSProperties} />
         ))}
       </div>
+      <HeroReferenceCard
+        className="hero-ref--studio-game"
+        eyebrow="Slot"
+        title="Forest Fortune"
+        src="/assets/games/forest-fortune/artwork.webp"
+      />
+      <HeroReferenceCard
+        className="hero-ref--studio-project"
+        eyebrow="Show-game"
+        title="ELEMENTALS"
+        src="/assets/projects/elementals/expositions/nexus-stage.webp"
+      />
+      <HeroReferenceCard
+        className="hero-ref--studio-social"
+        eyebrow="Concept"
+        title="LC App"
+        src="/assets/projects/lc-app/optimized/lc-app-mobile-social-feed.webp"
+      />
     </HeroVisualShell>
   );
 }
@@ -70,6 +89,15 @@ function SlotMechanicsVisual() {
           <span key={index} />
         ))}
       </div>
+      <HeroReferenceRail
+        className="hero-reference-rail--slots"
+        items={[
+          { title: "Forest Fortune", src: "/assets/games/forest-fortune/artwork.webp" },
+          { title: "Deep Dive", src: "/assets/games/deep-dive/artwork.webp" },
+          { title: "Dragon Rush", src: "/assets/games/dragon-rush/artwork.webp" },
+          { title: "Sweet Wins", src: "/assets/games/sweet-wins/artwork.webp" }
+        ]}
+      />
     </HeroVisualShell>
   );
 }
@@ -93,6 +121,17 @@ function ElementalEnergyVisual() {
       <div className="elemental-stream elemental-stream--water" />
       <div className="elemental-stream elemental-stream--air" />
       <div className="elemental-stream elemental-stream--earth" />
+      <HeroReferenceCard
+        className="hero-ref--elementals"
+        eyebrow="Original IP"
+        title="ELEMENTALS"
+        src="/assets/projects/elementals/expositions/nexus-studio-wheel.webp"
+      />
+      <div className="hero-project-tags hero-project-tags--elementals">
+        {["Fire", "Water", "Air", "Earth"].map((item) => (
+          <span key={item}>{item}</span>
+        ))}
+      </div>
     </HeroVisualShell>
   );
 }
@@ -114,6 +153,17 @@ function SocialNetworkVisual() {
       <div className="social-connection social-connection--a" />
       <div className="social-connection social-connection--b" />
       <div className="social-connection social-connection--c" />
+      <HeroReferenceCard
+        className="hero-ref--lc-app"
+        eyebrow="Product"
+        title="LC App"
+        src="/assets/projects/lc-app/optimized/lc-app-mobile-community.webp"
+      />
+      <div className="hero-project-tags hero-project-tags--lc">
+        {["Live tables", "Community", "Engagement"].map((item) => (
+          <span key={item}>{item}</span>
+        ))}
+      </div>
     </HeroVisualShell>
   );
 }
@@ -132,6 +182,17 @@ function TechnologyFlowVisual() {
           {item}
         </div>
       ))}
+      <HeroReferenceCard
+        className="hero-ref--technology-game"
+        eyebrow="Game layer"
+        title="Deep Dive"
+        src="/assets/games/deep-dive/artwork.webp"
+      />
+      <div className="hero-project-tags hero-project-tags--tech">
+        {["OpenGamer RGS", "API", "Game logic"].map((item) => (
+          <span key={item}>{item}</span>
+        ))}
+      </div>
     </HeroVisualShell>
   );
 }
@@ -152,7 +213,72 @@ function CustomProductVisual() {
       ))}
       <div className="product-surface product-surface--a" />
       <div className="product-surface product-surface--b" />
+      <HeroReferenceCard
+        className="hero-ref--custom-game"
+        eyebrow="Custom game"
+        title="Choco Boom"
+        src="/assets/games/choco-boom/artwork.webp"
+      />
+      <HeroReferenceCard
+        className="hero-ref--custom-slot"
+        eyebrow="Portfolio"
+        title="Sweet Wins"
+        src="/assets/games/sweet-wins/artwork.webp"
+      />
     </HeroVisualShell>
+  );
+}
+
+function HeroReferenceCard({
+  className = "",
+  eyebrow,
+  title,
+  src
+}: {
+  className?: string;
+  eyebrow: string;
+  title: string;
+  src: string;
+}) {
+  return (
+    <div className={`hero-reference-card ${className}`}>
+      <Image
+        src={src}
+        alt=""
+        width={600}
+        height={420}
+        sizes="(min-width: 1024px) 150px, 104px"
+        className="hero-reference-card__image"
+      />
+      <span className="hero-reference-card__eyebrow">{eyebrow}</span>
+      <strong>{title}</strong>
+    </div>
+  );
+}
+
+function HeroReferenceRail({
+  className = "",
+  items
+}: {
+  className?: string;
+  items: Array<{ title: string; src: string }>;
+}) {
+  return (
+    <div className={`hero-reference-rail ${className}`}>
+      {items.map((item) => (
+        <div key={item.title} className="hero-reference-tile">
+          <Image
+            src={item.src}
+            alt=""
+            width={600}
+            height={420}
+            sizes="(min-width: 1024px) 96px, 72px"
+            className="hero-reference-tile__image"
+          />
+          <span>{item.title}</span>
+        </div>
+      ))}
+    </div>
   );
 }
 
