@@ -15,6 +15,7 @@ Premium B2B iGaming website for OpenGamer Studio, built as a Next.js application
 
 ```bash
 pnpm install
+cp .env.example .env.local
 pnpm dev
 ```
 
@@ -22,7 +23,8 @@ Production checks:
 
 ```bash
 pnpm lint
-pnpm exec tsc --noEmit
+pnpm typecheck
+pnpm test
 pnpm build
 ```
 
@@ -64,12 +66,15 @@ pnpm qa:visual -- --skip-build
 ## Environment Variables
 
 - `NEXT_PUBLIC_SITE_URL` — canonical site URL for metadata, sitemap and robots. Defaults to `https://open-gamer.com`.
+- `NEXT_PUBLIC_DEPLOYMENT_ENV` — optional public deployment label.
 - `RESEND_API_KEY` — server-only Resend API key. Required for successful contact-form delivery.
 - `CONTACT_RECIPIENT_EMAIL` — server-only recipient inbox for business enquiries. Required; not exposed publicly.
 - `CONTACT_FROM_EMAIL` — server-only sender address from a verified Resend sending domain. Required.
 - `CONTACT_REPLY_TO_DOMAIN` — optional server-only allowlist for submitted Reply-To email domains.
 - `NEXT_PUBLIC_CONTACT_EMAIL` — optional public contact email rendered in footer/contact/legal copy when configured.
 - `NEXT_PUBLIC_LINKEDIN_URL` — optional public LinkedIn URL. Only valid HTTPS LinkedIn URLs render.
+- `NEXT_PUBLIC_MEETING_URL` — optional public meeting URL when approved.
+- `LEAD_WEBHOOK_URL` / `LEAD_WEBHOOK_SECRET` — reserved for a future CRM/webhook delivery provider.
 
 Do not commit `.env*`, `.vercel`, credentials, tokens or private source files.
 
@@ -87,11 +92,17 @@ Resend setup:
 
 Vercel project is already linked locally through `.vercel/project.json`, but `.vercel` is ignored and must not be committed.
 
-Preview deployment used for final handoff:
+Public audit deployment:
 
-https://opengamer-studio-prototype-50p0l7tpi-open-gamer.vercel.app
+https://opengamer-public-audit.vercel.app
+
+Latest final preview deployment:
+
+https://opengamer-public-audit-3f1cq4jf8-open-gamer.vercel.app
 
 Production deployment is not approved yet.
+
+Preview deployments must keep `NEXT_PUBLIC_SITE_URL` away from `https://open-gamer.com` unless they are intended to represent production. Non-production builds are `noindex, nofollow` through environment-aware metadata and `robots.txt`.
 
 ## Production Domain Checklist
 
@@ -113,6 +124,24 @@ Production deployment is not approved yet.
 16. Confirm analytics and consent configuration.
 17. Confirm legal-page review status.
 18. Keep a rollback deployment available.
+
+## Production Deployment Workflow
+
+1. Merge the approved production PR into the production branch.
+2. Confirm Vercel production environment variables, especially `NEXT_PUBLIC_SITE_URL=https://open-gamer.com`.
+3. Let Vercel build from the production branch or run the approved CLI deployment.
+4. Verify homepage, games, services, contact, legal pages, sitemap and robots.
+5. Submit a test enquiry only after delivery variables are configured.
+6. Connect `open-gamer.com` and `www.open-gamer.com` in the correct Vercel project.
+7. Verify HTTPS, canonical URLs, Open Graph URLs and `www` redirect.
+
+## Rollback
+
+1. Identify the last known good Vercel deployment.
+2. Promote the previous deployment in Vercel or revert the merge commit.
+3. Verify `open-gamer.com`, `/contact`, `/sitemap.xml` and `/robots.txt`.
+4. Confirm form delivery still works.
+5. Record the rollback reason and affected commit/deployment.
 
 ## Known Gaps
 

@@ -13,8 +13,16 @@ const payload = {
   consent: "on",
   projectStage: "Commercial review",
   website: "https://example.com",
+  preferredContactMethod: "Phone",
+  phone: "+374 77 000000",
   sourcePage: "/contact",
-  contextParameter: "?interest=games"
+  contextParameter: "?interest=games&utm_source=audit",
+  referrer: "https://example.org",
+  utmSource: "audit",
+  utmMedium: "external",
+  utmCampaign: "final-review",
+  utmContent: "homepage",
+  utmTerm: "opengamer"
 };
 
 function cacheSafeImport(path) {
@@ -61,6 +69,9 @@ test("Resend delivery succeeds only after provider acceptance", async () => {
   assert.equal(requestBody.reply_to, "narek@example.com");
   assert.equal(email.subject, "OpenGamer Enquiry — Game Development — OpenGamer");
   assert.match(requestBody.text, /Source Page: \/contact/);
+  assert.match(requestBody.text, /Phone: \+374 77 000000/);
+  assert.match(requestBody.text, /UTM Source: audit/);
+  assert.match(requestBody.text, /Referrer: https:\/\/example.org/);
   assert.doesNotMatch(JSON.stringify(requestBody), /re_test/);
 });
 

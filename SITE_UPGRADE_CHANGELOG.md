@@ -19,6 +19,10 @@ Upgraded the OpenGamer website information architecture, homepage positioning, g
 - Reworked `/services` into grouped iGaming development solutions.
 - Refined `/services/live-casino-development` around players, presenters, operations and live-product systems.
 - Simplified `/contact` into a shorter first-step enquiry form with advanced details collapsed.
+- Shortened the homepage into the final audit sequence and added a verified trust section.
+- Added conditional phone capture when Phone is selected as the preferred contact method.
+- Centralized production/preview SEO indexing logic.
+- Added `typecheck` and `test` package scripts for release verification.
 
 ## Technical Notes
 
@@ -26,3 +30,4 @@ Upgraded the OpenGamer website information architecture, homepage positioning, g
 - No unverified public facts were introduced.
 - Existing lead validation, honeypot, rate-limit and provider abstraction remain in place.
 - New hero visuals use local assets and CSS composition rather than remote imagery or video.
+- Preview deployments remain `noindex, nofollow`; production indexing requires `VERCEL_ENV=production` and `NEXT_PUBLIC_SITE_URL=https://open-gamer.com`.

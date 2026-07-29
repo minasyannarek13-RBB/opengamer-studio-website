@@ -51,6 +51,13 @@ export async function POST(request: Request) {
     );
   }
 
+  if (payload.preferredContactMethod === "Phone" && !/^\+?[0-9][0-9\s().-]{6,24}$/.test(payload.phone || "")) {
+    return NextResponse.json(
+      { message: "Please enter a valid phone number.", errors: { phone: "Enter a valid international phone number." } },
+      { status: 400 }
+    );
+  }
+
   const delivery = await deliverLead(payload as LeadPayload);
   if (!delivery.ok) {
     return NextResponse.json(
@@ -60,7 +67,7 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({
-    message: "OpenGamer will review the project information and follow up using the email address provided."
+    message: "Your enquiry has been submitted. The OpenGamer commercial or product team will review the information and contact you regarding the next practical step."
   });
 }
 

@@ -9,6 +9,7 @@ export type LeadPayload = {
   consent: string;
   website?: string;
   preferredContactMethod?: string;
+  phone?: string;
   projectStage?: string;
   expectedLaunch?: string;
   numberOfGames?: string;
@@ -18,6 +19,12 @@ export type LeadPayload = {
   budgetRange?: string;
   sourcePage?: string;
   contextParameter?: string;
+  referrer?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmContent?: string;
+  utmTerm?: string;
 };
 
 type DeliveryResult = {
@@ -106,11 +113,18 @@ function formatLead(payload: LeadPayload, timestamp: string) {
     `Reference Link: ${payload.website || "Not provided"}`,
     `Source Page: ${payload.sourcePage || "Not provided"}`,
     `Context Parameter: ${payload.contextParameter || "Not provided"}`,
+    `Referrer: ${payload.referrer || "Not provided"}`,
+    `UTM Source: ${payload.utmSource || "Not provided"}`,
+    `UTM Medium: ${payload.utmMedium || "Not provided"}`,
+    `UTM Campaign: ${payload.utmCampaign || "Not provided"}`,
+    `UTM Content: ${payload.utmContent || "Not provided"}`,
+    `UTM Term: ${payload.utmTerm || "Not provided"}`,
     `Timestamp: ${timestamp}`,
     "",
     `Job Title: ${payload.jobTitle}`,
     `Company Type: ${payload.companyType}`,
     `Preferred Contact Method: ${payload.preferredContactMethod || "Not provided"}`,
+    `Phone: ${payload.phone || "Not provided"}`,
     `Expected Launch: ${payload.expectedLaunch || "Not provided"}`,
     `Number of Games: ${payload.numberOfGames || "Not provided"}`,
     `Existing Platform: ${payload.existingPlatform || "Not provided"}`,

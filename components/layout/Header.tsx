@@ -32,6 +32,8 @@ export function Header({ locale }: { locale: Locale }) {
   const activePath = stripLocaleFromPath(pathname || "/");
   const isActiveRoute = (href: string) => (href === "/" ? activePath === "/" : activePath === href || activePath.startsWith(`${href}/`));
   const isSolutionsActive = activePath === "/services" || activePath.startsWith("/services/");
+  const resolvedCtaLabel = activePath === "/contact" ? "Explore Games" : ctaLabel[locale];
+  const resolvedCtaHref = activePath === "/contact" ? "/games" : "/contact";
 
   useEffect(() => {
     setIsOpen(false);
@@ -171,8 +173,8 @@ export function Header({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button href={getLocalizedPath(locale, "/contact")} className="hidden sm:inline-flex">
-            {ctaLabel[locale]}
+          <Button href={getLocalizedPath(locale, resolvedCtaHref)} className="hidden sm:inline-flex">
+            {resolvedCtaLabel}
           </Button>
           <button
             ref={menuButtonRef}
@@ -243,8 +245,8 @@ export function Header({ locale }: { locale: Locale }) {
                 </Link>
               )
             )}
-            <Button href={getLocalizedPath(locale, "/contact")} className="mt-2 w-full" onClick={() => setIsOpen(false)}>
-              {ctaLabel[locale]}
+            <Button href={getLocalizedPath(locale, resolvedCtaHref)} className="mt-2 w-full" onClick={() => setIsOpen(false)}>
+              {resolvedCtaLabel}
             </Button>
           </Container>
         </nav>

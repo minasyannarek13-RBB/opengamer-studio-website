@@ -53,6 +53,7 @@ type HomeCopy = {
   technology: { title: string; description: string }[];
   engagement: { title: string; description: string }[];
   why: string[];
+  trust: { title: string; description: string; isVerified: boolean }[];
 };
 
 type SectionCopy = {
@@ -159,8 +160,8 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       },
       projects: {
         eyebrow: "Featured projects",
-        title: "A broader studio ecosystem.",
-        description: "Slots, live game-show concepts and product interfaces sit inside one OpenGamer delivery system."
+        title: "Original Games, Live Casino Concepts and Product Technology",
+        description: "Explore selected OpenGamer work across slot production, live casino concepts and B2B product interfaces."
       },
       games: {
         eyebrow: "Games portfolio",
@@ -253,7 +254,7 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
     capabilities: [
       { title: "Game creation", items: ["Game concepts", "Mechanics", "Mathematics and logic", "Slot frontend", "Slot backend", "Art and animation", "QA and optimisation"] },
       { title: "Technology", items: ["RNG-related development", "RGS-related development", "Backend systems", "API integrations", "Reverse integrations", "Operator and aggregator integrations"] },
-      { title: "Commercial formats", items: ["Custom slots", "Branded games", "Frontend-only delivery", "Full-cycle production", "Licensing discussions", "Revenue-share cooperation", "IP or portfolio acquisition"] }
+      { title: "Commercial formats", items: ["Custom slots", "Branded games", "Frontend-only delivery", "Backend development", "Full-cycle production", "Dedicated development teams"] }
     ],
     projects: [
       { title: "ELEMENTALS", category: "Live Casino show-game concept", status: "Original Game Concept · In Development", description: "Premium game-show concept built around the Great Wheel and elemental realms.", href: "/portfolio/elementals", cta: "Explore Project", image: "/assets/projects/elementals/expositions/nexus-stage.webp", imageAlt: "ELEMENTALS Nexus stage artwork" },
@@ -280,7 +281,14 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       { title: "Full game production", description: "Concept, production, engineering and delivery managed together." },
       { title: "Licensing or partnership", description: "Commercial discussions around games, IP, portfolio or strategic cooperation." }
     ],
-    why: ["Multi-product capability across games, original concepts and technology", "One coordinated team across product, creative and engineering", "Flexible delivery scope from one layer to complete development", "Original work developed within the OpenGamer ecosystem"]
+    why: ["Multi-product capability across games, original concepts and technology", "One coordinated team across product, creative and engineering", "Flexible delivery scope from one layer to complete development", "Original work developed within the OpenGamer ecosystem"],
+    trust: [
+      { title: "Existing playable slot portfolio", description: "Selected OpenGamer titles include public demo access where confirmed.", isVerified: true },
+      { title: "Full-cycle frontend and backend capabilities", description: "The studio supports selected layers or complete iGaming product delivery.", isVerified: true },
+      { title: "Operator and aggregator integration experience", description: "Integration-oriented delivery is supported without publishing unconfirmed partner names.", isVerified: true },
+      { title: "Product work across slots and live casino", description: "The public portfolio includes slot games, ELEMENTALS and LC App concept work.", isVerified: true },
+      { title: "Flexible development formats", description: "Partners can discuss custom games, branded games, engineering layers or dedicated teams.", isVerified: true }
+    ]
   },
   ru: {} as HomeCopy,
   hy: {} as HomeCopy,
@@ -325,7 +333,7 @@ homepageCopy.ru = {
   capabilities: [
     { title: "Создание игр", items: ["Игровые концепты", "Механики", "Математика и логика", "Slot frontend", "Slot backend", "Арт и анимация", "QA и оптимизация"] },
     { title: "Технологии", items: ["RNG-related разработка", "RGS-related разработка", "Backend-системы", "API-интеграции", "Reverse integrations", "Интеграции с операторами и агрегаторами"] },
-    { title: "Коммерческие форматы", items: ["Custom slots", "Branded games", "Frontend-only delivery", "Full-cycle production", "Licensing discussions", "Revenue-share cooperation", "IP или portfolio acquisition"] }
+    { title: "Коммерческие форматы", items: ["Custom slots", "Branded games", "Frontend-only delivery", "Backend development", "Full-cycle production", "Dedicated development teams"] }
   ],
   projects: [
     { ...homepageCopy.en.projects[0], category: "Концепт Live Casino show game", description: "Премиальный show-game концепт вокруг Great Wheel и elemental realms.", cta: "Открыть проект" },
@@ -356,7 +364,8 @@ homepageCopy.ru = {
     { title: "Full game production", description: "Concept, production, engineering и delivery в одном управляемом процессе." },
     { title: "Licensing или partnership", description: "Коммерческие обсуждения по games, IP, portfolio или strategic cooperation." }
   ],
-  why: ["Мультипродуктовая студия, а не компания одной игры", "Реальный game artwork и проектные материалы", "Продукт, креатив и инженерия в одной команде", "Гибкие commercial engagement models"]
+  why: ["Мультипродуктовая студия, а не компания одной игры", "Реальный game artwork и проектные материалы", "Продукт, креатив и инженерия в одной команде", "Гибкие commercial engagement models"],
+  trust: homepageCopy.en.trust
 };
 
 homepageCopy.hy = {
@@ -392,7 +401,7 @@ homepageCopy.hy = {
   capabilities: [
     { title: "Խաղերի ստեղծում", items: ["Խաղային կոնցեպտներ", "Մեխանիկաներ", "Մաթեմատիկա և տրամաբանություն", "Slot frontend", "Slot backend", "Արտ և անիմացիա", "QA և օպտիմիզացիա"] },
     { title: "Տեխնոլոգիա", items: ["RNG-related development", "RGS-related development", "Backend systems", "API integrations", "Reverse integrations", "Operator և aggregator integrations"] },
-    { title: "Կոմերցիոն ձևաչափեր", items: ["Custom slots", "Branded games", "Frontend-only delivery", "Full-cycle production", "Licensing discussions", "Revenue-share cooperation", "IP կամ portfolio acquisition"] }
+    { title: "Կոմերցիոն ձևաչափեր", items: ["Custom slots", "Branded games", "Frontend-only delivery", "Backend development", "Full-cycle production", "Dedicated development teams"] }
   ],
   projects: [
     { ...homepageCopy.en.projects[0], category: "Live Casino show-game կոնցեպտ", description: "Պրեմիում show-game կոնցեպտ Great Wheel-ի և elemental realms-ի շուրջ:", cta: "Դիտել նախագիծը" },
@@ -423,7 +432,8 @@ homepageCopy.hy = {
     { title: "Full game production", description: "Concept, production, engineering և delivery միասին:" },
     { title: "Licensing կամ partnership", description: "Commercial discussions games, IP, portfolio կամ strategic cooperation-ի շուրջ:" }
   ],
-  why: ["Բազմապրոդուկտ ստուդիա, ոչ մեկ խաղի ընկերություն", "Իրական game artwork և project materials", "Product, creative և engineering մտածողություն միասին", "Ճկուն commercial engagement models"]
+  why: ["Բազմապրոդուկտ ստուդիա, ոչ մեկ խաղի ընկերություն", "Իրական game artwork և project materials", "Product, creative և engineering մտածողություն միասին", "Ճկուն commercial engagement models"],
+  trust: homepageCopy.en.trust
 };
 
 homepageCopy.es = {
@@ -449,7 +459,7 @@ homepageCopy.es = {
   capabilities: [
     { title: "Creacion de juegos", items: ["Conceptos de juego", "Mecanicas", "Matematica y logica", "Slot frontend", "Slot backend", "Arte y animacion", "QA y optimizacion"] },
     { title: "Tecnologia", items: ["Desarrollo RNG-related", "Desarrollo RGS-related", "Sistemas backend", "Integraciones API", "Reverse integrations", "Integraciones con operadores y agregadores"] },
-    { title: "Formatos comerciales", items: ["Custom slots", "Branded games", "Frontend-only delivery", "Full-cycle production", "Licensing discussions", "Revenue-share cooperation", "IP o portfolio acquisition"] }
+    { title: "Formatos comerciales", items: ["Custom slots", "Branded games", "Frontend-only delivery", "Backend development", "Full-cycle production", "Dedicated development teams"] }
   ],
   projects: [
     { ...homepageCopy.en.projects[0], category: "Concepto Live Casino show-game", description: "Concepto premium de show-game basado en Great Wheel y elemental realms.", cta: "Explorar proyecto" },
@@ -480,7 +490,8 @@ homepageCopy.es = {
     { title: "Full game production", description: "Concept, production, engineering y delivery gestionados juntos." },
     { title: "Licensing o partnership", description: "Conversaciones comerciales sobre games, IP, portfolio o strategic cooperation." }
   ],
-  why: ["Estudio multiproducto, no una empresa de un solo juego", "Arte real de juegos y materiales de proyecto", "Producto, creatividad e ingenieria combinados", "Modelos comerciales flexibles"]
+  why: ["Estudio multiproducto, no una empresa de un solo juego", "Arte real de juegos y materiales de proyecto", "Producto, creatividad e ingenieria combinados", "Modelos comerciales flexibles"],
+  trust: homepageCopy.en.trust
 };
 
 homepageCopy.pt = {
@@ -506,7 +517,7 @@ homepageCopy.pt = {
   capabilities: [
     { title: "Criacao de jogos", items: ["Conceitos de jogo", "Mecanicas", "Matematica e logica", "Slot frontend", "Slot backend", "Arte e animacao", "QA e otimizacao"] },
     { title: "Tecnologia", items: ["Desenvolvimento RNG-related", "Desenvolvimento RGS-related", "Sistemas backend", "Integracoes API", "Reverse integrations", "Integracoes com operadores e agregadores"] },
-    { title: "Formatos comerciais", items: ["Custom slots", "Branded games", "Frontend-only delivery", "Full-cycle production", "Licensing discussions", "Revenue-share cooperation", "IP ou portfolio acquisition"] }
+    { title: "Formatos comerciais", items: ["Custom slots", "Branded games", "Frontend-only delivery", "Backend development", "Full-cycle production", "Dedicated development teams"] }
   ],
   projects: [
     { ...homepageCopy.en.projects[0], category: "Conceito Live Casino show-game", description: "Conceito premium de show-game em torno da Great Wheel e elemental realms.", cta: "Explorar projeto" },
@@ -537,7 +548,8 @@ homepageCopy.pt = {
     { title: "Full game production", description: "Concept, production, engineering e delivery geridos juntos." },
     { title: "Licensing ou partnership", description: "Conversas comerciais sobre games, IP, portfolio ou strategic cooperation." }
   ],
-  why: ["Estudio multiproduto, nao uma empresa de um jogo so", "Arte real de jogos e materiais de projeto", "Produto, criatividade e engenharia combinados", "Modelos comerciais flexiveis"]
+  why: ["Estudio multiproduto, nao uma empresa de um jogo so", "Arte real de jogos e materiais de projeto", "Produto, criatividade e engenharia combinados", "Modelos comerciais flexiveis"],
+  trust: homepageCopy.en.trust
 };
 
 homepageCopy.ru.slides = [

@@ -1,13 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { company } from "@/content/company";
-import { siteUrl } from "@/lib/site";
+import { robotsConfig, siteUrl } from "@/lib/site";
 import { ScrollRevealController } from "@/components/motion/ScrollRevealController";
-
-const isPreviewEnvironment =
-  process.env.VERCEL_ENV === "preview" ||
-  (Boolean(process.env.VERCEL_URL) && process.env.VERCEL_ENV !== "production") ||
-  (Boolean(process.env.NEXT_PUBLIC_SITE_URL) && process.env.NEXT_PUBLIC_SITE_URL !== "https://open-gamer.com");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -16,19 +11,7 @@ export const metadata: Metadata = {
     template: "%s"
   },
   description: "An iGaming development studio focused on casino games, technology, integrations and product delivery.",
-  robots: isPreviewEnvironment
-    ? {
-        index: false,
-        follow: false,
-        googleBot: {
-          index: false,
-          follow: false
-        }
-      }
-    : {
-        index: true,
-        follow: true
-      },
+  robots: robotsConfig,
   icons: {
     apple: "/assets/brand/apple-touch-icon.png",
     icon: [
@@ -62,6 +45,13 @@ const organizationSchema = {
   ...(company.social.length ? { sameAs: company.social.map((item) => item.href) } : {})
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "OpenGamer Studio",
+  url: siteUrl
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
@@ -72,7 +62,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script
           type="application/ld+json"
           suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema]) }}
         />
       </body>
     </html>

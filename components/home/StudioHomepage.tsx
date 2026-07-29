@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { StudioGameSignature } from "@/components/games/StudioGameSignature";
 import { games, type Game } from "@/content/games";
 import { homepageCopy, homepageFeaturedGameSlugs } from "@/content/studioHomepage";
 import type { Locale } from "@/lib/i18n";
@@ -101,6 +100,28 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
         </div>
       </Section>
 
+      <Section>
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <SectionHeader {...copy.sections.games} />
+          <Button href={getLocalizedHomePath(locale, "/games")} variant="secondary">
+            {copy.slides[1].primary}
+          </Button>
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4" data-reveal-group="cards">
+          {homepageGames.map((game) => (
+            <GameCard key={game.slug} game={game} />
+          ))}
+        </div>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Button href={getLocalizedHomePath(locale, "/contact?interest=portfolio")} variant="secondary">
+            Request Full Game Portfolio
+          </Button>
+          <Button href={getLocalizedHomePath(locale, "/contact?interest=game")} variant="secondary">
+            Discuss Game Distribution
+          </Button>
+        </div>
+      </Section>
+
       <Section className="bg-black/20">
         <SectionHeader {...copy.sections.projects} />
         <div className="homepage-projects mt-10" data-reveal-group="cards">
@@ -136,23 +157,6 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
       </Section>
 
       <Section>
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeader {...copy.sections.games} />
-          <Button href={getLocalizedHomePath(locale, "/games")} variant="secondary">
-            {copy.slides[1].primary}
-          </Button>
-        </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4" data-reveal-group="cards">
-          {homepageGames.map((game) => (
-            <GameCard key={game.slug} game={game} />
-          ))}
-        </div>
-        <div className="mt-8">
-          <StudioGameSignature context="home" variant="inline" />
-        </div>
-      </Section>
-
-      <Section className="bg-black/20">
         <SectionHeader {...copy.sections.process} />
         <div className="studio-process mt-10" data-reveal-group="cards">
           {copy.process.map((step, index) => (
@@ -166,40 +170,16 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
       </Section>
 
       <Section>
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <SectionHeader {...copy.sections.technology} />
-          <div className="studio-tech-map studio-tech-map--home" data-reveal-group="cards">
-            <div className="studio-tech-map__core" aria-hidden="true">OpenGamer Delivery</div>
-            {copy.technology.map((item) => (
-              <Card key={item.title} className="studio-tech-map__node">
+        <SectionHeader eyebrow="Trust and credibility" title="Credibility Without Unsupported Claims" description="OpenGamer presents verified public proof points and keeps unconfirmed commercial data out of the public interface." />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5" data-reveal-group="cards">
+          {copy.trust
+            .filter((item) => item.isVerified)
+            .map((item) => (
+              <Card key={item.title} className="h-full">
                 <h2 className="text-lg font-semibold text-white">{item.title}</h2>
                 <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
               </Card>
             ))}
-          </div>
-        </div>
-      </Section>
-
-      <Section className="bg-black/20">
-        <SectionHeader {...copy.sections.engagement} />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
-          {copy.engagement.map((item) => (
-            <Card key={item.title} className="h-full">
-              <h2 className="text-lg font-semibold text-white">{item.title}</h2>
-              <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
-
-      <Section>
-        <SectionHeader {...copy.sections.why} />
-        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
-          {copy.why.map((item) => (
-            <div key={item} className="premium-card rounded-lg border border-line bg-white/[0.045] p-4 text-sm text-slate-200 transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25">
-              {item}
-            </div>
-          ))}
         </div>
       </Section>
 

@@ -36,6 +36,11 @@
 html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
+  scroll-padding-top: 6rem;
+}
+
+[id] {
+  scroll-margin-top: 6rem;
 }
 
 body {

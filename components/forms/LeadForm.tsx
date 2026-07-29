@@ -10,8 +10,7 @@ import {
   expectedLaunchOptions,
   numberOfGamesOptions,
   projectStages,
-  serviceInterests,
-  type ServiceInterestGroup
+  serviceInterests
 } from "@/content/contact";
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -25,14 +24,30 @@ export function LeadForm() {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [serviceDefault, setServiceDefault] = useState("");
-  const [sourceContext, setSourceContext] = useState({ sourcePage: "/contact", contextParameter: "" });
+  const [preferredContactMethod, setPreferredContactMethod] = useState("");
+  const [sourceContext, setSourceContext] = useState({
+    sourcePage: "/contact",
+    contextParameter: "",
+    referrer: "",
+    utmSource: "",
+    utmMedium: "",
+    utmCampaign: "",
+    utmContent: "",
+    utmTerm: ""
+  });
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const mappedInterest = mapInterestToService(params.get("interest") || params.get("service"));
     setSourceContext({
       sourcePage: window.location.pathname,
-      contextParameter: window.location.search || ""
+      contextParameter: window.location.search || "",
+      referrer: document.referrer || "",
+      utmSource: params.get("utm_source") || "",
+      utmMedium: params.get("utm_medium") || "",
+      utmCampaign: params.get("utm_campaign") || "",
+      utmContent: params.get("utm_content") || "",
+      utmTerm: params.get("utm_term") || ""
     });
     if (mappedInterest) {
       setServiceDefault(mappedInterest);
@@ -47,6 +62,16 @@ export function LeadForm() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const method = String(formData.get("preferredContactMethod") || "");
+    const phone = String(formData.get("phone") || "").trim();
+
+    if (method === "Phone" && !isValidPhone(phone)) {
+      setState("error");
+      setErrors({ phone: "Enter a valid international phone number." });
+      setMessage("Please check the form and try again.");
+      return;
+    }
+
     setState("submitting");
     setMessage("");
     setErrors({});
@@ -69,8 +94,9 @@ export function LeadForm() {
 
     if (response.ok) {
       setState("success");
-      setMessage(result.message || "OpenGamer will review the project information and follow up using the email address provided.");
+      setMessage(result.message || "Your enquiry has been submitted. The OpenGamer commercial or product team will review the information and contact you regarding the next practical step.");
       form.reset();
+      setPreferredContactMethod("");
       return;
     }
 
@@ -94,6 +120,12 @@ export function LeadForm() {
       </div>
       <input type="hidden" name="sourcePage" value={sourceContext.sourcePage} />
       <input type="hidden" name="contextParameter" value={sourceContext.contextParameter} />
+      <input type="hidden" name="referrer" value={sourceContext.referrer} />
+      <input type="hidden" name="utmSource" value={sourceContext.utmSource} />
+      <input type="hidden" name="utmMedium" value={sourceContext.utmMedium} />
+      <input type="hidden" name="utmCampaign" value={sourceContext.utmCampaign} />
+      <input type="hidden" name="utmContent" value={sourceContext.utmContent} />
+      <input type="hidden" name="utmTerm" value={sourceContext.utmTerm} />
 
       {errorEntries.length ? (
         <div className="rounded-xl border border-red-400/30 bg-red-500/[0.08] p-4 text-sm leading-6 text-red-100" role="alert">
@@ -144,7 +176,14 @@ export function LeadForm() {
           <Field label="Existing platform" name="existingPlatform" />
           <Field label="Required integration" name="requiredIntegration" />
           <Field label="Reference link" name="website" type="url" />
-          <Select label="Preferred contact method" name="preferredContactMethod" options={contactMethods} />
+          <Select
+            label="Preferred contact method"
+            name="preferredContactMethod"
+            options={contactMethods}
+            value={preferredContactMethod}
+            onChange={setPreferredContactMethod}
+          />
+          {preferredContactMethod === "Phone" ? <Field label="Phone number" name="phone" type="tel" required error={errors.phone} /> : null}
         </div>
       </details>
 
@@ -183,6 +222,16 @@ export function LeadForm() {
         <div className={state === "success" ? "text-sm text-emerald" : "text-sm text-red-300"} role="status" aria-live="polite">
           {state === "success" ? <p className="font-semibold text-white">Your enquiry has been submitted</p> : null}
           <p className={state === "success" ? "mt-1" : undefined}>{message}</p>
+          {state === "success" ? (
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link href="/games" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">
+                Return to Games
+              </Link>
+              <Link href="/portfolio" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">
+                View Projects
+              </Link>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </form>
@@ -230,14 +279,18 @@ function Select({
   options,
   required = false,
   error,
-  defaultValue = ""
+  defaultValue = "",
+  value,
+  onChange
 }: {
   label: string;
   name: string;
-  options: string[] | ServiceInterestGroup[];
+  options: string[];
   required?: boolean;
   error?: string;
   defaultValue?: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }) {
   const errorId = `${name}-error`;
 
@@ -248,27 +301,19 @@ function Select({
         key={defaultValue || "empty"}
         name={name}
         defaultValue={defaultValue}
+        value={value}
+        onChange={onChange ? (event) => onChange(event.target.value) : undefined}
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
         className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
       >
         <option value="">Select</option>
-        {options.map((option) =>
-          typeof option === "string" ? (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ) : (
-            <optgroup key={option.label} label={option.label}>
-              {option.options.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </optgroup>
-          )
-        )}
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
       </select>
       {error ? (
         <span id={errorId} className="text-xs text-red-300">
@@ -282,23 +327,27 @@ function Select({
 function mapInterestToService(value: string | null) {
   switch (value) {
     case "elementals":
-      return "ELEMENTALS Partnership";
+      return "Strategic Partnership";
     case "lc-app":
-      return "LC App Partnership";
+      return "Strategic Partnership";
     case "slot-development":
     case "game":
-      return "Custom Slot Development";
+      return "Slot Game Development";
     case "technology":
-      return "RGS-Related Development";
+      return "Frontend or Backend Engineering";
     case "live-casino":
       return "Live Casino Development";
     case "integration":
-      return "Game Integration";
+      return "Game or Platform Integration";
     case "portfolio":
-      return "White Label Games";
+      return "Portfolio Licensing or Reskin";
     default:
       return "";
   }
+}
+
+function isValidPhone(value: string) {
+  return /^\+?[0-9][0-9\s().-]{6,24}$/.test(value);
 }
 
 function LabelText({ label, required }: { label: string; required: boolean }) {

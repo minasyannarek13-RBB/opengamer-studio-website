@@ -14,6 +14,7 @@ Branch: `feat/full-site-content-ux-upgrade`
 | Visual QA screenshots | Passed: 140 screenshots, 0 failures |
 | Smoke test routes | Passed: all required URLs returned 200 |
 | Public audit deployment | Passed: Vercel deployment READY |
+| Preview deployment | Passed: Vercel preview READY |
 
 ## Required Smoke Routes
 
@@ -39,3 +40,7 @@ Branch: `feat/full-site-content-ux-upgrade`
 - Smoke test confirmed `/`, `/services`, `/games`, `/games/forest-fortune`, `/technology`, `/about`, `/contact`, `/privacy-policy`, `/terms-of-use`, `/cookie-policy`, `/sitemap.xml` and `/robots.txt`.
 - Public audit URL confirmed: `https://opengamer-public-audit.vercel.app`.
 - Deployment ID: `dpl_CZGfXqVeornssEzKXBXDc1Zrox3t`.
+- Final preview URL confirmed: `https://opengamer-public-audit-3f1cq4jf8-open-gamer.vercel.app`.
+- Final preview deployment ID: `dpl_EAcV5dYmYh9gMHDoMVFHHVFVAFqA`.
+- Preview noindex metadata and `robots.txt` disallow behaviour confirmed.
+- Form smoke tests confirmed missing required fields, invalid email, missing consent, conditional phone validation, honeypot response and unconfigured-delivery server state.

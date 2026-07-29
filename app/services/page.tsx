@@ -17,7 +17,7 @@ const solutionGroups = [
   {
     id: "game-production",
     eyebrow: "Game production",
-    title: "Game production",
+    title: "Original and Custom Casino Games Built Around Your Commercial Model",
     description: "Original and custom casino game production shaped around a partner's commercial model, market and content strategy.",
     items: [
       ["Custom Slot Development", "For operators, platforms and providers needing original or branded slot content.", "Concept, game design, art, frontend build and integration preparation."],
@@ -28,9 +28,21 @@ const solutionGroups = [
     ]
   },
   {
+    id: "live-casino",
+    eyebrow: "Live casino",
+    title: "Live Casino Product Design for Players, Presenters and Operations",
+    description: "Specialist live casino product support without claiming studio operation, licensing or broadcast ownership.",
+    items: [
+      ["Live Casino Game Design", "For operators and providers exploring new table, game-show or hybrid live formats.", "Market concept, rules, player journey, round flow and product documentation."],
+      ["Live Show-Game Development", "For teams developing original show formats around a differentiated mechanic.", "Format logic, bonus structure, visual identity, player UX and delivery scope."],
+      ["Presenter and Studio Product UX", "For live products where the dealer, presenter and operational team are part of the experience.", "Presenter prompts, round states, studio-facing flows, display logic and error-state planning."],
+      ["Frontend Product Interfaces", "For partners needing player-facing or operator-facing live casino product UI.", "Betting interfaces, live-session states, result communication, mobile UX and integration preparation."]
+    ]
+  },
+  {
     id: "technology-and-integration",
     eyebrow: "Technology and integration",
-    title: "Technology and integration",
+    title: "Backend Systems and Integrations Prepared for Casino Operations",
     description: "Engineering support for game sessions, backend modules, APIs, wallet communication and launch preparation.",
     items: [
       ["Backend and RGS Engineering", "For partners building, extending or modernising game technology layers.", "Session logic, round management, game configuration, reporting and administrative tooling."],
@@ -42,8 +54,8 @@ const solutionGroups = [
   {
     id: "portfolio-services",
     eyebrow: "Portfolio services",
-    title: "Portfolio services",
-    description: "Commercial content options for partners that need faster portfolio expansion or custom market adaptation.",
+    title: "Expand or Reposition Your Casino Game Portfolio",
+    description: "Existing OpenGamer titles can be evaluated for licensing, branded adaptation, reskin or other commercially agreed delivery models.",
     items: [
       ["White-Label Games", "For partners evaluating existing OpenGamer content or custom variants.", "Portfolio review, demo access where available, scope definition and commercial discussion."],
       ["Reskins", "For existing games that need a new theme, brand or market fit.", "Theme replacement, symbol sets, UI refresh, animation updates and launch preparation."],
@@ -54,7 +66,7 @@ const solutionGroups = [
   {
     id: "delivery-and-support",
     eyebrow: "Delivery and support",
-    title: "Delivery and support",
+    title: "Add Specialist iGaming Capacity Without Building Every Team Internally",
     description: "Specialist capacity and production governance for partners scaling iGaming development programmes.",
     items: [
       ["Dedicated Teams", "For providers, platforms and startups that need embedded iGaming development capacity.", "Frontend, backend, game art, QA, product and technical leadership support."],
@@ -103,9 +115,12 @@ export default function ServicesPage() {
             <div className="grid gap-5 md:grid-cols-2" data-reveal-group="cards">
               {group.items.map(([title, clientType, deliverables]) => (
                 <Card key={title} className="h-full">
-                  <h2 className="text-xl font-semibold text-white">{title}</h2>
+                  <h3 className="text-xl font-semibold text-white">{title}</h3>
                   <p className="mt-3 text-sm leading-6 text-slate-300">{clientType}</p>
                   <p className="mt-4 border-t border-white/10 pt-4 text-sm leading-6 text-slate-400">{deliverables}</p>
+                  <a href={`/contact?service=${encodeURIComponent(title)}`} className="mt-5 inline-flex text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                    Discuss This Service
+                  </a>
                 </Card>
               ))}
             </div>
