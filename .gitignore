@@ -11,5 +11,6 @@ dist/
 .vercel
 .playwright-browsers/
 qa/screenshots/
+qa/visual/
 qa/lighthouse*.json
 incoming/

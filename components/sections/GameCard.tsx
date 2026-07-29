@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { Button } from "@/components/ui/Button";
 import { getGameCommercialStatusLabel, getVerifiedDemoUrl, type Game } from "@/content/games";
 
@@ -13,7 +14,10 @@ export function GameCard({ game }: { game: Game }) {
   ].filter(Boolean) as [string, string][];
 
   return (
-    <article className="premium-card group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.058] hover:shadow-[0_22px_70px_rgba(0,0,0,0.28)] focus-within:-translate-y-0.5 focus-within:border-emerald/50 focus-within:shadow-[0_22px_70px_rgba(0,0,0,0.28)]">
+    <article
+      className="premium-card game-card group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.058] hover:shadow-[0_22px_70px_rgba(0,0,0,0.28)] focus-within:-translate-y-0.5 focus-within:border-emerald/50 focus-within:shadow-[0_22px_70px_rgba(0,0,0,0.28)]"
+      style={{ "--game-accent": game.visualAccent || "#2ee6a6" } as CSSProperties}
+    >
       <div className="image-frame relative aspect-[10/7] overflow-hidden bg-black/45">
         <Image
           src={game.artwork?.catalogue || game.image}

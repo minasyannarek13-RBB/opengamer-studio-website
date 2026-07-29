@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ArchitectureDiagram } from "@/components/sections/ArchitectureDiagram";
 import { CTASection } from "@/components/sections/CTASection";
 import { StudioGameSignature } from "@/components/games/StudioGameSignature";
+import { RelatedProductStrip } from "@/components/visual/ProductSignature";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -52,7 +53,7 @@ const engagementModels = ["Project-based delivery", "Dedicated technical team", 
 
 export default function TechnologyPage() {
   return (
-    <SiteShell>
+    <SiteShell atmosphere="technology">
       <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
         <Container>
           <SectionHeader
@@ -100,6 +101,18 @@ export default function TechnologyPage() {
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1fr]">
           <SectionHeader title="Reference Integration Architecture" description="A layered view separating player, partner, game technology and operational environments." />
           <ArchitectureDiagram items={technologyArchitectureFlow} />
+        </div>
+      </Section>
+      <Section>
+        <SectionHeader eyebrow="Product references" title="Technology Connected to Real Product Work" description="OpenGamer technology work is presented through game-facing products, integration flows and B2B product interfaces." />
+        <div className="mt-10">
+          <RelatedProductStrip
+            items={[
+              { eyebrow: "Game-facing product", title: "Deep Dive", description: "A public game demo showing the product layer technology supports.", image: "/assets/games/deep-dive/artwork.webp", href: "/games/deep-dive", actionLabel: "View Game", accent: "#5d9cff" },
+              { eyebrow: "Product interface", title: "LC App", description: "Social live casino product-interface engineering reference.", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" },
+              { eyebrow: "Game production", title: "Forest Fortune", description: "Portfolio game content connected to frontend and backend delivery.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" }
+            ]}
+          />
         </div>
       </Section>
       <Section>

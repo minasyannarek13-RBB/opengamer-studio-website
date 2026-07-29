@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { CTASection } from "@/components/sections/CTASection";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { ProductHeroBackground } from "@/components/visual/ProductHeroBackground";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
@@ -52,7 +53,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
   const relatedGames = [games[(gameIndex - 1 + games.length) % games.length], games[(gameIndex + 1) % games.length]];
   const gameDetails = [
     ["Game type", game.gameType || "Slot Game"],
-    ["Primary mechanic", game.keyMechanic],
+    game.keyMechanic ? ["Primary mechanic", game.keyMechanic] : null,
     commercialStatus ? ["Commercial status", commercialStatus] : null,
     ["Demo status", demoUrl ? "Public demo available" : "Request demo"],
     game.configurationLabel || game.lineCount ? ["Configuration", game.configurationLabel || game.lineCount] : null,
@@ -61,8 +62,9 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
   ].filter(Boolean) as [string, string][];
 
   return (
-    <SiteShell>
-      <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
+    <SiteShell atmosphere="games">
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-24">
+        <ProductHeroBackground image={game.artwork?.hero || game.image} accentPrimary={game.visualAccent || "#2ee6a6"} pattern={game.slug === "deep-dive" ? "particles" : game.slug === "forest-fortune" ? "mist" : game.slug === "dragon-rush" ? "rays" : "grid"} />
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1fr] lg:items-center">
           <div>
             <nav className="mb-8 flex flex-wrap items-center gap-2 text-sm text-slate-500" aria-label="Breadcrumb">

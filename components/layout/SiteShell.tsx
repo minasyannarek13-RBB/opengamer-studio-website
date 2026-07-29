@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { PageAtmosphere } from "@/components/visual/PageAtmosphere";
+import type { PageAtmosphereVariant } from "@/content/visual-themes";
 import type { Locale } from "@/lib/i18n";
 
 const skipLabel: Record<Locale, string> = {
@@ -11,7 +13,7 @@ const skipLabel: Record<Locale, string> = {
   pt: "Ir para o conteúdo"
 };
 
-export function SiteShell({ children, locale = "en" }: { children: ReactNode; locale?: Locale }) {
+export function SiteShell({ children, locale = "en", atmosphere = "studio" }: { children: ReactNode; locale?: Locale; atmosphere?: PageAtmosphereVariant }) {
   return (
     <>
       <a
@@ -21,7 +23,8 @@ export function SiteShell({ children, locale = "en" }: { children: ReactNode; lo
         {skipLabel[locale]}
       </a>
       <Header locale={locale} />
-      <main id="main-content" tabIndex={-1}>
+      <main id="main-content" tabIndex={-1} className="site-main">
+        <PageAtmosphere variant={atmosphere} />
         {children}
       </main>
       <Footer locale={locale} />

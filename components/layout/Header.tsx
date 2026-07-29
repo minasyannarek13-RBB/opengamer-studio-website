@@ -8,7 +8,7 @@ import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { logoAsset } from "@/content/company";
-import { solutionsNavigation } from "@/content/navigation";
+import { solutionsMegaMenu, solutionsNavigation } from "@/content/navigation";
 import { getLocalizedHomePath, getLocalizedPath, navRoutes, stripLocaleFromPath } from "@/lib/routes";
 
 const ctaLabel: Record<Locale, string> = {
@@ -128,6 +128,7 @@ export function Header({ locale }: { locale: Locale }) {
                 <button
                   ref={solutionsButtonRef}
                   type="button"
+                  aria-haspopup="menu"
                   aria-expanded={isSolutionsOpen}
                   aria-controls="solutions-navigation"
                   aria-current={isSolutionsActive ? "page" : undefined}
@@ -143,18 +144,30 @@ export function Header({ locale }: { locale: Locale }) {
                   <div
                     id="solutions-navigation"
                     ref={solutionsMenuRef}
-                    className="absolute left-1/2 top-full mt-3 w-[28rem] -translate-x-1/2 rounded-2xl border border-white/12 bg-ink/96 p-3 shadow-[0_28px_90px_rgba(0,0,0,0.46)] backdrop-blur-xl"
+                    className="solutions-dropdown absolute left-1/2 top-full z-[100] mt-0 w-[min(68rem,calc(100vw-3rem))] -translate-x-1/2 rounded-[var(--radius-feature)] p-4"
+                    role="menu"
                   >
-                    <div className="grid gap-1">
-                      {solutionsNavigation.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          className="rounded-xl px-4 py-3 text-sm text-slate-300 transition hover:bg-white/[0.065] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
-                        >
-                          {item.label}
-                        </Link>
+                    <div className="solutions-dropdown__bridge" aria-hidden="true" />
+                    <div className="grid gap-4 lg:grid-cols-[repeat(3,minmax(0,1fr))_minmax(13rem,0.8fr)]">
+                      {solutionsMegaMenu.map((group) => (
+                        <div key={group.title} className="solutions-dropdown__group">
+                          <p className="solutions-dropdown__heading">{group.title}</p>
+                          <div className="mt-3 grid gap-1.5">
+                            {group.items.map((item) => (
+                              <Link key={item.label} href={item.href} role="menuitem" className="solutions-dropdown__link">
+                                <span>{item.label}</span>
+                                <small>{item.description}</small>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
                       ))}
+                      <Link href="/portfolio/elementals" role="menuitem" className="solutions-dropdown__feature">
+                        <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="" width={600} height={420} sizes="220px" className="solutions-dropdown__feature-image" />
+                        <span>Featured work</span>
+                        <strong>ELEMENTALS</strong>
+                        <small>Explore the live casino concept</small>
+                      </Link>
                     </div>
                   </div>
                 ) : null}

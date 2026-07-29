@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { ProductSignature } from "@/components/visual/ProductSignature";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -22,7 +23,7 @@ const enquiryGuidance = [
 
 export default function ContactPage() {
   return (
-    <SiteShell>
+    <SiteShell atmosphere="contact">
       <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
         <Container>
           <SectionHeader
@@ -64,6 +65,15 @@ export default function ContactPage() {
                 ))}
               </ul>
             </Card>
+            <ProductSignature
+              eyebrow="Portfolio reference"
+              title="Forest Fortune"
+              description="Use the form to discuss game distribution, custom production or portfolio access."
+              image="/assets/games/forest-fortune/artwork.webp"
+              href="/games/forest-fortune"
+              actionLabel="View Game"
+              compact
+            />
           </aside>
           <LeadForm />
         </div>

@@ -31,6 +31,7 @@ export type Game = {
   lineCount?: string;
   seriesSlug?: string;
   isVariant?: boolean;
+  visualAccent?: string;
 };
 
 const officialGamesBaseUrl = "https://open-gamer.com/games/view?code=";
@@ -352,6 +353,7 @@ const gameContentOverrides: Record<string, Partial<Game>> = {
   "deep-dive": {
     gameType: "Video Slot",
     keyMechanic: "Sticky wilds and treasure features",
+    visualAccent: "#5d9cff",
     longDescription: "Deep Dive is an underwater slot experience where treasure discovery, sticky wild moments and deep-sea visual pacing create a clear theme for demo evaluation.",
     mechanics: ["Sticky wilds", "Treasure feature", "Underwater exploration"],
     features: ["Public demo", "Ocean world", "Bonus-focused presentation"],
@@ -368,7 +370,7 @@ const gameContentOverrides: Record<string, Partial<Game>> = {
   },
   "dragon-rush": {
     gameType: "Video Slot",
-    keyMechanic: "Dragon-led bonus pacing",
+    visualAccent: "#dca45f",
     shortDescription: "A dragon-themed slot with high-contrast fantasy artwork, fast demo access and bonus-led commercial positioning.",
     longDescription: "Dragon Rush gives partners a demo-ready fantasy slot reference for evaluating artwork tone, game pacing and potential custom development routes.",
     mechanics: ["Dragon theme", "Bonus-led play", "Fantasy slot pacing"],
@@ -378,6 +380,7 @@ const gameContentOverrides: Record<string, Partial<Game>> = {
   "forest-fortune": {
     gameType: "Video Slot",
     keyMechanic: "Scroll-triggered free spins",
+    visualAccent: "#2ee6a6",
     longDescription: "Forest Fortune is a fantasy forest slot where mystical symbols, scroll-led feature anticipation and free-spin moments support a clear adventure flow.",
     mechanics: ["Free spins", "Mystical scrolls", "Fantasy exploration"],
     features: ["Public demo", "Forest world", "Feature-led pacing"],
@@ -423,7 +426,7 @@ const gameContentOverrides: Record<string, Partial<Game>> = {
   },
   "sweet-wins": {
     gameType: "Video Slot",
-    keyMechanic: "Candy world bonus pacing",
+    visualAccent: "#7567f8",
     shortDescription: "A candy-themed slot with bright symbols, playful bonus anticipation and a public demo for quick partner review.",
     longDescription: "Sweet Wins provides a demo-ready confectionery slot reference for partners evaluating casual themes, promotional fit and custom branded game options.",
     mechanics: ["Candy theme", "Bonus-led play", "Casual slot pacing"],
@@ -484,7 +487,6 @@ export const games: Game[] = rawGames.map((game) => {
     ...merged,
     gameType: merged.gameType || "Portfolio Slot",
     status,
-    keyMechanic: merged.keyMechanic || "Portfolio slot concept",
     mechanics: merged.mechanics || ["Slot gameplay", "Portfolio artwork"],
     features: merged.features || ["Portfolio review", hasVerifiedDemo(merged) ? "Public demo" : "Request demo"],
     supportedDevices: merged.supportedDevices || defaultDevices,

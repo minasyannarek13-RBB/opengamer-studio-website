@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function ElementalsPage() {
   return (
-    <SiteShell>
+    <SiteShell atmosphere="elementals">
       <div className="elementals-page">
       <section className="elementals-hero relative overflow-hidden border-b border-white/10 py-16 sm:py-24">
         <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.024)_1px,transparent_1px)] [background-size:80px_80px] [mask-image:radial-gradient(circle_at_68%_44%,black,transparent_72%)]" />

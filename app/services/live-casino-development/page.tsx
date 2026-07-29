@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CTASection } from "@/components/sections/CTASection";
 import { StudioGameSignature } from "@/components/games/StudioGameSignature";
+import { ProductSignature } from "@/components/visual/ProductSignature";
 import { ProjectCard } from "@/components/sections/ProjectCard";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function LiveCasinoDevelopmentPage() {
   return (
-    <SiteShell>
+    <SiteShell atmosphere="elementals">
       <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-24">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_12%,rgba(35,196,131,0.12),transparent_24rem)]" />
         <Container>
@@ -41,6 +42,18 @@ export default function LiveCasinoDevelopmentPage() {
             Discuss a Project
           </Button>
           <StudioGameSignature context="liveCasino" variant="inline" className="mt-8 max-w-2xl" />
+          <div className="mt-6 max-w-2xl">
+            <ProductSignature
+              eyebrow="Related product layer"
+              title="LC App"
+              description="A separate B2B engagement concept that shows how live products can connect to product-interface thinking."
+              image="/assets/projects/lc-app/optimized/lc-app-mobile-community.webp"
+              href="/portfolio/lc-app"
+              actionLabel="View LC App"
+              accent="#6ccfde"
+              compact
+            />
+          </div>
         </Container>
       </section>
       <Section>

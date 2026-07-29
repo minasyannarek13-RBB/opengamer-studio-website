@@ -1,6 +1,7 @@
 .playwright-browsers/
 incoming/
 qa/screenshots/
+qa/visual/
 qa/lighthouse*.json
 .pnpm-store/
 .next/

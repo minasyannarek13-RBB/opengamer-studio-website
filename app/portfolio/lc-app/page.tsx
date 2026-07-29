@@ -49,7 +49,7 @@ const conceptSections = [
 
 export default function LcAppPage() {
   return (
-    <SiteShell>
+    <SiteShell atmosphere="lc-app">
       <div className="lc-app-page">
       <section className="lc-app-hero relative overflow-hidden border-b border-white/10 py-16 sm:py-24">
         <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(255,255,255,0.034)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.024)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />

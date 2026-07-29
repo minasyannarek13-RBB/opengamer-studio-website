@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function PortfolioPage() {
   return (
-    <SiteShell>
+    <SiteShell atmosphere="company">
       <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-24">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_10%,rgba(35,196,131,0.12),transparent_25rem)]" />
         <Container>

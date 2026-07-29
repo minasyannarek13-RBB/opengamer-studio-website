@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CTASection } from "@/components/sections/CTASection";
 import { StudioGameSignature } from "@/components/games/StudioGameSignature";
+import { RelatedProductStrip } from "@/components/visual/ProductSignature";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Card } from "@/components/ui/Card";
@@ -47,7 +48,7 @@ const workingPrinciples = [
 
 export default function AboutPage() {
   return (
-    <SiteShell>
+    <SiteShell atmosphere="company">
       <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-24">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(46,230,166,0.09),transparent_22rem),linear-gradient(180deg,rgba(255,255,255,0.035),transparent_58%)]" />
         <Container>
@@ -78,6 +79,18 @@ export default function AboutPage() {
               <h2 className="text-xl font-semibold text-white">{principle}</h2>
             </Card>
           ))}
+        </div>
+      </Section>
+      <Section>
+        <SectionHeader eyebrow="Studio output" title="What the Studio Builds" description="OpenGamer connects slot production, live casino concepts, product interfaces and technology delivery." />
+        <div className="mt-10">
+          <RelatedProductStrip
+            items={[
+              { eyebrow: "Games", title: "Slot Portfolio", description: "Selected playable and review-ready OpenGamer game content.", image: "/assets/games/sweet-wins/artwork.webp", href: "/games", actionLabel: "Explore Games" },
+              { eyebrow: "Live Casino", title: "ELEMENTALS", description: "Original show-game concept currently in development.", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals", actionLabel: "View Concept", accent: "#dca45f" },
+              { eyebrow: "Technology", title: "Product Engineering", description: "Frontend, backend and integration-oriented delivery capability.", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/technology", actionLabel: "View Technology", accent: "#6ccfde" }
+            ]}
+          />
         </div>
       </Section>
       <CTASection

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { RelatedProductStrip } from "@/components/visual/ProductSignature";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
@@ -79,7 +80,7 @@ const solutionGroups = [
 
 export default function ServicesPage() {
   return (
-    <SiteShell>
+    <SiteShell atmosphere="solutions">
       <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
         <Container>
           <SectionHeader
@@ -127,6 +128,19 @@ export default function ServicesPage() {
           </div>
         </Section>
       ))}
+
+      <Section>
+        <SectionHeader eyebrow="Product proof" title="References from the OpenGamer Ecosystem" description="Services are connected to actual OpenGamer games, live casino concepts and product-interface work." />
+        <div className="mt-10">
+          <RelatedProductStrip
+            items={[
+              { eyebrow: "Game production", title: "Forest Fortune", description: "A portfolio slot reference for custom game production discussions.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" },
+              { eyebrow: "Live Casino", title: "ELEMENTALS", description: "A show-game concept for live casino product-development scope.", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals", actionLabel: "View Concept", accent: "#dca45f" },
+              { eyebrow: "Product interface", title: "LC App", description: "A B2B social product concept for live casino engagement layers.", image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" }
+            ]}
+          />
+        </div>
+      </Section>
 
       <CTASection
         title="Need a Defined Scope or an Embedded Team?"
