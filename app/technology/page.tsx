@@ -57,7 +57,7 @@ export default function TechnologyPage() {
         <Container>
           <SectionHeader
             eyebrow="Technology"
-            title="Technology for Casino Game Development and Integration"
+            title="Game Technology, RGS Engineering and Integration Support"
             description="OpenGamer supports casino game production with front-end engineering, backend services, RGS-related development, integration workflows and delivery support."
             headingLevel="h1"
           />
@@ -132,9 +132,9 @@ export default function TechnologyPage() {
         </div>
       </Section>
       <CTASection
-        title="Discuss Technical Requirements"
+        title="Discuss Integration Requirements"
         description="Share your platform, wallet flow, aggregator context, target launch path and technical documentation status."
-        ctaLabel="Discuss Technical Requirements"
+        ctaLabel="Discuss Integration"
         ctaHref="/contact?service=technology"
         secondaryLabel="View Development Services"
         secondaryHref="/services"

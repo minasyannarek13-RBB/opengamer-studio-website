@@ -8,6 +8,7 @@ import type { Locale } from "@/lib/i18n";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { logoAsset } from "@/content/company";
+import { solutionsNavigation } from "@/content/navigation";
 import { getLocalizedHomePath, getLocalizedPath, navRoutes, stripLocaleFromPath } from "@/lib/routes";
 
 const ctaLabel: Record<Locale, string> = {
@@ -21,11 +22,21 @@ const ctaLabel: Record<Locale, string> = {
 export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
+  const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(true);
   const [isMenuMounted, setIsMenuMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const solutionsButtonRef = useRef<HTMLButtonElement>(null);
+  const solutionsMenuRef = useRef<HTMLDivElement>(null);
   const mobileNavRef = useRef<HTMLElement>(null);
   const activePath = stripLocaleFromPath(pathname || "/");
   const isActiveRoute = (href: string) => (href === "/" ? activePath === "/" : activePath === href || activePath.startsWith(`${href}/`));
+  const isSolutionsActive = activePath === "/services" || activePath.startsWith("/services/");
+
+  useEffect(() => {
+    setIsOpen(false);
+    setIsSolutionsOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (isOpen) {
@@ -64,6 +75,35 @@ export function Header({ locale }: { locale: Locale }) {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isSolutionsOpen) {
+      return;
+    }
+
+    function onPointerDown(event: PointerEvent) {
+      const target = event.target as Node;
+      if (solutionsMenuRef.current?.contains(target) || solutionsButtonRef.current?.contains(target)) {
+        return;
+      }
+      setIsSolutionsOpen(false);
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key !== "Escape") {
+        return;
+      }
+      setIsSolutionsOpen(false);
+      solutionsButtonRef.current?.focus();
+    }
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isSolutionsOpen]);
+
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/86 shadow-[0_14px_48px_rgba(0,0,0,0.28)] backdrop-blur-xl">
       <Container className="flex min-h-20 items-center justify-between gap-4">
@@ -79,16 +119,54 @@ export function Header({ locale }: { locale: Locale }) {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-2 lg:flex">
           {navRoutes.map((route) => (
-            <Link
-              key={route.path}
-              href={getLocalizedHomePath(locale, route.path)}
-              aria-current={isActiveRoute(route.path) ? "page" : undefined}
-              className="inline-flex min-h-11 items-center rounded-full px-3 py-2 text-sm font-medium text-slate-300 transition duration-200 hover:bg-white/[0.055] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:bg-emerald/10 aria-[current=page]:text-emerald"
-            >
-              {route.label[locale]}
-            </Link>
+            route.path === "/services" ? (
+              <div key={route.path} className="relative">
+                <button
+                  ref={solutionsButtonRef}
+                  type="button"
+                  aria-expanded={isSolutionsOpen}
+                  aria-controls="solutions-navigation"
+                  aria-current={isSolutionsActive ? "page" : undefined}
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-slate-300 transition duration-200 hover:bg-white/[0.055] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:bg-emerald/10 aria-[current=page]:text-emerald"
+                  onClick={() => setIsSolutionsOpen((value) => !value)}
+                >
+                  {route.label[locale]}
+                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" className={isSolutionsOpen ? "rotate-180 transition" : "transition"}>
+                    <path d="m3.5 5.25 3.5 3.5 3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+                {isSolutionsOpen ? (
+                  <div
+                    id="solutions-navigation"
+                    ref={solutionsMenuRef}
+                    className="absolute left-1/2 top-full mt-3 w-[28rem] -translate-x-1/2 rounded-2xl border border-white/12 bg-ink/96 p-3 shadow-[0_28px_90px_rgba(0,0,0,0.46)] backdrop-blur-xl"
+                  >
+                    <div className="grid gap-1">
+                      {solutionsNavigation.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="rounded-xl px-4 py-3 text-sm text-slate-300 transition hover:bg-white/[0.065] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            ) : (
+              <Link
+                key={route.path}
+                href={getLocalizedHomePath(locale, route.path)}
+                aria-current={isActiveRoute(route.path) ? "page" : undefined}
+                className="inline-flex min-h-11 items-center rounded-full px-3 py-2 text-sm font-medium text-slate-300 transition duration-200 hover:bg-white/[0.055] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:bg-emerald/10 aria-[current=page]:text-emerald"
+              >
+                {route.label[locale]}
+              </Link>
+            )
           ))}
         </nav>
 
@@ -123,17 +201,48 @@ export function Header({ locale }: { locale: Locale }) {
           aria-hidden={!isOpen}
         >
           <Container className="grid gap-2 py-4">
-            {navRoutes.map((route) => (
-              <Link
-                key={route.path}
-                href={getLocalizedHomePath(locale, route.path)}
-                aria-current={isActiveRoute(route.path) ? "page" : undefined}
-                className="rounded-lg px-3 py-3 text-sm font-medium text-slate-200 transition hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:bg-emerald/10 aria-[current=page]:text-emerald"
-                onClick={() => setIsOpen(false)}
-              >
-                {route.label[locale]}
-              </Link>
-            ))}
+            {navRoutes.map((route) =>
+              route.path === "/services" ? (
+                <div key={route.path} className="rounded-xl border border-white/10 bg-white/[0.035] p-2">
+                  <button
+                    type="button"
+                    className="flex min-h-11 w-full items-center justify-between rounded-lg px-3 text-sm font-medium text-slate-100 transition hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+                    aria-expanded={isMobileSolutionsOpen}
+                    aria-controls="mobile-solutions-navigation"
+                    onClick={() => setIsMobileSolutionsOpen((value) => !value)}
+                  >
+                    {route.label[locale]}
+                    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" className={isMobileSolutionsOpen ? "rotate-180 transition" : "transition"}>
+                      <path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                  {isMobileSolutionsOpen ? (
+                    <div id="mobile-solutions-navigation" className="mt-2 grid gap-1">
+                      {solutionsNavigation.map((item) => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="rounded-lg px-3 py-2.5 text-sm text-slate-300 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              ) : (
+                <Link
+                  key={route.path}
+                  href={getLocalizedHomePath(locale, route.path)}
+                  aria-current={isActiveRoute(route.path) ? "page" : undefined}
+                  className="rounded-lg px-3 py-3 text-sm font-medium text-slate-200 transition hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-[current=page]:bg-emerald/10 aria-[current=page]:text-emerald"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {route.label[locale]}
+                </Link>
+              )
+            )}
             <Button href={getLocalizedPath(locale, "/contact")} className="mt-2 w-full" onClick={() => setIsOpen(false)}>
               {ctaLabel[locale]}
             </Button>

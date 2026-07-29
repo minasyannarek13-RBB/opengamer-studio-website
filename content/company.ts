@@ -16,7 +16,7 @@ export const company = {
   website: "https://open-gamer.com",
   email: configuredPublicEmail,
   description:
-    "OpenGamer is an iGaming game and software development studio supporting casino game production, front-end and backend engineering, integrations, original product concepts and dedicated delivery teams.",
+    "OpenGamer is a full-cycle iGaming game and product development studio. We create original casino games, custom game content, live casino products and integration-ready technology for operators, platforms, aggregators and game providers.",
   social: isValidLinkedInUrl(configuredLinkedInUrl) ? [{ label: "LinkedIn", href: configuredLinkedInUrl }] : [],
   leadership: [
     { name: "Hayk", role: "CEO" },
@@ -25,6 +25,17 @@ export const company = {
     { name: "Ara", role: "Head of Front-End" }
   ]
 };
+
+export const companyFacts = {
+  foundedYear: null,
+  headquarters: null,
+  legalName: null,
+  registrationNumber: null,
+  verifiedPartners: [],
+  certifications: [],
+  approvedPublicEmail: Boolean(configuredPublicEmail),
+  contentStatus: "business-review-required"
+} as const;
 
 export const logoAsset = {
   src: "/assets/brand/opengamer-logo.webp",

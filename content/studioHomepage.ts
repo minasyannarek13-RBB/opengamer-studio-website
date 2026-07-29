@@ -141,9 +141,9 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
       ogDescription: "A multi-product iGaming development studio for games, technology, integrations and original product concepts."
     },
     hero: {
-      kicker: "Multi-product iGaming studio",
-      heading: "We build iGaming games, products and technology for operators and providers.",
-      intro: "From game concepts and mathematics to frontend, backend, integrations and complete product development.",
+      kicker: "Full-cycle iGaming development",
+      heading: "Casino Games and Technology Built for Real-World Operations",
+      intro: "OpenGamer designs and develops original slot games, custom casino content, live casino products and integration-ready software for operators, aggregators, platforms and game providers.",
       playLabel: "Start autoplay",
       pauseLabel: "Pause autoplay",
       previousLabel: "Previous project",

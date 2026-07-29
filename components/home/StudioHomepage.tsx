@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { GameCard } from "@/components/sections/GameCard";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { ProjectShowcaseSlider } from "@/components/home/ProjectShowcaseSlider";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { StudioGameSignature } from "@/components/games/StudioGameSignature";
 import { games, type Game } from "@/content/games";
@@ -48,25 +48,40 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
 
   return (
     <>
-      <ProjectShowcaseSlider slides={copy.slides} locale={locale} labels={copy.hero} />
-
-      <div className="homepage-proof-strip" aria-label="Selected OpenGamer work">
-        <div className="homepage-proof-strip__inner">
-          <div className="homepage-proof-strip__copy">
-            <span>Selected work</span>
-            <strong>Games and projects already visible in the studio ecosystem.</strong>
+      <section className="studio-static-hero">
+        <div className="studio-static-hero__ambient" aria-hidden="true" />
+        <Container className="grid min-h-[calc(100svh-5rem)] gap-10 py-16 sm:py-20 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
+          <div className="max-w-3xl">
+            <p className="premium-kicker text-xs font-semibold uppercase">{copy.hero.kicker}</p>
+            <h1 className="mt-5 text-balance text-5xl font-semibold leading-[0.98] tracking-normal text-white sm:text-6xl lg:text-7xl">
+              {copy.hero.heading}
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">{copy.hero.intro}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href={getLocalizedHomePath(locale, "/contact")}>Discuss a Project</Button>
+              <Button href={getLocalizedHomePath(locale, "/games")} variant="secondary">
+                Explore Games
+              </Button>
+            </div>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {["Original game production", "Custom and branded games", "Frontend and backend engineering", "Integration support"].map((item) => (
+                <div key={item} className="rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-sm text-slate-300">
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="homepage-proof-strip__items">
-            {homepageProofItems.map((item) => (
-              <Link key={item.title} href={getLocalizedHomePath(locale, item.href)} className="homepage-proof-card">
-                <Image src={item.image} alt="" width={600} height={420} sizes="(min-width: 1024px) 132px, 42vw" className="homepage-proof-card__image" />
+          <div className="studio-static-hero__visual" aria-label="OpenGamer selected games and product concepts">
+            {homepageProofItems.map((item, index) => (
+              <Link key={item.title} href={getLocalizedHomePath(locale, item.href)} className={`studio-static-hero__tile studio-static-hero__tile--${index + 1}`}>
+                <Image src={item.image} alt="" width={600} height={420} sizes="(min-width: 1024px) 19vw, 44vw" className="h-full w-full object-cover" priority={index < 2} />
                 <span>{item.type}</span>
                 <strong>{item.title}</strong>
               </Link>
             ))}
           </div>
-        </div>
-      </div>
+        </Container>
+      </section>
 
       <Section className="studio-section-top">
         <SectionHeader {...copy.sections.capabilities} />

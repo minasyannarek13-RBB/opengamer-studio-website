@@ -4,26 +4,58 @@ import { useMemo, useState } from "react";
 import { GameCard } from "@/components/sections/GameCard";
 import { games } from "@/content/games";
 
+const filters = [
+  { label: "All", value: "all" },
+  { label: "Demo Available", value: "demo" },
+  { label: "Classic Slots", value: "classic" },
+  { label: "Video Slots", value: "video" },
+  { label: "Request Demo", value: "request" }
+];
+
 export function GamePortfolio() {
   const [query, setQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState("all");
   const catalogueGames = useMemo(() => games.filter((game) => !game.isVariant), []);
   const filteredGames = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
-    if (!normalizedQuery) {
-      return catalogueGames;
-    }
-
     return catalogueGames.filter((game) => {
-      const searchableText = [game.title, game.shortDescription, ...(game.category || []), ...(game.variants || [])].join(" ").toLowerCase();
+      const matchesFilter =
+        activeFilter === "all" ||
+        (activeFilter === "demo" && game.status === "demo") ||
+        (activeFilter === "classic" && game.gameType === "Classic Slot") ||
+        (activeFilter === "video" && game.gameType === "Video Slot") ||
+        (activeFilter === "request" && game.status === "request-access");
+
+      if (!matchesFilter) {
+        return false;
+      }
+
+      if (!normalizedQuery) {
+        return true;
+      }
+
+      const searchableText = [
+        game.title,
+        game.shortDescription,
+        game.longDescription,
+        game.gameType,
+        game.keyMechanic,
+        ...(game.category || []),
+        ...(game.variants || []),
+        ...(game.mechanics || []),
+        ...(game.features || [])
+      ]
+        .join(" ")
+        .toLowerCase();
       return searchableText.includes(normalizedQuery);
     });
-  }, [catalogueGames, query]);
+  }, [activeFilter, catalogueGames, query]);
 
   return (
     <div>
       <h2 className="sr-only">Available games</h2>
-      <div className="premium-card grid gap-4 rounded-lg border border-white/10 bg-white/[0.04] p-4 shadow-[0_18px_56px_rgba(0,0,0,0.18)] sm:grid-cols-[1fr_auto] sm:items-center">
+      <div className="premium-card grid gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 shadow-[0_18px_56px_rgba(0,0,0,0.18)]">
         <label className="relative block">
           <span className="sr-only">Search games</span>
           <input
@@ -47,6 +79,19 @@ export function GamePortfolio() {
           Showing <span className="font-semibold text-white">{filteredGames.length}</span> of{" "}
           <span className="font-semibold text-white">{catalogueGames.length}</span> catalogue entries
         </p>
+        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter games">
+          {filters.map((filter) => (
+            <button
+              key={filter.value}
+              type="button"
+              aria-pressed={activeFilter === filter.value}
+              onClick={() => setActiveFilter(filter.value)}
+              className="min-h-10 rounded-full border border-white/10 bg-white/[0.035] px-4 text-sm font-semibold text-slate-300 transition hover:border-emerald/45 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 aria-pressed:border-emerald/45 aria-pressed:bg-emerald/10 aria-pressed:text-emerald"
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
       </div>
       {filteredGames.length ? (
         <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3" data-reveal-group="cards">

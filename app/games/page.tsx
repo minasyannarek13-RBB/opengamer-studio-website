@@ -37,9 +37,12 @@ export default function GamesPage() {
         <GamePortfolio />
       </Section>
       <CTASection
-        title="Discuss Game Content"
+        title="Request Portfolio or Discuss a Custom Game"
         description="OpenGamer can support custom slot development, white-label delivery, reskins, modernization and integration-ready production."
-        ctaLabel="Discuss Game Content"
+        ctaLabel="Discuss a Project"
+        ctaHref="/contact?interest=game"
+        secondaryLabel="Request Portfolio"
+        secondaryHref="/contact?interest=portfolio"
       />
     </SiteShell>
   );

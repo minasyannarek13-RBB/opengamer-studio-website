@@ -107,7 +107,7 @@ async function capture(baseUrl, label) {
           clientWidth: doc.clientWidth,
           imageCount: images.length,
           brokenImages: images.filter((img) => !img.complete || img.naturalWidth === 0).length,
-          missingAltImages: images.filter((img) => !img.alt).length
+          missingAltImages: images.filter((img) => !img.hasAttribute("alt")).length
         };
       });
 

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { LeadForm } from "@/components/forms/LeadForm";
-import { StudioGameSignature } from "@/components/games/StudioGameSignature";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Card } from "@/components/ui/Card";
@@ -29,10 +28,9 @@ export default function ContactPage() {
           <SectionHeader
             eyebrow="Contact"
             title="Tell Us What You Want to Build"
-            description="Use the form for project, integration, portfolio, dedicated team or technology partnership requests."
+            description="Share your project objective, current stage and required delivery scope. OpenGamer will review the request and propose the most practical next step."
             headingLevel="h1"
           />
-          <StudioGameSignature context="contact" variant="inline" className="mt-8 max-w-2xl" />
         </Container>
       </section>
       <Section>

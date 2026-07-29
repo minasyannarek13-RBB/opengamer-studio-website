@@ -5,8 +5,6 @@ const requiredFields = [
   "fullName",
   "company",
   "email",
-  "jobTitle",
-  "companyType",
   "serviceInterest",
   "projectDescription",
   "consent"

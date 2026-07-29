@@ -11,10 +11,12 @@ import { Section } from "@/components/ui/Section";
 import { portfolioProjects } from "@/content/portfolio";
 
 const capabilityGroups = [
-  ["Full-Cycle Capabilities. One Studio.", "OpenGamer designs live casino products end-to-end: concept, mathematics, UX, show format and studio presentation."],
-  ["Original Table & Show Concepts", "Mechanics designed for differentiation, not imitation."],
-  ["Mathematical Models for Live Formats", "Rules, paytables, probability structures and risk models are designed and prepared for simulation and validation as the concept progresses."],
-  ["Architecture for Live Products", "Consulting on the technical backbone a live product needs before build."]
+  ["Product Strategy", "Market concept, target player, format logic, session behaviour and commercial objective are shaped before production scope is defined."],
+  ["Game Rules and Mathematics", "Rules, betting models, payouts, side bets, feature logic and risk considerations are prepared for review and validation."],
+  ["Player Experience", "Betting interface, mobile UX, result communication, localisation and latency-aware interaction are designed around live-session behaviour."],
+  ["Presenter and Studio Flow", "Presenter prompts, round states, table flow, camera logic, display systems and operational clarity are considered as one product framework."],
+  ["Technical Product Layer", "Frontend, backend services, operator integration, reporting, monitoring and administrative tools are scoped around verified requirements."],
+  ["QA and Launch Preparation", "Game flow, device coverage, interrupted rounds, localisation, operator acceptance and launch support are planned without promising fixed timelines."]
 ];
 
 export const metadata: Metadata = {
@@ -31,12 +33,12 @@ export default function LiveCasinoDevelopmentPage() {
         <Container>
           <SectionHeader
             eyebrow="Live Casino Development"
-            title="Live Casino Development"
-            description="Original live casino product design — from studio-based table games to next-generation show formats built around original bonus mechanics and strong visual identity, not template clones."
+            title="Live Casino Products Designed Around Players, Presenters and Operations"
+            description="OpenGamer supports the design and development of live casino games, show formats, player interfaces and studio-facing product systems. The work connects game logic, broadcast experience, dealer operations and operator requirements within one product framework."
             headingLevel="h1"
           />
           <Button href="/contact" className="mt-8">
-            Discuss a Live Casino Concept
+            Discuss a Project
           </Button>
           <StudioGameSignature context="liveCasino" variant="inline" className="mt-8 max-w-2xl" />
         </Container>
@@ -73,9 +75,9 @@ export default function LiveCasinoDevelopmentPage() {
         </div>
       </Section>
       <CTASection
-        title="Design Your Next Live Casino Format"
+        title="Design Your Next Live Casino Product"
         description="Share the target market, format direction and studio context — OpenGamer will propose the right engagement model."
-        ctaLabel="Discuss a Live Casino Concept"
+        ctaLabel="Discuss a Project"
       />
     </SiteShell>
   );
