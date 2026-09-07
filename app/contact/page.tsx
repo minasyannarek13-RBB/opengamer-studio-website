@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -56,7 +55,7 @@ export default function ContactPage() {
       <Section>
         <div className="mb-10 grid gap-4 md:grid-cols-3" data-reveal-group="cards">
           {enquiryRoutes.map((route) => (
-            <Link
+            <a
               key={route.title}
               href={route.href}
               className="premium-card group rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30 hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
@@ -65,7 +64,7 @@ export default function ContactPage() {
               <h2 className="mt-3 text-xl font-semibold text-white">{route.title}</h2>
               <p className="mt-3 text-sm leading-6 text-slate-400">{route.description}</p>
               <span className="mt-5 inline-flex text-sm font-semibold text-emerald transition group-hover:text-white">Start enquiry →</span>
-            </Link>
+            </a>
           ))}
         </div>
         <div id="project-enquiry" className="scroll-mt-28 grid gap-8 lg:grid-cols-[0.42fr_1fr]">
