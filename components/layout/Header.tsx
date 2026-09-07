@@ -27,12 +27,13 @@ const exploreGamesLabel: Record<Locale, string> = {
   pt: "Explorar jogos"
 };
 
+const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(true);
-  const [isMenuMounted, setIsMenuMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const solutionsButtonRef = useRef<HTMLButtonElement>(null);
   const solutionsMenuRef = useRef<HTMLDivElement>(null);
@@ -49,32 +50,39 @@ export function Header({ locale }: { locale: Locale }) {
   }, [pathname]);
 
   useEffect(() => {
-    if (isOpen) {
-      setIsMenuMounted(true);
-      return;
-    }
-
-    const timeout = window.setTimeout(() => setIsMenuMounted(false), 260);
-    return () => window.clearTimeout(timeout);
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
+    if (!isOpen) return;
 
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const firstInteractive = mobileNavRef.current?.querySelector<HTMLElement>("a, button");
+
+    const panel = mobileNavRef.current;
+    const firstInteractive = panel?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
     firstInteractive?.focus();
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key !== "Escape") {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setIsOpen(false);
+        menuButtonRef.current?.focus();
         return;
       }
 
-      setIsOpen(false);
-      menuButtonRef.current?.focus();
+      if (event.key !== "Tab" || !panel) return;
+
+      const focusable = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter((element) => !element.hasAttribute("disabled") && element.offsetParent !== null);
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const activeElement = document.activeElement;
+
+      if (event.shiftKey && activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
 
     document.addEventListener("keydown", onKeyDown);
@@ -86,22 +94,16 @@ export function Header({ locale }: { locale: Locale }) {
   }, [isOpen]);
 
   useEffect(() => {
-    if (!isSolutionsOpen) {
-      return;
-    }
+    if (!isSolutionsOpen) return;
 
     function onPointerDown(event: PointerEvent) {
       const target = event.target as Node;
-      if (solutionsMenuRef.current?.contains(target) || solutionsButtonRef.current?.contains(target)) {
-        return;
-      }
+      if (solutionsMenuRef.current?.contains(target) || solutionsButtonRef.current?.contains(target)) return;
       setIsSolutionsOpen(false);
     }
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key !== "Escape") {
-        return;
-      }
+      if (event.key !== "Escape") return;
       setIsSolutionsOpen(false);
       solutionsButtonRef.current?.focus();
     }
@@ -117,26 +119,17 @@ export function Header({ locale }: { locale: Locale }) {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/86 shadow-[0_14px_48px_rgba(0,0,0,0.28)] backdrop-blur-xl">
       <Container className="flex min-h-20 items-center justify-between gap-4">
-        <Link href={getLocalizedPath(locale, "/")} className="flex items-center gap-3 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
-          <Image
-            src={logoAsset.src}
-            alt={logoAsset.alt}
-            width={logoAsset.width}
-            height={logoAsset.height}
-            priority
-            className="h-9 w-auto"
-            sizes="142px"
-          />
+        <Link href={getLocalizedPath(locale, "/")} aria-label="OpenGamer home" className="flex items-center gap-3 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+          <Image src={logoAsset.src} alt={logoAsset.alt} width={logoAsset.width} height={logoAsset.height} priority className="h-9 w-auto" sizes="142px" />
         </Link>
 
-        <nav className="hidden items-center gap-2 lg:flex">
-          {navRoutes.map((route) => (
+        <nav className="hidden items-center gap-2 lg:flex" aria-label="Primary navigation">
+          {navRoutes.map((route) =>
             route.path === "/services" ? (
               <div key={route.path} className="relative">
                 <button
                   ref={solutionsButtonRef}
                   type="button"
-                  aria-haspopup="menu"
                   aria-expanded={isSolutionsOpen}
                   aria-controls="solutions-navigation"
                   aria-current={isSolutionsActive ? "page" : undefined}
@@ -149,12 +142,7 @@ export function Header({ locale }: { locale: Locale }) {
                   </svg>
                 </button>
                 {isSolutionsOpen ? (
-                  <div
-                    id="solutions-navigation"
-                    ref={solutionsMenuRef}
-                    className="solutions-dropdown absolute left-1/2 top-full z-[100] mt-0 w-[min(68rem,calc(100vw-3rem))] -translate-x-1/2 rounded-[var(--radius-feature)] p-4"
-                    role="menu"
-                  >
+                  <div id="solutions-navigation" ref={solutionsMenuRef} className="solutions-dropdown absolute left-1/2 top-full z-[100] mt-0 w-[min(68rem,calc(100vw-3rem))] -translate-x-1/2 rounded-[var(--radius-feature)] p-4">
                     <div className="solutions-dropdown__bridge" aria-hidden="true" />
                     <div className="grid gap-4 lg:grid-cols-[repeat(3,minmax(0,1fr))_minmax(13rem,0.8fr)]">
                       {solutionsMegaMenu.map((group) => (
@@ -162,7 +150,7 @@ export function Header({ locale }: { locale: Locale }) {
                           <p className="solutions-dropdown__heading">{group.title}</p>
                           <div className="mt-3 grid gap-1.5">
                             {group.items.map((item) => (
-                              <Link key={item.label} href={getLocalizedHomePath(locale, item.href)} role="menuitem" className="solutions-dropdown__link">
+                              <Link key={item.label} href={getLocalizedHomePath(locale, item.href)} className="solutions-dropdown__link">
                                 <span>{item.label}</span>
                                 <small>{item.description}</small>
                               </Link>
@@ -170,7 +158,7 @@ export function Header({ locale }: { locale: Locale }) {
                           </div>
                         </div>
                       ))}
-                      <Link href={getLocalizedHomePath(locale, "/portfolio/elementals")} role="menuitem" className="solutions-dropdown__feature">
+                      <Link href={getLocalizedHomePath(locale, "/portfolio/elementals")} className="solutions-dropdown__feature">
                         <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="" width={600} height={420} sizes="220px" className="solutions-dropdown__feature-image" />
                         <span>Featured work</span>
                         <strong>ELEMENTALS</strong>
@@ -190,7 +178,7 @@ export function Header({ locale }: { locale: Locale }) {
                 {route.label[locale]}
               </Link>
             )
-          ))}
+          )}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -214,16 +202,10 @@ export function Header({ locale }: { locale: Locale }) {
           </button>
         </div>
       </Container>
-      {isMenuMounted ? (
-        <nav
-          id="mobile-navigation"
-          ref={mobileNavRef}
-          className="mobile-nav-panel border-t border-white/10 bg-ink/96 shadow-[0_22px_60px_rgba(0,0,0,0.36)] lg:hidden"
-          data-state={isOpen ? "open" : "closed"}
-          aria-label="Mobile navigation"
-          aria-hidden={!isOpen}
-        >
-          <Container className="grid gap-2 py-4">
+
+      {isOpen ? (
+        <nav id="mobile-navigation" ref={mobileNavRef} className="mobile-nav-panel border-t border-white/10 bg-ink/96 shadow-[0_22px_60px_rgba(0,0,0,0.36)] lg:hidden" data-state="open" aria-label="Mobile navigation">
+          <Container className="grid max-h-[calc(100dvh-5rem)] gap-2 overflow-y-auto overscroll-contain py-4">
             {navRoutes.map((route) =>
               route.path === "/services" ? (
                 <div key={route.path} className="rounded-xl border border-white/10 bg-white/[0.035] p-2">
@@ -242,12 +224,7 @@ export function Header({ locale }: { locale: Locale }) {
                   {isMobileSolutionsOpen ? (
                     <div id="mobile-solutions-navigation" className="mt-2 grid gap-1">
                       {solutionsNavigation.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={getLocalizedHomePath(locale, item.href)}
-                          className="rounded-lg px-3 py-2.5 text-sm text-slate-300 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
-                          onClick={() => setIsOpen(false)}
-                        >
+                        <Link key={item.label} href={getLocalizedHomePath(locale, item.href)} className="rounded-lg px-3 py-2.5 text-sm text-slate-300 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70" onClick={() => setIsOpen(false)}>
                           {item.label}
                         </Link>
                       ))}
