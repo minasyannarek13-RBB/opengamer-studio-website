@@ -38,8 +38,77 @@ const homepageProofItems = [
   }
 ];
 
+const proofCopy: Record<Locale, {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: { title: string; description: string }[];
+}> = {
+  en: {
+    eyebrow: "Studio proof",
+    title: "Real work partners can evaluate before the first call.",
+    description: "Playable games, visible product concepts and full-cycle development capabilities give partners concrete OpenGamer work to review before discussing scope.",
+    items: [
+      { title: "Playable slot portfolio", description: "Selected OpenGamer titles can be reviewed through public demos where available." },
+      { title: "Full-cycle game production", description: "Concept, mathematics, frontend, backend, art and QA can be delivered as one coordinated scope." },
+      { title: "Integration-oriented delivery", description: "Operator, aggregator and platform integration work can be included as part of the delivery scope." },
+      { title: "Slots and live casino product work", description: "The public portfolio includes slot titles, ELEMENTALS and LC App concept work." },
+      { title: "Flexible engagement", description: "Partners can engage for selected disciplines, complete production or dedicated development support." }
+    ]
+  },
+  ru: {
+    eyebrow: "Работы студии",
+    title: "Реальные проекты, которые можно оценить до первого звонка.",
+    description: "Игровые демо, продуктовые концепты и full-cycle возможности дают партнёрам конкретные материалы OpenGamer для оценки до обсуждения scope.",
+    items: [
+      { title: "Портфолио слот-игр", description: "Выбранные тайтлы OpenGamer можно открыть в публичном demo там, где оно доступно." },
+      { title: "Полный цикл game production", description: "Концепт, математика, frontend, backend, арт и QA могут поставляться как единый scope." },
+      { title: "Интеграционная разработка", description: "Работа с operator, aggregator и platform integrations может входить в delivery scope." },
+      { title: "Слоты и Live Casino продукты", description: "Публичное портфолио включает слот-игры, ELEMENTALS и концепт LC App." },
+      { title: "Гибкий формат работы", description: "Можно подключить отдельные дисциплины, полный production cycle или dedicated development support." }
+    ]
+  },
+  hy: {
+    eyebrow: "Ստուդիայի աշխատանքներ",
+    title: "Իրական նախագծեր, որոնք կարելի է գնահատել մինչև առաջին զանգը։",
+    description: "Խաղային demo-ները, product concept-ները և full-cycle հնարավորությունները գործընկերներին տալիս են OpenGamer-ի կոնկրետ աշխատանքներ՝ scope-ը քննարկելուց առաջ։",
+    items: [
+      { title: "Խաղարկվող slot portfolio", description: "Ընտրված OpenGamer խաղերը հնարավոր է դիտել public demo-ներով, որտեղ դրանք հասանելի են։" },
+      { title: "Full-cycle game production", description: "Concept, mathematics, frontend, backend, art և QA կարող են մատուցվել մեկ համակցված scope-ով։" },
+      { title: "Integration-oriented delivery", description: "Operator, aggregator և platform integration աշխատանքը կարող է ներառվել delivery scope-ում։" },
+      { title: "Slots և Live Casino product work", description: "Public portfolio-ն ներառում է slot titles, ELEMENTALS և LC App concept work։" },
+      { title: "Ճկուն համագործակցություն", description: "Հնարավոր է ընտրել առանձին disciplines, ամբողջական production կամ dedicated development support։" }
+    ]
+  },
+  es: {
+    eyebrow: "Trabajo del estudio",
+    title: "Trabajo real que los socios pueden evaluar antes de la primera llamada.",
+    description: "Juegos jugables, conceptos de producto visibles y capacidades full-cycle ofrecen trabajo concreto de OpenGamer para revisar antes de definir el alcance.",
+    items: [
+      { title: "Portafolio de slots jugables", description: "Los títulos seleccionados de OpenGamer pueden revisarse mediante demos públicas cuando están disponibles." },
+      { title: "Producción full-cycle", description: "Concepto, matemática, frontend, backend, arte y QA pueden entregarse como un alcance coordinado." },
+      { title: "Entrega orientada a integraciones", description: "El trabajo con integraciones de operadores, agregadores y plataformas puede formar parte del alcance." },
+      { title: "Slots y productos Live Casino", description: "El portafolio público incluye slots, ELEMENTALS y el trabajo conceptual de LC App." },
+      { title: "Colaboración flexible", description: "Los socios pueden contratar disciplinas concretas, producción completa o soporte de desarrollo dedicado." }
+    ]
+  },
+  pt: {
+    eyebrow: "Trabalho do estúdio",
+    title: "Trabalho real que os parceiros podem avaliar antes da primeira conversa.",
+    description: "Jogos jogáveis, conceitos de produto visíveis e capacidades full-cycle dão aos parceiros trabalho concreto da OpenGamer para avaliar antes de definir o escopo.",
+    items: [
+      { title: "Portfólio de slots jogáveis", description: "Títulos selecionados da OpenGamer podem ser avaliados por demos públicas quando disponíveis." },
+      { title: "Produção full-cycle", description: "Conceito, matemática, frontend, backend, arte e QA podem ser entregues como um escopo coordenado." },
+      { title: "Entrega orientada a integrações", description: "Integrações com operadores, agregadores e plataformas podem fazer parte do escopo de entrega." },
+      { title: "Slots e produtos Live Casino", description: "O portfólio público inclui slots, ELEMENTALS e o trabalho conceitual do LC App." },
+      { title: "Modelo de colaboração flexível", description: "Parceiros podem contratar disciplinas específicas, produção completa ou suporte de desenvolvimento dedicado." }
+    ]
+  }
+};
+
 export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
   const copy = homepageCopy[locale] || homepageCopy.en;
+  const proof = proofCopy[locale] || proofCopy.en;
   const homepageGames = homepageFeaturedGameSlugs
     .map((slug) => games.find((game) => game.slug === slug))
     .filter((game): game is Game => Boolean(game))
@@ -170,20 +239,14 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
       </Section>
 
       <Section>
-        <SectionHeader
-          eyebrow="Studio proof"
-          title="Real work partners can evaluate before the first call."
-          description="Playable games, visible product concepts and full-cycle development capabilities give partners concrete OpenGamer work to review before discussing scope."
-        />
+        <SectionHeader eyebrow={proof.eyebrow} title={proof.title} description={proof.description} />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
-          {copy.trust
-            .filter((item) => item.isVerified)
-            .map((item) => (
-              <Card key={item.title} tone="strong" className="h-full">
-                <h2 className="text-lg font-semibold text-white">{item.title}</h2>
-                <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
-              </Card>
-            ))}
+          {proof.items.map((item) => (
+            <Card key={item.title} tone="strong" className="h-full">
+              <h2 className="text-lg font-semibold text-white">{item.title}</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
+            </Card>
+          ))}
         </div>
       </Section>
 
