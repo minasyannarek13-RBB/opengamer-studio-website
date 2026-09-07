@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import { Button } from "@/components/ui/Button";
 import { getGameCommercialStatusLabel, getVerifiedDemoUrl, type Game } from "@/content/games";
@@ -9,18 +10,15 @@ export function GameCard({ game }: { game: Game }) {
   const primaryCategory = game.category?.[0];
 
   return (
-    <article
-      className="premium-card game-card group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] shadow-[0_18px_60px_rgba(0,0,0,0.20)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.05] hover:shadow-[0_24px_76px_rgba(0,0,0,0.26)] focus-within:-translate-y-0.5 focus-within:border-emerald/45"
-      style={{ "--game-accent": game.visualAccent || "#2ee6a6" } as CSSProperties}
-    >
-      <a href={`/games/${game.slug}`} className="image-frame relative aspect-[10/7] overflow-hidden bg-black/45 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald/70">
+    <article className="premium-card game-card group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] shadow-[0_18px_60px_rgba(0,0,0,0.20)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.05] hover:shadow-[0_24px_76px_rgba(0,0,0,0.26)] focus-within:-translate-y-0.5 focus-within:border-emerald/45" style={{ "--game-accent": game.visualAccent || "#2ee6a6" } as CSSProperties}>
+      <Link href={`/games/${game.slug}`} className="image-frame relative aspect-[10/7] overflow-hidden bg-black/45 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald/70">
         <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} width={game.imageWidth} height={game.imageHeight} sizes="(min-width:1280px) 300px,(min-width:768px) 50vw,100vw" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025] group-focus-within:scale-[1.025]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/88 via-black/25 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
           {primaryCategory ? <span className="rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur">{primaryCategory}</span> : <span />}
           {demoUrl ? <span className="rounded-full border border-emerald/25 bg-emerald/10 px-3 py-1 text-xs font-medium text-emerald backdrop-blur">Demo</span> : null}
         </div>
-      </a>
+      </Link>
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <h3 className="text-xl font-semibold text-white sm:text-2xl">{game.title}</h3>
