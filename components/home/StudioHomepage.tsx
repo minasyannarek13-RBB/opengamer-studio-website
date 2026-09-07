@@ -46,14 +46,14 @@ const proofCopy: Record<Locale, {
 }> = {
   en: {
     eyebrow: "Studio proof",
-    title: "Real work partners can evaluate before the first call.",
-    description: "Playable games, visible product concepts and full-cycle development capabilities give partners concrete OpenGamer work to review before discussing scope.",
+    title: "Work You Can Review Before We Talk",
+    description: "OpenGamer puts real games, visible concepts and clearly defined capabilities in front of partners before the first commercial conversation.",
     items: [
-      { title: "Playable slot portfolio", description: "Selected OpenGamer titles can be reviewed through public demos where available." },
-      { title: "Full-cycle game production", description: "Concept, mathematics, frontend, backend, art and QA can be delivered as one coordinated scope." },
-      { title: "Integration-oriented delivery", description: "Operator, aggregator and platform integration work can be included as part of the delivery scope." },
-      { title: "Slots and live casino product work", description: "The public portfolio includes slot titles, ELEMENTALS and LC App concept work." },
-      { title: "Flexible engagement", description: "Partners can engage for selected disciplines, complete production or dedicated development support." }
+      { title: "Playable slot portfolio", description: "Selected OpenGamer titles include public demos where available." },
+      { title: "Complete game production", description: "Concept, mathematics, frontend, backend, art and QA can be coordinated as one scope." },
+      { title: "Integration support", description: "Operator, aggregator and platform integration work can be included where the project requires it." },
+      { title: "Slots and Live Casino product work", description: "The public portfolio includes slot titles, ELEMENTALS and LC App concept work." },
+      { title: "Flexible engagement", description: "Engage OpenGamer for selected disciplines, a complete build or dedicated development support." }
     ]
   },
   ru: {
@@ -109,10 +109,52 @@ const proofCopy: Record<Locale, {
 export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
   const copy = homepageCopy[locale] || homepageCopy.en;
   const proof = proofCopy[locale] || proofCopy.en;
+  const isEnglish = locale === "en";
   const homepageGames = homepageFeaturedGameSlugs
     .map((slug) => games.find((game) => game.slug === slug))
     .filter((game): game is Game => Boolean(game))
     .slice(0, 4);
+
+  const hero = isEnglish
+    ? {
+        kicker: "iGaming game & product studio",
+        heading: "We Build Casino Games and the Technology Behind Them.",
+        intro: "OpenGamer combines game production, product thinking and engineering for operators, aggregators, platforms and game providers."
+      }
+    : copy.hero;
+
+  const capabilitiesSection = isEnglish
+    ? {
+        eyebrow: "What OpenGamer can own",
+        title: "Use the Whole Studio or Only the Part You Need",
+        description: "From game concept and mathematics to frontend, backend, art, QA and integration support, the scope can expand or stay focused around your roadmap."
+      }
+    : copy.sections.capabilities;
+
+  const gamesSection = isEnglish
+    ? {
+        eyebrow: "Games portfolio",
+        title: "Start with the Games",
+        description: "Explore selected OpenGamer titles and open public demos where available."
+      }
+    : copy.sections.games;
+
+  const projectsSection = isEnglish
+    ? {
+        eyebrow: "Beyond the slot portfolio",
+        title: "Original Concepts and Product Work",
+        description: "ELEMENTALS and LC App show how OpenGamer approaches Live Casino concepts and B2B product design beyond traditional slot production."
+      }
+    : copy.sections.projects;
+
+  const ctaSection = isEnglish
+    ? {
+        eyebrow: "Start a conversation",
+        title: "Have a Game, Product or Technical Gap to Solve?",
+        description: "Send the brief, current stage and what your team needs. We will keep the first conversation focused on the relevant scope.",
+        primary: "Discuss a Project"
+      }
+    : copy.sections.cta;
 
   return (
     <>
@@ -120,13 +162,13 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
         <div className="studio-static-hero__ambient" aria-hidden="true" />
         <Container className="grid min-h-[calc(100svh-5rem)] gap-10 py-16 sm:py-20 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
           <div className="max-w-3xl">
-            <p className="premium-kicker text-xs font-semibold uppercase">{copy.hero.kicker}</p>
+            <p className="premium-kicker text-xs font-semibold uppercase">{hero.kicker}</p>
             <h1 className="mt-5 text-balance text-5xl font-semibold leading-[0.98] tracking-normal text-white sm:text-6xl lg:text-7xl">
-              {copy.hero.heading}
+              {hero.heading}
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">{copy.hero.intro}</p>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">{hero.intro}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href={getLocalizedHomePath(locale, "/contact")}>Discuss a Project</Button>
+              <Button href={getLocalizedHomePath(locale, "/contact#project-enquiry")}>Discuss a Project</Button>
               <Button href={getLocalizedHomePath(locale, "/games")} variant="secondary">
                 Explore Games
               </Button>
@@ -141,7 +183,11 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
           </div>
           <div className="studio-static-hero__visual" aria-label="OpenGamer selected games and product concepts">
             {homepageProofItems.map((item, index) => (
-              <Link key={item.title} href={getLocalizedHomePath(locale, item.href)} className={`studio-static-hero__tile studio-static-hero__tile--${index + 1}`}>
+              <Link
+                key={item.title}
+                href={getLocalizedHomePath(locale, item.href)}
+                className={`studio-static-hero__tile studio-static-hero__tile--${index + 1} focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70`}
+              >
                 <Image src={item.image} alt="" width={600} height={420} sizes="(min-width: 1024px) 19vw, 44vw" className="h-full w-full object-cover" priority={index < 2} />
                 <span>{item.type}</span>
                 <strong>{item.title}</strong>
@@ -152,7 +198,7 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
       </section>
 
       <Section className="studio-section-top">
-        <SectionHeader {...copy.sections.capabilities} />
+        <SectionHeader {...capabilitiesSection} />
         <div className="mt-10 grid gap-5 lg:grid-cols-3" data-reveal-group="cards">
           {copy.capabilities.map((group) => (
             <Card key={group.title} tone="strong" className="capability-area h-full">
@@ -171,9 +217,9 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
 
       <Section>
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeader {...copy.sections.games} />
+          <SectionHeader {...gamesSection} />
           <Button href={getLocalizedHomePath(locale, "/games")} variant="secondary">
-            {copy.slides[1].primary}
+            {isEnglish ? "View All Games" : copy.slides[1].primary}
           </Button>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4" data-reveal-group="cards">
@@ -182,17 +228,17 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
           ))}
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button href={getLocalizedHomePath(locale, "/contact?interest=portfolio")} variant="secondary">
-            Request Full Game Portfolio
+          <Button href={getLocalizedHomePath(locale, "/contact?interest=portfolio#project-enquiry")} variant="secondary">
+            Request Game Portfolio
           </Button>
-          <Button href={getLocalizedHomePath(locale, "/contact?interest=game")} variant="secondary">
-            Discuss Game Distribution
+          <Button href={getLocalizedHomePath(locale, "/contact?interest=game#project-enquiry")} variant="secondary">
+            Discuss Custom Game Production
           </Button>
         </div>
       </Section>
 
       <Section className="bg-black/20">
-        <SectionHeader {...copy.sections.projects} />
+        <SectionHeader {...projectsSection} />
         <div className="homepage-projects mt-10" data-reveal-group="cards">
           {copy.projects.map((project, index) => (
             <article key={project.title} className="premium-card group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white/[0.045] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30 hover:bg-white/[0.06]">
@@ -253,12 +299,12 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
       <Section className="bg-black/24">
         <div className="premium-card surface-hairline grid gap-8 rounded-lg border border-emerald/20 bg-emerald/[0.045] p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <p className="premium-kicker mb-4 text-xs font-semibold uppercase">{copy.sections.cta.eyebrow}</p>
-            <h2 className="text-balance text-3xl font-semibold text-white sm:text-4xl">{copy.sections.cta.title}</h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">{copy.sections.cta.description}</p>
+            <p className="premium-kicker mb-4 text-xs font-semibold uppercase">{ctaSection.eyebrow}</p>
+            <h2 className="text-balance text-3xl font-semibold text-white sm:text-4xl">{ctaSection.title}</h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">{ctaSection.description}</p>
           </div>
-          <Button href={getLocalizedHomePath(locale, "/contact")} className="w-full sm:w-auto">
-            {copy.sections.cta.primary}
+          <Button href={getLocalizedHomePath(locale, "/contact#project-enquiry")} className="w-full sm:w-auto">
+            {ctaSection.primary}
           </Button>
         </div>
       </Section>
