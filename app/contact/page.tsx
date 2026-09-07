@@ -11,33 +11,33 @@ import { company } from "@/content/company";
 
 export const metadata: Metadata = {
   title: "Contact | OpenGamer Studio",
-  description: "Contact OpenGamer to discuss casino game development, RGS-related engineering, integrations or a dedicated iGaming development team.",
+  description: "Discuss casino game production, product engineering, integrations, portfolio opportunities or dedicated iGaming development support with OpenGamer.",
   alternates: { canonical: "/contact" }
 };
 
 const enquiryRoutes = [
   {
     title: "Game production",
-    description: "Original, custom or branded slot production, from selected stages to full-cycle delivery.",
+    description: "Original, custom or branded slot production, from a selected stage to a complete game build.",
     href: "/contact?interest=game#project-enquiry"
   },
   {
     title: "Engineering & integration",
-    description: "Frontend, backend, APIs and integration-oriented delivery for existing iGaming products.",
+    description: "Frontend, backend, APIs and integration work for games and existing iGaming products.",
     href: "/contact?interest=technology#project-enquiry"
   },
   {
     title: "Portfolio & partnerships",
-    description: "Portfolio access, licensing discussions and strategic product or distribution conversations.",
+    description: "Portfolio access, licensing, distribution and strategic product discussions.",
     href: "/contact?interest=portfolio#project-enquiry"
   }
 ];
 
 const enquiryGuidance = [
-  "Project type and commercial goal",
-  "Target platform, aggregator or operator context",
-  "Required game, RGS-related or integration scope",
-  "Current stage and key launch dependencies"
+  "What you want to build or improve",
+  "Target platform, operator or aggregator context",
+  "The production or engineering scope you need",
+  "Current stage, timing and key dependencies"
 ];
 
 export default function ContactPage() {
@@ -47,8 +47,8 @@ export default function ContactPage() {
         <Container>
           <SectionHeader
             eyebrow="Start a conversation"
-            title="Tell Us What You Want to Build"
-            description="Choose the closest starting point or send the essentials directly. OpenGamer will use the context you provide to review the right production, engineering or commercial path."
+            title="Bring Us the Project, the Gap or the Opportunity"
+            description="Choose the closest path below, or go straight to the form. A concise brief is enough to start a useful commercial conversation."
             headingLevel="h1"
           />
         </Container>
@@ -78,7 +78,7 @@ export default function ContactPage() {
                     {company.email}
                   </a>
                 ) : (
-                  <p>Use the form to send project, technology and portfolio enquiries.</p>
+                  <p>Use the form for project, technology and portfolio enquiries.</p>
                 )}
                 {company.social.map((item) => (
                   <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-white">
@@ -88,8 +88,8 @@ export default function ContactPage() {
               </div>
             </Card>
             <Card>
-              <h2 className="text-lg font-semibold text-white">Useful Details</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-400">Start with what you already know. Additional project details are optional in the form.</p>
+              <h2 className="text-lg font-semibold text-white">What Helps Us Understand the Brief</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Share only what is already clear. Extra detail can come later.</p>
               <ul className="mt-4 grid gap-3 text-sm text-slate-300">
                 {enquiryGuidance.map((item) => (
                   <li key={item} className="flex gap-3">
@@ -102,7 +102,7 @@ export default function ContactPage() {
             <ProductSignature
               eyebrow="Portfolio reference"
               title="Forest Fortune"
-              description="Use the form to discuss game distribution, custom production or portfolio access."
+              description="A useful reference for custom game production, portfolio access or distribution discussions."
               image="/assets/games/forest-fortune/artwork.webp"
               href="/games/forest-fortune"
               actionLabel="View Game"
