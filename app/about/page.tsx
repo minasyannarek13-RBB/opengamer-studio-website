@@ -12,40 +12,40 @@ import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = {
   title: "About | OpenGamer Studio",
-  description: "OpenGamer is an iGaming development studio creating casino games, product concepts and technology support for B2B partners.",
+  description: "OpenGamer is an iGaming development studio combining casino game production, product thinking and engineering for B2B partners.",
   alternates: { canonical: "/about" }
 };
 
 const aboutSections = [
   {
-    title: "Built for B2B delivery",
+    title: "Built around iGaming products",
     description:
-      "OpenGamer brings game design, mathematics, visual production, frontend and backend engineering, integration and post-launch product support into one delivery structure."
+      "OpenGamer works across game design, mathematics, visual production, frontend, backend and integration without treating each discipline as a separate project."
   },
   {
     title: "Flexible by scope",
     description:
-      "Partners can engage the studio for a single title, selected production stages, dedicated capacity, co-development or a broader technology relationship."
+      "A partner can engage the studio for one title, selected disciplines, dedicated capacity, co-development or a broader product and technology scope."
   },
   {
-    title: "Product and engineering together",
+    title: "Product and engineering stay connected",
     description:
-      "Game-facing creative work stays connected to the engineering, integration and operating requirements needed to move a product toward delivery."
+      "Creative decisions are made with game logic, integration requirements, device behaviour and delivery constraints in view."
   },
   {
-    title: "Focused on iGaming",
+    title: "Focused on the gaming industry",
     description:
-      "The studio works across slot production, live casino concepts and gaming product technology rather than treating casino products as generic software projects."
+      "The work spans slot production, Live Casino concepts and gaming product technology, with the domain context built into the delivery approach."
   }
 ];
 
 const workingPrinciples = [
-  { title: "Product before output", description: "Start with the commercial and player-facing objective before defining production scope." },
-  { title: "Defined responsibility", description: "Make ownership, deliverables and handoffs explicit from the beginning." },
-  { title: "Modular delivery", description: "Use the full studio or only the production layers the project actually needs." },
-  { title: "Technical transparency", description: "Keep product, engineering and integration constraints visible throughout delivery." },
-  { title: "Industry-specific execution", description: "Design around real iGaming workflows, content requirements and partner environments." },
-  { title: "Maintainable outcomes", description: "Build for the next integration, release and operating phase rather than a one-off presentation." }
+  { title: "Start with the product", description: "Define the commercial and player-facing objective before expanding the production scope." },
+  { title: "Make ownership clear", description: "Keep responsibility, deliverables and handoffs explicit from the beginning." },
+  { title: "Use only the scope you need", description: "Engage the complete studio or the specific disciplines that strengthen your roadmap." },
+  { title: "Keep constraints visible", description: "Product, engineering and integration requirements stay part of the same conversation." },
+  { title: "Design for iGaming reality", description: "Account for game flows, content requirements, partner environments and operational context." },
+  { title: "Build beyond the presentation", description: "Plan for the next integration, release and iteration rather than a one-off showcase." }
 ];
 
 const studioProof = [
@@ -78,10 +78,10 @@ export default function AboutPage() {
           <div>
             <p className="premium-kicker text-xs font-semibold uppercase">About OpenGamer</p>
             <h1 className="mt-5 max-w-3xl text-balance text-5xl font-semibold leading-[0.98] text-white sm:text-6xl">
-              One studio across game production, product and engineering.
+              A Game Studio Built Around Product and Engineering.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
-              OpenGamer develops casino games, original gaming concepts and integration-oriented software for operators, aggregators, platforms and game providers.
+              OpenGamer develops casino games, original product concepts and supporting technology for operators, aggregators, platforms and game providers.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/services">Explore Capabilities</Button>
@@ -91,7 +91,7 @@ export default function AboutPage() {
 
           <div className="grid gap-3 sm:grid-cols-3" aria-label="Selected OpenGamer work">
             {studioProof.map((item) => (
-              <Link key={item.title} href={item.href} className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.045] transition hover:-translate-y-0.5 hover:border-emerald/30 hover:bg-white/[0.06]">
+              <Link key={item.title} href={item.href} className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.045] transition hover:-translate-y-0.5 hover:border-emerald/30 hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                 <div className="relative aspect-[4/5] overflow-hidden bg-black/35">
                   <Image src={item.image} alt="" fill sizes="(min-width: 1024px) 18vw, 30vw" className="object-cover transition duration-500 group-hover:scale-[1.025]" />
                 </div>
@@ -108,8 +108,8 @@ export default function AboutPage() {
       <Section>
         <SectionHeader
           eyebrow="Studio model"
-          title="A development partner that can scale with the project."
-          description="OpenGamer can own a complete production scope or plug into the specific layers where a partner needs additional capability."
+          title="One Team When the Work Crosses Disciplines"
+          description="OpenGamer can own a complete production scope or join the specific part of a roadmap where extra game, product or engineering capability is needed."
         />
         <div className="mt-10 grid gap-4 lg:grid-cols-2" data-reveal-group="cards">
           {aboutSections.map((section) => (
@@ -122,7 +122,7 @@ export default function AboutPage() {
       </Section>
 
       <Section className="bg-black/20">
-        <SectionHeader eyebrow="How we work" title="Clear scope. Connected disciplines. Fewer handoffs." description="The studio is structured to keep product, creative and engineering decisions connected from definition through delivery." />
+        <SectionHeader eyebrow="How we work" title="Clear Scope. Connected Decisions. Fewer Handoffs." description="Product, creative and engineering choices stay connected from definition through delivery." />
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
           {workingPrinciples.map((principle) => (
             <Card key={principle.title} className="h-full">
@@ -134,21 +134,21 @@ export default function AboutPage() {
       </Section>
 
       <Section>
-        <SectionHeader eyebrow="Studio output" title="Games, original concepts and product technology." description="Selected work shows how OpenGamer combines content production, live casino concepts and technology delivery without presenting unfinished concepts as live products." />
+        <SectionHeader eyebrow="Selected work" title="Games, Original Concepts and Product Technology" description="Explore work across slot production, Live Casino concepts and product engineering, with development status kept explicit where a concept is not yet a live product." />
         <div className="mt-10">
           <RelatedProductStrip
             items={[
-              { eyebrow: "Games", title: "Slot Portfolio", description: "Selected playable and review-ready OpenGamer game content.", image: "/assets/games/sweet-wins/artwork.webp", href: "/games", actionLabel: "Explore Games" },
+              { eyebrow: "Games", title: "Slot Portfolio", description: "Selected OpenGamer titles with public demos where available.", image: "/assets/games/sweet-wins/artwork.webp", href: "/games", actionLabel: "Explore Games" },
               { eyebrow: "Live Casino", title: "ELEMENTALS", description: "Original show-game concept currently in development.", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals", actionLabel: "View Concept", accent: "#dca45f" },
-              { eyebrow: "Technology", title: "Product Engineering", description: "Frontend, backend and integration-oriented delivery capability.", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/technology", actionLabel: "View Technology", accent: "#6ccfde" }
+              { eyebrow: "Technology", title: "Product Engineering", description: "Frontend, backend and integration-focused development capability.", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/technology", actionLabel: "View Technology", accent: "#6ccfde" }
             ]}
           />
         </div>
       </Section>
 
       <CTASection
-        title="Bring us the product, the gap or the delivery problem."
-        description="Share the project type, current stage and the capability you need. OpenGamer will map the right engagement scope."
+        title="Bring Us the Product, the Gap or the Delivery Problem"
+        description="Share the current stage and what your team needs. We will keep the first conversation focused on the relevant scope."
         ctaLabel="Discuss a Project"
         ctaHref="/contact#project-enquiry"
       />
