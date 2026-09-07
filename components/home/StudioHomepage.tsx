@@ -170,12 +170,16 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
       </Section>
 
       <Section>
-        <SectionHeader eyebrow="Trust and credibility" title="Credibility Without Unsupported Claims" description="OpenGamer presents verified public proof points and keeps unconfirmed commercial data out of the public interface." />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5" data-reveal-group="cards">
+        <SectionHeader
+          eyebrow="Studio proof"
+          title="Real work partners can evaluate before the first call."
+          description="Playable games, visible product concepts and full-cycle development capabilities give partners concrete OpenGamer work to review before discussing scope."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
           {copy.trust
             .filter((item) => item.isVerified)
             .map((item) => (
-              <Card key={item.title} className="h-full">
+              <Card key={item.title} tone="strong" className="h-full">
                 <h2 className="text-lg font-semibold text-white">{item.title}</h2>
                 <p className="mt-3 text-sm leading-6 text-slate-400">{item.description}</p>
               </Card>
