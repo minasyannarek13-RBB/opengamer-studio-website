@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -14,6 +15,24 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" }
 };
 
+const enquiryRoutes = [
+  {
+    title: "Game production",
+    description: "Original, custom or branded slot production, from selected stages to full-cycle delivery.",
+    href: "/contact?interest=game"
+  },
+  {
+    title: "Engineering & integration",
+    description: "Frontend, backend, APIs and integration-oriented delivery for existing iGaming products.",
+    href: "/contact?interest=technology"
+  },
+  {
+    title: "Portfolio & partnerships",
+    description: "Portfolio access, licensing discussions and strategic product or distribution conversations.",
+    href: "/contact?interest=portfolio"
+  }
+];
+
 const enquiryGuidance = [
   "Project type and commercial goal",
   "Target platform, aggregator or operator context",
@@ -27,15 +46,29 @@ export default function ContactPage() {
       <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
         <Container>
           <SectionHeader
-            eyebrow="Contact"
+            eyebrow="Start a conversation"
             title="Tell Us What You Want to Build"
-            description="Share your project objective, current stage and required delivery scope. OpenGamer will review the request and propose the most practical next step."
+            description="Choose the closest starting point or send the essentials directly. OpenGamer will use the context you provide to review the right production, engineering or commercial path."
             headingLevel="h1"
           />
         </Container>
       </section>
       <Section>
-        <div className="grid gap-8 lg:grid-cols-[0.38fr_1fr]">
+        <div className="mb-10 grid gap-4 md:grid-cols-3" data-reveal-group="cards">
+          {enquiryRoutes.map((route) => (
+            <Link
+              key={route.title}
+              href={route.href}
+              className="premium-card group rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30 hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald">Choose a path</p>
+              <h2 className="mt-3 text-xl font-semibold text-white">{route.title}</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-400">{route.description}</p>
+              <span className="mt-5 inline-flex text-sm font-semibold text-emerald transition group-hover:text-white">Start here →</span>
+            </Link>
+          ))}
+        </div>
+        <div className="grid gap-8 lg:grid-cols-[0.42fr_1fr]">
           <aside className="grid gap-5" data-reveal-group="cards">
             <Card tone="strong">
               <h2 className="text-xl font-semibold text-white">Business Contact</h2>
@@ -56,6 +89,7 @@ export default function ContactPage() {
             </Card>
             <Card>
               <h2 className="text-lg font-semibold text-white">Useful Details</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Start with what you already know. Additional project details are optional in the form.</p>
               <ul className="mt-4 grid gap-3 text-sm text-slate-300">
                 {enquiryGuidance.map((item) => (
                   <li key={item} className="flex gap-3">
