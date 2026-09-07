@@ -19,17 +19,17 @@ const enquiryRoutes = [
   {
     title: "Game production",
     description: "Original, custom or branded slot production, from selected stages to full-cycle delivery.",
-    href: "/contact?interest=game"
+    href: "/contact?interest=game#project-enquiry"
   },
   {
     title: "Engineering & integration",
     description: "Frontend, backend, APIs and integration-oriented delivery for existing iGaming products.",
-    href: "/contact?interest=technology"
+    href: "/contact?interest=technology#project-enquiry"
   },
   {
     title: "Portfolio & partnerships",
     description: "Portfolio access, licensing discussions and strategic product or distribution conversations.",
-    href: "/contact?interest=portfolio"
+    href: "/contact?interest=portfolio#project-enquiry"
   }
 ];
 
@@ -64,11 +64,11 @@ export default function ContactPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald">Choose a path</p>
               <h2 className="mt-3 text-xl font-semibold text-white">{route.title}</h2>
               <p className="mt-3 text-sm leading-6 text-slate-400">{route.description}</p>
-              <span className="mt-5 inline-flex text-sm font-semibold text-emerald transition group-hover:text-white">Start here →</span>
+              <span className="mt-5 inline-flex text-sm font-semibold text-emerald transition group-hover:text-white">Start enquiry →</span>
             </Link>
           ))}
         </div>
-        <div className="grid gap-8 lg:grid-cols-[0.42fr_1fr]">
+        <div id="project-enquiry" className="scroll-mt-28 grid gap-8 lg:grid-cols-[0.42fr_1fr]">
           <aside className="grid gap-5" data-reveal-group="cards">
             <Card tone="strong">
               <h2 className="text-xl font-semibold text-white">Business Contact</h2>
