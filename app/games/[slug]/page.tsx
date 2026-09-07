@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CTASection } from "@/components/sections/CTASection";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -108,10 +109,10 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
           </div>
           <nav className="grid gap-4 sm:grid-cols-2" aria-label="Related games">
             {relatedGames.map((item) => (
-              <a key={item.slug} href={`/games/${item.slug}`} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30">
+              <Link key={item.slug} href={`/games/${item.slug}`} className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30">
                 <div className="relative aspect-[16/10] overflow-hidden bg-black/40"><Image src={item.artwork?.hero || item.image} alt={`${item.title} artwork`} width={item.imageWidth} height={item.imageHeight} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]" sizes="(min-width:1024px) 28vw,50vw" /></div>
                 <div className="p-4"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-emerald">Related game</p><h3 className="mt-2 text-xl font-semibold text-white">{item.title}</h3><p className="mt-2 text-sm leading-6 text-slate-400">{item.shortDescription}</p></div>
-              </a>
+              </Link>
             ))}
           </nav>
         </div>
