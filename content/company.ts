@@ -16,7 +16,7 @@ export const company = {
   website: "https://open-gamer.com",
   email: configuredPublicEmail,
   description:
-    "OpenGamer is a full-cycle iGaming game and product development studio. We create original casino games, custom game content, live casino products and integration-ready technology for operators, platforms, aggregators and game providers.",
+    "OpenGamer is an iGaming development studio creating casino games, original product concepts and supporting technology for operators, platforms, aggregators and game providers.",
   social: isValidLinkedInUrl(configuredLinkedInUrl) ? [{ label: "LinkedIn", href: configuredLinkedInUrl }] : [],
   leadership: [
     { name: "Hayk", role: "CEO" },
