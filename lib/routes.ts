@@ -7,13 +7,13 @@ export type RouteItem = {
 };
 
 export const routes: RouteItem[] = [
-  { path: "/", nav: true, label: { en: "Home", ru: "Главная", hy: "Գլխավոր", es: "Inicio", pt: "Inicio" } },
+  { path: "/", nav: false, label: { en: "Home", ru: "Главная", hy: "Գլխավոր", es: "Inicio", pt: "Inicio" } },
   { path: "/games", nav: true, label: { en: "Games", ru: "Игры", hy: "Խաղեր", es: "Juegos", pt: "Jogos" } },
   { path: "/services", nav: true, label: { en: "Solutions", ru: "Решения", hy: "Լուծումներ", es: "Soluciones", pt: "Soluções" } },
   { path: "/portfolio", nav: true, label: { en: "Portfolio", ru: "Портфолио", hy: "Պորտֆոլիո", es: "Portafolio", pt: "Portfólio" } },
   { path: "/technology", nav: true, label: { en: "Technology", ru: "Технологии", hy: "Տեխնոլոգիա", es: "Tecnología", pt: "Tecnologia" } },
   { path: "/about", nav: true, label: { en: "Company", ru: "Компания", hy: "Ընկերություն", es: "Empresa", pt: "Empresa" } },
-  { path: "/contact", nav: true, label: { en: "Contact", ru: "Контакты", hy: "Կապ", es: "Contacto", pt: "Contato" } }
+  { path: "/contact", nav: false, label: { en: "Contact", ru: "Контакты", hy: "Կապ", es: "Contacto", pt: "Contato" } }
 ];
 
 export const navRoutes = routes.filter((route) => route.nav);
