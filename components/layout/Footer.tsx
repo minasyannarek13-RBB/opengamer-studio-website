@@ -6,46 +6,51 @@ import { footerCompanyNavigation, footerSolutionsNavigation, legalNavigation } f
 import type { Locale } from "@/lib/i18n";
 import { getLocalizedHomePath, getLocalizedPath } from "@/lib/routes";
 
-const footerCopy: Record<Locale, { solutions: string; company: string; legalContact: string; enquiry: string; rights: string; scope: string }> = {
+const footerCopy: Record<Locale, { solutions: string; company: string; legalContact: string; enquiry: string; discuss: string; rights: string; scope: string }> = {
   en: {
     solutions: "Solutions",
     company: "Company",
     legalContact: "Legal and contact",
     enquiry: "Project enquiry form",
+    discuss: "Discuss a Project",
     rights: "All rights reserved.",
-    scope: "Casino games, custom products, live casino concepts and integration-ready technology."
+    scope: "Casino games, product concepts and iGaming technology."
   },
   ru: {
     solutions: "Решения",
     company: "Компания",
     legalContact: "Правовая информация и контакты",
     enquiry: "Форма запроса проекта",
+    discuss: "Обсудить проект",
     rights: "Все права защищены.",
-    scope: "Казино-игры, кастомные продукты, live casino концепты и интеграционная технология."
+    scope: "Казино-игры, продуктовые концепты и iGaming-технологии."
   },
   hy: {
     solutions: "Լուծումներ",
     company: "Ընկերություն",
     legalContact: "Իրավական և կապ",
     enquiry: "Նախագծի հարցման ձև",
+    discuss: "Քննարկել նախագիծը",
     rights: "Բոլոր իրավունքները պաշտպանված են:",
-    scope: "Կազինո խաղեր, անհատական արտադրանքներ, live casino գաղափարներ և ինտեգրման տեխնոլոգիա:"
+    scope: "Կազինո խաղեր, product concept-ներ և iGaming տեխնոլոգիա:"
   },
   es: {
     solutions: "Soluciones",
     company: "Empresa",
     legalContact: "Legal y contacto",
     enquiry: "Formulario de proyecto",
+    discuss: "Hablar de un proyecto",
     rights: "Todos los derechos reservados.",
-    scope: "Juegos de casino, productos personalizados, conceptos Live Casino y tecnología lista para integración."
+    scope: "Juegos de casino, conceptos de producto y tecnología iGaming."
   },
   pt: {
     solutions: "Soluções",
     company: "Empresa",
     legalContact: "Legal e contato",
-    enquiry: "Formulario de projeto",
+    enquiry: "Formulário de projeto",
+    discuss: "Discutir um projeto",
     rights: "Todos os direitos reservados.",
-    scope: "Jogos de cassino, produtos personalizados, conceitos Live Casino e tecnologia pronta para integração."
+    scope: "Jogos de cassino, conceitos de produto e tecnologia iGaming."
   }
 };
 
@@ -66,6 +71,12 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
               sizes="150px"
             />
             <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400">{company.description}</p>
+            <Link
+              href={getLocalizedPath(locale, "/contact")}
+              className="mt-5 inline-flex min-h-11 items-center rounded-full border border-emerald/30 bg-emerald/10 px-4 py-2 text-sm font-semibold text-emerald transition hover:border-emerald/55 hover:bg-emerald/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+            >
+              {copy.discuss}
+            </Link>
           </div>
           <div>
             <h2 className="text-sm font-semibold text-white">{copy.solutions}</h2>
