@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { CTASection } from "@/components/sections/CTASection";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Button } from "@/components/ui/Button";
@@ -38,16 +39,16 @@ export default function LiveCasinoDevelopmentPage() {
             </div>
           </div>
           <div className="grid min-h-[25rem] gap-3 sm:grid-cols-[1.15fr_0.85fr]">
-            <a href="/portfolio/elementals" className="group relative overflow-hidden rounded-2xl border border-[#dca45f]/20 bg-black/45 shadow-[0_26px_90px_rgba(0,0,0,0.34)]">
+            <Link href="/portfolio/elementals" className="group relative overflow-hidden rounded-2xl border border-[#dca45f]/20 bg-black/45 shadow-[0_26px_90px_rgba(0,0,0,0.34)]">
               <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="ELEMENTALS Nexus stage concept" fill sizes="(min-width:1024px) 34vw,60vw" className="object-cover transition duration-500 group-hover:scale-[1.02]" priority />
               <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/15 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-5"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#dca45f]">Show-game concept</span><strong className="mt-1 block text-xl font-semibold text-white">ELEMENTALS</strong></div>
-            </a>
-            <a href="/portfolio/lc-app" className="group relative overflow-hidden rounded-2xl border border-[#2ee6ce]/15 bg-black/45 shadow-[0_26px_90px_rgba(0,0,0,0.3)]">
+            </Link>
+            <Link href="/portfolio/lc-app" className="group relative overflow-hidden rounded-2xl border border-[#2ee6ce]/15 bg-black/45 shadow-[0_26px_90px_rgba(0,0,0,0.3)]">
               <Image src="/assets/projects/lc-app/optimized/lc-app-mobile-community.webp" alt="LC App concept community interface" fill sizes="(min-width:1024px) 24vw,40vw" className="object-cover transition duration-500 group-hover:scale-[1.02]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/15 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-5"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#2ee6ce]">Product layer</span><strong className="mt-1 block text-xl font-semibold text-white">LC App</strong></div>
-            </a>
+            </Link>
           </div>
         </Container>
       </section>
