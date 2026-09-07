@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ArchitectureDiagram } from "@/components/sections/ArchitectureDiagram";
 import { CTASection } from "@/components/sections/CTASection";
-import { StudioGameSignature } from "@/components/games/StudioGameSignature";
-import { RelatedProductStrip } from "@/components/visual/ProductSignature";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
-import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -13,142 +12,142 @@ import { integrationWorkflow, technologyArchitectureFlow, technologyPrinciples }
 
 export const metadata: Metadata = {
   title: "Technology | OpenGamer Studio",
-  description: "Technology capabilities for casino game development, RGS-related engineering, integration workflows and product delivery.",
+  description: "Frontend, backend, RGS-related engineering and integration support for casino games and iGaming products.",
   alternates: { canonical: "/technology" }
 };
 
-const technologyCapabilities = [
-  "HTML5 game clients",
-  "Front-end game engineering",
-  "Backend game services",
-  "RGS-related engineering",
-  "Wallet communication",
-  "Integration workflows",
-  "QA and release coordination",
-  "Post-release product support"
+const engineeringAreas = [
+  {
+    title: "Game Frontend",
+    description: "Responsive HTML5 clients, game UI, animation integration, asset optimisation and device-focused performance.",
+    items: ["HTML5 game clients", "Responsive UI", "Animation integration", "Performance optimisation"]
+  },
+  {
+    title: "Backend & RGS-Related Engineering",
+    description: "Game-session logic, configuration, wallet communication, reporting and RGS-related modules defined around the partner scope.",
+    items: ["Session handling", "Game logic", "Configuration", "Reporting"]
+  },
+  {
+    title: "Integration",
+    description: "Structured work around launch flows, wallet communication, operator or aggregator connectivity, QA and acceptance.",
+    items: ["API mapping", "Wallet flows", "Partner connectivity", "Acceptance support"]
+  }
 ];
 
-const frontEndCapabilities = [
-  "Responsive game clients",
-  "Mobile and desktop layouts",
-  "Game UI implementation",
-  "Animation integration",
-  "Asset optimization",
-  "Performance-focused rendering"
+const proofVisuals = [
+  { label: "Game-facing product", title: "Deep Dive", image: "/assets/games/deep-dive/artwork.webp", href: "/games/deep-dive" },
+  { label: "Product interface", title: "LC App", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/portfolio/lc-app" }
 ];
-
-const backendCapabilities = [
-  "Game session handling",
-  "Game logic",
-  "Wallet communication",
-  "Bonus support",
-  "Free spins support",
-  "Reporting",
-  "Operational visibility",
-  "Game configuration",
-  "Operator and aggregator connectivity"
-];
-
-const engagementModels = ["Project-based delivery", "Dedicated technical team", "Co-development", "Integration support", "Long-term product support"];
 
 export default function TechnologyPage() {
   return (
     <SiteShell atmosphere="technology">
-      <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
-        <Container>
-          <SectionHeader
-            eyebrow="Technology"
-            title="Game Technology, RGS Engineering and Integration Support"
-            description="OpenGamer supports casino game production with front-end engineering, backend services, RGS-related development, integration workflows and delivery support."
-            headingLevel="h1"
-          />
-          <StudioGameSignature context="technology" variant="inline" className="mt-8 max-w-2xl" />
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-20 lg:py-24">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_18%,rgba(46,230,166,0.13),transparent_28rem)]" />
+        <Container className="relative grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+          <div className="max-w-3xl">
+            <p className="premium-kicker text-xs font-semibold uppercase">Engineering</p>
+            <h1 className="mt-5 text-balance text-5xl font-semibold leading-[0.98] text-white sm:text-6xl">Technology behind the game experience.</h1>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
+              OpenGamer connects game frontend, backend services, RGS-related engineering and integrations so the product experience and technical delivery stay aligned.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/contact?interest=technology#project-enquiry">Discuss Engineering</Button>
+              <Button href="/services#technology-and-integration" variant="secondary">View Services</Button>
+            </div>
+          </div>
+
+          <div className="grid min-h-[25rem] gap-3 sm:grid-cols-2">
+            {proofVisuals.map((item, index) => (
+              <a key={item.title} href={item.href} className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-black/45 shadow-[0_24px_80px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 ${index === 1 ? "sm:translate-y-8" : ""}`}>
+                <Image src={item.image} alt="" fill sizes="(min-width: 1024px) 28vw, 48vw" className="object-cover transition duration-500 group-hover:scale-[1.025]" priority={index === 0} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/18 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald">{item.label}</span>
+                  <strong className="mt-1 block text-xl font-semibold text-white">{item.title}</strong>
+                </div>
+              </a>
+            ))}
+          </div>
         </Container>
       </section>
+
       <Section>
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1fr]">
-          <SectionHeader title="Technology Capabilities" description="A practical technology scope for building, integrating and supporting casino game products." />
-          <div className="grid gap-3 sm:grid-cols-2" data-reveal-group="cards">
-            {technologyCapabilities.map((item) => (
-              <Card key={item}>
-                <p className="text-sm font-medium text-slate-100">{item}</p>
-              </Card>
+        <div className="mb-10 max-w-3xl">
+          <p className="premium-kicker text-xs font-semibold uppercase">Core engineering areas</p>
+          <h2 className="mt-4 text-balance text-4xl font-semibold text-white sm:text-5xl">Three connected layers instead of a wall of capabilities.</h2>
+          <p className="mt-5 text-base leading-7 text-slate-300">A project can use one layer or combine them into a broader delivery scope.</p>
+        </div>
+        <div className="grid gap-5 lg:grid-cols-3" data-reveal-group="cards">
+          {engineeringAreas.map((area) => (
+            <Card key={area.title} tone="strong" className="h-full p-6">
+              <h3 className="text-2xl font-semibold text-white">{area.title}</h3>
+              <p className="mt-4 text-sm leading-6 text-slate-400">{area.description}</p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {area.items.map((item) => (
+                  <span key={item} className="rounded-full border border-white/10 bg-black/20 px-3 py-2 text-xs text-slate-300">{item}</span>
+                ))}
+              </div>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="bg-black/20">
+        <div className="grid gap-8 lg:grid-cols-[0.68fr_1.32fr] lg:items-start">
+          <div className="max-w-xl">
+            <p className="premium-kicker text-xs font-semibold uppercase">Architecture</p>
+            <h2 className="mt-4 text-balance text-4xl font-semibold text-white sm:text-5xl">Keep responsibilities visible across the integration path.</h2>
+            <p className="mt-5 text-base leading-7 text-slate-300">This reference view separates player-facing, game, partner and operational layers so dependencies are easier to discuss before implementation.</p>
+          </div>
+          <ArchitectureDiagram items={technologyArchitectureFlow} />
+        </div>
+      </Section>
+
+      <Section>
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
+          <div>
+            <p className="premium-kicker text-xs font-semibold uppercase">Integration workflow</p>
+            <h2 className="mt-4 text-balance text-4xl font-semibold text-white sm:text-5xl">Discover first. Integrate second.</h2>
+            <p className="mt-5 max-w-xl text-base leading-7 text-slate-300">Technical scope, dependencies and acceptance conditions are defined against the actual partner environment rather than assumed in advance.</p>
+          </div>
+          <ProcessTimeline items={integrationWorkflow.map((title) => ({ title }))} />
+        </div>
+      </Section>
+
+      <Section className="bg-black/20">
+        <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#050609] p-2 shadow-[0_26px_90px_rgba(0,0,0,0.32)]">
+            <Image src="/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp" alt="LC App concept across multiple devices" width={1672} height={941} className="h-full w-full rounded-xl object-contain" sizes="(min-width: 1024px) 56vw, 100vw" />
+          </div>
+          <div className="max-w-xl">
+            <p className="premium-kicker text-xs font-semibold uppercase">Product engineering reference</p>
+            <h2 className="mt-4 text-balance text-4xl font-semibold text-white">Engineering should support the product, not compete with it.</h2>
+            <p className="mt-5 text-base leading-7 text-slate-300">LC App is shown here as a product-interface reference: the visual system, responsive behaviour and product flows still need engineering decisions that stay connected to the user experience.</p>
+            <Button href="/portfolio/lc-app" variant="secondary" className="mt-7">Explore LC App</Button>
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
+          <div>
+            <p className="premium-kicker text-xs font-semibold uppercase">Engineering principles</p>
+            <h2 className="mt-4 text-balance text-4xl font-semibold text-white">Build for the next release, not just the demo.</h2>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2" data-reveal-group="cards">
+            {technologyPrinciples.slice(0, 6).map((principle) => (
+              <div key={principle} className="premium-card rounded-xl border border-line bg-white/[0.045] p-4 text-sm leading-6 text-slate-300 transition duration-300 hover:border-white/20">{principle}</div>
             ))}
           </div>
         </div>
       </Section>
-      <Section className="bg-black/20">
-        <SectionHeader title="Front-End Game Engineering" description="Client-side production for responsive casino game experiences across desktop and mobile environments." />
-        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
-          {frontEndCapabilities.map((item) => (
-            <Card key={item}>
-              <p className="text-sm font-medium text-slate-100">{item}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
-      <Section>
-        <SectionHeader title="Backend and RGS-Related Capabilities" description="Backend engineering for session flows, wallet communication, game logic and partner connectivity." />
-        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
-          {backendCapabilities.map((item) => (
-            <Card key={item}>
-              <p className="text-sm font-medium text-slate-100">{item}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
-      <Section className="bg-black/20">
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1fr]">
-          <SectionHeader title="Reference Integration Architecture" description="A layered view separating player, partner, game technology and operational environments." />
-          <ArchitectureDiagram items={technologyArchitectureFlow} />
-        </div>
-      </Section>
-      <Section>
-        <SectionHeader eyebrow="Product references" title="Technology Connected to Real Product Work" description="OpenGamer technology work is presented through game-facing products, integration flows and B2B product interfaces." />
-        <div className="mt-10">
-          <RelatedProductStrip
-            items={[
-              { eyebrow: "Game-facing product", title: "Deep Dive", description: "A public game demo showing the product layer technology supports.", image: "/assets/games/deep-dive/artwork.webp", href: "/games/deep-dive", actionLabel: "View Game", accent: "#5d9cff" },
-              { eyebrow: "Product interface", title: "LC App", description: "Social live casino product-interface engineering reference.", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" },
-              { eyebrow: "Game production", title: "Forest Fortune", description: "Portfolio game content connected to frontend and backend delivery.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" }
-            ]}
-          />
-        </div>
-      </Section>
-      <Section>
-        <SectionHeader
-          title="Integration and Delivery Workflow"
-          description="Each integration begins with technical discovery. Scope, dependencies and timing are defined after reviewing the partner environment and documentation."
-        />
-        <div className="mt-10">
-          <ProcessTimeline items={integrationWorkflow.map((title) => ({ title }))} />
-        </div>
-      </Section>
-      <Section className="bg-black/20">
-        <SectionHeader title="Engagement Models" description="Technology work can be scoped as a project, support stream or dedicated team depending on partner needs." />
-        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-5" data-reveal-group="cards">
-          {engagementModels.map((model) => (
-            <div key={model} className="premium-card rounded-lg border border-line bg-white/[0.045] p-4 text-sm text-slate-200 transition duration-300 hover:-translate-y-0.5 hover:border-white/20">
-              {model}
-            </div>
-          ))}
-        </div>
-      </Section>
-      <Section>
-        <SectionHeader title="Engineering Principles" />
-        <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
-          {technologyPrinciples.map((principle) => (
-            <div key={principle} className="premium-card rounded-lg border border-line bg-white/[0.045] p-4 text-sm text-slate-200 transition duration-300 hover:-translate-y-0.5 hover:border-white/20">
-              {principle}
-            </div>
-          ))}
-        </div>
-      </Section>
+
       <CTASection
-        title="Discuss Integration Requirements"
-        description="Share your platform, wallet flow, aggregator context, target launch path and technical documentation status."
-        ctaLabel="Discuss Integration"
-        ctaHref="/contact?service=technology"
+        title="Bring the product and the technical context"
+        description="Share the platform, wallet flow, integration target and current development stage. OpenGamer can review the engineering scope from there."
+        ctaLabel="Discuss Engineering"
+        ctaHref="/contact?interest=technology#project-enquiry"
         secondaryLabel="View Development Services"
         secondaryHref="/services"
       />
