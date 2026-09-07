@@ -12,7 +12,7 @@ import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = {
   title: "Solutions | OpenGamer Studio",
-  description: "Modular and full-cycle iGaming development solutions for slot games, live products, integrations, reskins, QA and dedicated development teams.",
+  description: "iGaming development for casino games, Live Casino products, frontend and backend engineering, integrations, portfolio work and dedicated teams.",
   alternates: { canonical: "/services" }
 };
 
@@ -40,68 +40,73 @@ const serviceHeroItems = [
 const solutionGroups = [
   {
     id: "game-production",
+    interest: "game",
     navLabel: "Game production",
     eyebrow: "Game production",
-    title: "Original and Custom Casino Games Built Around Your Commercial Model",
-    description: "Original and custom casino game production shaped around a partner's commercial model, market and content strategy.",
+    title: "Build an Original, Custom or Branded Casino Game",
+    description: "Use OpenGamer for a complete title or the specific production disciplines your team needs.",
     items: [
-      ["Custom Slot Development", "For operators, platforms and providers needing original or branded slot content.", "Concept, game design, art, frontend build and integration preparation."],
-      ["Turnkey Slot Development", "For partners that need a complete game build managed through one delivery structure.", "Product design, math support, art, animation, frontend, backend coordination and QA."],
-      ["Game Art and Animation", "For teams with existing mechanics or code that need stronger production assets.", "Visual direction, symbols, UI, animation, effects and promotional asset support."],
-      ["Mathematics and Game Design", "For partners defining a new game model or adapting an existing concept.", "Paytable support, feature logic, balancing preparation and documentation."],
-      ["Frontend Development", "For providers needing production HTML5 game clients.", "Responsive game UI, animation integration, state rendering, performance and device QA."]
+      ["Custom Slot Development", "Original or branded slot content for operators, platforms and providers.", "Concept, game design, art, frontend build and integration preparation."],
+      ["Turnkey Slot Development", "A complete game build managed through one production structure.", "Product design, math support, art, animation, frontend, backend coordination and QA."],
+      ["Game Art and Animation", "Production assets for teams that already have mechanics, math or code.", "Visual direction, symbols, UI, animation, effects and promotional asset support."],
+      ["Mathematics and Game Design", "New game models or adaptations of an existing concept.", "Paytable support, feature logic, balancing preparation and documentation."],
+      ["Frontend Development", "Production HTML5 game clients for providers and game teams.", "Responsive UI, animation integration, state rendering, performance and device QA."]
     ]
   },
   {
     id: "live-casino",
+    interest: "live-casino",
     navLabel: "Live Casino",
-    eyebrow: "Live casino",
-    title: "Live Casino Product Design for Players, Presenters and Operations",
-    description: "Specialist live casino product support for table games, show formats and player-facing product interfaces.",
+    eyebrow: "Live Casino",
+    title: "Design Live Casino Products Around the Full Experience",
+    description: "Product support for table games, show formats and player-facing live casino interfaces, with presenter and operational flows considered from the start.",
     items: [
-      ["Live Casino Game Design", "For operators and providers exploring new table, game-show or hybrid live formats.", "Market concept, rules, player journey, round flow and product documentation."],
-      ["Live Show-Game Development", "For teams developing original show formats around a differentiated mechanic.", "Format logic, bonus structure, visual identity, player UX and delivery scope."],
-      ["Presenter and Studio Product UX", "For live products where the dealer, presenter and operational team are part of the experience.", "Presenter prompts, round states, studio-facing flows, display logic and error-state planning."],
-      ["Frontend Product Interfaces", "For partners needing player-facing or operator-facing live casino product UI.", "Betting interfaces, live-session states, result communication, mobile UX and integration preparation."]
+      ["Live Casino Game Design", "New table, game-show or hybrid live formats.", "Market concept, rules, player journey, round flow and product documentation."],
+      ["Live Show-Game Development", "Original show formats built around a differentiated mechanic.", "Format logic, bonus structure, visual identity, player UX and delivery scope."],
+      ["Presenter and Studio Product UX", "Products where presenter and operational workflows shape the player experience.", "Presenter prompts, round states, studio-facing flows, display logic and error-state planning."],
+      ["Frontend Product Interfaces", "Player-facing or operator-facing Live Casino UI.", "Betting interfaces, live-session states, result communication, mobile UX and integration preparation."]
     ]
   },
   {
     id: "technology-and-integration",
+    interest: "technology",
     navLabel: "Technology & integration",
     eyebrow: "Technology and integration",
-    title: "Backend Systems and Integrations Prepared for Casino Operations",
-    description: "Engineering support for game sessions, backend modules, APIs, wallet communication and launch preparation.",
+    title: "Connect Game Logic, Backend Systems and Partner Integrations",
+    description: "Engineering support for game sessions, backend modules, APIs, wallet communication and partner onboarding flows.",
     items: [
-      ["Backend and RGS Engineering", "For partners building, extending or modernising game technology layers.", "Session logic, round management, game configuration, reporting and administrative tooling."],
-      ["Game Integration", "For content that needs structured partner onboarding.", "API mapping, sandbox setup, wallet flows, error handling, QA and acceptance support."],
-      ["Platform Integration", "For operators, aggregators or platforms connecting game content.", "Launch flows, authentication, wallet communication, reporting and monitoring alignment."],
-      ["Technical Modernisation", "For portfolios that need code, asset or device-performance improvements.", "Refactoring, mobile optimisation, UI updates and maintainability improvements."]
+      ["Backend and RGS Engineering", "Game technology layers that need to be built, extended or modernised.", "Session logic, round management, game configuration, reporting and administrative tooling."],
+      ["Game Integration", "Content that needs structured partner onboarding.", "API mapping, sandbox setup, wallet flows, error handling, QA and acceptance support."],
+      ["Platform Integration", "Operators, aggregators or platforms connecting game content.", "Launch flows, authentication, wallet communication, reporting and monitoring alignment."],
+      ["Technical Modernisation", "Portfolios that need code, asset or device-performance improvements.", "Refactoring, mobile optimisation, UI updates and maintainability improvements."]
     ]
   },
   {
     id: "portfolio-services",
+    interest: "portfolio",
     navLabel: "Portfolio services",
     eyebrow: "Portfolio services",
-    title: "Expand or Reposition Your Casino Game Portfolio",
-    description: "Existing OpenGamer titles can be evaluated for licensing, branded adaptation, reskin or other commercially agreed delivery models.",
+    title: "Extend, Adapt or Reposition a Game Portfolio",
+    description: "Evaluate existing OpenGamer titles for licensing, branded adaptation, reskin or another commercially agreed delivery model.",
     items: [
-      ["White-Label Games", "For partners evaluating existing OpenGamer content or custom variants.", "Portfolio review, demo access where available, scope definition and commercial discussion."],
-      ["Reskins", "For existing games that need a new theme, brand or market fit.", "Theme replacement, symbol sets, UI refresh, animation updates and launch preparation."],
-      ["Branded Games", "For operators and brands needing custom game content around a campaign or audience.", "Brand adaptation, game concept, asset direction and production scope."],
-      ["Legacy Game Modernisation", "For older titles needing better mobile UX, assets or integration readiness.", "Visual refresh, frontend improvements, QA and delivery planning."]
+      ["Portfolio Licensing", "Existing OpenGamer content for commercial evaluation.", "Portfolio review, demo access where available, scope definition and commercial discussion."],
+      ["Reskins", "Existing games that need a new theme, brand or market fit.", "Theme replacement, symbol sets, UI refresh, animation updates and launch preparation."],
+      ["Branded Games", "Custom content around a campaign, brand or audience.", "Brand adaptation, game concept, asset direction and production scope."],
+      ["Legacy Game Modernisation", "Older titles that need stronger mobile UX, assets or integration preparation.", "Visual refresh, frontend improvements, QA and delivery planning."]
     ]
   },
   {
     id: "delivery-and-support",
+    interest: "technology",
     navLabel: "Delivery & support",
     eyebrow: "Delivery and support",
-    title: "Add Specialist iGaming Capacity Without Building Every Team Internally",
-    description: "Specialist capacity and production governance for partners scaling iGaming development programmes.",
+    title: "Add Specialist iGaming Capacity Where the Roadmap Needs It",
+    description: "Dedicated capability and production support for partners scaling game or product development without rebuilding every discipline internally.",
     items: [
-      ["Dedicated Teams", "For providers, platforms and startups that need embedded iGaming development capacity.", "Frontend, backend, game art, QA, product and technical leadership support."],
-      ["QA", "For games and product builds that need structured release confidence.", "Functional testing, regression, device checks, integration scenarios and acceptance support."],
-      ["Certification Preparation Support", "For partners preparing materials for independent review.", "Documentation, QA evidence and implementation support without claiming certification ownership."],
-      ["Product and Technical Advisory", "For teams defining what to build before committing to production.", "Scope definition, architecture review, delivery planning and product risk review."]
+      ["Dedicated Teams", "Embedded iGaming development capacity for providers, platforms and product teams.", "Frontend, backend, game art, QA, product and technical leadership support."],
+      ["QA", "Games and product builds that need structured release confidence.", "Functional testing, regression, device checks, integration scenarios and acceptance support."],
+      ["Certification Preparation Support", "Teams preparing implementation and evidence for independent review.", "Documentation, QA evidence and implementation support without claiming certification ownership."],
+      ["Product and Technical Advisory", "Teams defining what to build before committing to production.", "Scope definition, architecture review, delivery planning and product risk review."]
     ]
   }
 ];
@@ -114,19 +119,19 @@ export default function ServicesPage() {
         <Container className="relative grid gap-10 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
           <div>
             <SectionHeader
-              eyebrow="OpenGamer Solutions"
-              title="From Game Concept to Integration-Ready Delivery"
-              description="Build a complete casino game, add a specialist production layer or extend your team with iGaming-focused product and engineering support."
+              eyebrow="OpenGamer solutions"
+              title="One iGaming Studio, From Game Concept to Technical Delivery"
+              description="Build a complete casino game, add a specialist production layer or extend your roadmap with product and engineering support."
               headingLevel="h1"
             />
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/contact?interest=project#project-enquiry">Discuss a Project</Button>
+              <Button href="/contact?interest=game#project-enquiry">Discuss a Project</Button>
               <Button href="/games" variant="secondary">
                 Explore Games
               </Button>
             </div>
             <div className="mt-8 flex flex-wrap gap-2 text-sm text-slate-300">
-              {["Full-cycle builds", "Selected production stages", "Dedicated specialist capacity"].map((item) => (
+              {["Complete game builds", "Selected production stages", "Dedicated specialist capacity"].map((item) => (
                 <span key={item} className="rounded-full border border-white/10 bg-white/[0.045] px-4 py-2">
                   {item}
                 </span>
@@ -184,7 +189,7 @@ export default function ServicesPage() {
                   <h3 className="text-xl font-semibold text-white">{title}</h3>
                   <p className="mt-3 text-sm leading-6 text-slate-300">{clientType}</p>
                   <p className="mt-4 border-t border-white/10 pt-4 text-sm leading-6 text-slate-400">{deliverables}</p>
-                  <a href={`/contact?service=${encodeURIComponent(title)}#project-enquiry`} className="mt-5 inline-flex text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                  <a href={`/contact?interest=${group.interest}#project-enquiry`} className="mt-5 inline-flex text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                     Discuss This Service
                   </a>
                 </Card>
@@ -195,22 +200,23 @@ export default function ServicesPage() {
       ))}
 
       <Section>
-        <SectionHeader eyebrow="Product proof" title="References from the OpenGamer Ecosystem" description="Services are connected to actual OpenGamer games, live casino concepts and product-interface work." />
+        <SectionHeader eyebrow="Work behind the capabilities" title="See the Games and Concepts Behind the Service List" description="OpenGamer service areas are connected to visible studio work across games, Live Casino concepts and product-interface design." />
         <div className="mt-10">
           <RelatedProductStrip
             items={[
-              { eyebrow: "Game production", title: "Forest Fortune", description: "A portfolio slot reference for custom game production discussions.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" },
-              { eyebrow: "Live Casino", title: "ELEMENTALS", description: "A show-game concept for live casino product-development scope.", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals", actionLabel: "View Concept", accent: "#dca45f" },
-              { eyebrow: "Product interface", title: "LC App", description: "A B2B social product concept for live casino engagement layers.", image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" }
+              { eyebrow: "Game production", title: "Forest Fortune", description: "A portfolio reference for custom game production discussions.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" },
+              { eyebrow: "Live Casino", title: "ELEMENTALS", description: "An original show-game concept for Live Casino product discussions.", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals", actionLabel: "View Concept", accent: "#dca45f" },
+              { eyebrow: "Product interface", title: "LC App", description: "A B2B social product concept for Live Casino engagement layers.", image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" }
             ]}
           />
         </div>
       </Section>
 
       <CTASection
-        title="Need a Defined Scope or an Embedded Team?"
-        description="Share the project type, target platform, integration requirements and launch stage. OpenGamer will suggest the right engagement model."
+        title="Need a Complete Build or One Missing Capability?"
+        description="Share the product, current stage and technical context. We will map the conversation to the relevant OpenGamer capability."
         ctaLabel="Discuss a Project"
+        ctaHref="/contact?interest=game#project-enquiry"
         secondaryLabel="Explore Games"
         secondaryHref="/games"
       />
