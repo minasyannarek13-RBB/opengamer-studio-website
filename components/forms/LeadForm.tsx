@@ -49,16 +49,20 @@ export function LeadForm() {
       utmContent: params.get("utm_content") || "",
       utmTerm: params.get("utm_term") || ""
     });
-    if (mappedInterest) {
-      setServiceDefault(mappedInterest);
-    }
+    if (mappedInterest) setServiceDefault(mappedInterest);
   }, []);
+
+  function focusFirstError(form: HTMLFormElement, nextErrors: Record<string, string>) {
+    const firstField = Object.keys(nextErrors)[0];
+    if (!firstField) return;
+    window.setTimeout(() => {
+      form.querySelector<HTMLElement>(`[name="${CSS.escape(firstField)}"]`)?.focus();
+    }, 0);
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (state === "submitting") {
-      return;
-    }
+    if (state === "submitting") return;
 
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -66,9 +70,11 @@ export function LeadForm() {
     const phone = String(formData.get("phone") || "").trim();
 
     if (method === "Phone" && !isValidPhone(phone)) {
+      const nextErrors = { phone: "Enter a valid international phone number." };
       setState("error");
-      setErrors({ phone: "Enter a valid international phone number." });
+      setErrors(nextErrors);
       setMessage("Please check the form and try again.");
+      focusFirstError(form, nextErrors);
       return;
     }
 
@@ -100,9 +106,11 @@ export function LeadForm() {
       return;
     }
 
+    const nextErrors = result.errors || {};
     setState("error");
-    setErrors(result.errors || {});
+    setErrors(nextErrors);
     setMessage(result.message || "Please check the form and try again.");
+    focusFirstError(form, nextErrors);
   }
 
   const errorEntries = Object.entries(errors);
@@ -114,7 +122,7 @@ export function LeadForm() {
       aria-busy={state === "submitting"}
       className="premium-card grid gap-5 rounded-2xl border border-line bg-white/[0.045] p-5 shadow-[0_22px_80px_rgba(0,0,0,0.24)] sm:p-6"
     >
-      <div className="hidden">
+      <div className="hidden" aria-hidden="true">
         <label htmlFor="website_url">Website URL</label>
         <input id="website_url" name="website_url" tabIndex={-1} autoComplete="off" />
       </div>
@@ -131,9 +139,7 @@ export function LeadForm() {
         <div className="rounded-xl border border-red-400/30 bg-red-500/[0.08] p-4 text-sm leading-6 text-red-100" role="alert">
           <p className="font-semibold text-white">Please review these fields:</p>
           <ul className="mt-2 list-disc pl-5">
-            {errorEntries.map(([field, error]) => (
-              <li key={field}>{error}</li>
-            ))}
+            {errorEntries.map(([field, error]) => <li key={field}>{error}</li>)}
           </ul>
         </div>
       ) : null}
@@ -157,16 +163,12 @@ export function LeadForm() {
             rows={5}
             className="min-h-36 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
           />
-          {errors.projectDescription ? (
-            <span id="projectDescription-error" className="text-xs text-red-300">
-              {errors.projectDescription}
-            </span>
-          ) : null}
+          {errors.projectDescription ? <span id="projectDescription-error" className="text-xs text-red-300">{errors.projectDescription}</span> : null}
         </label>
       </fieldset>
 
       <details className="rounded-xl border border-white/10 bg-black/20 p-4">
-        <summary className="cursor-pointer text-sm font-semibold text-white">Add project details</summary>
+        <summary className="cursor-pointer rounded-sm text-sm font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">Add project details</summary>
         <div className="mt-5 grid gap-5 md:grid-cols-2">
           <Select label="Project stage" name="projectStage" options={projectStages} />
           <Select label="Expected launch" name="expectedLaunch" options={expectedLaunchOptions} />
@@ -176,13 +178,7 @@ export function LeadForm() {
           <Field label="Existing platform" name="existingPlatform" />
           <Field label="Required integration" name="requiredIntegration" />
           <Field label="Reference link" name="website" type="url" />
-          <Select
-            label="Preferred contact method"
-            name="preferredContactMethod"
-            options={contactMethods}
-            value={preferredContactMethod}
-            onChange={setPreferredContactMethod}
-          />
+          <Select label="Preferred contact method" name="preferredContactMethod" options={contactMethods} value={preferredContactMethod} onChange={setPreferredContactMethod} />
           {preferredContactMethod === "Phone" ? <Field label="Phone number" name="phone" type="tel" required error={errors.phone} /> : null}
         </div>
       </details>
@@ -194,19 +190,13 @@ export function LeadForm() {
           required
           aria-invalid={Boolean(errors.consent)}
           aria-describedby={errors.consent ? "consent-error" : undefined}
-          className="mt-1 h-5 w-5 accent-emerald"
+          className="mt-1 h-5 w-5 rounded accent-emerald focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald"
         />
         <span>
           I agree that OpenGamer may use this information to respond to my business enquiry. See the{" "}
-          <Link href="/privacy-policy" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">
-            Privacy Policy
-          </Link>{" "}
+          <Link href="/privacy-policy" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">Privacy Policy</Link>{" "}
           for details.
-          {errors.consent ? (
-            <span id="consent-error" className="mt-1 block text-xs text-red-300">
-              {errors.consent}
-            </span>
-          ) : null}
+          {errors.consent ? <span id="consent-error" className="mt-1 block text-xs text-red-300">{errors.consent}</span> : null}
         </span>
       </label>
 
@@ -224,12 +214,8 @@ export function LeadForm() {
           <p className={state === "success" ? "mt-1" : undefined}>{message}</p>
           {state === "success" ? (
             <div className="mt-4 flex flex-wrap gap-3">
-              <Link href="/games" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">
-                Return to Games
-              </Link>
-              <Link href="/portfolio" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">
-                View Projects
-              </Link>
+              <Link href="/games" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">Return to Games</Link>
+              <Link href="/portfolio" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">View Portfolio</Link>
             </div>
           ) : null}
         </div>
@@ -238,20 +224,9 @@ export function LeadForm() {
   );
 }
 
-function Field({
-  label,
-  name,
-  type = "text",
-  required = false,
-  error
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
-  error?: string;
-}) {
+function Field({ label, name, type = "text", required = false, error }: { label: string; name: string; type?: string; required?: boolean; error?: string }) {
   const errorId = `${name}-error`;
+  const autoComplete = name === "fullName" ? "name" : name === "email" ? "email" : name === "company" ? "organization" : name === "phone" ? "tel" : name === "website" ? "url" : undefined;
 
   return (
     <label className="grid gap-2 text-sm font-medium text-slate-200">
@@ -260,74 +235,45 @@ function Field({
         name={name}
         type={type}
         required={required}
+        autoComplete={autoComplete}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
         className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
       />
-      {error ? (
-        <span id={errorId} className="text-xs text-red-300">
-          {error}
-        </span>
-      ) : null}
+      {error ? <span id={errorId} className="text-xs text-red-300">{error}</span> : null}
     </label>
   );
 }
 
-function Select({
-  label,
-  name,
-  options,
-  required = false,
-  error,
-  defaultValue = "",
-  value,
-  onChange
-}: {
-  label: string;
-  name: string;
-  options: string[];
-  required?: boolean;
-  error?: string;
-  defaultValue?: string;
-  value?: string;
-  onChange?: (value: string) => void;
-}) {
+function Select({ label, name, options, required = false, error, defaultValue = "", value, onChange }: { label: string; name: string; options: string[]; required?: boolean; error?: string; defaultValue?: string; value?: string; onChange?: (value: string) => void }) {
   const errorId = `${name}-error`;
+  const isControlled = typeof onChange === "function";
+  const stateProps = isControlled
+    ? { value: value ?? "", onChange: (event: React.ChangeEvent<HTMLSelectElement>) => onChange(event.target.value) }
+    : { defaultValue };
 
   return (
     <label className="grid gap-2 text-sm font-medium text-slate-200">
       <LabelText label={label} required={required} />
       <select
-        key={defaultValue || "empty"}
+        key={isControlled ? undefined : defaultValue || "empty"}
         name={name}
-        defaultValue={defaultValue}
-        value={value}
-        onChange={onChange ? (event) => onChange(event.target.value) : undefined}
+        {...stateProps}
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
         className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
       >
         <option value="">Select</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
+        {options.map((option) => <option key={option} value={option}>{option}</option>)}
       </select>
-      {error ? (
-        <span id={errorId} className="text-xs text-red-300">
-          {error}
-        </span>
-      ) : null}
+      {error ? <span id={errorId} className="text-xs text-red-300">{error}</span> : null}
     </label>
   );
 }
 
 function mapInterestToService(value: string | null) {
-  if (value && serviceInterests.includes(value)) {
-    return value;
-  }
+  if (value && serviceInterests.includes(value)) return value;
 
   switch (value) {
     case "elementals":
@@ -360,15 +306,7 @@ function isValidPhone(value: string) {
 function LabelText({ label, required }: { label: string; required: boolean }) {
   return (
     <span className="flex items-center justify-between gap-3">
-      <span>
-        {label}
-        {required ? (
-          <span className="text-emerald" aria-hidden="true">
-            {" "}
-            *
-          </span>
-        ) : null}
-      </span>
+      <span>{label}{required ? <span className="text-emerald" aria-hidden="true"> *</span> : null}</span>
       {!required ? <span className="text-xs font-normal text-slate-500">Optional</span> : null}
     </span>
   );
