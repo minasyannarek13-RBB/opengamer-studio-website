@@ -8,13 +8,12 @@ type CardProps = {
 };
 
 export function Card({ children, className = "", tone = "default", style }: CardProps) {
-  const toneClass =
-    tone === "strong"
-      ? "border-white/15 bg-white/[0.065] surface-hairline"
-      : "border-line bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.2)]";
+  const toneClass = tone === "strong"
+    ? "border-white/15 bg-white/[0.06] surface-hairline shadow-[0_20px_70px_rgba(0,0,0,0.20)]"
+    : "border-white/10 bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.18)]";
 
   return (
-    <div style={style} className={`premium-card rounded-lg border ${toneClass} p-5 backdrop-blur-[2px] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.058] hover:shadow-[0_22px_70px_rgba(0,0,0,0.28)] ${className}`}>
+    <div style={style} className={`premium-card rounded-2xl border ${toneClass} p-5 backdrop-blur-[2px] ${className}`}>
       {children}
     </div>
   );
