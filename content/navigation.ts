@@ -2,7 +2,7 @@ export const mainNavigation = [
   { label: "Home", href: "/" },
   { label: "Games", href: "/games" },
   { label: "Solutions", href: "/services" },
-  { label: "Projects", href: "/portfolio" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Technology", href: "/technology" },
   { label: "Company", href: "/about" },
   { label: "Contact", href: "/contact" }
@@ -11,12 +11,10 @@ export const mainNavigation = [
 export const solutionsNavigation = [
   { label: "Slot Game Development", href: "/services#game-production" },
   { label: "Live Casino Development", href: "/services/live-casino-development" },
-  { label: "Frontend Development", href: "/services#game-production" },
-  { label: "Backend and RGS Engineering", href: "/services#technology-and-integration" },
+  { label: "Backend & RGS Engineering", href: "/services#technology-and-integration" },
   { label: "Integrations", href: "/services#technology-and-integration" },
-  { label: "White-Label and Reskin Services", href: "/services#portfolio-services" },
-  { label: "Dedicated Development Teams", href: "/services#delivery-and-support" },
-  { label: "QA and Certification Support", href: "/services#delivery-and-support" }
+  { label: "Portfolio & Reskins", href: "/services#portfolio-services" },
+  { label: "Dedicated Teams", href: "/services#delivery-and-support" }
 ];
 
 export const solutionsMegaMenu = [
@@ -24,27 +22,24 @@ export const solutionsMegaMenu = [
     title: "Game Production",
     items: [
       { label: "Slot Game Development", href: "/services#game-production", description: "Original and custom casino game production." },
-      { label: "Custom and Branded Games", href: "/services#portfolio-services", description: "Game concepts shaped around brand and commercial goals." },
-      { label: "Frontend Development", href: "/services#game-production", description: "HTML5 game clients and product interfaces." },
-      { label: "Game Art and Animation", href: "/services#game-production", description: "Visual direction, symbols, UI and motion assets." }
+      { label: "Custom & Branded Games", href: "/services#portfolio-services", description: "Content shaped around a brand or commercial brief." },
+      { label: "Art, Frontend & Math", href: "/services#game-production", description: "Selected production layers or a complete game scope." }
     ]
   },
   {
     title: "Technology",
     items: [
-      { label: "Backend and RGS Engineering", href: "/services#technology-and-integration", description: "Game sessions, round logic and RGS-related modules." },
-      { label: "Game Integrations", href: "/services#technology-and-integration", description: "Wallet, launch and acceptance flows." },
-      { label: "Platform Integrations", href: "/services#technology-and-integration", description: "Operator, aggregator and platform connectivity." },
-      { label: "Technical Modernisation", href: "/services#technology-and-integration", description: "Portfolio and codebase improvement work." }
+      { label: "Backend & RGS Engineering", href: "/services#technology-and-integration", description: "Game sessions, logic, configuration and RGS-related modules." },
+      { label: "Integrations", href: "/services#technology-and-integration", description: "Wallet, launch, operator, aggregator and acceptance flows." },
+      { label: "Technical Modernisation", href: "/services#technology-and-integration", description: "Improve existing game and product technology." }
     ]
   },
   {
-    title: "Products and Delivery",
+    title: "Products & Delivery",
     items: [
-      { label: "Live Casino Development", href: "/services/live-casino-development", description: "Live product formats, player UX and presenter flows." },
-      { label: "Portfolio Licensing and Reskins", href: "/services#portfolio-services", description: "Commercial evaluation of existing titles and variants." },
-      { label: "Dedicated Development Teams", href: "/services#delivery-and-support", description: "Specialist iGaming capacity for partner roadmaps." },
-      { label: "QA and Certification Preparation", href: "/services#delivery-and-support", description: "Structured QA evidence and release preparation." }
+      { label: "Live Casino Development", href: "/services/live-casino-development", description: "Live formats, player UX and presenter-facing product flows." },
+      { label: "Portfolio & Reskins", href: "/services#portfolio-services", description: "Existing titles, branded adaptations and portfolio discussions." },
+      { label: "Dedicated Teams", href: "/services#delivery-and-support", description: "Specialist iGaming capacity for an existing roadmap." }
     ]
   }
 ];
@@ -52,15 +47,15 @@ export const solutionsMegaMenu = [
 export const footerSolutionsNavigation = [
   { label: "Slot Game Development", href: "/services#game-production" },
   { label: "Live Casino Development", href: "/services/live-casino-development" },
-  { label: "Frontend Development", href: "/services#game-production" },
-  { label: "Backend and RGS Engineering", href: "/services#technology-and-integration" },
+  { label: "Backend & RGS Engineering", href: "/services#technology-and-integration" },
   { label: "Integrations", href: "/services#technology-and-integration" },
+  { label: "Portfolio & Reskins", href: "/services#portfolio-services" },
   { label: "Dedicated Teams", href: "/services#delivery-and-support" }
 ];
 
 export const footerCompanyNavigation = [
   { label: "Games", href: "/games" },
-  { label: "Projects", href: "/portfolio" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Technology", href: "/technology" },
   { label: "Company", href: "/about" },
   { label: "Contact", href: "/contact" }
