@@ -19,6 +19,14 @@ const ctaLabel: Record<Locale, string> = {
   pt: "Discutir um projeto"
 };
 
+const exploreGamesLabel: Record<Locale, string> = {
+  en: "Explore Games",
+  ru: "Посмотреть игры",
+  hy: "Դիտել խաղերը",
+  es: "Explorar juegos",
+  pt: "Explorar jogos"
+};
+
 export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +40,7 @@ export function Header({ locale }: { locale: Locale }) {
   const activePath = stripLocaleFromPath(pathname || "/");
   const isActiveRoute = (href: string) => (href === "/" ? activePath === "/" : activePath === href || activePath.startsWith(`${href}/`));
   const isSolutionsActive = activePath === "/services" || activePath.startsWith("/services/");
-  const resolvedCtaLabel = activePath === "/contact" ? "Explore Games" : ctaLabel[locale];
+  const resolvedCtaLabel = activePath === "/contact" ? exploreGamesLabel[locale] : ctaLabel[locale];
   const resolvedCtaHref = activePath === "/contact" ? "/games" : "/contact";
 
   useEffect(() => {
@@ -154,7 +162,7 @@ export function Header({ locale }: { locale: Locale }) {
                           <p className="solutions-dropdown__heading">{group.title}</p>
                           <div className="mt-3 grid gap-1.5">
                             {group.items.map((item) => (
-                              <Link key={item.label} href={item.href} role="menuitem" className="solutions-dropdown__link">
+                              <Link key={item.label} href={getLocalizedHomePath(locale, item.href)} role="menuitem" className="solutions-dropdown__link">
                                 <span>{item.label}</span>
                                 <small>{item.description}</small>
                               </Link>
@@ -162,7 +170,7 @@ export function Header({ locale }: { locale: Locale }) {
                           </div>
                         </div>
                       ))}
-                      <Link href="/portfolio/elementals" role="menuitem" className="solutions-dropdown__feature">
+                      <Link href={getLocalizedHomePath(locale, "/portfolio/elementals")} role="menuitem" className="solutions-dropdown__feature">
                         <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="" width={600} height={420} sizes="220px" className="solutions-dropdown__feature-image" />
                         <span>Featured work</span>
                         <strong>ELEMENTALS</strong>
@@ -236,7 +244,7 @@ export function Header({ locale }: { locale: Locale }) {
                       {solutionsNavigation.map((item) => (
                         <Link
                           key={item.label}
-                          href={item.href}
+                          href={getLocalizedHomePath(locale, item.href)}
                           className="rounded-lg px-3 py-2.5 text-sm text-slate-300 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
                           onClick={() => setIsOpen(false)}
                         >
