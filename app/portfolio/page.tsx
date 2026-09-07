@@ -15,7 +15,7 @@ import { portfolioProjects } from "@/content/portfolio";
 
 export const metadata: Metadata = {
   title: "Portfolio | OpenGamer Studio",
-  description: "OpenGamer portfolio of selected casino games and product concepts for iGaming.",
+  description: "Explore selected OpenGamer casino games, original concepts and product work across slots, Live Casino and B2B gaming technology.",
   alternates: { canonical: "/portfolio" }
 };
 
@@ -51,14 +51,14 @@ export default function PortfolioPage() {
         <Container className="relative grid gap-10 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
           <div>
             <SectionHeader
-              eyebrow="OpenGamer Portfolio"
-              title="Games, Concepts and Product Work You Can Explore"
-              description="A selected view of OpenGamer work across casino games, Live Casino concepts and B2B product design."
+              eyebrow="OpenGamer portfolio"
+              title="Games and Product Concepts You Can Actually Explore"
+              description="A focused view of OpenGamer work across slot games, Live Casino concepts and B2B product design, with each project clearly labelled by status."
               headingLevel="h1"
             />
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/games">Explore Games</Button>
-              <Button href="/contact?interest=portfolio" variant="secondary">
+              <Button href="/contact?interest=portfolio#project-enquiry" variant="secondary">
                 Discuss Portfolio & Partnerships
               </Button>
             </div>
@@ -91,7 +91,7 @@ export default function PortfolioPage() {
         </Container>
       </section>
       <Section>
-        <SectionHeader eyebrow="Featured Projects" title="Original Product Concepts" description="Original live casino and product concepts currently presented for discussion and development." />
+        <SectionHeader eyebrow="Original concepts" title="Product Ideas with a Clear Identity" description="Selected concepts that show OpenGamer product thinking beyond the slot portfolio. Development status is kept explicit on every project." />
         <div className="mt-10 grid gap-6 lg:grid-cols-2" data-reveal-group="cards">
           {portfolioProjects.map((project) => (
             <ProjectCard key={project.title} {...project} />
@@ -99,7 +99,7 @@ export default function PortfolioPage() {
         </div>
       </Section>
       <Section className="bg-black/20">
-        <SectionHeader eyebrow="Casino Games" title="Selected Slot Games" description="A curated view of selected OpenGamer slot titles. The full catalogue is available on the Games page." />
+        <SectionHeader eyebrow="Casino games" title="Selected Slot Titles" description="A curated sample from the OpenGamer slot portfolio. Open the full Games page for individual titles and public demos where available." />
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3" data-reveal-group="cards">
           {featuredGames.map((game) => (
             <GameCard key={game.slug} game={game} />
@@ -109,7 +109,12 @@ export default function PortfolioPage() {
           View All Games
         </Button>
       </Section>
-      <CTASection title="Discuss a Project" description="Share the project type, business model and target market. OpenGamer will propose the right engagement model." />
+      <CTASection
+        title="See Something Relevant to Your Roadmap?"
+        description="Discuss a specific title, concept, custom production need or broader portfolio opportunity with OpenGamer."
+        ctaLabel="Discuss a Project"
+        ctaHref="/contact?interest=portfolio#project-enquiry"
+      />
     </SiteShell>
   );
 }
