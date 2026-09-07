@@ -325,9 +325,12 @@ function Select({
 }
 
 function mapInterestToService(value: string | null) {
+  if (value && serviceInterests.includes(value)) {
+    return value;
+  }
+
   switch (value) {
     case "elementals":
-      return "Strategic Partnership";
     case "lc-app":
       return "Strategic Partnership";
     case "slot-development":
@@ -341,6 +344,10 @@ function mapInterestToService(value: string | null) {
       return "Game or Platform Integration";
     case "portfolio":
       return "Portfolio Licensing or Reskin";
+    case "team":
+      return "Dedicated Development Team";
+    case "project":
+      return "Other";
     default:
       return "";
   }
