@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -14,9 +16,31 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" }
 };
 
+const serviceHeroItems = [
+  {
+    title: "Casino Game Production",
+    label: "Games",
+    image: "/assets/games/forest-fortune/artwork.webp",
+    href: "#game-production"
+  },
+  {
+    title: "Live Casino Product Design",
+    label: "Live Casino",
+    image: "/assets/projects/elementals/expositions/nexus-stage.webp",
+    href: "#live-casino"
+  },
+  {
+    title: "Product & Integration Engineering",
+    label: "Technology",
+    image: "/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp",
+    href: "#technology-and-integration"
+  }
+];
+
 const solutionGroups = [
   {
     id: "game-production",
+    navLabel: "Game production",
     eyebrow: "Game production",
     title: "Original and Custom Casino Games Built Around Your Commercial Model",
     description: "Original and custom casino game production shaped around a partner's commercial model, market and content strategy.",
@@ -30,9 +54,10 @@ const solutionGroups = [
   },
   {
     id: "live-casino",
+    navLabel: "Live Casino",
     eyebrow: "Live casino",
     title: "Live Casino Product Design for Players, Presenters and Operations",
-    description: "Specialist live casino product support without claiming studio operation, licensing or broadcast ownership.",
+    description: "Specialist live casino product support for table games, show formats and player-facing product interfaces.",
     items: [
       ["Live Casino Game Design", "For operators and providers exploring new table, game-show or hybrid live formats.", "Market concept, rules, player journey, round flow and product documentation."],
       ["Live Show-Game Development", "For teams developing original show formats around a differentiated mechanic.", "Format logic, bonus structure, visual identity, player UX and delivery scope."],
@@ -42,6 +67,7 @@ const solutionGroups = [
   },
   {
     id: "technology-and-integration",
+    navLabel: "Technology & integration",
     eyebrow: "Technology and integration",
     title: "Backend Systems and Integrations Prepared for Casino Operations",
     description: "Engineering support for game sessions, backend modules, APIs, wallet communication and launch preparation.",
@@ -54,6 +80,7 @@ const solutionGroups = [
   },
   {
     id: "portfolio-services",
+    navLabel: "Portfolio services",
     eyebrow: "Portfolio services",
     title: "Expand or Reposition Your Casino Game Portfolio",
     description: "Existing OpenGamer titles can be evaluated for licensing, branded adaptation, reskin or other commercially agreed delivery models.",
@@ -66,6 +93,7 @@ const solutionGroups = [
   },
   {
     id: "delivery-and-support",
+    navLabel: "Delivery & support",
     eyebrow: "Delivery and support",
     title: "Add Specialist iGaming Capacity Without Building Every Team Internally",
     description: "Specialist capacity and production governance for partners scaling iGaming development programmes.",
@@ -81,28 +109,65 @@ const solutionGroups = [
 export default function ServicesPage() {
   return (
     <SiteShell atmosphere="solutions">
-      <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
-        <Container>
-          <SectionHeader
-            eyebrow="Solutions"
-            title="iGaming Development Solutions"
-            description="OpenGamer provides modular and full-cycle production support for casino games, live products, technical integrations and dedicated development teams."
-            headingLevel="h1"
-          />
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/contact">Discuss a Project</Button>
-            <Button href="/games" variant="secondary">
-              Explore Games
-            </Button>
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-20 lg:py-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_74%_14%,rgba(35,196,131,0.14),transparent_28rem)]" />
+        <Container className="relative grid gap-10 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
+          <div>
+            <SectionHeader
+              eyebrow="OpenGamer Solutions"
+              title="From Game Concept to Integration-Ready Delivery"
+              description="Build a complete casino game, add a specialist production layer or extend your team with iGaming-focused product and engineering support."
+              headingLevel="h1"
+            />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/contact?interest=project#project-enquiry">Discuss a Project</Button>
+              <Button href="/games" variant="secondary">
+                Explore Games
+              </Button>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-2 text-sm text-slate-300">
+              {["Full-cycle builds", "Selected production stages", "Dedicated specialist capacity"].map((item) => (
+                <span key={item} className="rounded-full border border-white/10 bg-white/[0.045] px-4 py-2">
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
-          <nav className="mt-10 flex gap-2 overflow-x-auto pb-1" aria-label="Solution areas">
+
+          <div className="grid min-h-[26rem] gap-3 sm:grid-cols-2 sm:grid-rows-2" aria-label="OpenGamer service areas">
+            {serviceHeroItems.map((item, index) => (
+              <Link
+                key={item.title}
+                href={item.href}
+                className={`group relative min-h-48 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/45 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 ${index === 0 ? "sm:row-span-2" : ""}`}
+              >
+                <Image
+                  src={item.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 48vw, 100vw"
+                  className="object-cover transition duration-500 group-hover:scale-[1.025]"
+                  priority={index === 0}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/18 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                  <span className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-emerald">{item.label}</span>
+                  <strong className="mt-1 block text-lg font-semibold text-white sm:text-xl">{item.title}</strong>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </Container>
+
+        <Container className="relative mt-10">
+          <nav className="flex gap-2 overflow-x-auto pb-1" aria-label="Solution areas">
             {solutionGroups.map((group) => (
               <a
                 key={group.id}
                 href={`#${group.id}`}
                 className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-sm text-slate-300 transition hover:border-emerald/45 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
               >
-                {group.title}
+                {group.navLabel}
               </a>
             ))}
           </nav>
@@ -119,7 +184,7 @@ export default function ServicesPage() {
                   <h3 className="text-xl font-semibold text-white">{title}</h3>
                   <p className="mt-3 text-sm leading-6 text-slate-300">{clientType}</p>
                   <p className="mt-4 border-t border-white/10 pt-4 text-sm leading-6 text-slate-400">{deliverables}</p>
-                  <a href={`/contact?service=${encodeURIComponent(title)}`} className="mt-5 inline-flex text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                  <a href={`/contact?service=${encodeURIComponent(title)}#project-enquiry`} className="mt-5 inline-flex text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                     Discuss This Service
                   </a>
                 </Card>
