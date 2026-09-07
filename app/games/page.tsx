@@ -11,11 +11,11 @@ import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = {
   title: "Games | OpenGamer Studio",
-  description: "OpenGamer slot game catalogue with local artwork, selected public demos and series presentation.",
+  description: "Explore selected OpenGamer slot games, artwork and public demos where available, or discuss custom and branded game production.",
   alternates: { canonical: "/games" },
   openGraph: {
     title: "Games | OpenGamer Studio",
-    description: "OpenGamer slot game catalogue with selected public demos and series presentation.",
+    description: "Selected OpenGamer slot games with artwork, game details and public demos where available.",
     url: "/games",
     type: "website",
     images: [{ url: "/assets/brand/opengamer-og.png", width: 1200, height: 630, alt: "OpenGamer games portfolio" }]
@@ -35,12 +35,12 @@ export default function GamesPage() {
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(46,230,166,0.11),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.04),transparent_62%)]" />
         <Container className="relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="premium-kicker text-xs font-semibold uppercase">Playable portfolio</p>
+            <p className="premium-kicker text-xs font-semibold uppercase">OpenGamer game portfolio</p>
             <h1 className="mt-5 max-w-3xl text-balance text-4xl font-semibold leading-[1.02] text-white sm:text-5xl lg:text-6xl">
-              Slot Games Built to Be Evaluated, Played and Discussed.
+              Original Slot Games You Can Explore.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
-              Explore selected OpenGamer titles, review public demos where available, or use the portfolio as a starting point for custom game production and distribution discussions.
+              Browse selected OpenGamer titles, open public demos where available, and use the portfolio as a starting point for custom, branded or distribution discussions.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="#game-catalogue">Explore Games</Button>
@@ -84,7 +84,7 @@ export default function GamesPage() {
           <SectionHeader
             eyebrow="Game catalogue"
             title="Explore the OpenGamer Slot Portfolio"
-            description="Browse titles by format and demo availability, then open individual game pages for artwork, mechanics and confirmed demo access."
+            description="Browse selected titles, then open each game page for artwork, mechanics and confirmed demo access where available."
           />
           <div className="mt-10">
             <GamePortfolio />
@@ -93,20 +93,20 @@ export default function GamesPage() {
       </Section>
 
       <Section className="bg-black/20">
-        <SectionHeader eyebrow="Custom content" title="Looking for Custom Game Production?" description="Use existing portfolio work as a starting point for branded games, reskins or full-cycle game production discussions." />
+        <SectionHeader eyebrow="Custom game production" title="Use the Portfolio as a Starting Point" description="Need an original title, branded adaptation or reskin? Start from an existing reference and define the scope around your product and commercial goals." />
         <div className="mt-10">
           <RelatedProductStrip
             items={[
-              { eyebrow: "Portfolio reference", title: "Forest Fortune", description: "Fantasy slot production and demo-ready game presentation.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" },
-              { eyebrow: "Portfolio reference", title: "Deep Dive", description: "Underwater game artwork, feature pacing and public demo access.", image: "/assets/games/deep-dive/artwork.webp", href: "/games/deep-dive", actionLabel: "View Game", accent: "#5d9cff" },
-              { eyebrow: "Custom scope", title: "Branded and Reskin Work", description: "Discuss custom content built around partner commercial goals.", image: "/assets/games/choco-boom/artwork.webp", href: "/contact?interest=portfolio", actionLabel: "Request Scope", accent: "#dca45f" }
+              { eyebrow: "Portfolio reference", title: "Forest Fortune", description: "A reference for fantasy-themed slot production and game presentation.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" },
+              { eyebrow: "Portfolio reference", title: "Deep Dive", description: "A reference for themed artwork, feature pacing and public demo presentation.", image: "/assets/games/deep-dive/artwork.webp", href: "/games/deep-dive", actionLabel: "View Game", accent: "#5d9cff" },
+              { eyebrow: "Custom scope", title: "Branded and Reskin Work", description: "Discuss custom content shaped around a partner brief, brand or portfolio need.", image: "/assets/games/choco-boom/artwork.webp", href: "/contact?interest=portfolio#project-enquiry", actionLabel: "Discuss Scope", accent: "#dca45f" }
             ]}
           />
         </div>
       </Section>
       <CTASection
-        title="Request Portfolio or Discuss a Custom Game"
-        description="OpenGamer can support custom slot development, white-label delivery, reskins, modernization and integration-ready production."
+        title="Building a Game or Expanding a Portfolio?"
+        description="Share the format, current stage and delivery scope. OpenGamer can discuss custom development, branded games, reskins and portfolio opportunities."
         ctaLabel="Discuss a Project"
         ctaHref="/contact?interest=game#project-enquiry"
         secondaryLabel="Request Portfolio"
