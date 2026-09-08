@@ -158,3 +158,38 @@ Reduce repeated game-art payload on high-frequency catalogue and studio-referenc
 3. Confirm titles without verified WebP continue using their existing source files.
 4. Confirm the preview remains `X-Robots-Tag: noindex` and no production alias/domain/configuration changes occur.
 5. Promote only after founder approval; all optimized assets already exist in the repository and require no manual upload.
+
+---
+
+## 2026-09-08 09:16 +04 — Full Game Artwork Delivery Pass
+
+Branch: `design/visual-asset-polish-20260908-r5`  
+Parent: `design/visual-asset-polish-20260908-r4` at `813c27b855cb4687466959535f6eeda78c4faae1`  
+Material commits: `d9247d97b0ead01a17bbedf62f96b2199ac72f04`, `20adc33e67e521e4acf3479efd4c4b8ee2a827e1`
+
+### Purpose
+
+Extend the verified WebP delivery strategy from shared catalogue/signature components to the remaining game-detail surfaces, while keeping original game artwork, product facts and production configuration unchanged.
+
+### Changes
+
+- Expanded the verified artwork resolver from seven to eleven catalogue titles by adding existing WebP assets for Cake Bonanza, Dragon Fruits, Goblin Gems and Royal Fruits.
+- Game-detail metadata/Open Graph images, hero atmosphere, primary hero artwork and related-game cards now use the same verified optimized resolver as shared catalogue components.
+- Titles without a verified matching WebP continue to fall back to their existing source artwork; variant titles are not remapped to another configuration merely to save bytes.
+- No source/master asset was deleted. LC App continues to use its existing optimized 100–160 KB interface assets, and ELEMENTALS continues to use its current WebP exposition set on primary public surfaces.
+- No generated imagery was introduced because the authentic existing product assets remain stronger and more factually defensible for the current public site.
+
+### QA
+
+- Vercel preview deployment `dpl_CtaZ84CJuz7ZVkHokTCLLExhJGjP` built commit `20adc33e67e521e4acf3479efd4c4b8ee2a827e1` successfully.
+- Next.js compile passed; lint/type validation passed; static generation passed `93/93`; deployment reached `READY`.
+- Preview access preserved `X-Robots-Tag: noindex`.
+- Preview runtime warning/error/fatal log check returned no entries.
+
+### Production Instructions
+
+1. Treat r5 as the next verified design/asset descendant after r4; do not cherry-pick older visual branches over it.
+2. Re-run the existing responsive visual QA at 390/430/768/1024/1280/1440/1920 before any founder-approved promotion.
+3. Confirm the exact game artwork on `/games`, representative `/games/[slug]` pages and related-game cards remains visually unchanged aside from asset format/delivery.
+4. Keep `v2-current`, `main`, production aliases, domains and production configuration unchanged until explicit founder authorization.
+5. No manual asset upload is required; all optimized files referenced by this pass already exist in the repository.
