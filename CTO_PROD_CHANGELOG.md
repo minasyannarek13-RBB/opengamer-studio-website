@@ -1,5 +1,20 @@
 # CTO Production Handoff Log
 
+## 2026-09-08 07:21 +04 — Homepage positioning + direct enquiry conversion
+
+- **Status:** NEEDS CTO REVIEW
+- **Baseline:** `v2-current` @ `697e1a3dbd0fa2fd33d4a62f09cd3dca3f10bc19`
+- **Implementation commits:** `c059422b8ba32528f0348e42406976961f12b0a6`, `c42301b70a32446b101ce65f9de490855e5476d4`
+- **Purpose:** sharpen the English homepage first impression around OpenGamer's existing game-production and engineering capabilities and remove friction between commercial CTAs and the enquiry form.
+- **Files/components changed:**
+  - `components/home/StudioHomepage.tsx` — ports the focused coordinated homepage pass from `design/full-site-polish-pass-20260908` commit `7970d60b21774c9ab976ae10f20f001b3ca48ee9`: clearer English hero/section positioning, stronger games/custom-production CTA labels, form-anchor links and keyboard focus treatment for hero proof tiles.
+  - `app/contact/page.tsx` — adds the missing `#project-enquiry` target with scroll offset and routes the three enquiry cards directly to that target while preserving existing `interest` query preselection.
+- **User-visible effect:** visitors get a clearer B2B statement of what OpenGamer builds, a simpler games/capabilities narrative, and commercial CTAs now land at the relevant enquiry form instead of only changing the contact URL.
+- **Technical rationale:** ports the strongest focused change from the coordinated site-improvement branch instead of introducing a competing redesign, then closes an integration gap in that branch where homepage CTAs referenced an anchor that did not exist. No dependency, API contract, lead-delivery, DNS, secret, env, migration or production-config change.
+- **Verification:** authoritative `v2-current` baseline remains unchanged at `697e1a3`; prior handoff head `a34f44d` has green Vercel status. Vercel preview for implementation head `c42301b` was **pending** at log time. Live `v2.open-gamer.com` could not be fetched by the available web runtime in this run, so no live-deployment equivalence is claimed.
+- **Rollback:** revert `c42301b70a32446b101ce65f9de490855e5476d4` and `c059422b8ba32528f0348e42406976961f12b0a6`.
+- **CTO production action required:** review the preview at homepage + `/contact` on mobile and desktop; verify hero CTA, game-production/portfolio CTAs and all three contact intent cards land on `#project-enquiry` and preserve service-interest preselection; then run repository `lint`, `typecheck`, `test`, `build` and the visual-QA command before port/merge. No DNS/alias action required.
+
 ## 2026-09-08 06:23 +04 — Portable full-site visual QA coverage
 
 - **Status:** NEEDS CTO REVIEW
