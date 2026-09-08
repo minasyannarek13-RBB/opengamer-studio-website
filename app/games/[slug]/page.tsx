@@ -49,6 +49,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
 
   const demoUrl = getVerifiedDemoUrl(game);
   const commercialStatus = getGameCommercialStatusLabel(game);
+  const gameEnquiryHref = `/contact?interest=game&game=${game.slug}#project-enquiry`;
   const gameIndex = games.findIndex((item) => item.slug === game.slug);
   const relatedGames = [games[(gameIndex - 1 + games.length) % games.length], games[(gameIndex + 1) % games.length]];
   const gameDetails = [
@@ -83,9 +84,9 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
                   Play Demo
                 </Button>
               ) : (
-                <Button href={`/contact?interest=game&game=${game.slug}`}>Request Demo</Button>
+                <Button href={gameEnquiryHref}>Request Demo</Button>
               )}
-              <Button href="/contact" variant="secondary">
+              <Button href={gameEnquiryHref} variant="secondary">
                 Discuss a Project
               </Button>
             </div>
@@ -168,8 +169,9 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
         title="Interested in This Game or a Custom Version?"
         description="Share the target theme, mechanics, platform and integration context. OpenGamer will propose the right production model."
         ctaLabel="Discuss a Project"
+        ctaHref={gameEnquiryHref}
         secondaryLabel="Request Portfolio"
-        secondaryHref="/contact?interest=portfolio"
+        secondaryHref="/contact?interest=portfolio#project-enquiry"
       />
     </SiteShell>
   );
