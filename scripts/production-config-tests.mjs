@@ -90,6 +90,24 @@ test("Resend delivery failure is not reported as success", async () => {
   assert.equal(result.ok, false);
 });
 
+test("Resend provider exceptions fail closed instead of throwing", async () => {
+  const { deliverToResend } = await cacheSafeImport("../lib/leadDelivery.ts");
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => {
+    throw new Error("network unavailable");
+  };
+
+  const result = await deliverToResend(payload, {
+    apiKey: "re_test",
+    recipientEmail: "leads@example.com",
+    fromEmail: "OpenGamer Website <website@example.com>"
+  });
+  globalThis.fetch = originalFetch;
+
+  assert.equal(result.ok, false);
+  assert.equal(result.message, "Lead delivery provider is unavailable.");
+});
+
 test("public corporate data is conditional and excludes phone/address", async () => {
   process.env.NEXT_PUBLIC_CONTACT_EMAIL = "";
   process.env.NEXT_PUBLIC_LINKEDIN_URL = "http://linkedin.com/company/opengamer";
