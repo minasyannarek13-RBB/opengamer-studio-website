@@ -2,6 +2,39 @@
 
 This file records production-facing handoff notes for the latest verified OpenGamer website descendants. Historical site passes remain documented in `SITE_UPGRADE_CHANGELOG.md`.
 
+## 2026-09-08 15:38 +04 — Route Social Preview Integrity
+
+Branch: `design/page-social-preview-polish-20260908-r11`  
+Parent: `design/social-preview-integrity-polish-20260908-r10` at `02953ab1718fa5f876759a783d51121241feb9c8`  
+Functional head before this handoff note: `33a60f5db7d856f74dc83495835811ba76cd54d7`
+
+### Purpose
+
+Improve B2B link sharing beyond the homepage so key OpenGamer routes carry page-specific Open Graph/Twitter presentation rather than relying on generic inherited social metadata.
+
+### Changes
+
+- Added dedicated social metadata layouts for About, Contact, Services, Technology and Portfolio using the approved 1200x630 OpenGamer brand preview.
+- Added a product-specific ELEMENTALS visual preview for Live Casino Development.
+- Added product-specific Twitter/X preview metadata for ELEMENTALS and LC App while keeping their existing page-level Open Graph metadata authoritative.
+- Added `scripts/social-preview-tests.mjs` and wired it into the existing pre-build production-integrity gate.
+- The new gate verifies dedicated route URL/image metadata, Open Graph + Twitter coverage for key commercial routes, and product-specific Twitter preview assets for ELEMENTALS/LC App.
+- No public body copy, product claims, dependencies, production aliases, domains or production configuration were changed.
+
+### QA
+
+- Git compare against r10: ahead 10 / behind 0 before this handoff commit; only route metadata layouts, the social-preview test and package test wiring changed.
+- Earlier incremental r11 Vercel previews for About and Services reached READY with preview `X-Robots-Tag: noindex` preserved.
+- Final branch-head Vercel/build verification is required before promotion; do not treat an earlier incremental preview as head verification.
+
+### Production Instructions
+
+1. Carry the route metadata layouts and `scripts/social-preview-tests.mjs` forward together.
+2. Keep authentic OpenGamer brand/product imagery as social-card evidence; do not substitute generated visuals that imply shipped functionality.
+3. Re-run the complete production-integrity/build gate and verify rendered OG/Twitter metadata on the final branch-head preview before any promotion.
+4. Keep preview noindex protection intact.
+5. Do not alter `v2-current`, `main`, production aliases, domains or production configuration without explicit founder approval.
+
 ## 2026-09-08 14:50 +04 — Homepage Social Preview Integrity Gate
 
 Branch: `design/social-preview-integrity-polish-20260908-r10`  
