@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-09 01:47 +04 — Homepage product-status positioning
+- **Status:** NEEDS CTO REVIEW
+- **Commit:** `7b459cff09239bc90c419bea42e87629536454c4`.
+- **Purpose:** replace weak generic concept framing with more precise factual product-status language while keeping OpenGamer, ELEMENTALS and LC App clearly separated.
+- **Files/components changed:** `components/home/StudioHomepage.tsx`.
+- **User-visible effect:** homepage showcase now labels ELEMENTALS as `Original Live Casino IP` and LC App as `B2B product direction`; English proof/project copy explicitly distinguishes playable games, original IP and in-development product work instead of implying that all items share the same production status.
+- **Technical rationale:** coordinated QA branch `design/product-positioning-consistency-polish-20260909-r20` supplied a focused 8-line positioning correction. Only the safe factual copy layer was ported into the stronger current implementation branch; no r20 layout replacement or weaker portfolio disclaimer was imported.
+- **Verification:** GitHub commit created successfully. Vercel preview deployment `dpl_7ceC4iw3YAmFpekYaVStAqdDbXu3` started for the exact implementation commit and is currently **BUILDING**; final build/preview success is not claimed yet. The immediately preceding aggregate handoff head was Vercel `READY`.
+- **Env/migration/config dependency:** none; no DNS, aliases, secrets, env, migrations, dependencies, API contracts or production configuration changed.
+- **Rollback:** revert `7b459cff09239bc90c419bea42e87629536454c4`.
+- **CTO production action required:** after the exact preview reaches READY, run the standard lint/typecheck/test/build gate if not already covered by Vercel, inspect homepage hero/showcase/proof/project sections on mobile/tablet/desktop, confirm ELEMENTALS/LC App status wording remains factual, then port/merge only after review.
+
 ## 2026-09-09 01:21 +04 — Optimized homepage/game-card artwork delivery
 - **Status:** NEEDS CTO REVIEW
 - **Commit:** `1ab1381b5d3d5f4142c674ade5430eb63ae7f692`.
