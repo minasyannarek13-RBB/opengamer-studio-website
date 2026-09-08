@@ -11,7 +11,7 @@ import { company } from "@/content/company";
 
 export const metadata: Metadata = {
   title: "Contact | OpenGamer Studio",
-  description: "Contact OpenGamer to discuss casino game development, RGS-related engineering, integrations or a dedicated iGaming development team.",
+  description: "Contact OpenGamer to discuss casino game development, branded games, dedicated development capacity, RGS-related engineering or integrations.",
   alternates: { canonical: "/contact" }
 };
 
@@ -20,6 +20,11 @@ const enquiryRoutes = [
     title: "Game production",
     description: "Original, custom or branded slot production, from selected stages to full-cycle delivery.",
     href: "/contact?interest=game#project-enquiry"
+  },
+  {
+    title: "Dedicated development capacity",
+    description: "Add focused iGaming production capacity across frontend, backend, mathematics, art or connected delivery scopes.",
+    href: "/contact?interest=technology#project-enquiry"
   },
   {
     title: "Engineering & integration",
@@ -36,8 +41,8 @@ const enquiryRoutes = [
 const enquiryGuidance = [
   "Project type and commercial goal",
   "Target platform, aggregator or operator context",
-  "Required game, RGS-related or integration scope",
-  "Current stage and key launch dependencies"
+  "Required game, engineering or integration scope",
+  "Current stage and key delivery dependencies"
 ];
 
 export default function ContactPage() {
@@ -46,15 +51,15 @@ export default function ContactPage() {
       <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
         <Container>
           <SectionHeader
-            eyebrow="Start a conversation"
-            title="Tell Us What You Want to Build"
-            description="Choose the closest starting point or send the essentials directly. OpenGamer will use the context you provide to review the right production, engineering or commercial path."
+            eyebrow="Start a commercial conversation"
+            title="Tell Us What You Need Built"
+            description="Choose the closest starting point or send the essentials directly. OpenGamer will review the relevant production, engineering or commercial scope without forcing a full-cycle engagement."
             headingLevel="h1"
           />
         </Container>
       </section>
       <Section>
-        <div className="mb-10 grid gap-4 md:grid-cols-3" data-reveal-group="cards">
+        <div className="mb-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4" data-reveal-group="cards">
           {enquiryRoutes.map((route) => (
             <Link
               key={route.title}
@@ -78,7 +83,7 @@ export default function ContactPage() {
                     {company.email}
                   </a>
                 ) : (
-                  <p>Use the form to send project, technology and portfolio enquiries.</p>
+                  <p>Use the form for game production, dedicated development, technology and portfolio enquiries.</p>
                 )}
                 {company.social.map((item) => (
                   <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-white">
