@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { company, logoAsset } from "@/content/company";
 import { footerCompanyNavigation, footerSolutionsNavigation, legalNavigation } from "@/content/navigation";
 import type { Locale } from "@/lib/i18n";
-import { getLocalizedHomePath, getLocalizedPath } from "@/lib/routes";
+import { getLocalizedHomePath } from "@/lib/routes";
 
 const footerCopy: Record<Locale, { solutions: string; company: string; legalContact: string; enquiry: string; rights: string; scope: string }> = {
   en: {
@@ -100,7 +100,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
                   {company.email}
                 </a>
               ) : (
-                <Link href={getLocalizedPath(locale, "/contact")} className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <Link href={getLocalizedHomePath(locale, "/contact")} className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                   {copy.enquiry}
                 </Link>
               )}
