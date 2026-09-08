@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-08 14:25 +04 — Homepage social preview metadata integrity
+- **Status:** NEEDS CTO REVIEW
+- **Commit:** `b88637901692920c8545b8a0f517b9537a2162dd`
+- **Purpose:** preserve the branded 1200×630 social preview when homepage-level Open Graph/Twitter metadata overrides root metadata.
+- **Files/components changed:** `app/page.tsx` metadata only.
+- **User-visible effect:** no in-page UI change; shared homepage links should retain the existing OpenGamer branded preview image on Open Graph/Twitter-compatible surfaces instead of losing the root image through nested metadata replacement.
+- **Technical rationale:** page-level `openGraph` and `twitter` objects override the corresponding root metadata objects; both now explicitly reference the existing `/assets/brand/opengamer-og.png` asset. No new asset/content/dependency introduced.
+- **Verification:** focused metadata diff reviewed; existing asset path already used by root metadata and Games OG metadata. Fresh Vercel/build status must be confirmed for this head before production port/merge.
+- **Env/migration/config dependency:** none; no DNS, aliases, secrets, env, migrations, dependencies or runtime production configuration changed.
+- **Rollback:** revert `b88637901692920c8545b8a0f517b9537a2162dd`.
+- **CTO production action required:** run `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`; inspect rendered homepage metadata for `og:image` and `twitter:image`, then port/merge only after preview checks pass.
+
 ## 2026-09-08 13:21 +04 — Asset delivery payload + regression gate
 - **Status:** NEEDS CTO REVIEW
 - **Baseline:** `v2-current` @ `697e1a3dbd0fa2fd33d4a62f09cd3dca3f10bc19`
