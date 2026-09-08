@@ -1,16 +1,28 @@
 # OpenGamer CTO Production Handoff Changelog
 
+## 2026-09-09 — Product positioning consistency pass
+- Branch: `design/product-positioning-consistency-polish-20260909-r20`.
+- Parent: newly verified `design/homepage-asset-integrity-polish-20260909-r19` @ `0dba5d56365073d50c6f5c81f0bafd0c7f2032ba`.
+- Portfolio functional commit: `b46c1b4acc04e7e03b09e466e79d8b0a5e0066d1` — VERIFIED on Vercel deployment `dpl_4Tox15u7oZUkjBAsb5o8KevdkPg9` (`READY`).
+- Homepage functional head: `150bca22e9674518c30bccb41d2b4588ce7bcc16` — pushed but NOT yet Vercel-verified because the next build was rejected by the Hobby `build-rate-limit` before execution.
+- Purpose: align top-level public positioning with the factual statuses already used by the canonical portfolio data, reducing repetitive weak `concept` framing without implying launch, integration, licensing, revenue or production readiness.
+- Changed: `app/portfolio/page.tsx`, `components/home/StudioHomepage.tsx`.
+- Portfolio copy: ELEMENTALS is presented as `Original Live Casino IP`; LC App as `B2B product direction`; hero/metadata/CTA copy now distinguishes original IP and in-development product work from shipped slot portfolio titles.
+- Homepage copy: hero showcase labels, proof copy and the beyond-slots section now use `Original Live Casino IP`, `B2B product direction`, and explicit `in-development` language where relevant. Existing canonical product status data remains unchanged.
+- Verified portfolio QA on `b46c1b4`: production-integrity `11/11 PASS`; asset-delivery `4/4 PASS`; social-preview `7/7 PASS`; locale/schema `2/2 PASS`; security-header `2/2 PASS`; locale-routing `2/2 PASS`; Next.js compile PASS; lint/type PASS; static generation `93/93 PASS`; Vercel state `READY`.
+- Final-head status: GitHub/Vercel reports `build-rate-limit` for `150bca22...`; do not treat the homepage functional head as verified until the same complete gate and preview runtime/noindex checks pass on that commit or a descendant containing no additional functional changes.
+- Production instruction: no promotion from r20 until final-head verification. `main`, `v2-current`, production aliases, domains and production configuration remain untouched and require founder authorization.
+
 ## 2026-09-09 — Homepage artwork delivery integrity
 - Branch: `design/homepage-asset-integrity-polish-20260909-r19`.
 - Parent: verified `design/portfolio-commercial-clarity-polish-20260908-r18` @ `4de0bbf1aed4fdf6b670205c6ebd31a0556d6f22`.
-- Functional head: `08a1270a1794ef84b849e03cfcdab0b609e356e2`.
+- Functional head: `08a1270a1794ef84b849e03cfcdab0b609e356e2`; handoff head: `0dba5d56365073d50c6f5c81f0bafd0c7f2032ba`.
 - Purpose: remove remaining homepage/showcase references to legacy JPG/source game artwork where verified WebP equivalents already exist, reducing avoidable image payload and preventing dormant showcase configuration from reintroducing heavier assets during future UI work.
 - Changed: `content/studioHomepage.ts`, `scripts/asset-delivery-tests.mjs`.
 - Asset changes: Forest Fortune showcase `source.jpg` -> `artwork.webp`; Deep Dive showcase and Game Portfolio card `artwork.jpg` -> `artwork.webp`; Choco Boom showcase `artwork.jpg` -> `artwork.webp`. Existing WebP files were verified in-repository before use; no product visuals or factual claims were changed.
-- Regression gate: asset-delivery suite now rejects those three legacy homepage artwork paths and requires the optimized WebP references.
-- Diff integrity: branch is `ahead 2 / behind 0` from r18 at functional head; functional diff is limited to 4 path substitutions plus the asset regression test.
-- QA status: GitHub push succeeded. Vercel did not start a preview build for functional head because the project returned `build-rate-limit`; therefore r19 is intentionally NOT marked verified or approved yet. This is a transient hosting-plan limit, not an application build failure. Full build/lint/type/static/runtime/noindex verification remains required on the same head when Vercel accepts builds again.
-- Production instruction: do not promote r19 until the complete Vercel production-config gate and preview verification pass. Do not alter `main`, `v2-current`, production aliases, domains or production configuration without founder authorization.
+- Regression gate: asset-delivery suite rejects those three legacy homepage artwork paths and requires the optimized WebP references.
+- Verification update: the previous build-rate-limit cleared. Vercel deployment `dpl_AzCjKPvG9taRx1Cz3zwpavwfbxnD` for handoff head `0dba5d...` reached `READY`; preview root returned HTTP `200`, retained HTML `noindex, nofollow` plus `X-Robots-Tag: noindex`, and runtime warning/error/fatal checks returned no entries.
+- Production instruction: r19 is now a verified forward baseline. Do not alter `main`, `v2-current`, production aliases, domains or production configuration without founder authorization.
 
 ## 2026-09-08 — Portfolio commercial clarity and verified locale chain
 - Branch: `design/portfolio-commercial-clarity-polish-20260908-r18`.
@@ -62,8 +74,8 @@
 
 ## 2026-09-08 — Preview indexing integrity hardening
 - Branch: `design/preview-indexing-integrity-polish-20260908-r14`
-- Parent: `design/game-art-delivery-integrity-polish-20260908-r13` @ `6a04d59ed5200b9bb9464c969774de9e2ed5be41`
-- Functional commit: `559619d0130481080fb1557bf8b68295154eceb2`
+- Parent: `design/game-art-delivery-integrity-polish-20260908-r13` @ `6a04d59ed5200b9bb9464c969774de9e2ed5be41`.
+- Functional commit: `559619d0130481080fb1557bf8b68295154eceb2`.
 - Purpose: keep non-production previews fully isolated from search-engine discovery while preserving production sitemap behavior.
 - Changed: `app/robots.ts`, `scripts/production-config-tests.mjs`.
 - Behavior: when `isIndexableProduction` is false, `/robots.txt` returns `Disallow: /` with no sitemap reference. Production behavior remains `Allow: /` plus `${siteUrl}/sitemap.xml`.
