@@ -6,8 +6,8 @@ export const portfolioProjects = [
     status: "Original Game Concept · In Development",
     href: "/portfolio/elementals",
     cta: "View ELEMENTALS",
-    image: "/assets/projects/elementals/overview.jpg",
-    imageAlt: "ELEMENTALS premium Live Casino show game concept"
+    image: "/assets/projects/elementals/expositions/nexus-stage.webp",
+    imageAlt: "ELEMENTALS Nexus stage concept with the Great Wheel and four elemental realms"
   },
   {
     title: "LC App",
@@ -24,7 +24,7 @@ export const portfolioProjects = [
 export const elementalsRealms = [
   {
     title: "Fire",
-    description: "One of four elemental bonus realms, each with its own bonus round and visual identity.",
+    description: "A volcanic bonus realm built around heat, ritual fire and high-contrast energy.",
     tone: "from-red-500/20 to-orange-400/10",
     guardianImage: "/assets/projects/elementals/character-fire.jpg",
     portalImage: "/assets/projects/elementals/gate-fire.jpg",
@@ -32,7 +32,7 @@ export const elementalsRealms = [
   },
   {
     title: "Water",
-    description: "One of four elemental bonus realms, each with its own bonus round and visual identity.",
+    description: "A ceremonial water realm shaped by glass, deep blue light and fluid motion.",
     tone: "from-cyan-400/20 to-blue-500/10",
     guardianImage: "/assets/projects/elementals/character-water.jpg",
     portalImage: "/assets/projects/elementals/gate-water.jpg",
@@ -40,7 +40,7 @@ export const elementalsRealms = [
   },
   {
     title: "Earth",
-    description: "One of four elemental bonus realms, each with its own bonus round and visual identity.",
+    description: "A monumental stone realm defined by contained energy, weight and ancient structure.",
     tone: "from-lime-500/18 to-stone-500/10",
     guardianImage: "/assets/projects/elementals/character-earth.jpg",
     portalImage: "/assets/projects/elementals/gate-earth.jpg",
@@ -48,7 +48,7 @@ export const elementalsRealms = [
   },
   {
     title: "Air",
-    description: "One of four elemental bonus realms, each with its own bonus round and visual identity.",
+    description: "A storm-lit realm built around levitation, wind motion and open vertical space.",
     tone: "from-slate-200/16 to-emerald/10",
     guardianImage: "/assets/projects/elementals/character-air.jpg",
     portalImage: "/assets/projects/elementals/gate-air.jpg",
