@@ -8,3 +8,12 @@ qa/lighthouse*.json
 node_modules/
 *.log
 .DS_Store
+
+# Keep authentic high-resolution LC App source files in Git, but ship only the
+# optimized public variants currently referenced by the website.
+public/assets/projects/lc-app/lc-app-desktop-experience.webp
+public/assets/projects/lc-app/lc-app-device-ecosystem.webp
+public/assets/projects/lc-app/lc-app-mobile-community.webp
+public/assets/projects/lc-app/lc-app-mobile-creator-profile.webp
+public/assets/projects/lc-app/lc-app-mobile-discover.png
+public/assets/projects/lc-app/lc-app-mobile-social-feed.webp
