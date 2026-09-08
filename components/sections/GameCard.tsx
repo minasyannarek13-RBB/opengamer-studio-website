@@ -76,7 +76,7 @@ export function GameCard({ game }: { game: Game }) {
               Play Demo
             </Button>
           ) : (
-            <Button href={`/contact?interest=game&game=${game.slug}`} variant="secondary" className="min-h-10 px-4">
+            <Button href={`/contact?interest=game&game=${game.slug}#project-enquiry`} variant="secondary" className="min-h-10 px-4">
               Request Demo
             </Button>
           )}
