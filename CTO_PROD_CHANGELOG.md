@@ -1,5 +1,20 @@
 # CTO Production Handoff Log
 
+## 2026-09-08 10:20 +04 — Permanent redirects for hidden locale paths
+
+- **Status:** NEEDS CTO REVIEW
+- **Baseline:** `v2-current` @ `697e1a3dbd0fa2fd33d4a62f09cd3dca3f10bc19`
+- **Implementation commit:** `741c5d88ea3b6ca0688352641da5a623f0a08cf0`
+- **Purpose:** make hidden locale-prefix routes canonical permanent redirects instead of temporary redirects.
+- **Files/components changed:**
+  - `app/[locale]/[...path]/page.tsx` — replaces Next.js `redirect()` with `permanentRedirect()` while preserving the exact destination mapping.
+- **User-visible effect:** none in normal navigation; locale-prefixed legacy/hidden paths still resolve to the same canonical route, but crawlers and clients now receive a permanent redirect signal.
+- **Technical rationale:** the current site intentionally hides locale-prefixed duplicates, so a permanent redirect better represents canonical URL intent and avoids treating those paths as temporary alternate locations. This focused change was already identified in the coordinated Site Improvement/QA branch `design/site-integrity-polish-20260908-r6` (`7104464`).
+- **Verification:** exact one-file coordinated diff ported to the current build handoff branch. Destination construction is unchanged. New Vercel preview/build and repository lint/typecheck/test/build must be rechecked before production handoff; no local success is claimed in this run.
+- **Env/migration/config dependency:** none.
+- **Rollback:** revert `741c5d88ea3b6ca0688352641da5a623f0a08cf0`.
+- **CTO production action required:** verify preview status; smoke-test `/en`, `/en/games` and another supported locale-prefixed path to confirm they permanently redirect to the corresponding canonical non-prefixed route; then run `lint`, `typecheck`, `test`, `build` and visual QA before port/merge. No DNS/alias/env action required.
+
 ## 2026-09-08 09:24 +04 — Sitemap freshness signal hygiene
 
 - **Status:** NEEDS CTO REVIEW
