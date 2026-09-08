@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { company, logoAsset } from "@/content/company";
 import { footerCompanyNavigation, footerSolutionsNavigation, legalNavigation } from "@/content/navigation";
 import type { Locale } from "@/lib/i18n";
-import { getLocalizedHomePath, getLocalizedPath } from "@/lib/routes";
+import { getLocalizedHomePath } from "@/lib/routes";
 
 const footerCopy: Record<Locale, { solutions: string; company: string; legalContact: string; enquiry: string; discuss: string; rights: string; scope: string }> = {
   en: {
@@ -72,7 +72,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
             />
             <p className="mt-4 max-w-xl break-words text-sm leading-6 text-slate-400">{company.description}</p>
             <Link
-              href={getLocalizedPath(locale, "/contact")}
+              href={getLocalizedHomePath(locale, "/contact")}
               className="mt-5 inline-flex min-h-11 max-w-full items-center justify-center rounded-full border border-emerald/30 bg-emerald/10 px-4 py-2 text-center text-sm font-semibold leading-5 text-emerald transition hover:border-emerald/55 hover:bg-emerald/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
             >
               {copy.discuss}
@@ -111,7 +111,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
                   {company.email}
                 </a>
               ) : (
-                <Link href={getLocalizedPath(locale, "/contact")} className="break-words hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <Link href={getLocalizedHomePath(locale, "/contact")} className="break-words hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                   {copy.enquiry}
                 </Link>
               )}
