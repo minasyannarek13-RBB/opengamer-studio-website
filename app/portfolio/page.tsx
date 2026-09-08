@@ -46,31 +46,31 @@ const portfolioHeroItems = [
 export default function PortfolioPage() {
   return (
     <SiteShell atmosphere="company">
-      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-12 sm:py-16 lg:py-20">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_76%_14%,rgba(35,196,131,0.14),transparent_28rem)]" />
-        <Container className="relative grid gap-10 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
-          <div>
+        <Container className="relative grid min-w-0 gap-8 lg:grid-cols-[0.84fr_1.16fr] lg:items-center lg:gap-10">
+          <div className="min-w-0">
             <SectionHeader
               eyebrow="OpenGamer portfolio"
-              title="Games and Product Concepts You Can Actually Explore"
-              description="A focused view of OpenGamer work across slot games, Live Casino concepts and B2B product design, with each project clearly labelled by status."
+              title="Games, Concepts and Product Work"
+              description="Explore selected slot games, Live Casino concepts and B2B product work, with project status kept clear."
               headingLevel="h1"
             />
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/games">Explore Games</Button>
-              <Button href="/contact?interest=portfolio#project-enquiry" variant="secondary">
+            <div className="mt-7 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap sm:mt-8">
+              <Button href="/games" className="w-full min-[480px]:w-auto">Explore Games</Button>
+              <Button href="/contact?interest=portfolio#project-enquiry" variant="secondary" className="w-full min-[480px]:w-auto">
                 Discuss Portfolio & Partnerships
               </Button>
             </div>
-            <StudioGameSignature context="portfolio" variant="inline" className="mt-8 max-w-2xl" />
+            <StudioGameSignature context="portfolio" variant="inline" className="mt-7 max-w-2xl sm:mt-8" />
           </div>
 
-          <div className="grid min-h-[26rem] grid-cols-2 gap-3 md:grid-cols-3 md:grid-rows-2" aria-label="Selected OpenGamer portfolio work">
+          <div className="grid min-h-[22rem] grid-cols-2 gap-3 sm:min-h-[24rem] md:grid-cols-3 md:grid-rows-2 lg:min-h-[26rem]" aria-label="Selected OpenGamer portfolio work">
             {portfolioHeroItems.map((item) => (
               <Link
                 key={item.title}
                 href={item.href}
-                className={`group relative min-h-44 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/45 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 ${item.className}`}
+                className={`group relative min-h-36 min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/45 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 sm:min-h-44 ${item.className}`}
               >
                 <Image
                   src={item.image}
@@ -81,9 +81,9 @@ export default function PortfolioPage() {
                   priority={item.title === "ELEMENTALS"}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/18 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                  <span className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-emerald">{item.label}</span>
-                  <strong className="mt-1 block text-lg font-semibold text-white sm:text-xl">{item.title}</strong>
+                <div className="absolute inset-x-0 bottom-0 min-w-0 p-3 sm:p-5">
+                  <span className="block break-words text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-emerald sm:text-[0.68rem] sm:tracking-[0.16em]">{item.label}</span>
+                  <strong className="mt-1 block break-words text-base font-semibold text-white sm:text-xl">{item.title}</strong>
                 </div>
               </Link>
             ))}
@@ -91,27 +91,27 @@ export default function PortfolioPage() {
         </Container>
       </section>
       <Section>
-        <SectionHeader eyebrow="Original concepts" title="Product Ideas with a Clear Identity" description="Selected concepts that show OpenGamer product thinking beyond the slot portfolio. Development status is kept explicit on every project." />
-        <div className="mt-10 grid gap-6 lg:grid-cols-2" data-reveal-group="cards">
+        <SectionHeader eyebrow="Original concepts" title="Ideas with a Clear Product Identity" description="Selected concepts that show OpenGamer product thinking beyond slot production." />
+        <div className="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-2 lg:gap-6" data-reveal-group="cards">
           {portfolioProjects.map((project) => (
             <ProjectCard key={project.title} {...project} />
           ))}
         </div>
       </Section>
       <Section className="bg-black/20">
-        <SectionHeader eyebrow="Casino games" title="Selected Slot Titles" description="A curated sample from the OpenGamer slot portfolio. Open the full Games page for individual titles and public demos where available." />
-        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3" data-reveal-group="cards">
+        <SectionHeader eyebrow="Casino games" title="Selected Slot Titles" description="A curated sample of the OpenGamer slot portfolio, with public demos where available." />
+        <div className="mt-8 grid gap-5 sm:mt-10 md:grid-cols-2 xl:grid-cols-3" data-reveal-group="cards">
           {featuredGames.map((game) => (
             <GameCard key={game.slug} game={game} />
           ))}
         </div>
-        <Button href="/games" variant="secondary" className="mt-8">
+        <Button href="/games" variant="secondary" className="mt-7 w-full sm:mt-8 sm:w-auto">
           View All Games
         </Button>
       </Section>
       <CTASection
-        title="See Something Relevant to Your Roadmap?"
-        description="Discuss a specific title, concept, custom production need or broader portfolio opportunity with OpenGamer."
+        title="See Something Relevant?"
+        description="Discuss a title, concept, custom production need or broader portfolio opportunity with OpenGamer."
         ctaLabel="Discuss a Project"
         ctaHref="/contact?interest=portfolio#project-enquiry"
       />
