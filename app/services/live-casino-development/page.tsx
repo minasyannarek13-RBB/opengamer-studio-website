@@ -26,55 +26,55 @@ export const metadata: Metadata = {
 export default function LiveCasinoDevelopmentPage() {
   return (
     <SiteShell atmosphere="elementals">
-      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-12 sm:py-16 lg:py-20">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_16%,rgba(220,164,95,0.12),transparent_28rem),radial-gradient(circle_at_18%_80%,rgba(46,230,206,0.08),transparent_24rem)]" />
-        <Container className="relative grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
-          <div className="max-w-3xl">
-            <p className="premium-kicker text-xs font-semibold uppercase">Live Casino Development</p>
-            <h1 className="mt-5 text-balance text-5xl font-semibold leading-[0.98] text-white sm:text-6xl">Design the product around the table, not only the table itself.</h1>
-            <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">OpenGamer works across show-game concepts, rules, player UX, presenter flows and the product technology that connects them.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/contact?interest=live-casino#project-enquiry">Discuss Live Casino</Button>
-              <Button href="/portfolio/elementals" variant="secondary">Explore ELEMENTALS</Button>
+        <Container className="relative grid min-w-0 gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-10">
+          <div className="min-w-0 max-w-2xl">
+            <p className="premium-kicker break-words text-xs font-semibold uppercase">Live Casino Development</p>
+            <h1 className="mt-5 max-w-[13ch] break-words text-balance text-[clamp(2.7rem,9vw,4rem)] font-semibold leading-[0.99] tracking-[-0.02em] text-white">Design the Experience Around the Table</h1>
+            <p className="mt-5 max-w-xl break-words text-base leading-7 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8">OpenGamer works across show-game concepts, rules, player UX, presenter flows and the technology connecting them.</p>
+            <div className="mt-7 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap sm:mt-8">
+              <Button href="/contact?interest=live-casino#project-enquiry" className="w-full min-[480px]:w-auto">Discuss Live Casino</Button>
+              <Button href="/portfolio/elementals" variant="secondary" className="w-full min-[480px]:w-auto">Explore ELEMENTALS</Button>
             </div>
           </div>
-          <div className="grid min-h-[25rem] gap-3 sm:grid-cols-[1.15fr_0.85fr]">
-            <Link href="/portfolio/elementals" className="group relative overflow-hidden rounded-2xl border border-[#dca45f]/20 bg-black/45 shadow-[0_26px_90px_rgba(0,0,0,0.34)]">
+          <div className="grid min-h-[21rem] min-w-0 gap-3 sm:min-h-[24rem] sm:grid-cols-[1.15fr_0.85fr] lg:min-h-[25rem]">
+            <Link href="/portfolio/elementals" className="group relative min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-[#dca45f]/20 bg-black/45 shadow-[0_26px_90px_rgba(0,0,0,0.34)]">
               <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="ELEMENTALS Nexus stage concept" fill sizes="(min-width:1024px) 34vw,60vw" className="object-cover transition duration-500 group-hover:scale-[1.02]" priority />
               <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/15 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#dca45f]">Show-game concept</span><strong className="mt-1 block text-xl font-semibold text-white">ELEMENTALS</strong></div>
+              <div className="absolute inset-x-0 bottom-0 min-w-0 p-4 sm:p-5"><span className="block break-words text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-[#dca45f] sm:text-xs sm:tracking-[0.16em]">Show-game concept</span><strong className="mt-1 block break-words text-lg font-semibold text-white sm:text-xl">ELEMENTALS</strong></div>
             </Link>
-            <Link href="/portfolio/lc-app" className="group relative overflow-hidden rounded-2xl border border-[#2ee6ce]/15 bg-black/45 shadow-[0_26px_90px_rgba(0,0,0,0.3)]">
+            <Link href="/portfolio/lc-app" className="group relative min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-[#2ee6ce]/15 bg-black/45 shadow-[0_26px_90px_rgba(0,0,0,0.3)]">
               <Image src="/assets/projects/lc-app/optimized/lc-app-mobile-community.webp" alt="LC App concept community interface" fill sizes="(min-width:1024px) 24vw,40vw" className="object-cover transition duration-500 group-hover:scale-[1.02]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/15 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#2ee6ce]">Product layer</span><strong className="mt-1 block text-xl font-semibold text-white">LC App</strong></div>
+              <div className="absolute inset-x-0 bottom-0 min-w-0 p-4 sm:p-5"><span className="block break-words text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-[#2ee6ce] sm:text-xs sm:tracking-[0.16em]">Product layer</span><strong className="mt-1 block break-words text-lg font-semibold text-white sm:text-xl">LC App</strong></div>
             </Link>
           </div>
         </Container>
       </section>
 
       <Section>
-        <div className="mb-10 max-w-3xl"><p className="premium-kicker text-xs font-semibold uppercase">What OpenGamer can cover</p><h2 className="mt-4 text-balance text-4xl font-semibold text-white sm:text-5xl">From format idea to a product teams can actually build around.</h2></div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
-          {capabilityGroups.map(([title, description]) => <Card key={title} tone="strong" className="h-full"><h3 className="text-xl font-semibold text-white">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-400">{description}</p></Card>)}
+        <div className="mb-8 max-w-3xl sm:mb-10"><p className="premium-kicker break-words text-xs font-semibold uppercase">What OpenGamer can cover</p><h2 className="mt-4 max-w-[17ch] break-words text-balance text-[clamp(2rem,6vw,3rem)] font-semibold leading-[1.06] text-white">From Format Idea to Buildable Product</h2></div>
+        <div className="grid min-w-0 gap-4 md:grid-cols-2 lg:grid-cols-3" data-reveal-group="cards">
+          {capabilityGroups.map(([title, description]) => <Card key={title} tone="strong" className="h-full min-w-0"><h3 className="break-words text-xl font-semibold text-white">{title}</h3><p className="mt-3 break-words text-sm leading-6 text-slate-400">{description}</p></Card>)}
         </div>
       </Section>
 
       <Section className="bg-black/20">
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-          <div className="overflow-hidden rounded-2xl border border-[#dca45f]/20 bg-black/40 p-2"><Image src="/assets/projects/elementals/expositions/nexus-studio-wheel.webp" alt="ELEMENTALS studio wheel concept" width={1086} height={724} className="h-full w-full rounded-xl object-cover" sizes="(min-width:1024px) 58vw,100vw" /></div>
-          <div className="max-w-xl"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#dca45f]">OpenGamer concept reference</p><h2 className="mt-4 text-balance text-4xl font-semibold text-white">ELEMENTALS shows the product thinking in context.</h2><p className="mt-5 text-base leading-7 text-slate-300">The concept combines a central wheel, realm-based bonus direction, dealer-host presentation and studio-facing product thinking. It remains in development and is not presented as a launched live product.</p><Button href="/portfolio/elementals" variant="secondary" className="mt-7">Explore ELEMENTALS</Button></div>
+        <div className="grid min-w-0 gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          <div className="min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-[#dca45f]/20 bg-black/40 p-2"><Image src="/assets/projects/elementals/expositions/nexus-studio-wheel.webp" alt="ELEMENTALS studio wheel concept" width={1086} height={724} className="h-full w-full rounded-[var(--radius-card)] object-cover" sizes="(min-width:1024px) 58vw,100vw" /></div>
+          <div className="min-w-0 max-w-xl"><p className="break-words text-xs font-semibold uppercase tracking-[0.14em] text-[#dca45f]">OpenGamer concept reference</p><h2 className="mt-4 break-words text-balance text-[clamp(2rem,5.5vw,2.75rem)] font-semibold leading-[1.08] text-white">ELEMENTALS Shows the Product Thinking in Context</h2><p className="mt-4 break-words text-base leading-7 text-slate-300 sm:mt-5">The concept combines a central wheel, realm-based bonus direction, dealer-host presentation and studio-facing product thinking. ELEMENTALS remains in development.</p><Button href="/portfolio/elementals" variant="secondary" className="mt-7 w-full sm:w-auto">Explore ELEMENTALS</Button></div>
         </div>
       </Section>
 
       <Section>
-        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
-          <div className="max-w-xl"><p className="premium-kicker text-xs font-semibold uppercase">Beyond the table</p><h2 className="mt-4 text-balance text-4xl font-semibold text-white">Live Casino can also be a product ecosystem.</h2><p className="mt-5 text-base leading-7 text-slate-300">LC App is a separate OpenGamer concept exploring discovery, creators, communities and communication around existing Live Casino ecosystems.</p><Button href="/portfolio/lc-app" variant="secondary" className="mt-7">Explore LC App</Button></div>
-          <div className="overflow-hidden rounded-2xl border border-[#2ee6ce]/15 bg-[#050609] p-2"><Image src="/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp" alt="LC App concept across multiple devices" width={1672} height={941} className="h-full w-full rounded-xl object-contain" sizes="(min-width:1024px) 58vw,100vw" /></div>
+        <div className="grid min-w-0 gap-8 lg:grid-cols-[0.72fr_minmax(0,1.28fr)] lg:items-center">
+          <div className="min-w-0 max-w-xl"><p className="premium-kicker break-words text-xs font-semibold uppercase">Beyond the table</p><h2 className="mt-4 break-words text-balance text-[clamp(2rem,5.5vw,2.75rem)] font-semibold leading-[1.08] text-white">Live Casino Can Extend Beyond the Session</h2><p className="mt-4 break-words text-base leading-7 text-slate-300 sm:mt-5">LC App is a separate OpenGamer concept exploring discovery, creators, communities and communication around existing Live Casino ecosystems.</p><Button href="/portfolio/lc-app" variant="secondary" className="mt-7 w-full sm:w-auto">Explore LC App</Button></div>
+          <div className="min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-[#2ee6ce]/15 bg-[#050609] p-2"><Image src="/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp" alt="LC App concept across multiple devices" width={1672} height={941} className="h-full w-full rounded-[var(--radius-card)] object-contain" sizes="(min-width:1024px) 58vw,100vw" /></div>
         </div>
       </Section>
 
-      <CTASection title="Discuss the next Live Casino product" description="Share the target format, player journey, studio context or current product gap. OpenGamer can review the right development scope." ctaLabel="Discuss Live Casino" ctaHref="/contact?interest=live-casino#project-enquiry" secondaryLabel="Explore Portfolio" secondaryHref="/portfolio" />
+      <CTASection title="Discuss the Next Live Casino Product" description="Share the target format, player journey, studio context or current product gap. OpenGamer can review the right development scope." ctaLabel="Discuss Live Casino" ctaHref="/contact?interest=live-casino#project-enquiry" secondaryLabel="Explore Portfolio" secondaryHref="/portfolio" />
     </SiteShell>
   );
 }
