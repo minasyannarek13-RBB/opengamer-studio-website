@@ -58,68 +58,68 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
   const copy = footerCopy[locale];
 
   return (
-    <footer className="border-t border-white/10 bg-black/40 py-14 sm:py-16">
+    <footer className="border-t border-white/10 bg-black/40 py-12 sm:py-16">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[1.35fr_0.82fr_0.72fr_0.9fr]" data-scroll-reveal>
-          <div>
+        <div className="grid min-w-0 gap-9 sm:gap-10 lg:grid-cols-[1.35fr_0.82fr_0.72fr_0.9fr]" data-scroll-reveal>
+          <div className="min-w-0">
             <Image
               src={logoAsset.src}
               alt={logoAsset.alt}
               width={logoAsset.width}
               height={logoAsset.height}
-              className="h-10 w-auto"
+              className="h-9 w-auto sm:h-10"
               sizes="150px"
             />
-            <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400">{company.description}</p>
+            <p className="mt-4 max-w-xl break-words text-sm leading-6 text-slate-400">{company.description}</p>
             <Link
               href={getLocalizedPath(locale, "/contact")}
-              className="mt-5 inline-flex min-h-11 items-center rounded-full border border-emerald/30 bg-emerald/10 px-4 py-2 text-sm font-semibold text-emerald transition hover:border-emerald/55 hover:bg-emerald/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+              className="mt-5 inline-flex min-h-11 max-w-full items-center justify-center rounded-full border border-emerald/30 bg-emerald/10 px-4 py-2 text-center text-sm font-semibold leading-5 text-emerald transition hover:border-emerald/55 hover:bg-emerald/15 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
             >
               {copy.discuss}
             </Link>
           </div>
-          <div>
-            <h2 className="text-sm font-semibold text-white">{copy.solutions}</h2>
-            <div className="mt-4 grid gap-3 text-sm text-slate-400">
+          <div className="min-w-0">
+            <h2 className="break-words text-sm font-semibold text-white">{copy.solutions}</h2>
+            <div className="mt-4 grid min-w-0 gap-3 text-sm text-slate-400">
               {footerSolutionsNavigation.map((route) => (
-                <Link key={route.href + route.label} href={getLocalizedHomePath(locale, route.href)} className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <Link key={route.href + route.label} href={getLocalizedHomePath(locale, route.href)} className="break-words hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                   {route.label}
                 </Link>
               ))}
             </div>
           </div>
-          <div>
-            <h2 className="text-sm font-semibold text-white">{copy.company}</h2>
-            <div className="mt-4 grid gap-3 text-sm text-slate-400">
+          <div className="min-w-0">
+            <h2 className="break-words text-sm font-semibold text-white">{copy.company}</h2>
+            <div className="mt-4 grid min-w-0 gap-3 text-sm text-slate-400">
               {footerCompanyNavigation.map((route) => (
-                <Link key={route.href} href={getLocalizedHomePath(locale, route.href)} className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <Link key={route.href} href={getLocalizedHomePath(locale, route.href)} className="break-words hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                   {route.label}
                 </Link>
               ))}
             </div>
           </div>
-          <div>
-            <h2 className="text-sm font-semibold text-white">{copy.legalContact}</h2>
-            <div className="mt-4 grid gap-3 text-sm text-slate-400">
+          <div className="min-w-0">
+            <h2 className="break-words text-sm font-semibold text-white">{copy.legalContact}</h2>
+            <div className="mt-4 grid min-w-0 gap-3 text-sm text-slate-400">
               {legalNavigation.map((route) => (
-                <Link key={route.href} href={getLocalizedHomePath(locale, route.href)} className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <Link key={route.href} href={getLocalizedHomePath(locale, route.href)} className="break-words hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                   {route.label}
                 </Link>
               ))}
               {company.email ? (
-                <a href={`mailto:${company.email}`} className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <a href={`mailto:${company.email}`} className="break-all hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                   {company.email}
                 </a>
               ) : (
-                <Link href={getLocalizedPath(locale, "/contact")} className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <Link href={getLocalizedPath(locale, "/contact")} className="break-words hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                   {copy.enquiry}
                 </Link>
               )}
             </div>
             {company.social.length ? (
-              <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-400">
+              <div className="mt-5 flex min-w-0 flex-wrap gap-3 text-sm text-slate-400">
                 {company.social.map((item) => (
-                  <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                  <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="break-words hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                     {item.label}
                   </a>
                 ))}
@@ -127,9 +127,9 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
             ) : null}
           </div>
         </div>
-        <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>Copyright © 2026 OpenGamer. {copy.rights}</p>
-          <p>{copy.scope}</p>
+        <div className="mt-9 flex min-w-0 flex-col gap-2 border-t border-white/10 pt-6 text-sm leading-6 text-slate-500 sm:mt-10 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+          <p className="break-words">Copyright © 2026 OpenGamer. {copy.rights}</p>
+          <p className="max-w-xl break-words sm:text-right">{copy.scope}</p>
         </div>
       </Container>
     </footer>
