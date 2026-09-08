@@ -100,7 +100,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
                   {company.email}
                 </a>
               ) : (
-                <Link href={getLocalizedHomePath(locale, "/contact")} className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <Link href={getLocalizedHomePath(locale, "/contact#project-enquiry")} className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                   {copy.enquiry}
                 </Link>
               )}
