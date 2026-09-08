@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-08 22:20 +04 — Canonical locale routing + navigation CTA regression gate
+- **Status:** BLOCKED
+- **Implementation commits:** `f776787bfb7995b31f770d02a0588f6f7f3d8381`, `70cb393733a4470b013fae48d365fbe5013ef687`, `031a7fce9f8c12dfcebaca41d4ad94a761739827`, `07fd939f6373ebf41e9fd41c57f30701b59e3531`, `cf010ffaa4000a4bdaca582f21b9b694b8c29a04`.
+- **Purpose:** stop non-home navigation/CTA links from manufacturing locale-prefixed URLs that immediately redirect to canonical English launch pages, and prevent the behavior from returning.
+- **Files/components changed:** `lib/routes.ts`, `scripts/locale-routing-tests.mjs`, `package.json`, `components/layout/Header.tsx`, `components/layout/Footer.tsx`.
+- **User-visible effect:** localized homepage links remain localized (`/ru`, `/hy`, `/es`, `/pt`), while About/Contact/Portfolio/project and other non-localized launch destinations now resolve directly to canonical routes instead of adding an unnecessary redirect hop. Header desktop/mobile CTAs and footer enquiry fallback follow the same rule.
+- **Technical rationale:** current localized non-home route files are compatibility redirects rather than independently localized destinations. Linking directly to canonical pages reduces navigation latency, redirect noise and conflicting crawl signals while preserving the existing localized homepage experience.
+- **Verification:** coordinated QA branch `design/locale-routing-integrity-polish-20260908-r16` supplied the focused routing contract. Vercel build for `f776787` = READY. Vercel build for `70cb393` = READY. After wiring the regression test into the production gate, build `031a7fc` correctly failed because the test exposed two remaining Header CTA uses of `getLocalizedPath`; build logs confirmed the exact assertion. Header and Footer residual paths were then corrected in `07fd939` and `cf010ff`. Fresh aggregate preview build for the final head has not completed because Vercel began returning the Hobby-plan build-rate-limit; therefore no final aggregate build success is claimed.
+- **Env/migration/config dependency:** none; no DNS, aliases, secrets, environment variables, migrations, dependencies or production configuration changed.
+- **Rollback:** revert `cf010ffaa4000a4bdaca582f21b9b694b8c29a04`, `07fd939f6373ebf41e9fd41c57f30701b59e3531`, `031a7fce9f8c12dfcebaca41d4ad94a761739827`, `70cb393733a4470b013fae48d365fbe5013ef687`, then `f776787bfb7995b31f770d02a0588f6f7f3d8381`.
+- **CTO production action required:** when Vercel build capacity resumes, run `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`; preview `/ru`, `/es`, `/about`, `/contact`, `/portfolio/elementals`; verify homepage logo/home links preserve locale but desktop/mobile header CTAs and footer non-home links go directly to canonical routes with no redirect hop; then merge/port only after preview passes.
+
 ## 2026-09-08 21:24 +04 — Baseline browser security headers + regression gate
 - **Status:** BLOCKED
 - **Implementation commits:** `ef7bcca4d7b96355887b7985caf8176c148bb6ec`, `eaeae0624d7668360b5e32d6a540b3b9a76ae1eb`, `0bec9f23538b344fada2420085ef17e5bdea893c`.
