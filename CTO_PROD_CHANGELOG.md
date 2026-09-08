@@ -1,5 +1,20 @@
 # CTO Production Handoff Log
 
+## 2026-09-08 12:21 +04 — Production build gated by integrity tests
+
+- **Status:** NEEDS CTO REVIEW
+- **Baseline:** `v2-current` @ `697e1a3dbd0fa2fd33d4a62f09cd3dca3f10bc19`
+- **Implementation commit:** `67744469b8fbb64b4527a176a16837fd4f43b136`
+- **Purpose:** prevent Vercel/production builds from succeeding when the repository's production-integrity checks fail.
+- **Files/components changed:**
+  - `package.json` — changes `build` from `next build` to `pnpm test:production-config && next build`.
+- **User-visible effect:** none when configuration is valid; invalid production configuration now blocks the build before a deployable artifact is produced.
+- **Technical rationale:** reuses the existing `test:production-config` script and ports the focused safeguard from coordinated QA branch `design/asset-delivery-polish-20260908-r8` commit `58b541e`; no dependency or runtime application behavior is added.
+- **Verification:** exact one-line package script change from the coordinated QA branch. The existing `test:production-config` command is already present on this handoff branch. New Vercel/CI status must be rechecked before production handoff; no local build success is claimed in this run.
+- **Env/migration/config dependency:** none; existing production-config tests define the accepted configuration contract.
+- **Rollback:** revert `67744469b8fbb64b4527a176a16837fd4f43b136`.
+- **CTO production action required:** verify the new preview/CI is green and confirm the build log runs `test:production-config` before `next build`; then run `lint`, `typecheck`, `test`, `build` and visual QA before port/merge. No DNS/alias/env change required.
+
 ## 2026-09-08 11:21 +04 — Catalogue demo CTA lands on enquiry form
 
 - **Status:** NEEDS CTO REVIEW
