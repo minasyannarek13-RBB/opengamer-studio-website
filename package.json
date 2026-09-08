@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "pnpm test:production-config",
-    "test:production-config": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/production-config-tests.mjs && node scripts/asset-delivery-tests.mjs && node scripts/social-preview-tests.mjs",
+    "test:production-config": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/production-config-tests.mjs && node scripts/asset-delivery-tests.mjs && node scripts/social-preview-tests.mjs && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/locale-routing-tests.mjs",
     "qa:visual": "node scripts/visual-qa.mjs"
   },
   "dependencies": {
