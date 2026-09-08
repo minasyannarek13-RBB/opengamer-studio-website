@@ -26,13 +26,13 @@ const homepageProofItems = [
   },
   {
     title: "ELEMENTALS",
-    type: "Live Casino concept",
+    type: "Original Live Casino IP",
     image: "/assets/projects/elementals/expositions/nexus-stage.webp",
     href: "/portfolio/elementals"
   },
   {
     title: "LC App",
-    type: "Product concept",
+    type: "B2B product direction",
     image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp",
     href: "/portfolio/lc-app"
   }
@@ -47,12 +47,12 @@ const proofCopy: Record<Locale, {
   en: {
     eyebrow: "Studio proof",
     title: "Work You Can Review Before We Talk",
-    description: "OpenGamer puts real games, visible concepts and clearly defined capabilities in front of partners before the first commercial conversation.",
+    description: "Review playable games, original IP, in-development product work and clearly defined studio capabilities before the first commercial conversation.",
     items: [
       { title: "Playable slot portfolio", description: "Selected OpenGamer titles include public demos where available." },
       { title: "Complete game production", description: "Concept, mathematics, frontend, backend, art and QA can be coordinated as one scope." },
       { title: "Integration support", description: "Operator, aggregator and platform integration work can be included where the project requires it." },
-      { title: "Slots and Live Casino product work", description: "The public portfolio includes slot titles, ELEMENTALS and LC App concept work." },
+      { title: "Beyond slots", description: "The portfolio also includes ELEMENTALS original IP and the in-development LC App product direction." },
       { title: "Flexible engagement", description: "Engage OpenGamer for selected disciplines, a complete build or dedicated development support." }
     ]
   },
@@ -142,8 +142,8 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
   const projectsSection = isEnglish
     ? {
         eyebrow: "Beyond the slot portfolio",
-        title: "Original Concepts and Product Work",
-        description: "ELEMENTALS and LC App show how OpenGamer approaches Live Casino concepts and B2B product design beyond traditional slot production."
+        title: "Original IP and Product Direction",
+        description: "ELEMENTALS and LC App show how OpenGamer approaches original Live Casino IP and in-development B2B product design beyond traditional slot production."
       }
     : copy.sections.projects;
 
@@ -181,7 +181,7 @@ export function StudioHomepage({ locale = "en" }: { locale?: Locale }) {
               ))}
             </div>
           </div>
-          <div className="studio-static-hero__visual" aria-label="OpenGamer selected games and product concepts">
+          <div className="studio-static-hero__visual" aria-label="OpenGamer selected games, original IP and product work">
             {homepageProofItems.map((item, index) => (
               <Link
                 key={item.title}
