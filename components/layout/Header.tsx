@@ -194,7 +194,7 @@ export function Header({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button href={getLocalizedPath(locale, resolvedCtaHref)} className="hidden sm:inline-flex">
+          <Button href={getLocalizedHomePath(locale, resolvedCtaHref)} className="hidden sm:inline-flex">
             {resolvedCtaLabel}
           </Button>
           <button
@@ -266,7 +266,7 @@ export function Header({ locale }: { locale: Locale }) {
                 </Link>
               )
             )}
-            <Button href={getLocalizedPath(locale, resolvedCtaHref)} className="mt-2 w-full" onClick={() => setIsOpen(false)}>
+            <Button href={getLocalizedHomePath(locale, resolvedCtaHref)} className="mt-2 w-full" onClick={() => setIsOpen(false)}>
               {resolvedCtaLabel}
             </Button>
           </Container>
