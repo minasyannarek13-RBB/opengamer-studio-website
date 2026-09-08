@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { games, getVerifiedDemoUrl } from "@/content/games";
+import { getOptimizedGameArtwork } from "@/lib/gameAssets";
 
 export type StudioGameSignatureVariant = "compact" | "inline" | "footer-strip" | "related-game" | "visual-cameo";
 
@@ -28,7 +29,7 @@ export function StudioGameSignature({ context, variant = "compact", className = 
     <aside className={`studio-game-signature studio-game-signature--${variant} ${className}`} aria-label="OpenGamer game portfolio reference">
       {game ? (
         <div className="studio-game-signature__image">
-          <Image src={game.image} alt={`${game.title} artwork`} width={game.imageWidth} height={game.imageHeight} sizes="96px" className="h-full w-full object-contain p-1.5" />
+          <Image src={getOptimizedGameArtwork(game)} alt={`${game.title} artwork`} width={game.imageWidth} height={game.imageHeight} sizes="96px" className="h-full w-full object-contain p-1.5" />
         </div>
       ) : null}
       <div className="min-w-0">
