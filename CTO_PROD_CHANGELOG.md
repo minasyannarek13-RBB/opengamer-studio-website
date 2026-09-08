@@ -1,5 +1,20 @@
 # CTO Production Handoff Log
 
+## 2026-09-08 04:22 +04 — Error-state visual alignment and recovery paths
+
+- **Status:** NEEDS CTO REVIEW
+- **Baseline:** `v2-current` @ `697e1a3dbd0fa2fd33d4a62f09cd3dca3f10bc19`
+- **Implementation head:** `d0fe1ed52b8628f099eb43bbb3586defa71d33c5`
+- **Purpose:** bring 404/runtime error states into the current premium v2 visual system and reduce dead-end navigation.
+- **Files/components changed:**
+  - `app/error.tsx` — replaces bespoke retry button styling with shared `Button`, aligns card/background/typography with the current premium surface system, and adds `role="alert"`.
+  - `app/not-found.tsx` — aligns 404 styling with the same system and adds direct recovery routes to Home and Games.
+- **User-visible effect:** error and 404 pages now look consistent with the rest of the site; users hitting a bad route can continue to the game portfolio instead of facing a single dead-end action.
+- **Technical rationale:** reuses existing `Button` and visual-system utilities, so no dependency, route, API or configuration change is introduced.
+- **Verification:** diff was copied from the latest coordinated `design/verification-polish-pass-20260908` workstream commits and applied cleanly to the build handoff branch. Vercel check for implementation head `d0fe1ed` is **pending** at log time; no DNS, secrets, env, migration, lead API contract or production configuration changes.
+- **Rollback:** revert `d0fe1ed52b8628f099eb43bbb3586defa71d33c5` and `a7035ae4544ffb1eaca403131750fac6c5810c8a`.
+- **CTO production action required:** wait for/verify green preview status, smoke-test an invalid route plus an induced runtime error path where practical, then run repository `lint`, `typecheck`, `test`, and `build` before port/merge. No DNS/alias change is required.
+
 ## 2026-09-08 03:24 +04 — Contact conversion + localized proof/navigation
 
 - **Status:** NEEDS CTO REVIEW
