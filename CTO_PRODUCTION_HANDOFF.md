@@ -2,6 +2,38 @@
 
 This file records production-facing handoff notes for the latest verified OpenGamer website descendants. Historical site passes remain documented in `SITE_UPGRADE_CHANGELOG.md`.
 
+## 2026-09-08 16:35 +04 — Font Delivery Integrity
+
+Branch: `design/font-delivery-integrity-polish-20260908-r12`  
+Parent: `design/page-social-preview-polish-20260908-r11` at `de035598a5c8fb783b4fd3b4856d71bab0046429`  
+Functional head before this handoff note: `f5b7117107e20e73b2d3ff4589bbe631928b2175`
+
+### Purpose
+
+Make the approved typography deterministic across visitor devices. The CSS declared Inter but the site did not actually deliver that font, so systems without a locally installed Inter silently fell back to Arial.
+
+### Changes
+
+- Added Next.js `next/font/google` Inter delivery at the root layout with Latin and Cyrillic subsets.
+- Applied the generated Inter class to the document body, overriding the previous device-dependent local-font fallback while retaining Arial/sans-serif as glyph fallback.
+- Enabled preload and `display: swap`; Next.js self-hosts the generated font files in the deployment, so there is no visitor-time Google Fonts request.
+- Based this pass on the newer verified route-social-preview branch rather than the older r10 head, preserving all route-specific Open Graph/Twitter improvements.
+- No public copy, imagery, claims, layout dimensions, production aliases, domains or production configuration were changed.
+
+### QA
+
+- The identical font implementation on the temporary r11 branch built successfully on Vercel deployment `dpl_C6MTqmQhFNurLciPucyWd6KXWE8s` and reached `READY`.
+- Final r12 branch-head Vercel verification is required after this handoff commit; confirm the route-social-preview tests, production-integrity tests, asset tests, Next.js compile/type/lint/static generation and preview noindex all remain green.
+- Runtime verification should confirm the rendered HTML/CSS references a generated `/_next/static/media/` font asset rather than depending on a client-installed Inter font.
+
+### Production Instructions
+
+1. Carry the root `next/font` setup together with the route-specific social metadata from r11.
+2. Keep font loading self-hosted through Next.js; do not add runtime Google Fonts stylesheets or external font CDNs.
+3. Re-run visual QA at 390/430/768/1024/1280/1440/1920 after any future font-family or weight change because typography can change wrapping and card heights.
+4. Preserve preview noindex and the existing production/asset integrity gates.
+5. Do not alter `v2-current`, `main`, production aliases, domains or production configuration without explicit founder approval.
+
 ## 2026-09-08 15:38 +04 — Route Social Preview Integrity
 
 Branch: `design/page-social-preview-polish-20260908-r11`  
