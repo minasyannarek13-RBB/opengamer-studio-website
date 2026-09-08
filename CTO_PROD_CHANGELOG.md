@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-08 21:24 +04 — Baseline browser security headers + regression gate
+- **Status:** BLOCKED
+- **Implementation commits:** `ef7bcca4d7b96355887b7985caf8176c148bb6ec`, `eaeae0624d7668360b5e32d6a540b3b9a76ae1eb`, `0bec9f23538b344fada2420085ef17e5bdea893c`.
+- **Purpose:** add low-risk baseline browser protections across all public routes and prevent future removal through the existing pre-build integrity gate.
+- **Files/components changed:** `next.config.ts`, `scripts/security-header-tests.mjs`, `package.json`.
+- **User-visible effect:** no intended visual or navigation change. Responses are configured with `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`, and a restrictive `Permissions-Policy` for camera, microphone, geolocation and payment.
+- **Technical rationale:** ported the focused security-header layer from coordinated QA branch `design/accessibility-metadata-polish-20260908-r15`. CSP is intentionally not added because an unvalidated inline-script/style policy could break Next.js runtime behavior; the regression test explicitly preserves that conservative boundary.
+- **Verification:** source parity reviewed against QA `next.config.ts` and `scripts/security-header-tests.mjs`; the new security test is wired into `test:production-config` and therefore the production `build` gate. Fresh Vercel/CI status for aggregate head still requires confirmation; the immediately preceding handoff head was blocked by Vercel build-rate limiting rather than a code failure. No fresh deployed-header smoke success is claimed here.
+- **Env/migration/config dependency:** no secrets, DNS, aliases, migrations, dependencies or environment-variable changes. This does change application response-header configuration and therefore requires CTO review before production port/merge.
+- **Rollback:** revert `0bec9f23538b344fada2420085ef17e5bdea893c`, `eaeae0624d7668360b5e32d6a540b3b9a76ae1eb`, then `ef7bcca4d7b96355887b7985caf8176c148bb6ec`.
+- **CTO production action required:** once preview build capacity is available, run `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`; deploy preview and verify the four response headers on `/`, `/games`, `/contact` and one localized route; confirm no runtime regressions and no CSP header; then merge/port only after review.
+
 ## 2026-09-08 20:20 +04 — Localized document language + schema logo integrity
 - **Status:** BLOCKED
 - **Implementation commits:** `d8a7448f1dfa7854c68d91204f83d43f2c6bc481`, `4b5bcbfeeff6168dfddc5a868b20b19bc09fe530`, `99e13d536e2a439fcd0f610df71d77c1db4b01f9`.
