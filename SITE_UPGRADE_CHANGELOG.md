@@ -229,3 +229,40 @@ Improve site-wide SEO and navigation integrity without changing approved visual/
 2. Keep `v2-current`, `main`, production aliases, domains and production configuration unchanged until explicit founder approval.
 3. During pre-production promotion, verify raw permanent redirect responses for representative legacy and hidden-locale URLs and confirm canonical targets remain correct.
 4. No asset upload or content migration is required for this pass.
+
+---
+
+## 2026-09-08 11:12 +04 — Conversion Integrity / Lead Delivery Hardening
+
+Branch: `design/conversion-integrity-polish-20260908-r7`  
+Parent: `design/site-integrity-polish-20260908-r6` at `5cb61ab5a81db3d0b90bbcfe5829cf05c1b49639`  
+Material commits: `ad000c09`, `737341cb`, `e87e71a6`
+
+### Purpose
+
+Harden the highest-value commercial conversion path without changing provider credentials, production configuration or approved public design: keep contact-form failures controlled, prevent oversized/malformed submissions and avoid exposing internal delivery configuration to visitors.
+
+### Changes
+
+- `lib/leadDelivery.ts` now catches Resend/network exceptions and fails closed with a controlled delivery result instead of allowing an unhandled provider exception to become a server error.
+- `/api/lead` now caps request bodies at 64 KiB and applies conservative per-field length limits to protect the contact endpoint from oversized payloads.
+- Non-string payload values are normalized out rather than being trusted through the previous type cast.
+- Public `503` responses no longer surface internal setup/provider messages such as `Contact delivery is not configured yet`; visitors receive a short retry message instead.
+- Existing required-field, email, phone, honeypot and rate-limit behavior remains intact.
+- Added a regression test ensuring provider/network exceptions return `ok: false` rather than throwing.
+- No CRM/Resend credentials, domains, aliases, public claims, visual assets or production configuration were changed.
+
+### QA
+
+- Vercel preview deployment `dpl_2Bk2favvCDG46vxy7J8dCMDbGCFM` built head `e87e71a6673d169f1140b7c179cdacb5f68b80bc` successfully.
+- Next.js compile passed; lint/type validation passed; static generation passed `93/93`; deployment reached `READY`.
+- Preview response preserves `X-Robots-Tag: noindex`.
+- Preview runtime warning/error/fatal log check returned no entries.
+- Branch comparison confirms r7 is a direct descendant of r6 (`ahead 3`, `behind 0`).
+
+### Production Instructions
+
+1. Treat r7 as the current verified descendant after r6; do not overwrite it with older visual/integrity branches.
+2. Keep `v2-current`, `main`, production aliases, domains and production configuration unchanged until explicit founder approval.
+3. Before production promotion, configure and verify the approved Resend recipient/from credentials in the target environment; the code intentionally fails closed when delivery configuration is absent.
+4. Run one controlled end-to-end contact submission after credentials are approved, then confirm receipt in the actual commercial inbox before treating lead capture as production-ready.
