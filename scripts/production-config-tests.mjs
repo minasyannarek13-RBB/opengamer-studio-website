@@ -127,3 +127,11 @@ test("schema source omits unconfirmed corporate fields", async () => {
   assert.match(layoutSource, /company\.email \? \{ email: company\.email \}/);
   assert.match(layoutSource, /company\.social\.length \? \{ sameAs:/);
 });
+
+test("preview robots disallow crawling without advertising production sitemap", async () => {
+  const robotsSource = await readFile(new URL("../app/robots.ts", import.meta.url), "utf8");
+  const previewBlock = robotsSource.match(/if \(!isIndexableProduction\) \{([\s\S]*?)\n  \}/)?.[1] || "";
+  assert.match(previewBlock, /disallow:\s*"\/"/);
+  assert.doesNotMatch(previewBlock, /sitemap/);
+  assert.match(robotsSource, /sitemap:\s*`\$\{siteUrl\}\/sitemap\.xml`/);
+});
