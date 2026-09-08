@@ -1,5 +1,17 @@
 # OpenGamer CTO Production Handoff Changelog
 
+## 2026-09-08 — Portfolio commercial clarity and verified locale chain
+- Branch: `design/portfolio-commercial-clarity-polish-20260908-r18`.
+- Parent: `design/locale-canonical-integrity-polish-20260908-r17` @ `f68f1395333b1e2e7483569b9276bb11324614e2`; the complete branch remains a descendant of the last verified r15 baseline.
+- Functional commit: `3de9d825e622c6bfd9e6e25d661dc6f9a792f292`.
+- Purpose: reduce repetitive public “concept” framing in portfolio cards and visual descriptions while preserving the factual in-development status of ELEMENTALS and LC App; also close final verification of the r16/r17 locale-routing chain.
+- Changed: `content/portfolio.ts` only for functional content; no layout, production config, domain, alias or runtime configuration changes.
+- Commercial copy: ELEMENTALS is presented as original IP / a cinematic Live Casino show-game direction; LC App as an in-development B2B product direction for discovery, creator-led engagement and communities around existing Live Casino ecosystems. Neither is represented as launched, integrated, licensed, revenue-generating or production-ready.
+- Visual semantics: LC App alt text now describes the screens as product design rather than repeatedly labelling every asset “concept”; the public visual note is shortened to “Product visuals illustrate the intended LC App experience and cross-device direction.”
+- QA: Vercel deployment `dpl_J6ttdQ6CdNydf5Wth7uqpK7Dcj7j` reached READY. Production-integrity `11/11 PASS`; asset-delivery `3/3 PASS`; social-preview `7/7 PASS`; locale/schema `2/2 PASS`; security-header `2/2 PASS`; locale-routing `2/2 PASS`; Next.js compile PASS; lint/type PASS; static generation `93/93 PASS`; runtime warning/error logs = 0.
+- Locale verification: the final r18 build proves the r17 canonical routing contract passes together with its updated regression test. The earlier r17 red deployment was an intermediate helper commit built before the test update, not a failure of the final routing state.
+- Production instruction: review r18 as the current verified forward candidate. Do not merge/promote or alter `main`, `v2-current`, production aliases, domains or production configuration without founder authorization.
+
 ## 2026-09-08 — Locale canonical routing correction
 - Branch: `design/locale-canonical-integrity-polish-20260908-r17`
 - Parent: `design/locale-routing-integrity-polish-20260908-r16` @ `8a65d235e89b8881bc3e24f54d5599a393ad2d5d`.
