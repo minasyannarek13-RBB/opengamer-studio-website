@@ -1,5 +1,20 @@
 # CTO Production Handoff Log
 
+## 2026-09-08 08:19 +04 — Preserve game context through commercial CTAs
+
+- **Status:** NEEDS CTO REVIEW
+- **Baseline:** `v2-current` @ `697e1a3dbd0fa2fd33d4a62f09cd3dca3f10bc19`
+- **Implementation commit:** `ad90e408fd06178504bf787e279da5027b5ae1d1`
+- **Purpose:** remove a conversion/context leak on individual game pages so commercial enquiries retain the exact game the visitor was viewing.
+- **Files/components changed:**
+  - `app/games/[slug]/page.tsx` — introduces one canonical game-enquiry URL per detail page and routes `Request Demo`, hero `Discuss a Project`, and the bottom commercial CTA to `/contact?interest=game&game=<slug>#project-enquiry`; the portfolio CTA now also lands directly on the enquiry form.
+- **User-visible effect:** visitors moving from a specific game into a commercial discussion land at the form instead of the top of Contact, and OpenGamer receives the selected game slug in the existing lead source context rather than losing it on some CTA paths.
+- **Technical rationale:** reuses the current query/context capture already implemented by `LeadForm`; no new field, API contract, dependency, CRM behavior, content claim or production configuration is introduced.
+- **Verification:** implementation is isolated to CTA href composition in the existing server-rendered game detail route; the existing `LeadForm` records `window.location.search` in `contextParameter`, so the game slug remains available to downstream lead handling. Vercel preview/build status for this new head must be rechecked before production handoff. Live `v2.open-gamer.com` equivalence is not claimed.
+- **Env/migration/config dependency:** none.
+- **Rollback:** revert `ad90e408fd06178504bf787e279da5027b5ae1d1`.
+- **CTO production action required:** verify one demo-enabled and one request-demo game page on preview; confirm both hero CTA paths and the bottom `Discuss a Project` land on `#project-enquiry` with `interest=game&game=<slug>` preserved, then run repository `lint`, `typecheck`, `test`, `build`, and visual QA before port/merge. No DNS/alias/env action required.
+
 ## 2026-09-08 07:21 +04 — Homepage positioning + direct enquiry conversion
 
 - **Status:** NEEDS CTO REVIEW
@@ -73,4 +88,3 @@
 - **Verification:** GitHub/Vercel status for batch head `33c8898` = **success**. Diff vs `v2-current`: 3 files, +126/-17. No DNS, secrets, env, API contract, migration, or production configuration changes.
 - **Rollback:** revert the four commits after `697e1a3` or reset the deployment to `v2-current` baseline `697e1a3`.
 - **CTO production action required:** review preview/diff, run repository `lint`, `typecheck`, `test`, and `build` in the production environment, then port/merge this branch only if checks remain green. No DNS/alias change is required.
-
