@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-08 16:48 +04 — Paid-development contact conversion pass
+- **Status:** NEEDS CTO REVIEW
+- **Commit:** `0a70ebc4ab0940a0151d60ef13c7768ad81464eb`
+- **Purpose:** make the Contact page convert OpenGamer's existing sellable capabilities into clearer paid-work entry points, especially dedicated development capacity.
+- **Files/components changed:** `app/contact/page.tsx`.
+- **User-visible effect:** Contact now presents four distinct commercial paths: game production, dedicated development capacity, engineering/integration, and portfolio/partnerships; hero copy is more purchase-oriented; mobile/tablet/desktop route-card layout adapts from 1 → 2 → 4 columns; metadata now includes branded games and dedicated development capacity.
+- **Technical rationale:** dedicated frontend/backend/math/art capacity is an existing OpenGamer offer but was not represented as a first-class enquiry path. The new route reuses the existing `interest=technology` LeadForm contract rather than adding a new query/API schema, keeping the change low-risk and reversible.
+- **Verification:** source diff reviewed against the existing Contact/LeadForm query contract. No local lint/typecheck/test/build success is claimed because this environment cannot clone/run the repository. Vercel/CI status for the new head must be checked before production handoff.
+- **Env/migration/config dependency:** none; no DNS, aliases, secrets, env, migrations, dependencies, API contracts or production configuration changed.
+- **Rollback:** revert `0a70ebc4ab0940a0151d60ef13c7768ad81464eb`.
+- **CTO production action required:** run `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`; smoke-test all four Contact route cards on mobile/tablet/desktop; confirm each CTA reaches `#project-enquiry` and LeadForm preselection still works; merge/port only after preview passes.
+
 ## 2026-09-08 12:26 UTC — Preview robots sitemap isolation
 - **Status:** NEEDS CTO REVIEW
 - **Commit:** `1fd4202e7350c32dcf7de4bc74d839ed90b35211`
