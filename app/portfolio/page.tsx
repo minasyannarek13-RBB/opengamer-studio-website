@@ -25,21 +25,24 @@ const portfolioHeroItems = [
     label: "Live Casino concept",
     image: "/assets/projects/elementals/expositions/nexus-stage.webp",
     href: "/portfolio/elementals",
-    className: "md:col-span-2 md:row-span-2"
+    className: "md:col-span-2 md:row-span-2",
+    contain: false
   },
   {
     title: "LC App",
     label: "B2B product concept",
     image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp",
     href: "/portfolio/lc-app",
-    className: ""
+    className: "",
+    contain: true
   },
   {
     title: "Forest Fortune",
     label: "Slot portfolio",
     image: "/assets/games/forest-fortune/artwork.webp",
     href: "/games/forest-fortune",
-    className: ""
+    className: "",
+    contain: false
   }
 ];
 
@@ -70,14 +73,14 @@ export default function PortfolioPage() {
               <Link
                 key={item.title}
                 href={item.href}
-                className={`group relative min-h-36 min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/45 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 sm:min-h-44 ${item.className}`}
+                className={`group relative min-h-36 min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/55 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 sm:min-h-44 ${item.className}`}
               >
                 <Image
                   src={item.image}
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 30vw, (min-width: 768px) 48vw, 50vw"
-                  className="object-cover transition duration-500 group-hover:scale-[1.025]"
+                  className={`${item.contain ? "object-contain p-2 sm:p-3" : "object-cover"} transition duration-500 group-hover:scale-[1.025]`}
                   priority={item.title === "ELEMENTALS"}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/18 to-transparent" />
