@@ -21,19 +21,22 @@ const serviceHeroItems = [
     title: "Casino Game Production",
     label: "Games",
     image: "/assets/games/forest-fortune/artwork.webp",
-    href: "#game-production"
+    href: "#game-production",
+    contain: false
   },
   {
     title: "Live Casino Product Design",
     label: "Live Casino",
     image: "/assets/projects/elementals/expositions/nexus-stage.webp",
-    href: "#live-casino"
+    href: "#live-casino",
+    contain: false
   },
   {
     title: "Product & Integration Engineering",
     label: "Technology",
     image: "/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp",
-    href: "#technology-and-integration"
+    href: "#technology-and-integration",
+    contain: true
   }
 ];
 
@@ -137,14 +140,14 @@ export default function ServicesPage() {
               <Link
                 key={item.title}
                 href={item.href}
-                className={`group relative min-h-40 min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/45 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 sm:min-h-48 ${index === 0 ? "sm:row-span-2" : ""}`}
+                className={`group relative min-h-40 min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/55 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 sm:min-h-48 ${index === 0 ? "sm:row-span-2" : ""}`}
               >
                 <Image
                   src={item.image}
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 30vw, (min-width: 640px) 48vw, 100vw"
-                  className="object-cover transition duration-500 group-hover:scale-[1.025]"
+                  className={`${item.contain ? "object-contain p-2 sm:p-3" : "object-cover"} transition duration-500 group-hover:scale-[1.025]`}
                   priority={index === 0}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/18 to-transparent" />
