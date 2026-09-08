@@ -1,5 +1,17 @@
 # OpenGamer CTO Production Handoff Changelog
 
+## 2026-09-09 — Homepage artwork delivery integrity
+- Branch: `design/homepage-asset-integrity-polish-20260909-r19`.
+- Parent: verified `design/portfolio-commercial-clarity-polish-20260908-r18` @ `4de0bbf1aed4fdf6b670205c6ebd31a0556d6f22`.
+- Functional head: `08a1270a1794ef84b849e03cfcdab0b609e356e2`.
+- Purpose: remove remaining homepage/showcase references to legacy JPG/source game artwork where verified WebP equivalents already exist, reducing avoidable image payload and preventing dormant showcase configuration from reintroducing heavier assets during future UI work.
+- Changed: `content/studioHomepage.ts`, `scripts/asset-delivery-tests.mjs`.
+- Asset changes: Forest Fortune showcase `source.jpg` -> `artwork.webp`; Deep Dive showcase and Game Portfolio card `artwork.jpg` -> `artwork.webp`; Choco Boom showcase `artwork.jpg` -> `artwork.webp`. Existing WebP files were verified in-repository before use; no product visuals or factual claims were changed.
+- Regression gate: asset-delivery suite now rejects those three legacy homepage artwork paths and requires the optimized WebP references.
+- Diff integrity: branch is `ahead 2 / behind 0` from r18 at functional head; functional diff is limited to 4 path substitutions plus the asset regression test.
+- QA status: GitHub push succeeded. Vercel did not start a preview build for functional head because the project returned `build-rate-limit`; therefore r19 is intentionally NOT marked verified or approved yet. This is a transient hosting-plan limit, not an application build failure. Full build/lint/type/static/runtime/noindex verification remains required on the same head when Vercel accepts builds again.
+- Production instruction: do not promote r19 until the complete Vercel production-config gate and preview verification pass. Do not alter `main`, `v2-current`, production aliases, domains or production configuration without founder authorization.
+
 ## 2026-09-08 — Portfolio commercial clarity and verified locale chain
 - Branch: `design/portfolio-commercial-clarity-polish-20260908-r18`.
 - Parent: `design/locale-canonical-integrity-polish-20260908-r17` @ `f68f1395333b1e2e7483569b9276bb11324614e2`; the complete branch remains a descendant of the last verified r15 baseline.
