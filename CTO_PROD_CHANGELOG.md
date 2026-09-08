@@ -1,5 +1,19 @@
 # CTO Production Handoff Log
 
+## 2026-09-08 05:21 +04 — Legal-page production wording and responsive hardening
+
+- **Status:** NEEDS CTO REVIEW
+- **Baseline:** `v2-current` @ `697e1a3dbd0fa2fd33d4a62f09cd3dca3f10bc19`
+- **Implementation commit:** `8e3d30d330d5e5aa23e0e14e21d35bcf412e592d`
+- **Purpose:** remove internal pre-launch wording from public legal pages and harden the shared legal layout for narrow screens without changing legal section content.
+- **Files/components changed:**
+  - `components/pages/LegalPage.tsx` — removes the public sentence `Final legal review is required before production launch`, replaces it with neutral visitor/business-enquiry copy, and adds responsive heading/card sizing plus overflow-safe wrapping.
+- **User-visible effect:** legal pages no longer expose internal launch-process language; headings, cards and long text wrap more safely on mobile while retaining the existing v2 visual identity.
+- **Technical rationale:** ports the focused verified improvement from coordinated branch `design/content-responsive-polish-20260908` instead of duplicating a competing redesign. No dependency, route, API, legal-section-data or configuration change.
+- **Verification:** exact focused diff from coordinated commit `63e6b2960cdc411a7a98269db174391158d2e1cd` applied to the current build handoff branch. CI/preview for implementation commit `8e3d30d` must be rechecked after this commit; no DNS, secrets, env, migration or production configuration changes.
+- **Rollback:** revert `8e3d30d330d5e5aa23e0e14e21d35bcf412e592d`.
+- **CTO production action required:** verify preview/CI, inspect `/privacy` and `/terms` (or all routes using `LegalPage`) at mobile + desktop widths, then run repository `lint`, `typecheck`, `test`, and `build` before port/merge. No DNS/alias action required.
+
 ## 2026-09-08 04:22 +04 — Error-state visual alignment and recovery paths
 
 - **Status:** NEEDS CTO REVIEW
