@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { logoAsset } from "@/content/company";
 import { solutionsMegaMenu, solutionsNavigation } from "@/content/navigation";
-import { getLocalizedHomePath, getLocalizedPath, navRoutes, stripLocaleFromPath } from "@/lib/routes";
+import { getLocalizedHomePath, navRoutes, stripLocaleFromPath } from "@/lib/routes";
 
 const ctaLabel: Record<Locale, string> = {
   en: "Discuss a Project",
@@ -117,7 +117,7 @@ export function Header({ locale }: { locale: Locale }) {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/86 shadow-[0_14px_48px_rgba(0,0,0,0.28)] backdrop-blur-xl">
       <Container className="flex min-h-20 items-center justify-between gap-4">
-        <Link href={getLocalizedPath(locale, "/")} className="flex items-center gap-3 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+        <Link href={getLocalizedHomePath(locale, "/")} className="flex items-center gap-3 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
           <Image
             src={logoAsset.src}
             alt={logoAsset.alt}
