@@ -193,3 +193,39 @@ Extend the verified WebP delivery strategy from shared catalogue/signature compo
 3. Confirm the exact game artwork on `/games`, representative `/games/[slug]` pages and related-game cards remains visually unchanged aside from asset format/delivery.
 4. Keep `v2-current`, `main`, production aliases, domains and production configuration unchanged until explicit founder authorization.
 5. No manual asset upload is required; all optimized files referenced by this pass already exist in the repository.
+
+---
+
+## 2026-09-08 10:12 +04 — Site Integrity / Legacy URL Pass
+
+Branch: `design/site-integrity-polish-20260908-r6`  
+Parent: `design/visual-asset-polish-20260908-r5` at `525e3663fe2f646bb7bd7f633a3f45e76ffbd5cf`  
+Material commits: `bc273510`, `a39e39dd`, `5ca3c008`, `c788a697`, `f46782f8`, `6145e2dd`, `1f9b05a2`, `7104464f`
+
+### Purpose
+
+Improve site-wide SEO and navigation integrity without changing approved visual/product content: remove false sitemap freshness and ensure legacy or hidden-locale URLs resolve permanently to the most relevant current pages.
+
+### Changes
+
+- Removed build-time `lastModified: new Date()` from `app/sitemap.ts`, avoiding a false signal that every public route changes on every deployment.
+- Replaced temporary Next.js redirects in the shared legacy redirect helper with permanent redirects.
+- `/studios/live-casino-studio` and its localized legacy equivalents now resolve directly to `/services/live-casino-development` instead of the generic Services page.
+- `/studios/slot-studio` and localized equivalents now resolve directly to `/services#game-production`.
+- Hidden locale home and catch-all routes now use permanent redirects to the canonical non-locale public URL structure.
+- Existing current routes, content, imagery, factual claims and production configuration remain unchanged.
+
+### QA
+
+- Vercel preview deployment `dpl_6UKKLR6HkXxf61vnJrFopib2ijF9` built head `7104464f078da7be5c0cd18eadda3dfad2913198` successfully.
+- Next.js compile passed; lint/type validation passed; static generation passed `93/93`; deployment reached `READY`.
+- Preview runtime warning/error/fatal log check returned no entries.
+- Preview responses preserve `X-Robots-Tag: noindex`.
+- Legacy `/studios/live-casino-studio` was verified to resolve to the current `/services/live-casino-development` page in the deployed preview.
+
+### Production Instructions
+
+1. Treat r6 as the verified site-integrity descendant of r5; do not overwrite it with older visual branches.
+2. Keep `v2-current`, `main`, production aliases, domains and production configuration unchanged until explicit founder approval.
+3. During pre-production promotion, verify raw permanent redirect responses for representative legacy and hidden-locale URLs and confirm canonical targets remain correct.
+4. No asset upload or content migration is required for this pass.
