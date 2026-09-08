@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { type FormEvent, useEffect, useState } from "react";
+import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import {
   budgetRangeOptions,
@@ -249,7 +249,7 @@ function Select({ label, name, options, required = false, error, defaultValue = 
   const errorId = `${name}-error`;
   const isControlled = typeof onChange === "function";
   const stateProps = isControlled
-    ? { value: value ?? "", onChange: (event: React.ChangeEvent<HTMLSelectElement>) => onChange(event.target.value) }
+    ? { value: value ?? "", onChange: (event: ChangeEvent<HTMLSelectElement>) => onChange(event.target.value) }
     : { defaultValue };
 
   return (
