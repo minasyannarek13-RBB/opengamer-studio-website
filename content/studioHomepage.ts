@@ -75,7 +75,7 @@ const baseSlides = {
     secondaryHref: "/games"
   },
   slots: {
-    image: "/assets/games/forest-fortune/source.jpg",
+    image: "/assets/games/forest-fortune/artwork.webp",
     imageAlt: "Forest Fortune slot game artwork from the OpenGamer portfolio",
     imageWidth: 600,
     imageHeight: 420,
@@ -108,7 +108,7 @@ const baseSlides = {
     secondaryHref: "/contact"
   },
   tech: {
-    image: "/assets/games/deep-dive/artwork.jpg",
+    image: "/assets/games/deep-dive/artwork.webp",
     imageAlt: "Deep Dive game artwork representing frontend and backend production",
     imageWidth: 600,
     imageHeight: 420,
@@ -119,7 +119,7 @@ const baseSlides = {
     secondaryHref: "/services"
   },
   brand: {
-    image: "/assets/games/choco-boom/artwork.jpg",
+    image: "/assets/games/choco-boom/artwork.webp",
     imageAlt: "Choco Boom slot artwork representing branded and custom games",
     imageWidth: 600,
     imageHeight: 420,
@@ -259,7 +259,7 @@ export const homepageCopy: Record<Locale, HomeCopy> = {
     projects: [
       { title: "ELEMENTALS", category: "Live Casino show-game concept", status: "Original Game Concept · In Development", description: "Premium game-show concept built around the Great Wheel and elemental realms.", href: "/portfolio/elementals", cta: "Explore Project", image: "/assets/projects/elementals/expositions/nexus-stage.webp", imageAlt: "ELEMENTALS Nexus stage artwork" },
       { title: "LC App", category: "B2B social product concept", status: "Product Concept · In Development", description: "A social engagement layer concept for existing Live Casino ecosystems.", href: "/portfolio/lc-app", cta: "View Concept", image: "/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp", imageAlt: "LC App multi-device concept interface" },
-      { title: "Game Portfolio", category: "Slot game catalogue", status: "Portfolio Games", description: "Selected OpenGamer titles with real artwork and confirmed demos where available.", href: "/games", cta: "View Games", image: "/assets/games/deep-dive/artwork.jpg", imageAlt: "Deep Dive slot artwork" }
+      { title: "Game Portfolio", category: "Slot game catalogue", status: "Portfolio Games", description: "Selected OpenGamer titles with real artwork and confirmed demos where available.", href: "/games", cta: "View Games", image: "/assets/games/deep-dive/artwork.webp", imageAlt: "Deep Dive slot artwork" }
     ],
     process: [
       { title: "Define", description: "Product idea, audience, commercial objective and production scope." },

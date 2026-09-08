@@ -22,6 +22,12 @@ const excludedPublicAssets = [
   "/assets/games/sweet-wins/artwork.jpg"
 ];
 
+const homepageLegacyArtwork = [
+  "/assets/games/forest-fortune/source.jpg",
+  "/assets/games/deep-dive/artwork.jpg",
+  "/assets/games/choco-boom/artwork.jpg"
+];
+
 async function collectSourceFiles(directoryUrl) {
   const entries = await readdir(directoryUrl, { withFileTypes: true });
   const files = [];
@@ -52,4 +58,21 @@ test("Vercel ignore contract includes every deployment-excluded visual asset", a
   for (const assetPath of excludedPublicAssets) {
     assert.match(ignoreSource, new RegExp(`public${assetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
   }
+});
+
+test("game cards resolve artwork through the optimized delivery helper", async () => {
+  const cardSource = await readFile(new URL("../components/sections/GameCard.tsx", import.meta.url), "utf8");
+  assert.match(cardSource, /getOptimizedGameArtwork/);
+  assert.match(cardSource, /const artwork = getOptimizedGameArtwork\(game\)/);
+  assert.doesNotMatch(cardSource, /src=\{game\.artwork\?\.catalogue \|\| game\.image\}/);
+});
+
+test("homepage showcase uses optimized game artwork where WebP variants exist", async () => {
+  const homepageSource = await readFile(new URL("../content/studioHomepage.ts", import.meta.url), "utf8");
+  for (const assetPath of homepageLegacyArtwork) {
+    assert.equal(homepageSource.includes(assetPath), false, `homepage references legacy artwork ${assetPath}`);
+  }
+  assert.match(homepageSource, /\/assets\/games\/forest-fortune\/artwork\.webp/);
+  assert.match(homepageSource, /\/assets\/games\/deep-dive\/artwork\.webp/);
+  assert.match(homepageSource, /\/assets\/games\/choco-boom\/artwork\.webp/);
 });
