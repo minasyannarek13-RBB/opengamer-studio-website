@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-08 19:24 +04 — Preview robots regression gate
+- **Status:** NEEDS CTO REVIEW
+- **Commit:** `6d10e93476fd97d86e3da9efc0c96771226b19a2`
+- **Purpose:** lock the existing preview-indexing safeguard into the production integrity test suite so future refactors cannot silently re-advertise a sitemap from non-indexable previews.
+- **Files/components changed:** `scripts/production-config-tests.mjs`.
+- **User-visible effect:** none; this is a regression guard only. Preview/non-production robots behavior remains `Disallow: /` with no sitemap, while production keeps the canonical sitemap declaration.
+- **Technical rationale:** ported the focused regression test from the latest coordinated QA branch `design/preview-indexing-integrity-polish-20260908-r14`; it validates the stronger handoff implementation already present in `app/robots.ts` without duplicating or replacing that code.
+- **Verification:** Vercel status for implementation head `6d10e934` = **success**. The configured production build gate therefore completed successfully on this head, including production-config checks and Next build. This also clears the earlier transient Vercel build-rate-limit blocker for the aggregate handoff branch. No separate deployed responsive/metadata smoke pass is claimed in this run.
+- **Env/migration/config dependency:** none; no DNS, aliases, secrets, env, migrations, dependencies, APIs or production runtime configuration changed.
+- **Rollback:** revert `6d10e93476fd97d86e3da9efc0c96771226b19a2`.
+- **CTO production action required:** run the standard lint/typecheck/test/build suite and smoke `/robots.txt` on both canonical production and the intended preview; then review the aggregate handoff branch before merge/port.
+
 ## 2026-09-08 17:xx +04 — Core-route social preview integrity
 - **Status:** BLOCKED
 - **Implementation commits:** `feadc408e21de25050bb6f5f21a7b118facf63a0`, `7d9242fa44e830534ccb16dca39c0f989b16862c`, `592ff2dadd22a437b8f156553997d0a9bee78faa`, `5872571686b741a39623078209ea666c3565798c`, `7c6756f389b457c2a84ef3839673589259a1ce8c`, `5e68e4714847da104395b7d13a353040f17a78d1`.
