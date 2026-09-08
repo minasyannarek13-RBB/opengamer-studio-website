@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-08 20:20 +04 — Localized document language + schema logo integrity
+- **Status:** BLOCKED
+- **Implementation commits:** `d8a7448f1dfa7854c68d91204f83d43f2c6bc481`, `4b5bcbfeeff6168dfddc5a868b20b19bc09fe530`, `99e13d536e2a439fcd0f610df71d77c1db4b01f9`.
+- **Purpose:** make localized routes expose the correct document language to browsers/assistive technology and keep Organization structured data tied to the canonical configured logo asset instead of a hard-coded legacy path.
+- **Files/components changed:** `app/layout.tsx`, `scripts/locale-accessibility-tests.mjs`, `package.json`.
+- **User-visible effect:** no intended visual change. `/ru`, `/hy`, `/es`, `/pt` and `/en` routes set the root `<html lang>` to the route locale before body content; Organization JSON-LD now uses `logoAsset.src` from the existing company content model.
+- **Technical rationale:** ported the strongest focused fix + regression gate from coordinated QA branch `design/accessibility-metadata-polish-20260908-r15`, adapted to the handoff branch without reintroducing its unrelated Google-font implementation. This improves language semantics/accessibility and prevents schema/logo drift while preserving the current v2 visual identity.
+- **Verification:** source parity and adaptation reviewed against QA commits `8ed790f`, `8c3e582`, `0808422`. Current Vercel status for implementation head `99e13d5` is **failure due to Vercel build-rate limit**, not a reported code/test failure. No fresh lint/typecheck/test/build or deployed locale smoke success is claimed for this head.
+- **Env/migration/config dependency:** none; no DNS, aliases, secrets, env, migrations, dependencies, APIs or production runtime configuration changed.
+- **Rollback:** revert `99e13d536e2a439fcd0f610df71d77c1db4b01f9`, `4b5bcbfeeff6168dfddc5a868b20b19bc09fe530`, then `d8a7448f1dfa7854c68d91204f83d43f2c6bc481`.
+- **CTO production action required:** once Vercel build quota is available, run `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`; smoke localized routes and confirm the rendered root language matches the path; inspect Organization JSON-LD logo URL; then merge/port only after preview checks pass.
+
 ## 2026-09-08 19:24 +04 — Preview robots regression gate
 - **Status:** NEEDS CTO REVIEW
 - **Commit:** `6d10e93476fd97d86e3da9efc0c96771226b19a2`
