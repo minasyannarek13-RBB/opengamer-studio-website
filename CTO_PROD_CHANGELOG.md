@@ -1,5 +1,20 @@
 # CTO Production Handoff Log
 
+## 2026-09-08 11:21 +04 — Catalogue demo CTA lands on enquiry form
+
+- **Status:** NEEDS CTO REVIEW
+- **Baseline:** `v2-current` @ `697e1a3dbd0fa2fd33d4a62f09cd3dca3f10bc19`
+- **Implementation commit:** `00527cb7ad235e555e12626824b298db69653ed1`
+- **Purpose:** remove the remaining Games catalogue conversion leak for titles without a public demo.
+- **Files/components changed:**
+  - `components/sections/GameCard.tsx` — changes the fallback `Request Demo` CTA from `/contact?interest=game&game=<slug>` to `/contact?interest=game&game=<slug>#project-enquiry`.
+- **User-visible effect:** visitors requesting access from a catalogue card now land directly at the existing enquiry form while the exact game slug and game-interest context remain preserved.
+- **Technical rationale:** aligns catalogue-card behavior with the already-hardened game-detail CTA flow and reuses the existing Contact anchor/query handling; no new field, API contract, dependency, content claim or configuration is introduced.
+- **Verification:** focused one-line href change on the current handoff branch; source query parameters are unchanged. New Vercel preview/build and repository lint/typecheck/test/build must be rechecked before production handoff; no local success is claimed in this run.
+- **Env/migration/config dependency:** none.
+- **Rollback:** revert `00527cb7ad235e555e12626824b298db69653ed1`.
+- **CTO production action required:** on preview, choose a catalogue game without a public demo and confirm `Request Demo` lands on `#project-enquiry` with `interest=game&game=<slug>` intact; then run `lint`, `typecheck`, `test`, `build` and visual QA before port/merge. No DNS/alias/env action required.
+
 ## 2026-09-08 10:20 +04 — Permanent redirects for hidden locale paths
 
 - **Status:** NEEDS CTO REVIEW
