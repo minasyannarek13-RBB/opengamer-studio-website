@@ -4,6 +4,12 @@ import { StudioHomepage } from "@/components/home/StudioHomepage";
 import { homepageCopy } from "@/content/studioHomepage";
 
 const copy = homepageCopy.en;
+const socialPreview = {
+  url: "/assets/brand/opengamer-og.png",
+  width: 1200,
+  height: 630,
+  alt: "OpenGamer Studio"
+};
 
 export const metadata: Metadata = {
   title: copy.meta.title,
@@ -17,12 +23,14 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "OpenGamer Studio",
     type: "website",
-    locale: "en"
+    locale: "en",
+    images: [socialPreview]
   },
   twitter: {
     card: "summary_large_image",
     title: copy.meta.ogTitle,
-    description: copy.meta.ogDescription
+    description: copy.meta.ogDescription,
+    images: [socialPreview.url]
   }
 };
 
