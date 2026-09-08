@@ -41,7 +41,7 @@ export function Header({ locale }: { locale: Locale }) {
   const isActiveRoute = (href: string) => (href === "/" ? activePath === "/" : activePath === href || activePath.startsWith(`${href}/`));
   const isSolutionsActive = activePath === "/services" || activePath.startsWith("/services/");
   const resolvedCtaLabel = activePath === "/contact" ? exploreGamesLabel[locale] : ctaLabel[locale];
-  const resolvedCtaHref = activePath === "/contact" ? "/games" : "/contact";
+  const resolvedCtaHref = activePath === "/contact" ? "/games" : "/contact#project-enquiry";
 
   useEffect(() => {
     setIsOpen(false);
