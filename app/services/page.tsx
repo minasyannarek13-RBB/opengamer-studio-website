@@ -44,7 +44,7 @@ const solutionGroups = [
     navLabel: "Game production",
     eyebrow: "Game production",
     title: "Build an Original, Custom or Branded Casino Game",
-    description: "Use OpenGamer for a complete title or the specific production disciplines your team needs.",
+    description: "Use OpenGamer for a complete title or the production disciplines your team needs.",
     items: [
       ["Custom Slot Development", "Original or branded slot content for operators, platforms and providers.", "Concept, game design, art, frontend build and integration preparation."],
       ["Turnkey Slot Development", "A complete game build managed through one production structure.", "Product design, math support, art, animation, frontend, backend coordination and QA."],
@@ -59,7 +59,7 @@ const solutionGroups = [
     navLabel: "Live Casino",
     eyebrow: "Live Casino",
     title: "Design Live Casino Products Around the Full Experience",
-    description: "Product support for table games, show formats and player-facing live casino interfaces, with presenter and operational flows considered from the start.",
+    description: "Product support for table games, show formats and player-facing interfaces, with presenter and operational flows considered from the start.",
     items: [
       ["Live Casino Game Design", "New table, game-show or hybrid live formats.", "Market concept, rules, player journey, round flow and product documentation."],
       ["Live Show-Game Development", "Original show formats built around a differentiated mechanic.", "Format logic, bonus structure, visual identity, player UX and delivery scope."],
@@ -100,8 +100,8 @@ const solutionGroups = [
     interest: "technology",
     navLabel: "Delivery & support",
     eyebrow: "Delivery and support",
-    title: "Add Specialist iGaming Capacity Where the Roadmap Needs It",
-    description: "Dedicated capability and production support for partners scaling game or product development without rebuilding every discipline internally.",
+    title: "Add Specialist iGaming Capacity Where You Need It",
+    description: "Dedicated production and engineering support for partners scaling delivery without rebuilding every discipline internally.",
     items: [
       ["Dedicated Teams", "Embedded iGaming development capacity for providers, platforms and product teams.", "Frontend, backend, game art, QA, product and technical leadership support."],
       ["QA", "Games and product builds that need structured release confidence.", "Functional testing, regression, device checks, integration scenarios and acceptance support."],
@@ -114,37 +114,30 @@ const solutionGroups = [
 export default function ServicesPage() {
   return (
     <SiteShell atmosphere="solutions">
-      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-12 sm:py-16 lg:py-20">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_74%_14%,rgba(35,196,131,0.14),transparent_28rem)]" />
-        <Container className="relative grid gap-10 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
-          <div>
+        <Container className="relative grid min-w-0 gap-8 lg:grid-cols-[0.84fr_1.16fr] lg:items-center lg:gap-10">
+          <div className="min-w-0">
             <SectionHeader
               eyebrow="OpenGamer solutions"
-              title="One iGaming Studio, From Game Concept to Technical Delivery"
+              title="Game Production, Live Casino and Engineering"
               description="Build a complete casino game, add a specialist production layer or extend your roadmap with product and engineering support."
               headingLevel="h1"
             />
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/contact?interest=game#project-enquiry">Discuss a Project</Button>
-              <Button href="/games" variant="secondary">
+            <div className="mt-7 flex flex-col gap-3 min-[460px]:flex-row min-[460px]:flex-wrap sm:mt-8">
+              <Button href="/contact?interest=game#project-enquiry" className="w-full min-[460px]:w-auto">Discuss a Project</Button>
+              <Button href="/games" variant="secondary" className="w-full min-[460px]:w-auto">
                 Explore Games
               </Button>
             </div>
-            <div className="mt-8 flex flex-wrap gap-2 text-sm text-slate-300">
-              {["Complete game builds", "Selected production stages", "Dedicated specialist capacity"].map((item) => (
-                <span key={item} className="rounded-full border border-white/10 bg-white/[0.045] px-4 py-2">
-                  {item}
-                </span>
-              ))}
-            </div>
           </div>
 
-          <div className="grid min-h-[26rem] gap-3 sm:grid-cols-2 sm:grid-rows-2" aria-label="OpenGamer service areas">
+          <div className="grid min-h-[22rem] min-w-0 gap-3 sm:min-h-[24rem] sm:grid-cols-2 sm:grid-rows-2 lg:min-h-[26rem]" aria-label="OpenGamer service areas">
             {serviceHeroItems.map((item, index) => (
               <Link
                 key={item.title}
                 href={item.href}
-                className={`group relative min-h-48 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/45 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 ${index === 0 ? "sm:row-span-2" : ""}`}
+                className={`group relative min-h-40 min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/45 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 sm:min-h-48 ${index === 0 ? "sm:row-span-2" : ""}`}
               >
                 <Image
                   src={item.image}
@@ -155,22 +148,22 @@ export default function ServicesPage() {
                   priority={index === 0}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/18 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                  <span className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-emerald">{item.label}</span>
-                  <strong className="mt-1 block text-lg font-semibold text-white sm:text-xl">{item.title}</strong>
+                <div className="absolute inset-x-0 bottom-0 min-w-0 p-4 sm:p-5">
+                  <span className="block break-words text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-emerald sm:text-[0.68rem] sm:tracking-[0.16em]">{item.label}</span>
+                  <strong className="mt-1 block break-words text-lg font-semibold text-white sm:text-xl">{item.title}</strong>
                 </div>
               </Link>
             ))}
           </div>
         </Container>
 
-        <Container className="relative mt-10">
-          <nav className="flex gap-2 overflow-x-auto pb-1" aria-label="Solution areas">
+        <Container className="relative mt-8 sm:mt-10">
+          <nav className="flex gap-2 overflow-x-auto pb-2" aria-label="Solution areas">
             {solutionGroups.map((group) => (
               <a
                 key={group.id}
                 href={`#${group.id}`}
-                className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-sm text-slate-300 transition hover:border-emerald/45 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+                className="shrink-0 whitespace-nowrap rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-sm text-slate-300 transition hover:border-emerald/45 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
               >
                 {group.navLabel}
               </a>
@@ -181,17 +174,17 @@ export default function ServicesPage() {
 
       {solutionGroups.map((group, index) => (
         <Section key={group.id} id={group.id} className={index % 2 ? "bg-black/20" : ""}>
-          <div className="grid gap-8 lg:grid-cols-[0.36fr_1fr]">
+          <div className="grid min-w-0 gap-8 lg:grid-cols-[0.36fr_minmax(0,1fr)]">
             <SectionHeader eyebrow={group.eyebrow} title={group.title} description={group.description} />
-            <div className="grid gap-5 md:grid-cols-2" data-reveal-group="cards">
+            <div className="grid min-w-0 gap-5 md:grid-cols-2" data-reveal-group="cards">
               {group.items.map(([title, clientType, deliverables]) => (
-                <Card key={title} className="h-full">
-                  <h3 className="text-xl font-semibold text-white">{title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">{clientType}</p>
-                  <p className="mt-4 border-t border-white/10 pt-4 text-sm leading-6 text-slate-400">{deliverables}</p>
-                  <a href={`/contact?interest=${group.interest}#project-enquiry`} className="mt-5 inline-flex text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <Card key={title} className="h-full min-w-0">
+                  <h3 className="break-words text-xl font-semibold text-white">{title}</h3>
+                  <p className="mt-3 break-words text-sm leading-6 text-slate-300">{clientType}</p>
+                  <p className="mt-4 break-words border-t border-white/10 pt-4 text-sm leading-6 text-slate-400">{deliverables}</p>
+                  <Link href={`/contact?interest=${group.interest}#project-enquiry`} className="mt-5 inline-flex max-w-full break-words text-sm font-semibold leading-5 text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                     Discuss This Service
-                  </a>
+                  </Link>
                 </Card>
               ))}
             </div>
@@ -200,8 +193,8 @@ export default function ServicesPage() {
       ))}
 
       <Section>
-        <SectionHeader eyebrow="Work behind the capabilities" title="See the Games and Concepts Behind the Service List" description="OpenGamer service areas are connected to visible studio work across games, Live Casino concepts and product-interface design." />
-        <div className="mt-10">
+        <SectionHeader eyebrow="Studio work" title="See the Work Behind the Capabilities" description="Explore visible examples across games, Live Casino concepts and product-interface design." />
+        <div className="mt-8 sm:mt-10">
           <RelatedProductStrip
             items={[
               { eyebrow: "Game production", title: "Forest Fortune", description: "A portfolio reference for custom game production discussions.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" },
@@ -214,7 +207,7 @@ export default function ServicesPage() {
 
       <CTASection
         title="Need a Complete Build or One Missing Capability?"
-        description="Share the product, current stage and technical context. We will map the conversation to the relevant OpenGamer capability."
+        description="Share the product, current stage and technical context. We will focus the conversation on the capability you need."
         ctaLabel="Discuss a Project"
         ctaHref="/contact?interest=game#project-enquiry"
         secondaryLabel="Explore Games"
