@@ -1,5 +1,20 @@
 # CTO Production Handoff Log
 
+## 2026-09-08 09:24 +04 — Sitemap freshness signal hygiene
+
+- **Status:** NEEDS CTO REVIEW
+- **Baseline:** `v2-current` @ `697e1a3dbd0fa2fd33d4a62f09cd3dca3f10bc19`
+- **Implementation commit:** `94ba10978f1ad0c5ddc8edd817f1c6b65cbc5faa`
+- **Purpose:** stop the sitemap from falsely reporting every public route and game page as modified at the exact time the sitemap is generated.
+- **Files/components changed:**
+  - `app/sitemap.ts` — removes runtime `lastModified: new Date()` while preserving route coverage, change-frequency hints and priority values.
+- **User-visible effect:** none directly; search engines no longer receive a synthetic freshness timestamp for every URL on every sitemap request.
+- **Technical rationale:** an always-current `lastModified` is not evidence of actual content modification and can degrade crawl/freshness signal quality. Omitting it is safer until the site has a truthful per-page content timestamp source.
+- **Verification:** change is isolated to one optional `MetadataRoute.Sitemap` property; existing route generation and URL construction are unchanged. Prior handoff head `6298f17` has a successful Vercel deployment status and zero unresolved Vercel preview feedback. New head preview/build must be rechecked before production handoff. Container-side clone/test was unavailable in this run because the execution container could not resolve GitHub; no local lint/typecheck/test/build success is claimed.
+- **Env/migration/config dependency:** none.
+- **Rollback:** revert `94ba10978f1ad0c5ddc8edd817f1c6b65cbc5faa`.
+- **CTO production action required:** verify the new preview/build, open `/sitemap.xml` and confirm all expected routes remain present without synthetic `lastmod`, then run repository `lint`, `typecheck`, `test`, `build` and visual QA before port/merge. No DNS/alias/env action required.
+
 ## 2026-09-08 08:19 +04 — Preserve game context through commercial CTAs
 
 - **Status:** NEEDS CTO REVIEW
