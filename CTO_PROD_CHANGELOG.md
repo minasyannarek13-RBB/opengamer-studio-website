@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-08 17:xx +04 — Core-route social preview integrity
+- **Status:** BLOCKED
+- **Implementation commits:** `feadc408e21de25050bb6f5f21a7b118facf63a0`, `7d9242fa44e830534ccb16dca39c0f989b16862c`, `592ff2dadd22a437b8f156553997d0a9bee78faa`, `5872571686b741a39623078209ea666c3565798c`, `7c6756f389b457c2a84ef3839673589259a1ce8c`, `5e68e4714847da104395b7d13a353040f17a78d1`.
+- **Purpose:** preserve dedicated Open Graph/Twitter link previews for core commercial routes whose route-level metadata can otherwise replace root social metadata.
+- **Files/components changed:** `app/about/layout.tsx`, `app/contact/layout.tsx`, `app/services/layout.tsx`, `app/technology/layout.tsx`, `app/portfolio/layout.tsx`, `app/services/live-casino-development/layout.tsx`.
+- **User-visible effect:** no in-page UI change; shared links for About, Contact, Solutions, Technology, Portfolio and Live Casino Development now carry route-specific title/description plus a branded or project-relevant large preview image.
+- **Technical rationale:** ported the stronger verified metadata pattern from coordinated QA branch `design/font-delivery-integrity-polish-20260908-r12`; nested route metadata can replace root Open Graph/Twitter objects, so these route layouts explicitly preserve social-preview fields without changing page UI or production configuration.
+- **Verification:** source parity checked against coordinated QA implementation. Current Vercel status for implementation head `5e68e47` is **failure due to Vercel build-rate limit** (`upgradeToPro=build-rate-limit`), not a reported code/build failure. No fresh lint/typecheck/test/build or deployed smoke success is claimed for this head.
+- **Env/migration/config dependency:** none; no DNS, aliases, secrets, env, migrations, dependencies, APIs or production runtime configuration changed.
+- **Rollback:** revert the six implementation commits above in reverse order.
+- **CTO production action required:** once Vercel build quota is available, run `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`; deploy preview and inspect rendered `og:*` / `twitter:*` metadata for `/about`, `/contact`, `/services`, `/technology`, `/portfolio`, and `/services/live-casino-development`; port/merge only after checks pass.
+
 ## 2026-09-08 16:48 +04 — Paid-development contact conversion pass
 - **Status:** NEEDS CTO REVIEW
 - **Commit:** `0a70ebc4ab0940a0151d60ef13c7768ad81464eb`
