@@ -15,14 +15,14 @@ import { portfolioProjects } from "@/content/portfolio";
 
 export const metadata: Metadata = {
   title: "Portfolio | OpenGamer Studio",
-  description: "Explore selected OpenGamer casino games, original concepts and product work across slots, Live Casino and B2B gaming technology.",
+  description: "Explore selected OpenGamer casino games, original IP and in-development product work across slots, Live Casino and B2B gaming technology.",
   alternates: { canonical: "/portfolio" }
 };
 
 const portfolioHeroItems = [
   {
     title: "ELEMENTALS",
-    label: "Live Casino concept",
+    label: "Original Live Casino IP",
     image: "/assets/projects/elementals/expositions/nexus-stage.webp",
     href: "/portfolio/elementals",
     className: "md:col-span-2 md:row-span-2",
@@ -30,7 +30,7 @@ const portfolioHeroItems = [
   },
   {
     title: "LC App",
-    label: "B2B product concept",
+    label: "B2B product direction",
     image: "/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp",
     href: "/portfolio/lc-app",
     className: "",
@@ -55,8 +55,8 @@ export default function PortfolioPage() {
           <div className="min-w-0">
             <SectionHeader
               eyebrow="OpenGamer portfolio"
-              title="Games, Concepts and Product Work"
-              description="Explore selected slot games, Live Casino concepts and B2B product work, with project status kept clear."
+              title="Games, Original IP and Product Work"
+              description="Explore selected slot games, original Live Casino IP and in-development B2B product work, with project status kept clear."
               headingLevel="h1"
             />
             <div className="mt-7 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap sm:mt-8">
@@ -94,7 +94,7 @@ export default function PortfolioPage() {
         </Container>
       </section>
       <Section>
-        <SectionHeader eyebrow="Original concepts" title="Ideas with a Clear Product Identity" description="Selected concepts that show OpenGamer product thinking beyond slot production." />
+        <SectionHeader eyebrow="Original product work" title="Ideas with a Clear Product Identity" description="Selected IP and product directions that show OpenGamer thinking beyond slot production." />
         <div className="mt-8 grid gap-5 sm:mt-10 lg:grid-cols-2 lg:gap-6" data-reveal-group="cards">
           {portfolioProjects.map((project) => (
             <ProjectCard key={project.title} {...project} />
@@ -114,7 +114,7 @@ export default function PortfolioPage() {
       </Section>
       <CTASection
         title="See Something Relevant?"
-        description="Discuss a title, concept, custom production need or broader portfolio opportunity with OpenGamer."
+        description="Discuss a title, original IP, in-development product direction, custom production need or broader portfolio opportunity with OpenGamer."
         ctaLabel="Discuss a Project"
         ctaHref="/contact?interest=portfolio#project-enquiry"
       />
