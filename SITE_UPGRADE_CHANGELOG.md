@@ -37,3 +37,41 @@ Upgraded the OpenGamer website information architecture, homepage positioning, g
 - New hero visuals use local assets and CSS composition rather than remote imagery or video.
 - Preview deployments remain `noindex, nofollow`; production indexing requires `VERCEL_ENV=production` and `NEXT_PUBLIC_SITE_URL=https://open-gamer.com`.
 - New visual QA screenshots are local artifacts under `qa/visual/` and are intentionally excluded from Git/Vercel archives.
+
+---
+
+## 2026-09-08 — Visual Asset / Responsive QA Pass
+
+Branch: `design/visual-asset-polish-20260908-r1`  
+Approved parent: `63e6b2960cdc411a7a98269db174391158d2e1cd`  
+Pass commits: `1e5d8b0`, `9e4d925`, `2950a60`, `a7252e7`, `08e7382`
+
+### Purpose
+
+Preserve the approved content-responsive version while improving visual fidelity of authentic product assets and making recurring visual QA cover the full public site at founder-review breakpoints.
+
+### Changes
+
+- `/portfolio`: LC App UI proof now uses contained presentation instead of destructive `object-cover` cropping; game and ELEMENTALS artwork remain cover-based.
+- `/about`: LC App proof tile now preserves the full interface; game/ELEMENTALS proof remains artwork-led.
+- `/services`: Product & Integration Engineering hero now preserves the LC App device ecosystem rather than cropping it as an illustration.
+- `/technology`: LC App desktop-interface hero now uses contained UI presentation; Deep Dive remains artwork-led.
+- `scripts/visual-qa.mjs`: removed machine-specific pnpm/runtime paths and expanded reusable QA coverage to Portfolio, ELEMENTALS, LC App and Live Casino Development.
+- Visual QA breakpoints now include `390`, `430`, `768`, `1024`, `1280`, `1440` and `1920` widths.
+- Visual QA now checks one-H1 structure, horizontal overflow, broken images, missing alt attributes and clipped text in major text/control elements.
+- `QA_DEPLOYED_BASE_URL` can now point the QA harness at the exact preview deployment being reviewed.
+
+### Asset Audit Notes
+
+- Public LC App pages already use the optimized asset set under `public/assets/projects/lc-app/optimized/` (roughly 100–160 KB per asset) rather than the multi-megabyte originals for the main reviewed surfaces.
+- Several game titles still have available WebP artwork while their content records reference JPG/source files. This is a safe follow-up optimization candidate after visual comparison; no asset was replaced solely to reduce bytes in this pass.
+- No generated imagery was introduced. Existing authentic OpenGamer, ELEMENTALS and LC App assets were sufficient for the issues addressed here.
+
+### QA / Production Instructions
+
+1. Run `pnpm lint`, `pnpm typecheck`, `pnpm test:production-config`, and `pnpm build`.
+2. Deploy this branch as preview only.
+3. Run visual QA against the exact preview with `QA_DEPLOYED_BASE_URL=<preview-url> pnpm qa:visual -- --target=deployed` when Playwright browsers are available.
+4. Review LC App crops on `/portfolio`, `/about`, `/services` and `/technology` at 390/430/1024/1280/1440/1920.
+5. Confirm preview keeps `X-Robots-Tag: noindex`.
+6. Do not promote or alter production aliases/domains without founder approval.
