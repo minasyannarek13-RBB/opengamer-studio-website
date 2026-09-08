@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-08 12:26 UTC — Preview robots sitemap isolation
+- **Status:** NEEDS CTO REVIEW
+- **Commit:** `1fd4202e7350c32dcf7de4bc74d839ed90b35211`
+- **Purpose:** prevent non-production/preview deployments from advertising their own sitemap while they are intentionally blocked from indexing.
+- **Files/components changed:** `app/robots.ts`.
+- **User-visible effect:** none in the site UI; production robots behavior is unchanged. Preview/non-production `robots.txt` still disallows all crawling and now omits the preview sitemap declaration.
+- **Technical rationale:** the existing environment guard correctly sets `Disallow: /` outside the canonical production domain, but still emitted `${siteUrl}/sitemap.xml`; removing that signal makes preview crawler policy internally consistent and reduces accidental discovery/indexing noise.
+- **Verification:** focused source diff reviewed against existing `isIndexableProduction` contract; no fresh lint/typecheck/test/build or deployed robots smoke is claimed for this head. Vercel/CI status must be confirmed before production handoff.
+- **Env/migration/config dependency:** none; no DNS, aliases, secrets, env, migrations, dependencies or production runtime configuration changed.
+- **Rollback:** revert `1fd4202e7350c32dcf7de4bc74d839ed90b35211`.
+- **CTO production action required:** run `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`; verify canonical production `/robots.txt` contains `Allow: /` plus the production sitemap and a preview deployment contains `Disallow: /` with no sitemap line, then port/merge only after preview checks pass.
+
 ## 2026-09-08 14:25 +04 — Homepage social preview metadata integrity
 - **Status:** NEEDS CTO REVIEW
 - **Commit:** `b88637901692920c8545b8a0f517b9537a2162dd`
