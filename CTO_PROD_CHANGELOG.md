@@ -1,5 +1,19 @@
 # CTO Production Handoff Log
 
+## 2026-09-08 06:23 +04 — Portable full-site visual QA coverage
+
+- **Status:** NEEDS CTO REVIEW
+- **Baseline:** `v2-current` @ `697e1a3dbd0fa2fd33d4a62f09cd3dca3f10bc19`
+- **Implementation commit:** `d75c0d68e7a7bfbbf24ece88a1b2a70f31d0efa2`
+- **Purpose:** make the existing Playwright visual-QA runner portable across developer/CTO environments and broaden regression coverage for the current v2 site before production handoff.
+- **Files/components changed:**
+  - `scripts/visual-qa.mjs` — removes machine-specific pnpm/node paths; allows `QA_DEPLOYED_BASE_URL`; adds live-casino, portfolio, ELEMENTALS and LC App routes; adds 1920/1280 desktop and 430 mobile widths; detects clipped text in addition to H1/overflow/broken-image/alt checks.
+- **User-visible effect:** none directly; reduces the chance of shipping responsive, clipping or asset regressions across key public routes and makes the same QA command reproducible by the CTO instead of depending on one Mac filesystem.
+- **Technical rationale:** ports the focused QA improvement from coordinated commit `08e7382f87fd9ae8f42d28399482f75c36ef93f9`. No application dependency, route implementation, API, content, DNS, secret, env contract or production configuration is changed; `QA_DEPLOYED_BASE_URL` is optional.
+- **Verification:** exact coordinated QA implementation applied to the current build handoff branch. CI/preview for `d75c0d6` must be rechecked; the script itself should be run with the repository Playwright/browser setup before production merge.
+- **Rollback:** revert `d75c0d68e7a7bfbbf24ece88a1b2a70f31d0efa2`.
+- **CTO production action required:** run the repository install/bootstrap as usual, then execute the existing visual-QA command against local build and the intended preview by setting `QA_DEPLOYED_BASE_URL`; review `qa/screenshots/summary.json` and screenshots, then run `lint`, `typecheck`, `test`, and `build`. No DNS/alias action required.
+
 ## 2026-09-08 05:21 +04 — Legal-page production wording and responsive hardening
 
 - **Status:** NEEDS CTO REVIEW
