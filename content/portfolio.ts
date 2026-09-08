@@ -1,23 +1,23 @@
 export const portfolioProjects = [
   {
     title: "ELEMENTALS",
-    tagline: "Premium Live Casino Show Game Concept",
-    description: "A four-realm show game built around the Great Wheel and a dealer-host presentation.",
-    status: "Original Game Concept · In Development",
+    tagline: "Cinematic Live Casino Show Game",
+    description: "An original four-realm show game direction built around the Great Wheel and a dealer-host presentation.",
+    status: "Original IP · In Development",
     href: "/portfolio/elementals",
     cta: "View ELEMENTALS",
     image: "/assets/projects/elementals/expositions/nexus-stage.webp",
-    imageAlt: "ELEMENTALS Nexus stage concept with the Great Wheel and four elemental realms"
+    imageAlt: "ELEMENTALS Nexus stage with the Great Wheel and four elemental realms"
   },
   {
     title: "LC App",
     tagline: "B2B Social Engagement Layer for Live Casino",
-    description: "A B2B social engagement layer concept for existing Live Casino operators and providers.",
-    status: "Product Concept · In Development",
+    description: "An in-development B2B product direction for discovery, creator-led engagement and communities around existing Live Casino ecosystems.",
+    status: "Product Direction · In Development",
     href: "/portfolio/lc-app",
     cta: "See LC App",
     image: "/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp",
-    imageAlt: "LC App concept interface shown across laptop, tablet and mobile devices"
+    imageAlt: "LC App product design shown across laptop, tablet and mobile devices"
   }
 ];
 
@@ -115,48 +115,48 @@ export const lcAppAssets = {
     src: "/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp",
     width: 1672,
     height: 941,
-    alt: "LC App concept interface shown across laptop, tablet and mobile devices."
+    alt: "LC App product design shown across laptop, tablet and mobile devices."
   },
   productLineup: {
     src: "/assets/projects/lc-app/optimized/lc-app-mobile-product-lineup.webp",
     width: 1672,
     height: 941,
-    alt: "LC App concept interface showing five mobile product screens on dark podiums."
+    alt: "LC App product design showing five mobile product screens on dark podiums."
   },
   discover: {
     src: "/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp",
     width: 864,
     height: 1821,
-    alt: "LC App concept interface showing a social Live Casino discovery screen."
+    alt: "LC App product design showing a social Live Casino discovery screen."
   },
   socialFeed: {
     src: "/assets/projects/lc-app/optimized/lc-app-mobile-social-feed.webp",
     width: 864,
     height: 1821,
-    alt: "LC App concept interface showing a Live Casino social feed."
+    alt: "LC App product design showing a Live Casino social feed."
   },
   creatorProfile: {
     src: "/assets/projects/lc-app/optimized/lc-app-mobile-creator-profile.webp",
     width: 853,
     height: 1844,
-    alt: "LC App concept interface showing a creator profile for Live Casino experiences."
+    alt: "LC App product design showing a creator profile for Live Casino experiences."
   },
   community: {
     src: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp",
     width: 1672,
     height: 941,
-    alt: "LC App concept interface showing a Live Casino community space."
+    alt: "LC App product design showing a Live Casino community space."
   },
   desktopExperience: {
     src: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp",
     width: 1586,
     height: 992,
-    alt: "LC App concept interface showing a cross-device desktop experience."
+    alt: "LC App product design showing a cross-device desktop experience."
   }
 };
 
 export const lcAppOverview =
-  "LC App explores a social product layer for existing Live Casino ecosystems, connecting live tables, communities, creator-led experiences and player communication within one interface.";
+  "LC App is an in-development social product layer for existing Live Casino ecosystems, connecting live tables, communities, creator-led experiences and player communication within one interface.";
 
 export const lcAppDisclaimer =
-  "The interfaces shown are concept visuals created to communicate the intended product direction. They do not represent a currently launched production application.";
+  "Product visuals illustrate the intended LC App experience and cross-device direction.";
