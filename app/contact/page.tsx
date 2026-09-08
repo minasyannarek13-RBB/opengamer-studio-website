@@ -19,17 +19,17 @@ const enquiryRoutes = [
   {
     title: "Game production",
     description: "Original, custom or branded slot production, from selected stages to full-cycle delivery.",
-    href: "/contact?interest=game"
+    href: "/contact?interest=game#project-enquiry"
   },
   {
     title: "Engineering & integration",
     description: "Frontend, backend, APIs and integration-oriented delivery for existing iGaming products.",
-    href: "/contact?interest=technology"
+    href: "/contact?interest=technology#project-enquiry"
   },
   {
     title: "Portfolio & partnerships",
     description: "Portfolio access, licensing discussions and strategic product or distribution conversations.",
-    href: "/contact?interest=portfolio"
+    href: "/contact?interest=portfolio#project-enquiry"
   }
 ];
 
@@ -109,7 +109,9 @@ export default function ContactPage() {
               compact
             />
           </aside>
-          <LeadForm />
+          <div id="project-enquiry" className="scroll-mt-28">
+            <LeadForm />
+          </div>
         </div>
       </Section>
     </SiteShell>
