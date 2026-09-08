@@ -2,6 +2,44 @@
 
 This file records production-facing handoff notes for the latest verified OpenGamer website descendants. Historical site passes remain documented in `SITE_UPGRADE_CHANGELOG.md`.
 
+## 2026-09-08 18:42 +04 — Game Card Artwork Delivery Integrity
+
+Branch: `design/game-art-delivery-integrity-polish-20260908-r13`  
+Parent: `design/font-delivery-integrity-polish-20260908-r12` at `55981a08baca8ae9cf9ff02ee3787601f3ea48a1`  
+Functional head before this handoff note: `3562d2bef475bad089d68fc8fed7dfa053621adc`
+
+### Purpose
+
+Make the game catalogue consistently use the existing optimized artwork pipeline. Game detail pages already resolved optimized assets centrally, but shared game cards could still inherit raw JPG/source artwork from `content/games.ts` for titles that already have verified WebP counterparts.
+
+### Changes
+
+- Routed `GameCard` artwork through `getOptimizedGameArtwork(game)` instead of directly using `game.artwork?.catalogue || game.image`.
+- This consolidates card, detail, related-game and social-preview artwork selection around the same verified asset resolver where optimized artwork exists.
+- Added an asset-delivery regression test that fails if `GameCard` stops using the optimized resolver or regresses to the prior raw image expression.
+- Kept fallback behavior for titles/variants without verified optimized replacements; no artwork was fabricated or silently substituted.
+- No public copy, factual claims, product status, production aliases, domains or production configuration were changed.
+
+### QA
+
+- Functional deployment `dpl_2G46sxnqjZ6FzGbBtEGk1QQbQTfv` ran the complete pre-build gate on `3562d2bef475bad089d68fc8fed7dfa053621adc`.
+- Production-integrity suite: `10/10 PASS`, `0 fail`.
+- Asset-delivery suite: `3/3 PASS`, `0 fail`, including the new optimized-game-card resolver gate.
+- Social-preview suite: `7/7 PASS`, `0 fail`.
+- Next.js optimized production compile: PASS.
+- Lint/type validation: PASS.
+- Static generation: `93/93 PASS`.
+- `.vercelignore` still removed the configured 17 redundant visual source files before build.
+- Final branch-head deployment, preview noindex and runtime log verification should be confirmed after this handoff commit before promotion.
+
+### Production Instructions
+
+1. Keep `lib/gameAssets.ts`, `GameCard.tsx` and the asset-delivery tests together so catalogue cards cannot drift back to raw source artwork.
+2. Add a new optimized mapping only when a visually verified replacement asset exists; preserve fallback for titles without one.
+3. Keep authentic OpenGamer artwork as the source of truth; do not generate replacement game art merely to achieve format uniformity.
+4. Preserve all current preview noindex, factuality, lead-delivery and social-preview gates.
+5. Do not alter `v2-current`, `main`, production aliases, domains or production configuration without explicit founder approval.
+
 ## 2026-09-08 16:35 +04 — Font Delivery Integrity
 
 Branch: `design/font-delivery-integrity-polish-20260908-r12`  
