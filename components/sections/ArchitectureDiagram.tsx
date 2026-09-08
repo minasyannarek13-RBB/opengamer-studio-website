@@ -19,10 +19,10 @@ export function ArchitectureDiagram({ items }: { items: string[] }) {
   ];
 
   return (
-    <div className="premium-card surface-hairline rounded-lg border border-line bg-black/30 p-5 sm:p-6">
+    <div className="premium-card surface-hairline rounded-2xl border border-line bg-black/30 p-5 sm:p-6">
       <div className="grid gap-3 md:grid-cols-2">
         {layers.map((layer, index) => (
-          <div key={layer.title} className="relative rounded-lg border border-white/10 bg-white/[0.045] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 hover:bg-white/[0.065]">
+          <div key={layer.title} className="relative rounded-xl border border-white/10 bg-white/[0.045] p-4">
             <div className="flex items-center gap-3">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-emerald/35 bg-emerald/[0.12] text-xs font-semibold text-emerald">
                 {index + 1}
