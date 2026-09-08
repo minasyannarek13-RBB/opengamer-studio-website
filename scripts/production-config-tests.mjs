@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const payload = {
@@ -25,8 +25,33 @@ const payload = {
   utmTerm: "opengamer"
 };
 
+const excludedLcAppSourceAssets = [
+  "/assets/projects/lc-app/lc-app-desktop-experience.webp",
+  "/assets/projects/lc-app/lc-app-device-ecosystem.webp",
+  "/assets/projects/lc-app/lc-app-mobile-community.webp",
+  "/assets/projects/lc-app/lc-app-mobile-creator-profile.webp",
+  "/assets/projects/lc-app/lc-app-mobile-discover.png",
+  "/assets/projects/lc-app/lc-app-mobile-social-feed.webp"
+];
+
 function cacheSafeImport(path) {
   return import(`${path}?t=${Date.now()}-${Math.random()}`);
+}
+
+async function collectSourceFiles(directoryUrl) {
+  const entries = await readdir(directoryUrl, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const childUrl = new URL(`${entry.name}${entry.isDirectory() ? "/" : ""}`, directoryUrl);
+    if (entry.isDirectory()) {
+      files.push(...(await collectSourceFiles(childUrl)));
+    } else if (/\.(?:[cm]?[jt]sx?|mjs)$/.test(entry.name)) {
+      files.push(childUrl);
+    }
+  }
+
+  return files;
 }
 
 test("Resend delivery refuses missing configuration without fetch", async () => {
@@ -144,4 +169,26 @@ test("schema source omits unconfirmed corporate fields", async () => {
   assert.doesNotMatch(layoutSource, /address:/);
   assert.match(layoutSource, /company\.email \? \{ email: company\.email \}/);
   assert.match(layoutSource, /company\.social\.length \? \{ sameAs:/);
+});
+
+test("public source does not regress to superseded heavy LC App assets", async () => {
+  const sourceRoots = ["app/", "components/", "content/", "lib/"];
+  const sourceFiles = [];
+  for (const root of sourceRoots) {
+    sourceFiles.push(...(await collectSourceFiles(new URL(`../${root}`, import.meta.url))));
+  }
+
+  for (const fileUrl of sourceFiles) {
+    const source = await readFile(fileUrl, "utf8");
+    for (const assetPath of excludedLcAppSourceAssets) {
+      assert.equal(source.includes(assetPath), false, `${fileUrl.pathname} references excluded asset ${assetPath}`);
+    }
+  }
+});
+
+test("Vercel deployment excludes superseded heavy LC App source files", async () => {
+  const ignoreSource = await readFile(new URL("../.vercelignore", import.meta.url), "utf8");
+  for (const assetPath of excludedLcAppSourceAssets) {
+    assert.match(ignoreSource, new RegExp(`public${assetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
+  }
 });
