@@ -1,6 +1,5 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export function redirectToLaunch(path: string): never {
-  redirect(path);
+  permanentRedirect(path);
 }
-
