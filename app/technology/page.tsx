@@ -36,8 +36,8 @@ const engineeringAreas = [
 ];
 
 const proofVisuals = [
-  { label: "Game-facing product", title: "Deep Dive", image: "/assets/games/deep-dive/artwork.webp", href: "/games/deep-dive" },
-  { label: "Product interface", title: "LC App", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/portfolio/lc-app" }
+  { label: "Game-facing product", title: "Deep Dive", image: "/assets/games/deep-dive/artwork.webp", href: "/games/deep-dive", contain: false },
+  { label: "Product interface", title: "LC App", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/portfolio/lc-app", contain: true }
 ];
 
 export default function TechnologyPage() {
@@ -57,8 +57,8 @@ export default function TechnologyPage() {
           </div>
           <div className="grid min-h-[21rem] min-w-0 gap-3 sm:min-h-[24rem] sm:grid-cols-2 lg:min-h-[25rem]">
             {proofVisuals.map((item, index) => (
-              <Link key={item.title} href={item.href} className={`group relative min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/45 shadow-[0_24px_80px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 ${index === 1 ? "sm:translate-y-6 lg:translate-y-8" : ""}`}>
-                <Image src={item.image} alt="" fill sizes="(min-width:1024px) 28vw,48vw" className="object-cover transition duration-500 group-hover:scale-[1.025]" priority={index === 0} />
+              <Link key={item.title} href={item.href} className={`group relative min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/55 shadow-[0_24px_80px_rgba(0,0,0,0.3)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 ${index === 1 ? "sm:translate-y-6 lg:translate-y-8" : ""}`}>
+                <Image src={item.image} alt="" fill sizes="(min-width:1024px) 28vw,48vw" className={`${item.contain ? "object-contain p-2 sm:p-3" : "object-cover"} transition duration-500 group-hover:scale-[1.025]`} priority={index === 0} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/18 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 min-w-0 p-4 sm:p-5">
                   <span className="block break-words text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-emerald sm:text-xs sm:tracking-[0.16em]">{item.label}</span>
