@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-09 01:21 +04 — Optimized homepage/game-card artwork delivery
+- **Status:** NEEDS CTO REVIEW
+- **Commit:** `1ab1381b5d3d5f4142c674ade5430eb63ae7f692`.
+- **Purpose:** move homepage showcase and catalogue cards off legacy/source JPG artwork where verified WebP variants already exist, while adopting the stronger QA game-card presentation and guarding the asset contract against regression.
+- **Files/components changed:** `content/studioHomepage.ts`, `components/sections/GameCard.tsx`, `lib/gameAssets.ts`, `scripts/asset-delivery-tests.mjs`.
+- **User-visible effect:** homepage slot/technology/custom-product artwork and the game catalogue use optimized WebP artwork; game cards gain the stronger verified QA composition with clickable artwork, clearer hierarchy/status treatment and preserved Play Demo / Request Demo / View Game conversion paths.
+- **Technical rationale:** coordinated QA branch `design/homepage-asset-integrity-polish-20260909-r19` identified remaining legacy artwork references after the earlier deployment-payload cleanup. The pre-change homepage blob on the implementation branch exactly matched the QA parent blob (`24b6ada1...`), so the optimized homepage patch ports without unrelated content drift. A central `getOptimizedGameArtwork()` helper keeps known WebP mappings explicit and safely falls back to existing game artwork/image data.
+- **Verification:** source compatibility checked against current game data and CTA routes; the QA branch includes an asset-delivery regression test covering both the centralized game-card resolver and homepage legacy-artwork exclusions. Vercel status for implementation commit is currently **pending**; no fresh deployed smoke or final build success is claimed yet.
+- **Env/migration/config dependency:** none; no DNS, aliases, secrets, env, migrations, dependencies, API contracts or production configuration changed.
+- **Rollback:** revert `1ab1381b5d3d5f4142c674ade5430eb63ae7f692`.
+- **CTO production action required:** after preview build completes, run `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`; inspect `/` and `/games` on mobile/tablet/desktop; confirm WebP assets load, image links work, demos/request-demo routes remain correct and no excluded legacy asset is referenced; merge/port only after preview QA passes.
+
 ## 2026-09-09 00:22 +04 — Portfolio commercial showcase + clearer status framing
 - **Status:** NEEDS CTO REVIEW
 - **Commit:** `a0f024c0d3a4b1351909f4fbe46005b71f1cb361`.
