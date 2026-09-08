@@ -11,14 +11,22 @@ export function SectionHeader({ eyebrow, title, description, align = "left", hea
   const Heading = headingLevel;
 
   return (
-    <div className={isCenter ? "reveal mx-auto max-w-3xl text-center" : "reveal max-w-3xl"}>
+    <div className={isCenter ? "reveal mx-auto min-w-0 max-w-3xl text-center" : "reveal min-w-0 max-w-3xl"}>
       {eyebrow ? (
-        <p className="premium-kicker mb-4 text-xs font-semibold uppercase">{eyebrow}</p>
+        <p className="premium-kicker mb-4 break-words text-xs font-semibold uppercase">{eyebrow}</p>
       ) : null}
-      <Heading className={headingLevel === "h1" ? "text-balance max-w-5xl text-4xl font-semibold leading-[1.02] tracking-normal text-white sm:text-5xl lg:text-6xl" : "text-balance max-w-4xl text-3xl font-semibold leading-[1.06] tracking-normal text-white sm:text-4xl"}>
+      <Heading
+        className={
+          headingLevel === "h1"
+            ? "max-w-5xl break-words text-balance text-[clamp(2.45rem,7vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.02em] text-white lg:text-6xl"
+            : "max-w-4xl break-words text-balance text-[clamp(2rem,5.5vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.015em] text-white"
+        }
+      >
         {title}
       </Heading>
-      {description ? <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">{description}</p> : null}
+      {description ? (
+        <p className="mt-4 max-w-2xl break-words text-[0.98rem] leading-7 text-slate-300 sm:mt-5 sm:text-lg sm:leading-8">{description}</p>
+      ) : null}
     </div>
   );
 }
