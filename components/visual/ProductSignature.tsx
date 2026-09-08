@@ -14,10 +14,19 @@ export type ProductSignatureProps = {
 };
 
 export function ProductSignature({ eyebrow, title, description, image, href, actionLabel, accent = "#2ee6a6", compact = false }: ProductSignatureProps) {
+  const isInterfaceVisual = image.includes("/assets/projects/lc-app/");
+
   return (
     <aside className={`product-signature ${compact ? "product-signature--compact" : ""}`} style={{ "--product-accent": accent } as CSSProperties}>
-      <div className="product-signature__image">
-        <Image src={image} alt={`${title} visual reference`} width={220} height={154} sizes={compact ? "88px" : "120px"} className="h-full w-full object-cover" />
+      <div className={`product-signature__image ${isInterfaceVisual ? "bg-[#050609]" : ""}`}>
+        <Image
+          src={image}
+          alt={`${title} visual reference`}
+          width={220}
+          height={154}
+          sizes={compact ? "88px" : "120px"}
+          className={`h-full w-full ${isInterfaceVisual ? "object-contain p-1" : "object-cover"}`}
+        />
       </div>
       <div className="min-w-0">
         <p>{eyebrow}</p>
