@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { games, getGameCommercialStatusLabel, getVerifiedDemoUrl } from "@/content/games";
+import { getOptimizedGameArtwork } from "@/lib/gameAssets";
 
 type GameDetailProps = { params: Promise<{ slug: string }> };
 
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: GameDetailProps): Promise<Met
   const { slug } = await params;
   const game = games.find((item) => item.slug === slug);
   if (!game) return { title: "Game Details | OpenGamer Studio" };
+  const artwork = getOptimizedGameArtwork(game);
   return {
     title: `${game.title} | OpenGamer Studio`,
     description: game.shortDescription,
@@ -29,7 +31,7 @@ export async function generateMetadata({ params }: GameDetailProps): Promise<Met
       title: `${game.title} | OpenGamer Studio`,
       description: game.shortDescription,
       url: `/games/${game.slug}`,
-      images: [{ url: game.artwork?.hero || game.image, width: game.imageWidth, height: game.imageHeight, alt: `${game.title} artwork` }]
+      images: [{ url: artwork, width: game.imageWidth, height: game.imageHeight, alt: `${game.title} artwork` }]
     }
   };
 }
@@ -39,6 +41,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
   const game = games.find((item) => item.slug === slug);
   if (!game) notFound();
 
+  const artwork = getOptimizedGameArtwork(game);
   const demoUrl = getVerifiedDemoUrl(game);
   const commercialStatus = getGameCommercialStatusLabel(game);
   const gameIndex = games.findIndex((item) => item.slug === game.slug);
@@ -56,7 +59,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
   return (
     <SiteShell atmosphere="games">
       <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-12 sm:py-16 lg:py-20">
-        <ProductHeroBackground image={game.artwork?.hero || game.image} accentPrimary={game.visualAccent || "#2ee6a6"} pattern={game.slug === "deep-dive" ? "particles" : game.slug === "forest-fortune" ? "mist" : game.slug === "dragon-rush" ? "rays" : "grid"} />
+        <ProductHeroBackground image={artwork} accentPrimary={game.visualAccent || "#2ee6a6"} pattern={game.slug === "deep-dive" ? "particles" : game.slug === "forest-fortune" ? "mist" : game.slug === "dragon-rush" ? "rays" : "grid"} />
         <Container className="relative grid min-w-0 gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-10">
           <div className="min-w-0 max-w-2xl">
             <nav className="mb-6 flex min-w-0 flex-wrap items-center gap-2 text-sm text-slate-500 sm:mb-7" aria-label="Breadcrumb">
@@ -72,7 +75,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
           </div>
           <div className="min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/40 p-2 shadow-[0_30px_100px_rgba(0,0,0,0.34)]">
             <div className="relative aspect-[10/7] overflow-hidden rounded-[var(--radius-card)]">
-              <Image src={game.artwork?.hero || game.image} alt={`${game.title} artwork`} width={game.imageWidth} height={game.imageHeight} priority className="h-full w-full object-cover" sizes="(min-width:1024px) 54vw,100vw" />
+              <Image src={artwork} alt={`${game.title} artwork`} width={game.imageWidth} height={game.imageHeight} priority className="h-full w-full object-cover" sizes="(min-width:1024px) 54vw,100vw" />
             </div>
           </div>
         </Container>
@@ -110,7 +113,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
           <nav className="grid min-w-0 gap-4 sm:grid-cols-2" aria-label="Related games">
             {relatedGames.map((item) => (
               <Link key={item.slug} href={`/games/${item.slug}`} className="group min-w-0 overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.035] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30">
-                <div className="relative aspect-[16/10] overflow-hidden bg-black/40"><Image src={item.artwork?.hero || item.image} alt={`${item.title} artwork`} width={item.imageWidth} height={item.imageHeight} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]" sizes="(min-width:1024px) 28vw,50vw" /></div>
+                <div className="relative aspect-[16/10] overflow-hidden bg-black/40"><Image src={getOptimizedGameArtwork(item)} alt={`${item.title} artwork`} width={item.imageWidth} height={item.imageHeight} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]" sizes="(min-width:1024px) 28vw,50vw" /></div>
                 <div className="min-w-0 p-4"><p className="break-words text-xs font-semibold uppercase tracking-[0.12em] text-emerald">Related game</p><h3 className="mt-2 break-words text-xl font-semibold text-white">{item.title}</h3><p className="mt-2 break-words text-sm leading-6 text-slate-400">{item.shortDescription}</p></div>
               </Link>
             ))}
