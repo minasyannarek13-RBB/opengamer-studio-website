@@ -1,5 +1,17 @@
 # OpenGamer CTO Production Handoff Changelog
 
+## 2026-09-08 — Locale navigation routing integrity
+- Branch: `design/locale-routing-integrity-polish-20260908-r16`
+- Parent: `design/accessibility-metadata-polish-20260908-r15` @ `8d8fcab9db8b62b69a1f6fb0bef79e652926f862`
+- Functional head before handoff note: `275aeef3287fdfe58df7ee4088d45daba0d39fd2`
+- Purpose: stop localized homepage navigation from manufacturing `/ru|hy|es|pt/...` URLs for launch pages that are not actually localized and immediately redirect to the canonical English route.
+- Changed: `lib/routes.ts`, `components/layout/Header.tsx`, `components/layout/Footer.tsx`, `package.json`, `scripts/locale-routing-tests.mjs`.
+- Behavior: `/ru`, `/hy`, `/es`, `/pt` remain genuine localized homepage destinations. Header, mega-menu, mobile navigation, footer and commercial CTAs now link directly to canonical `/games`, `/services`, `/portfolio`, `/technology`, `/about`, `/contact` and nested launch pages instead of adding a needless locale redirect hop.
+- Regression gate: locale-routing tests assert that localized home remains localized while non-home launch destinations stay canonical, and that header/footer CTAs do not regress to localized compatibility redirects.
+- Integration: r16 is a direct descendant of the verified accessibility/security r15 branch and preserves its document-language, schema-logo and browser-security work; compare status is `ahead 7 / behind 0` with only five logical files changed versus that parent.
+- QA status: Vercel refused a new preview for the functional head with `Deployment rate limited — retry in 24 hours`; no application build ran. A local clone/build fallback was attempted but the execution container has no external DNS access, so final production-gate/build/runtime verification is pending rather than inferred.
+- Production instruction: do not promote r16 until Vercel can run the complete production gate, Next.js compile/lint/type/static generation and runtime noindex/header checks. Once the limit clears, verify the r16 head before treating it as the new approved working branch. `main`, `v2-current`, production aliases, domains and production configuration remain untouched.
+
 ## 2026-09-08 — Accessibility, schema and browser-security hardening
 - Branch: `design/accessibility-metadata-polish-20260908-r15`
 - Parent: `design/preview-indexing-integrity-polish-20260908-r14` @ `1582bc4a014bce83b4b8a25a7463310e08be68ef`
