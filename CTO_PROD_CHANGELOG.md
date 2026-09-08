@@ -2,6 +2,18 @@
 
 Chronological production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded.
 
+## 2026-09-09 00:22 +04 — Portfolio commercial showcase + clearer status framing
+- **Status:** NEEDS CTO REVIEW
+- **Commit:** `a0f024c0d3a4b1351909f4fbe46005b71f1cb361`.
+- **Purpose:** strengthen the Portfolio page as a commercial review surface without weakening factual status boundaries for OpenGamer, ELEMENTALS or LC App.
+- **Files/components changed:** `app/portfolio/page.tsx` only.
+- **User-visible effect:** Portfolio now opens with a premium three-item visual showcase using existing real assets for ELEMENTALS, LC App and Forest Fortune; adds direct `Explore Games` and portfolio/partnership enquiry CTAs; sharpens the page hierarchy and responsive spacing; keeps concept/product status explicit and routes commercial enquiries directly to `#project-enquiry` with `interest=portfolio`.
+- **Technical rationale:** coordinated QA branch `design/portfolio-commercial-clarity-polish-20260908-r18` contained a stronger visual/commercial Portfolio composition, but its separate `content/portfolio.ts` changes weakened the explicit LC App concept disclaimer. This handoff ports only the safe page-level composition and deliberately preserves the implementation branch's stronger factuality wording and existing project data.
+- **Verification:** source compatibility checked against the current `CTASection`, `ProjectCard`, `GameCard`, existing asset paths and current Portfolio data. Vercel status for implementation commit is currently **pending**; no fresh lint/typecheck/test/build or deployed responsive smoke success is claimed yet.
+- **Env/migration/config dependency:** none; no DNS, aliases, secrets, env, migrations, dependencies, API contracts or production configuration changed.
+- **Rollback:** revert `a0f024c0d3a4b1351909f4fbe46005b71f1cb361`.
+- **CTO production action required:** after preview build completes, run `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`; inspect `/portfolio` at mobile/tablet/desktop widths; verify all three hero links, `/games`, and the portfolio enquiry CTA; merge/port only after preview QA passes.
+
 ## 2026-09-08 23:21 +04 — Canonical locale-home correction
 - **Status:** BLOCKED
 - **Implementation commits:** `eb3faceafd758fcc2b7cbfafb74822c603b17117`, `3a2845dcc0155ff562511b1ee50c20362cd28bde`, `991a54bcfbc8477ee3092e55ff8e03f62ec6a3c7`.
