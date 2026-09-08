@@ -73,7 +73,7 @@ export function LeadForm() {
       const nextErrors = { phone: "Enter a valid international phone number." };
       setState("error");
       setErrors(nextErrors);
-      setMessage("Please check the form and try again.");
+      setMessage("Please review the highlighted field.");
       focusFirstError(form, nextErrors);
       return;
     }
@@ -94,13 +94,13 @@ export function LeadForm() {
       result = (await response.json()) as LeadResponse;
     } catch {
       setState("error");
-      setMessage("The request could not be sent. Please try again.");
+      setMessage("The enquiry could not be sent. Please try again.");
       return;
     }
 
     if (response.ok) {
       setState("success");
-      setMessage(result.message || "Your enquiry has been submitted. The OpenGamer commercial or product team will review the information and contact you regarding the next practical step.");
+      setMessage(result.message || "Thanks. We received your enquiry and will review the brief.");
       form.reset();
       setPreferredContactMethod("");
       return;
@@ -109,7 +109,7 @@ export function LeadForm() {
     const nextErrors = result.errors || {};
     setState("error");
     setErrors(nextErrors);
-    setMessage(result.message || "Please check the form and try again.");
+    setMessage(result.message || "Please review the highlighted fields.");
     focusFirstError(form, nextErrors);
   }
 
@@ -120,7 +120,7 @@ export function LeadForm() {
       onSubmit={submit}
       noValidate
       aria-busy={state === "submitting"}
-      className="premium-card grid gap-5 rounded-2xl border border-line bg-white/[0.045] p-5 shadow-[0_22px_80px_rgba(0,0,0,0.24)] sm:p-6"
+      className="premium-card grid min-w-0 gap-5 rounded-[var(--radius-feature)] border border-line bg-white/[0.045] p-5 shadow-[0_22px_80px_rgba(0,0,0,0.24)] sm:p-6"
     >
       <div className="hidden" aria-hidden="true">
         <label htmlFor="website_url">Website URL</label>
@@ -136,24 +136,24 @@ export function LeadForm() {
       <input type="hidden" name="utmTerm" value={sourceContext.utmTerm} />
 
       {errorEntries.length ? (
-        <div className="rounded-xl border border-red-400/30 bg-red-500/[0.08] p-4 text-sm leading-6 text-red-100" role="alert">
-          <p className="font-semibold text-white">Please review these fields:</p>
+        <div className="min-w-0 rounded-[var(--radius-card)] border border-red-400/30 bg-red-500/[0.08] p-4 text-sm leading-6 text-red-100" role="alert">
+          <p className="break-words font-semibold text-white">Please review:</p>
           <ul className="mt-2 list-disc pl-5">
-            {errorEntries.map(([field, error]) => <li key={field}>{error}</li>)}
+            {errorEntries.map(([field, error]) => <li key={field} className="break-words">{error}</li>)}
           </ul>
         </div>
       ) : null}
 
-      <fieldset className="grid gap-5">
-        <legend className="text-base font-semibold text-white">Business enquiry</legend>
-        <div className="grid gap-5 md:grid-cols-2">
+      <fieldset className="grid min-w-0 gap-5">
+        <legend className="break-words text-base font-semibold text-white">Business enquiry</legend>
+        <div className="grid min-w-0 gap-5 md:grid-cols-2">
           <Field label="Full name" name="fullName" required error={errors.fullName} />
           <Field label="Work email" name="email" type="email" required error={errors.email} />
           <Field label="Company" name="company" required error={errors.company} />
           <Select label="Company type" name="companyType" options={companyTypes} error={errors.companyType} />
           <Select label="Area of interest" name="serviceInterest" options={serviceInterests} required error={errors.serviceInterest} defaultValue={serviceDefault} />
         </div>
-        <label className="grid gap-2 text-sm font-medium text-slate-200">
+        <label className="grid min-w-0 gap-2 text-sm font-medium text-slate-200">
           <LabelText label="Project summary" required />
           <textarea
             name="projectDescription"
@@ -161,15 +161,16 @@ export function LeadForm() {
             aria-invalid={Boolean(errors.projectDescription)}
             aria-describedby={errors.projectDescription ? "projectDescription-error" : undefined}
             rows={5}
-            className="min-h-36 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
+            placeholder="What are you building, changing or looking for?"
+            className="min-h-32 min-w-0 resize-y rounded-[var(--radius-card)] border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors placeholder:text-slate-600 hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70 sm:min-h-36"
           />
-          {errors.projectDescription ? <span id="projectDescription-error" className="text-xs text-red-300">{errors.projectDescription}</span> : null}
+          {errors.projectDescription ? <span id="projectDescription-error" className="break-words text-xs text-red-300">{errors.projectDescription}</span> : null}
         </label>
       </fieldset>
 
-      <details className="rounded-xl border border-white/10 bg-black/20 p-4">
-        <summary className="cursor-pointer rounded-sm text-sm font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">Add project details</summary>
-        <div className="mt-5 grid gap-5 md:grid-cols-2">
+      <details className="min-w-0 rounded-[var(--radius-card)] border border-white/10 bg-black/20 p-4">
+        <summary className="cursor-pointer break-words rounded-sm text-sm font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">Add optional project details</summary>
+        <div className="mt-5 grid min-w-0 gap-5 md:grid-cols-2">
           <Select label="Project stage" name="projectStage" options={projectStages} />
           <Select label="Expected launch" name="expectedLaunch" options={expectedLaunchOptions} />
           <Select label="Number of games" name="numberOfGames" options={numberOfGamesOptions} />
@@ -183,38 +184,37 @@ export function LeadForm() {
         </div>
       </details>
 
-      <label className="flex gap-3 text-sm leading-6 text-slate-300">
+      <label className="flex min-w-0 gap-3 text-sm leading-6 text-slate-300">
         <input
           name="consent"
           type="checkbox"
           required
           aria-invalid={Boolean(errors.consent)}
           aria-describedby={errors.consent ? "consent-error" : undefined}
-          className="mt-1 h-5 w-5 rounded accent-emerald focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald"
+          className="mt-1 h-5 w-5 shrink-0 rounded accent-emerald focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald"
         />
-        <span>
-          I agree that OpenGamer may use this information to respond to my business enquiry. See the{" "}
-          <Link href="/privacy-policy" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">Privacy Policy</Link>{" "}
-          for details.
-          {errors.consent ? <span id="consent-error" className="mt-1 block text-xs text-red-300">{errors.consent}</span> : null}
+        <span className="min-w-0 break-words">
+          I agree that OpenGamer may use this information to respond to my enquiry. See the{" "}
+          <Link href="/privacy-policy" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">Privacy Policy</Link>.
+          {errors.consent ? <span id="consent-error" className="mt-1 block break-words text-xs text-red-300">{errors.consent}</span> : null}
         </span>
       </label>
 
-      <p className="rounded-xl border border-white/10 bg-black/20 p-4 text-sm leading-6 text-slate-400">
-        Business enquiries are reviewed by the OpenGamer commercial and product team. Please do not submit player data, passwords or confidential credentials through this form.
+      <p className="min-w-0 break-words rounded-[var(--radius-card)] border border-white/10 bg-black/20 p-4 text-sm leading-6 text-slate-400">
+        Do not include player data, passwords or confidential credentials.
       </p>
 
-      <Button type="submit" disabled={state === "submitting"} className="w-full md:w-fit">
-        {state === "submitting" ? "Submitting..." : "Submit Project Enquiry"}
+      <Button type="submit" disabled={state === "submitting"} className="w-full sm:w-fit">
+        {state === "submitting" ? "Sending..." : "Send Enquiry"}
       </Button>
 
       {message ? (
-        <div className={state === "success" ? "text-sm text-emerald" : "text-sm text-red-300"} role="status" aria-live="polite">
-          {state === "success" ? <p className="font-semibold text-white">Your enquiry has been submitted</p> : null}
-          <p className={state === "success" ? "mt-1" : undefined}>{message}</p>
+        <div className={state === "success" ? "min-w-0 text-sm text-emerald" : "min-w-0 text-sm text-red-300"} role="status" aria-live="polite">
+          {state === "success" ? <p className="break-words font-semibold text-white">Enquiry received</p> : null}
+          <p className={`${state === "success" ? "mt-1" : ""} break-words`}>{message}</p>
           {state === "success" ? (
             <div className="mt-4 flex flex-wrap gap-3">
-              <Link href="/games" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">Return to Games</Link>
+              <Link href="/games" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">Explore Games</Link>
               <Link href="/portfolio" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">View Portfolio</Link>
             </div>
           ) : null}
@@ -229,7 +229,7 @@ function Field({ label, name, type = "text", required = false, error }: { label:
   const autoComplete = name === "fullName" ? "name" : name === "email" ? "email" : name === "company" ? "organization" : name === "phone" ? "tel" : name === "website" ? "url" : undefined;
 
   return (
-    <label className="grid gap-2 text-sm font-medium text-slate-200">
+    <label className="grid min-w-0 gap-2 text-sm font-medium text-slate-200">
       <LabelText label={label} required={required} />
       <input
         name={name}
@@ -238,9 +238,9 @@ function Field({ label, name, type = "text", required = false, error }: { label:
         autoComplete={autoComplete}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
+        className="min-h-12 min-w-0 rounded-[var(--radius-card)] border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
       />
-      {error ? <span id={errorId} className="text-xs text-red-300">{error}</span> : null}
+      {error ? <span id={errorId} className="break-words text-xs text-red-300">{error}</span> : null}
     </label>
   );
 }
@@ -253,7 +253,7 @@ function Select({ label, name, options, required = false, error, defaultValue = 
     : { defaultValue };
 
   return (
-    <label className="grid gap-2 text-sm font-medium text-slate-200">
+    <label className="grid min-w-0 gap-2 text-sm font-medium text-slate-200">
       <LabelText label={label} required={required} />
       <select
         key={isControlled ? undefined : defaultValue || "empty"}
@@ -262,12 +262,12 @@ function Select({ label, name, options, required = false, error, defaultValue = 
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
+        className="min-h-12 min-w-0 rounded-[var(--radius-card)] border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
       >
         <option value="">Select</option>
         {options.map((option) => <option key={option} value={option}>{option}</option>)}
       </select>
-      {error ? <span id={errorId} className="text-xs text-red-300">{error}</span> : null}
+      {error ? <span id={errorId} className="break-words text-xs text-red-300">{error}</span> : null}
     </label>
   );
 }
@@ -305,9 +305,9 @@ function isValidPhone(value: string) {
 
 function LabelText({ label, required }: { label: string; required: boolean }) {
   return (
-    <span className="flex items-center justify-between gap-3">
-      <span>{label}{required ? <span className="text-emerald" aria-hidden="true"> *</span> : null}</span>
-      {!required ? <span className="text-xs font-normal text-slate-500">Optional</span> : null}
+    <span className="flex min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-1">
+      <span className="min-w-0 break-words">{label}{required ? <span className="text-emerald" aria-hidden="true"> *</span> : null}</span>
+      {!required ? <span className="shrink-0 text-xs font-normal text-slate-500">Optional</span> : null}
     </span>
   );
 }
