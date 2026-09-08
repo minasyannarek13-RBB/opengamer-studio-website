@@ -2,6 +2,48 @@
 
 This file records production-facing handoff notes for the latest verified OpenGamer website descendants. Historical site passes remain documented in `SITE_UPGRADE_CHANGELOG.md`.
 
+## 2026-09-08 13:18 +04 — Slot Asset Delivery / Regression Gate
+
+Branch: `design/final-visual-conversion-polish-20260908-r9`  
+Parent: `design/asset-delivery-polish-20260908-r8` at `ff9e89e1cfb3453ba0352b85b898dbe5af597722`  
+Functional head: `d29197f984d72e659c83c845bd96bf8a252c6380`
+
+### Purpose
+
+Continue the full visual-asset audit by removing confirmed redundant slot source artwork from the Vercel delivery payload while preserving authentic source files in Git and preventing future public-source regressions.
+
+### Changes
+
+- Added 11 confirmed redundant slot JPG/source files to `.vercelignore`; their optimized or otherwise selected public counterparts remain in use.
+- The 11 newly excluded slot files total 3,838,035 bytes (~3.66 MiB) in Git. Vercel confirmed they are removed before build.
+- Added `scripts/asset-delivery-tests.mjs` to recursively scan `app/`, `components/`, `content/` and `lib/` and fail if any deployment-excluded visual asset becomes publicly referenced.
+- Added a second asset-delivery contract test that verifies every excluded visual path remains present in `.vercelignore`.
+- Extended the existing production-config build gate so both the prior 9 integrity tests and the new 2 visual-asset delivery tests execute before every Next.js build.
+- Preserved current public visuals, responsive behavior and factual boundaries. No AI-generated imagery was introduced because authentic OpenGamer/ELEMENTALS/LC App assets remain preferable for the current public surfaces.
+- Did not exclude variant/title artwork that lacks a verified optimized replacement.
+
+### QA
+
+- Vercel deployment `dpl_7DcSNHA4KiUGSkNqwgFD1gdBWVC6` built functional head `d29197f984d72e659c83c845bd96bf8a252c6380` and reached `READY`.
+- Vercel found `.vercelignore` and removed 17 configured visual files before build (the six prior LC App source files plus the 11 slot source/archive files).
+- Existing production integrity suite: `9/9 PASS`, `0 fail`.
+- New asset-delivery suite: `2/2 PASS`, `0 fail`.
+- Next.js optimized production compile: PASS.
+- Lint/type validation: PASS.
+- Static generation: `93/93 PASS`.
+- Runtime warning/error/fatal check: no entries.
+- Preview root returned HTTP `200` and retained both HTML `noindex, nofollow` metadata and `X-Robots-Tag: noindex`.
+- Runtime HTML confirms the homepage key game visuals use optimized WebP assets for Forest Fortune, Deep Dive, Dragon Rush and Sweet Wins.
+
+### Production Instructions
+
+1. Carry `.vercelignore`, `scripts/production-config-tests.mjs`, `scripts/asset-delivery-tests.mjs` and the pre-build integrity gate forward together.
+2. Do not reintroduce an excluded visual path into public source. If an archived source asset is needed publicly, first create/verify a production-appropriate optimized asset and update the delivery contract intentionally.
+3. Do not exclude Fruit Elixir/Passion Paradise variants, The Aztecs, Rich or Dead or other title assets unless a verified replacement exists and the source scan passes.
+4. Keep authentic source artwork in Git unless a separate repository-storage cleanup is explicitly approved.
+5. Re-run deployed responsive visual QA at 390/430/768/1024/1280/1440/1920 before founder-approved production promotion.
+6. Do not alter `v2-current`, `main`, production aliases, domains or production configuration without explicit founder approval.
+
 ## 2026-09-08 12:16 +04 — Asset Delivery / Build Integrity Gate
 
 Branch: `design/asset-delivery-polish-20260908-r8`  
