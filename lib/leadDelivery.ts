@@ -65,19 +65,26 @@ export async function deliverToResend(
 
   const email = buildResendEmail(payload, config);
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${config.apiKey}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(email)
-  });
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${config.apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(email)
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      return {
+        ok: false,
+        message: "Lead delivery provider rejected the request."
+      };
+    }
+  } catch {
     return {
       ok: false,
-      message: "Lead delivery provider rejected the request."
+      message: "Lead delivery provider is unavailable."
     };
   }
 
