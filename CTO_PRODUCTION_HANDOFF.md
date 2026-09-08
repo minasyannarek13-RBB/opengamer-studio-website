@@ -2,6 +2,43 @@
 
 This file records production-facing handoff notes for the latest verified OpenGamer website descendants. Historical site passes remain documented in `SITE_UPGRADE_CHANGELOG.md`.
 
+## 2026-09-08 14:50 +04 — Homepage Social Preview Integrity Gate
+
+Branch: `design/social-preview-integrity-polish-20260908-r10`  
+Parent: `design/final-visual-conversion-polish-20260908-r9` at `2946eaac979a70d092ae5fb26cc2c0cb29f8c516`  
+Functional head: `be4f0aa32e8d28c90841fce428e09a570c26bb99`
+
+### Purpose
+
+Protect the homepage's commercial presentation when OpenGamer links are shared on LinkedIn, X and messaging platforms by making the large social preview image explicit at page level and preventing future metadata regressions.
+
+### Changes
+
+- Added explicit homepage Open Graph image metadata using `/assets/brand/opengamer-og.png` at `1200x630` with an `OpenGamer Studio` alt label.
+- Added explicit homepage Twitter/X image metadata while retaining `summary_large_image`.
+- Added a production-config regression test that fails if the homepage loses the approved social preview asset, required 1200x630 dimensions, Open Graph image binding or Twitter image binding.
+- No public body copy, product claims, visual assets, dependencies, production aliases, domains or production configuration were changed.
+
+### QA
+
+- Vercel deployment `dpl_CgMaoEoo6ZhwPfq6n3M1k4CuGWLY` built functional head `be4f0aa32e8d28c90841fce428e09a570c26bb99` and reached `READY`.
+- Production integrity suite: `10/10 PASS`, `0 fail`, including the new social-preview metadata gate.
+- Asset-delivery suite: `2/2 PASS`, `0 fail`.
+- Next.js optimized production compile: PASS.
+- Lint/type validation: PASS.
+- Static generation: `93/93 PASS`.
+- Preview root returned HTTP `200`.
+- Deployed HTML confirms `og:image=https://open-gamer.com/assets/brand/opengamer-og.png` with `1200x630`, plus `twitter:image` pointing to the same approved asset.
+- Preview protection remains HTML `noindex, nofollow` plus `X-Robots-Tag: noindex`.
+
+### Production Instructions
+
+1. Carry the explicit homepage Open Graph/Twitter image metadata and its production-config test forward together.
+2. Keep `/assets/brand/opengamer-og.png` as the default homepage social image unless a founder-approved 1200x630 replacement is intentionally introduced.
+3. After eventual production promotion, refresh/test LinkedIn and other social caches against the production URL before relying on the card publicly.
+4. Continue the existing `.vercelignore`, production-integrity and asset-delivery gates unchanged.
+5. Do not alter `v2-current`, `main`, production aliases, domains or production configuration without explicit founder approval.
+
 ## 2026-09-08 13:18 +04 — Slot Asset Delivery / Regression Gate
 
 Branch: `design/final-visual-conversion-polish-20260908-r9`  
