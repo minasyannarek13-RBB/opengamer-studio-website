@@ -103,3 +103,30 @@ Consolidate the strongest verified visual improvements from the parallel asset-p
 4. Confirm preview response keeps `X-Robots-Tag: noindex`.
 5. Keep `v2-current`, `main`, production aliases, domains and production configuration unchanged.
 6. Production handoff: promote only the consolidated verified commit after founder approval; no manual asset copying is required because all referenced files already exist in the repository.
+
+---
+
+## 2026-09-08 — Reusable UI Asset Framing Pass
+
+Branch: `design/visual-asset-polish-20260908-r3`  
+Parent: `design/visual-asset-polish-20260908-r2` at `1f7ac7b4c06b7194e6a7e2c1d60f3373812c7f01`  
+Material commit: `99fe6402b828fa61721ac1c85971988326e9cf86`
+
+### Purpose
+
+Close a remaining visual-system inconsistency where LC App interface assets were correctly preserved in major heroes but could still be destructively cropped inside reusable product-reference strips.
+
+### Changes
+
+- `components/visual/ProductSignature.tsx` now identifies LC App interface assets and presents them with contained framing on a dark product surface instead of generic `object-cover` cropping.
+- Game artwork and cinematic ELEMENTALS imagery keep cover-based presentation, preserving the intended distinction between artwork and product UI.
+- The fix propagates automatically to reusable product-reference strips on Games, Services, Technology, Company, Live Casino and Contact wherever LC App assets are used.
+- No generated imagery and no new factual claims were introduced.
+
+### QA / Production Instructions
+
+1. Verify `pnpm build` plus lint/type/config checks on the branch preview.
+2. Inspect every `RelatedProductStrip` / `ProductSignature` containing LC App at 390/430/768/1024/1280/1440/1920.
+3. Confirm product UI remains legible without stretching and other artwork retains its existing cover behavior.
+4. Confirm preview keeps `X-Robots-Tag: noindex`.
+5. Do not alter `v2-current`, `main`, production aliases, domains or production configuration.
