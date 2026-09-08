@@ -75,3 +75,31 @@ Preserve the approved content-responsive version while improving visual fidelity
 4. Review LC App crops on `/portfolio`, `/about`, `/services` and `/technology` at 390/430/1024/1280/1440/1920.
 5. Confirm preview keeps `X-Robots-Tag: noindex`.
 6. Do not promote or alter production aliases/domains without founder approval.
+
+---
+
+## 2026-09-08 — Consolidated Visual Asset Pass
+
+Branch: `design/visual-asset-polish-20260908-r2`  
+Parent: `design/visual-asset-polish-20260908-r1` at `c92e8e71ee3de4ff118c6f4a475be50947a59737`  
+Material commits: `fe2270b4ae181fb7fdd675a339a289f14b82276a`, `84075eac28e48a36f961ce7b49ab3b0ced753960`
+
+### Purpose
+
+Consolidate the strongest verified visual improvements from the parallel asset-polish passes instead of maintaining divergent design branches.
+
+### Changes
+
+- `/portfolio` hero now uses the full optimized LC App device-ecosystem composition while retaining contained UI presentation, so the proof communicates the cross-device product rather than a cropped single community screen.
+- ELEMENTALS public project-card artwork now uses the current Nexus stage exposition instead of the older overview image, aligning portfolio proof with the dedicated ELEMENTALS experience.
+- ELEMENTALS Fire, Water, Earth and Air cards now carry realm-specific copy rather than one repeated generic description.
+- Existing authentic OpenGamer assets remain preferred; no generated imagery was added because it would not currently improve factual confidence or visual quality enough to justify replacing the available product artwork.
+
+### QA / Production Instructions
+
+1. Verify the branch preview builds cleanly with lint/type/build/config checks.
+2. Run deployed visual QA at 390/430/768/1024/1280/1440/1920 when the browser runtime is available.
+3. Review `/portfolio`, `/portfolio/elementals`, `/about`, `/services`, `/technology` and `/portfolio/lc-app` for crop, overflow, broken images and hierarchy regressions.
+4. Confirm preview response keeps `X-Robots-Tag: noindex`.
+5. Keep `v2-current`, `main`, production aliases, domains and production configuration unchanged.
+6. Production handoff: promote only the consolidated verified commit after founder approval; no manual asset copying is required because all referenced files already exist in the repository.
