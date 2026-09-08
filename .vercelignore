@@ -17,3 +17,18 @@ public/assets/projects/lc-app/lc-app-mobile-community.webp
 public/assets/projects/lc-app/lc-app-mobile-creator-profile.webp
 public/assets/projects/lc-app/lc-app-mobile-discover.png
 public/assets/projects/lc-app/lc-app-mobile-social-feed.webp
+
+# Keep archival/source slot artwork in Git when a separate WebP (or another
+# referenced asset) already carries the public website visual. These files are
+# deliberately not part of the deployment payload.
+public/assets/games/cake-bonanza/artwork.jpg
+public/assets/games/choco-boom/source.jpg
+public/assets/games/deep-dive/source.jpg
+public/assets/games/dragon-fruits/artwork.jpg
+public/assets/games/dragon-rush/artwork.jpg
+public/assets/games/forest-fortune/artwork.jpg
+public/assets/games/fruit-elixir/source.jpg
+public/assets/games/goblin-gems/artwork.jpg
+public/assets/games/passion-paradise/source.jpg
+public/assets/games/royal-fruits/artwork.jpg
+public/assets/games/sweet-wins/artwork.jpg
