@@ -180,6 +180,14 @@ test("homepage exposes a large social preview image", async () => {
   assert.match(pageSource, /images:\s*\[socialPreview\.url\]/);
 });
 
+test("preview robots disallow crawling without advertising production sitemap", async () => {
+  const robotsSource = await readFile(new URL("../app/robots.ts", import.meta.url), "utf8");
+  const previewBlock = robotsSource.match(/if \(!isIndexableProduction\) \{([\s\S]*?)\n  \}/)?.[1] || "";
+  assert.match(previewBlock, /disallow:\s*"\/"/);
+  assert.doesNotMatch(previewBlock, /sitemap/);
+  assert.match(robotsSource, /sitemap:\s*`\$\{siteUrl\}\/sitemap\.xml`/);
+});
+
 test("public source does not regress to superseded heavy LC App assets", async () => {
   const sourceRoots = ["app/", "components/", "content/", "lib/"];
   const sourceFiles = [];
