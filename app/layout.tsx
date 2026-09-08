@@ -1,8 +1,16 @@
 import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { company } from "@/content/company";
 import { robotsConfig, siteUrl } from "@/lib/site";
 import { ScrollRevealController } from "@/components/motion/ScrollRevealController";
+
+const inter = Inter({
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
+  preload: true,
+  fallback: ["Arial", "sans-serif"]
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -55,7 +63,7 @@ const websiteSchema = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
         <ScrollRevealController />
         <div id="site-status" className="sr-only" role="status" aria-live="polite" aria-atomic="true" />
         {children}
