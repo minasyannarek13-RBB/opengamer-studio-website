@@ -23,7 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...routes, ...gameRoutes].map((route) => ({
     url: `${siteUrl}${route}`,
-    lastModified: new Date(),
     changeFrequency: route === "/" ? "weekly" : "monthly",
     priority: route === "/" ? 1 : route.startsWith("/games/") ? 0.7 : 0.8
   }));
