@@ -130,3 +130,31 @@ Close a remaining visual-system inconsistency where LC App interface assets were
 3. Confirm product UI remains legible without stretching and other artwork retains its existing cover behavior.
 4. Confirm preview keeps `X-Robots-Tag: noindex`.
 5. Do not alter `v2-current`, `main`, production aliases, domains or production configuration.
+
+---
+
+## 2026-09-08 — Shared Game Artwork Delivery Optimization
+
+Branch: `design/visual-asset-polish-20260908-r4`  
+Parent: `design/visual-asset-polish-20260908-r3` at `4839585685121bb0aa02fe203c3fc7e907e26281`  
+Material commits: `3084416`, `3865bb5`, `b28bd6d`
+
+### Purpose
+
+Reduce repeated game-art payload on high-frequency catalogue and studio-reference surfaces without changing artwork composition, factual content or titles that do not already have a verified WebP asset in the repository.
+
+### Changes
+
+- Added `lib/gameAssets.ts` as a conservative verified-asset resolver for seven titles that already have matching WebP artwork: Choco Boom, Deep Dive, Dragon Rush, Forest Fortune, Fruit Elixir, Passion Paradise and Sweet Wins.
+- `GameCard` now uses the verified WebP path for those titles across homepage/catalogue/portfolio card surfaces while preserving the existing fallback for all other games.
+- `StudioGameSignature` now uses the same verified resolver, reducing repeated payload on Home, Services, Live Casino, Technology, About, Contact, Portfolio, ELEMENTALS and LC App cross-reference surfaces.
+- No source image was deleted, no game without an existing WebP was altered, and no generated artwork or new factual claim was introduced.
+- Representative repository savings include Forest Fortune `source.jpg` 117,817 B → `artwork.webp` 55,160 B, Dragon Rush `source.jpg` 361,559 B → 55,604 B, Choco Boom `artwork.jpg` 356,141 B → 54,380 B and Sweet Wins `source.jpg` 49,589 B → 37,418 B before framework-level image transformation/caching.
+
+### QA / Production Instructions
+
+1. Verify lint, typecheck, production-config tests and Next.js build on the exact r4 preview.
+2. Inspect `/`, `/games`, `/portfolio` and shared studio-signature surfaces for unchanged composition and correct game artwork.
+3. Confirm titles without verified WebP continue using their existing source files.
+4. Confirm the preview remains `X-Robots-Tag: noindex` and no production alias/domain/configuration changes occur.
+5. Promote only after founder approval; all optimized assets already exist in the repository and require no manual upload.
