@@ -1,16 +1,27 @@
 # OpenGamer CTO Production Handoff Changelog
 
+## 2026-09-08 — Locale canonical routing correction
+- Branch: `design/locale-canonical-integrity-polish-20260908-r17`
+- Parent: `design/locale-routing-integrity-polish-20260908-r16` @ `8a65d235e89b8881bc3e24f54d5599a393ad2d5d`.
+- Functional head before handoff note: `fa009454c90236f7c012e9037da9873ca42f0852`.
+- Purpose: align launch navigation with the actual public locale contract. Audit found r16 described `/ru`, `/hy`, `/es` and `/pt` as genuine localized home destinations even though `app/[locale]/page.tsx` permanently redirects every locale home to `/`.
+- Changed: `lib/routes.ts`, `components/layout/Header.tsx`, `scripts/locale-routing-tests.mjs`.
+- Behavior: all header, mega-menu, mobile-nav, CTA, footer and logo destinations now resolve directly to canonical launch routes. The logo no longer manufactures a `/ru|hy|es|pt` homepage hop. Localized route files remain compatibility redirects; existing translated copy stays in source but is not newly exposed as public product claims.
+- Regression gate: locale-routing tests now assert the real launch contract, including canonical locale-home handling and the absence of `getLocalizedPath(locale, ...)` in Header navigation.
+- QA: the first incremental Vercel deployment (`dpl_AmTZFornruL7P5GQ8P9hY9fzhYWd`) failed exactly as expected because it built the helper commit before the updated regression test landed (`'/' !== '/ru'`). That failure confirms the old gate detected the intentional contract change. Final-head Vercel verification remains required before promotion; do not infer readiness from the intermediate deployment.
+- Production instruction: promote only after the final r17 head passes the complete production-config gates, Next.js build/static generation and preview runtime checks. `main`, `v2-current`, production aliases, domains and production configuration remain untouched.
+
 ## 2026-09-08 — Locale navigation routing integrity
 - Branch: `design/locale-routing-integrity-polish-20260908-r16`
 - Parent: `design/accessibility-metadata-polish-20260908-r15` @ `8d8fcab9db8b62b69a1f6fb0bef79e652926f862`
 - Functional head before handoff note: `275aeef3287fdfe58df7ee4088d45daba0d39fd2`
 - Purpose: stop localized homepage navigation from manufacturing `/ru|hy|es|pt/...` URLs for launch pages that are not actually localized and immediately redirect to the canonical English route.
 - Changed: `lib/routes.ts`, `components/layout/Header.tsx`, `components/layout/Footer.tsx`, `package.json`, `scripts/locale-routing-tests.mjs`.
-- Behavior: `/ru`, `/hy`, `/es`, `/pt` remain genuine localized homepage destinations. Header, mega-menu, mobile navigation, footer and commercial CTAs now link directly to canonical `/games`, `/services`, `/portfolio`, `/technology`, `/about`, `/contact` and nested launch pages instead of adding a needless locale redirect hop.
-- Regression gate: locale-routing tests assert that localized home remains localized while non-home launch destinations stay canonical, and that header/footer CTAs do not regress to localized compatibility redirects.
-- Integration: r16 is a direct descendant of the verified accessibility/security r15 branch and preserves its document-language, schema-logo and browser-security work; compare status is `ahead 7 / behind 0` with only five logical files changed versus that parent.
-- QA status: Vercel refused a new preview for the functional head with `Deployment rate limited — retry in 24 hours`; no application build ran. A local clone/build fallback was attempted but the execution container has no external DNS access, so final production-gate/build/runtime verification is pending rather than inferred.
-- Production instruction: do not promote r16 until Vercel can run the complete production gate, Next.js compile/lint/type/static generation and runtime noindex/header checks. Once the limit clears, verify the r16 head before treating it as the new approved working branch. `main`, `v2-current`, production aliases, domains and production configuration remain untouched.
+- Behavior: r16 intended to keep locale home routes localized while canonicalizing non-home launch pages. Subsequent r17 audit found this description was inconsistent with `app/[locale]/page.tsx`, which permanently redirects locale homes to `/`; r17 supersedes this routing contract.
+- Regression gate: superseded by r17 because the r16 test encoded the inaccurate locale-home assumption.
+- Integration: r16 is a direct descendant of the verified accessibility/security r15 branch and preserves its document-language, schema-logo and browser-security work.
+- QA status: functional routing changes were observed in READY Vercel builds on the parallel build branch, but the r16 branch head itself was not treated as the approved baseline.
+- Production instruction: use r17 or later after final verification. `main`, `v2-current`, production aliases, domains and production configuration remain untouched.
 
 ## 2026-09-08 — Accessibility, schema and browser-security hardening
 - Branch: `design/accessibility-metadata-polish-20260908-r15`
