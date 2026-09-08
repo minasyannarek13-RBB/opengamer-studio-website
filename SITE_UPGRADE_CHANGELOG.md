@@ -37,3 +37,29 @@ Upgraded the OpenGamer website information architecture, homepage positioning, g
 - New hero visuals use local assets and CSS composition rather than remote imagery or video.
 - Preview deployments remain `noindex, nofollow`; production indexing requires `VERCEL_ENV=production` and `NEXT_PUBLIC_SITE_URL=https://open-gamer.com`.
 - New visual QA screenshots are local artifacts under `qa/visual/` and are intentionally excluded from Git/Vercel archives.
+
+---
+
+## 2026-09-08 — Visual Asset Polish
+
+Branch: `design/visual-asset-polish-20260908`
+Material change commit: `18b5a79482d877cebccca0a52cb7df760ee0888e`
+
+### Purpose
+
+Improve visual fidelity without redesign churn by treating game artwork and UI/product imagery differently. Product-interface visuals must remain legible rather than being destructively cropped to fill decorative cards.
+
+### Changes
+
+- Portfolio hero now uses the LC App device-ecosystem composition instead of the mobile-community frame.
+- LC App portfolio hero uses `object-contain` with restrained padding so the full cross-device product composition remains visible across responsive card sizes.
+- Game and cinematic artwork continue to use `object-cover`, preserving the stronger editorial crop appropriate to those assets.
+- ELEMENTALS project-card artwork now uses the current Nexus stage exposition instead of the older `overview.jpg`, improving consistency with the dedicated ELEMENTALS page while reducing the source asset footprint for that public card.
+- ELEMENTALS realm descriptions are now specific to Fire, Water, Earth and Air rather than repeating one generic sentence across four visually distinct assets.
+
+### QA / Production Notes
+
+- No new generated imagery was introduced because the current authentic OpenGamer, ELEMENTALS and LC App asset set already covers the required public surfaces at higher factual confidence.
+- No product status, integration, partner, customer, certification or launch-readiness claims were added.
+- Keep `v2-current`, `main`, production aliases and production domains unchanged.
+- Promote only after preview build/type checks pass and preview continues to return `x-robots-tag: noindex`.
