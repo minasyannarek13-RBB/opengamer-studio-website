@@ -31,7 +31,7 @@ const portfolioHeroItems = [
   {
     title: "LC App",
     label: "B2B product concept",
-    image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp",
+    image: "/assets/projects/lc-app/optimized/lc-app-device-ecosystem.webp",
     href: "/portfolio/lc-app",
     className: "",
     contain: true
@@ -73,7 +73,7 @@ export default function PortfolioPage() {
               <Link
                 key={item.title}
                 href={item.href}
-                className={`group relative min-h-36 min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-black/55 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 sm:min-h-44 ${item.className}`}
+                className={`group relative min-h-36 min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-[#050609] shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/35 sm:min-h-44 ${item.className}`}
               >
                 <Image
                   src={item.image}
