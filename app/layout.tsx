@@ -1,8 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
-import { company } from "@/content/company";
+import { company, logoAsset } from "@/content/company";
 import { robotsConfig, siteUrl } from "@/lib/site";
 import { ScrollRevealController } from "@/components/motion/ScrollRevealController";
+
+const localeBootstrapScript = `(() => {
+  const locale = location.pathname.split('/')[1];
+  if (['en', 'ru', 'hy', 'es', 'pt'].includes(locale)) {
+    document.documentElement.lang = locale;
+  }
+})();`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -40,7 +47,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: company.name,
   url: company.website,
-  logo: `${siteUrl}/assets/brand/opengamer-logo.png`,
+  logo: `${siteUrl}${logoAsset.src}`,
   ...(company.email ? { email: company.email } : {}),
   ...(company.social.length ? { sameAs: company.social.map((item) => item.href) } : {})
 };
@@ -55,6 +62,9 @@ const websiteSchema = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: localeBootstrapScript }} />
+      </head>
       <body>
         <ScrollRevealController />
         <div id="site-status" className="sr-only" role="status" aria-live="polite" aria-atomic="true" />
