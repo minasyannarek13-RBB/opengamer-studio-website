@@ -49,19 +49,22 @@ const studioProof = [
     eyebrow: "Slot production",
     title: "Forest Fortune",
     image: "/assets/games/forest-fortune/artwork.webp",
-    href: "/games/forest-fortune"
+    href: "/games/forest-fortune",
+    contain: false
   },
   {
     eyebrow: "Live Casino concept",
     title: "ELEMENTALS",
     image: "/assets/projects/elementals/expositions/nexus-stage.webp",
-    href: "/portfolio/elementals"
+    href: "/portfolio/elementals",
+    contain: false
   },
   {
     eyebrow: "Product concept",
     title: "LC App",
     image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp",
-    href: "/portfolio/lc-app"
+    href: "/portfolio/lc-app",
+    contain: true
   }
 ];
 
@@ -88,8 +91,8 @@ export default function AboutPage() {
           <div className="grid min-w-0 gap-3 sm:grid-cols-3" aria-label="Selected OpenGamer work">
             {studioProof.map((item) => (
               <Link key={item.title} href={item.href} className="group min-w-0 overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/[0.045] transition hover:-translate-y-0.5 hover:border-emerald/30 hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
-                <div className="relative aspect-[4/5] overflow-hidden bg-black/35">
-                  <Image src={item.image} alt="" fill sizes="(min-width: 1024px) 18vw, 30vw" className="object-cover transition duration-500 group-hover:scale-[1.025]" />
+                <div className="relative aspect-[4/5] overflow-hidden bg-black/45">
+                  <Image src={item.image} alt="" fill sizes="(min-width: 1024px) 18vw, 30vw" className={`${item.contain ? "object-contain p-2" : "object-cover"} transition duration-500 group-hover:scale-[1.025]`} />
                 </div>
                 <div className="min-w-0 p-4">
                   <p className="break-words text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-emerald">{item.eyebrow}</p>
