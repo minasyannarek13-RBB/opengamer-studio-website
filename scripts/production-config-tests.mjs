@@ -171,6 +171,15 @@ test("schema source omits unconfirmed corporate fields", async () => {
   assert.match(layoutSource, /company\.social\.length \? \{ sameAs:/);
 });
 
+test("homepage exposes a large social preview image", async () => {
+  const pageSource = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+  assert.match(pageSource, /opengamer-og\.png/);
+  assert.match(pageSource, /width:\s*1200/);
+  assert.match(pageSource, /height:\s*630/);
+  assert.match(pageSource, /images:\s*\[socialPreview\]/);
+  assert.match(pageSource, /images:\s*\[socialPreview\.url\]/);
+});
+
 test("public source does not regress to superseded heavy LC App assets", async () => {
   const sourceRoots = ["app/", "components/", "content/", "lib/"];
   const sourceFiles = [];
