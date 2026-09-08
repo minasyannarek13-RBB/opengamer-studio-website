@@ -37,7 +37,7 @@ export async function POST(request: Request) {
   if (missing.length) {
     return NextResponse.json(
       {
-        message: "Please complete all required fields.",
+        message: "Please complete the required fields.",
         errors: Object.fromEntries(missing.map((field) => [field, "Required"]))
       },
       { status: 400 }
@@ -61,13 +61,13 @@ export async function POST(request: Request) {
   const delivery = await deliverLead(payload as LeadPayload);
   if (!delivery.ok) {
     return NextResponse.json(
-      { message: delivery.message || "Lead delivery is not configured yet." },
+      { message: delivery.message || "The enquiry could not be delivered yet." },
       { status: 503 }
     );
   }
 
   return NextResponse.json({
-    message: "Your enquiry has been submitted. The OpenGamer commercial or product team will review the information and contact you regarding the next practical step."
+    message: "Thanks. We received your enquiry and will review the brief."
   });
 }
 
