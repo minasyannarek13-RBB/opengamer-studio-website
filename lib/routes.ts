@@ -23,10 +23,14 @@ export function getLocalizedPath(locale: Locale, path: string): string {
   return path === "/" ? `/${locale}` : `/${locale}${path}`;
 }
 
+/**
+ * Only the homepage is currently a true localized public destination.
+ * All other localized route files are compatibility redirects to the canonical
+ * English launch pages, so navigation should link directly to those pages
+ * instead of manufacturing a needless /:locale/* redirect hop.
+ */
 export function getLocalizedHomePath(locale: Locale, path: string): string {
   if (path === "/") return getLocalizedPath(locale, path);
-  const localeReadyPaths = ["/about", "/portfolio", "/technology", "/contact"];
-  if (localeReadyPaths.includes(path)) return getLocalizedPath(locale, path);
   return path;
 }
 
