@@ -53,3 +53,10 @@ test("Vercel ignore contract includes every deployment-excluded visual asset", a
     assert.match(ignoreSource, new RegExp(`public${assetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
   }
 });
+
+test("game cards resolve artwork through the optimized delivery helper", async () => {
+  const cardSource = await readFile(new URL("../components/sections/GameCard.tsx", import.meta.url), "utf8");
+  assert.match(cardSource, /getOptimizedGameArtwork/);
+  assert.match(cardSource, /const artwork = getOptimizedGameArtwork\(game\)/);
+  assert.doesNotMatch(cardSource, /src=\{game\.artwork\?\.catalogue \|\| game\.image\}/);
+});
