@@ -256,6 +256,33 @@ export default function ServicesPage() {
                 </div>
               )}
 
+              {group.id === "delivery-and-support" && (
+                <div className="relative mb-9 overflow-hidden rounded-[1.4rem] border border-white/10 bg-[#06090b] p-5 sm:p-7">
+                  <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(46,230,166,0.055),transparent_20rem),radial-gradient(circle_at_90%_80%,rgba(93,156,255,0.035),transparent_18rem)]" />
+                  <div className="relative grid gap-7 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+                    <div>
+                      <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Embedded capacity</p>
+                      <h3 className="mt-3 text-2xl font-semibold tracking-[-0.015em] text-white sm:text-3xl">Add the disciplines the roadmap is missing.</h3>
+                      <p className="mt-4 text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">The engagement can be shaped around a focused specialist scope or a broader dedicated team. The point is to fill a delivery gap without forcing the partner to recreate every role internally.</p>
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {["Frontend", "Backend", "Game art", "QA", "Product", "Technical leadership"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.1em] text-slate-400">{item}</span>)}
+                      </div>
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {[
+                        ["Focused scope", "Add one missing discipline or a tightly defined delivery package."],
+                        ["Dedicated team", "Combine several disciplines around an agreed product or engineering roadmap."],
+                        ["Release confidence", "Use QA, regression and integration scenarios to support acceptance."],
+                        ["Advisory", "Clarify scope, architecture and delivery risk before committing to a larger build."]
+                      ].map(([title, text]) => <div key={title} className="rounded-xl border border-white/[0.08] bg-white/[0.025] p-4 sm:p-5"><h4 className="text-sm font-semibold text-white">{title}</h4><p className="mt-2 text-sm leading-6 text-slate-500">{text}</p></div>)}
+                    </div>
+                  </div>
+                  <div className="relative mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-slate-500">
+                    Certification preparation support means implementation, documentation and QA support before independent review. It does not imply that OpenGamer owns or issues a certification.
+                  </div>
+                </div>
+              )}
+
               <div className="divide-y divide-white/10 border-y border-white/10">
                 {group.services.map(([title, clientType, deliverables], serviceIndex) => (
                   <article key={title} className="grid gap-4 py-6 sm:grid-cols-[3rem_0.9fr_1.1fr] sm:gap-6 sm:py-7">
