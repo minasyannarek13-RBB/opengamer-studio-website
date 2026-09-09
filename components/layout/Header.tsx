@@ -226,9 +226,24 @@ export function Header({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button href={getLocalizedHomePath(locale, resolvedCtaHref)} className="hidden sm:inline-flex">
-            {resolvedCtaLabel}
-          </Button>
+          {activePath === "/contact" ? (
+            <Button href={getLocalizedHomePath(locale, resolvedCtaHref)} className="hidden sm:inline-flex">
+              {resolvedCtaLabel}
+            </Button>
+          ) : (
+            <Link
+              href={getLocalizedHomePath(locale, resolvedCtaHref)}
+              className="group relative hidden h-12 min-w-[12rem] items-center justify-center px-7 sm:inline-flex focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+              aria-label={resolvedCtaLabel}
+            >
+              <span aria-hidden="true" className="absolute left-1 top-[7px] h-[15px] w-6 [clip-path:polygon(100%_100%,0_100%,72%_0)] bg-emerald/75 transition duration-200 group-hover:bg-emerald" />
+              <span aria-hidden="true" className="absolute bottom-[7px] left-1 h-[15px] w-6 [clip-path:polygon(100%_0,0_0,72%_100%)] bg-emerald/75 transition duration-200 group-hover:bg-emerald" />
+              <span aria-hidden="true" className="absolute left-3 right-3 top-1/2 h-10 -translate-y-1/2 rounded-[46%_43%_43%_46%/52%_48%_48%_52%] border border-emerald/45 bg-[linear-gradient(90deg,#19c98f_0%,#2ee6a6_42%,#29d79e_72%,#20bd8a_100%)] shadow-[0_10px_34px_rgba(46,230,166,0.2)] transition duration-200 group-hover:shadow-[0_12px_42px_rgba(46,230,166,0.3)]" />
+              <span aria-hidden="true" className="absolute right-0 top-1/2 h-7 w-7 -translate-y-1/2 rounded-[45%_70%_70%_45%] border border-emerald/45 bg-emerald shadow-[6px_0_24px_rgba(46,230,166,0.18)]" />
+              <span aria-hidden="true" className="absolute left-[2.7rem] top-1/2 h-9 w-px -translate-y-1/2 bg-black/20" />
+              <span className="relative z-10 whitespace-nowrap pl-1 text-[0.78rem] font-bold tracking-[-0.01em] text-[#03120d]">{resolvedCtaLabel}</span>
+            </Link>
+          )}
           <button
             ref={menuButtonRef}
             type="button"
