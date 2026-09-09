@@ -34,15 +34,47 @@
   }
 }
 
-/* Keep the LC App card's top badge and lower caption on the same inset. */
+/* LC App hero card: reserve clean zones for label and caption so neither sits on the device artwork. */
+a[href$="/portfolio/lc-app"] > img {
+  top: 3.5rem !important;
+  bottom: 4.65rem !important;
+  height: auto !important;
+  padding: 0.15rem 0.8rem 0.35rem !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+
 a[href$="/portfolio/lc-app"] > div:nth-of-type(3) {
-  left: 1rem;
-  right: auto;
+  top: 0.9rem;
+  left: 0.9rem;
+  right: 0.9rem;
+  width: auto;
+  min-height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.75rem;
+  white-space: nowrap;
+  font-size: 0.44rem;
+  line-height: 1;
+  letter-spacing: 0.09em;
+  text-align: center;
 }
 
 a[href$="/portfolio/lc-app"] > div:nth-of-type(4) {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  padding: 0.75rem 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, transparent, rgba(3, 7, 8, 0.92) 35%);
+}
+
+a[href$="/portfolio/lc-app"] > div:nth-of-type(4) strong,
+a[href$="/portfolio/lc-app"] > div:nth-of-type(4) span {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* Use the sharper ELEMENTALS studio frame in the Services feature tile. */
