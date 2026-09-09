@@ -32,7 +32,10 @@ export const metadata: Metadata = {
 };
 
 const featuredTitles = heroProductGames.slice(0, 3);
-const portfolioHighlights = portfolioGames.slice(0, 4);
+const portfolioHighlightSlugs = ["captain-boom", "nuclear-blast", "wars-of-the-gods", "goblin-gems", "royal-fruits"];
+const portfolioHighlights = portfolioHighlightSlugs
+  .map((slug) => portfolioGames.find((game) => game.slug === slug))
+  .filter(Boolean) as typeof portfolioGames;
 const developmentHighlights = inDevelopmentGames.slice(0, 4);
 
 export default function GamesPage() {
@@ -91,11 +94,11 @@ export default function GamesPage() {
               <p className="max-w-xl text-sm leading-6 text-slate-500">These titles are part of the confirmed OpenGamer catalogue. Their public status stays separate from demo availability.</p>
             </div>
 
-            <div className="mt-7 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-7 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
               {portfolioHighlights.map((game) => (
                 <Link key={game.slug} href={`/games/${game.slug}`} className="group relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.025] p-3 transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transform-none motion-reduce:transition-none">
                   <div className="relative aspect-[10/7] overflow-hidden rounded-[0.9rem] border border-white/[0.06] bg-black/30">
-                    <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill quality={92} sizes="(min-width:1280px) 22vw,(min-width:640px) 46vw,100vw" className="object-cover transition duration-500 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
+                    <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill quality={92} sizes="(min-width:1280px) 18vw,(min-width:640px) 46vw,100vw" className="object-cover transition duration-500 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
                   </div>
                   <div className="px-1 pb-1 pt-4">
