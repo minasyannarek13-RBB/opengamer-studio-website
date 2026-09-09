@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { ManualHero } from "@/components/home/ManualHero";
+import { GameProofRail } from "@/components/home/GameProofRail";
 import { ManualHomepageBody } from "@/components/home/ManualHomepageBody";
 import { homepageCopy } from "@/content/studioHomepage";
 
@@ -37,6 +38,7 @@ export default function HomePage() {
   return (
     <SiteShell locale="en">
       <ManualHero />
+      <GameProofRail />
       <ManualHomepageBody />
     </SiteShell>
   );
