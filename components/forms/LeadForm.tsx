@@ -19,6 +19,27 @@ type LeadResponse = {
   errors?: Record<string, string>;
 };
 
+const fieldMaxLengths: Record<string, number> = {
+  fullName: 120,
+  company: 160,
+  email: 254,
+  jobTitle: 160,
+  targetMarkets: 240,
+  existingPlatform: 240,
+  requiredIntegration: 500,
+  website: 500,
+  phone: 40
+};
+
+const fieldAutoComplete: Record<string, string> = {
+  fullName: "name",
+  company: "organization",
+  email: "email",
+  jobTitle: "organization-title",
+  phone: "tel",
+  website: "url"
+};
+
 export function LeadForm() {
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
@@ -112,7 +133,7 @@ export function LeadForm() {
       onSubmit={submit}
       noValidate
       aria-busy={state === "submitting"}
-      className="premium-card grid gap-5 rounded-2xl border border-line bg-white/[0.045] p-5 shadow-[0_22px_80px_rgba(0,0,0,0.24)] sm:p-6"
+      className="premium-card grid gap-5 rounded-2xl border border-line bg-white/[0.045] p-5 shadow-[0_22px_80px_rgba(0,0,0,0.24)] sm:p-6 lg:p-7"
     >
       <div className="hidden">
         <label htmlFor="website_url">Website URL</label>
@@ -127,6 +148,14 @@ export function LeadForm() {
       <input type="hidden" name="utmContent" value={sourceContext.utmContent} />
       <input type="hidden" name="utmTerm" value={sourceContext.utmTerm} />
 
+      <div className="flex flex-col gap-2 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-[0.62rem] font-semibold uppercase tracking-[0.17em] text-emerald">Business enquiry</p>
+          <h3 className="mt-2 text-xl font-semibold tracking-[-0.015em] text-white sm:text-2xl">Tell us enough to route the project correctly.</h3>
+        </div>
+        <p className="text-xs leading-5 text-slate-500"><span className="text-emerald">*</span> Required fields</p>
+      </div>
+
       {errorEntries.length ? (
         <div className="rounded-xl border border-red-400/30 bg-red-500/[0.08] p-4 text-sm leading-6 text-red-100" role="alert">
           <p className="font-semibold text-white">Please review these fields:</p>
@@ -139,7 +168,7 @@ export function LeadForm() {
       ) : null}
 
       <fieldset className="grid gap-5">
-        <legend className="text-base font-semibold text-white">Business enquiry</legend>
+        <legend className="sr-only">Business enquiry details</legend>
         <div className="grid gap-5 md:grid-cols-2">
           <Field label="Full name" name="fullName" required error={errors.fullName} />
           <Field label="Work email" name="email" type="email" required error={errors.email} />
@@ -150,13 +179,16 @@ export function LeadForm() {
         <label className="grid gap-2 text-sm font-medium text-slate-200">
           <LabelText label="Project summary" required />
           <textarea
+            id="projectDescription"
             name="projectDescription"
             required
+            maxLength={5000}
             aria-invalid={Boolean(errors.projectDescription)}
-            aria-describedby={errors.projectDescription ? "projectDescription-error" : undefined}
+            aria-describedby={errors.projectDescription ? "projectDescription-error" : "projectDescription-hint"}
             rows={5}
             className="min-h-36 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
           />
+          <span id="projectDescription-hint" className="text-xs leading-5 text-slate-500">Describe what needs to be built, extended or integrated. Up to 5,000 characters.</span>
           {errors.projectDescription ? (
             <span id="projectDescription-error" className="text-xs text-red-300">
               {errors.projectDescription}
@@ -165,8 +197,12 @@ export function LeadForm() {
         </label>
       </fieldset>
 
-      <details className="rounded-xl border border-white/10 bg-black/20 p-4">
-        <summary className="cursor-pointer text-sm font-semibold text-white">Add project details</summary>
+      <details className="rounded-xl border border-white/10 bg-black/20 p-4 open:border-white/15 open:bg-black/25">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-white">
+          <span>Add project details</span>
+          <span className="text-xs font-normal text-slate-500">Optional</span>
+        </summary>
+        <p className="mt-3 max-w-2xl text-xs leading-5 text-slate-500">Add only what is already known. Unknowns can stay unknown until they matter to scope.</p>
         <div className="mt-5 grid gap-5 md:grid-cols-2">
           <Select label="Project stage" name="projectStage" options={projectStages} />
           <Select label="Expected launch" name="expectedLaunch" options={expectedLaunchOptions} />
@@ -187,14 +223,14 @@ export function LeadForm() {
         </div>
       </details>
 
-      <label className="flex gap-3 text-sm leading-6 text-slate-300">
+      <label className="flex gap-3 rounded-xl border border-white/[0.08] bg-black/15 p-4 text-sm leading-6 text-slate-300">
         <input
           name="consent"
           type="checkbox"
           required
           aria-invalid={Boolean(errors.consent)}
           aria-describedby={errors.consent ? "consent-error" : undefined}
-          className="mt-1 h-5 w-5 accent-emerald"
+          className="mt-1 h-5 w-5 shrink-0 accent-emerald"
         />
         <span>
           I agree that OpenGamer may use this information to respond to my business enquiry. See the{" "}
@@ -210,26 +246,25 @@ export function LeadForm() {
         </span>
       </label>
 
-      <p className="rounded-xl border border-white/10 bg-black/20 p-4 text-sm leading-6 text-slate-400">
-        Business enquiries are reviewed by the OpenGamer commercial and product team. Please do not submit player data, passwords or confidential credentials through this form.
-      </p>
-
-      <Button type="submit" disabled={state === "submitting"} className="w-full md:w-fit">
-        {state === "submitting" ? "Submitting..." : "Submit Project Enquiry"}
-      </Button>
+      <div className="grid gap-4 border-t border-white/10 pt-5 sm:grid-cols-[1fr_auto] sm:items-center">
+        <p className="text-xs leading-5 text-slate-500">Please do not submit player data, passwords or confidential credentials through this form.</p>
+        <Button type="submit" disabled={state === "submitting"} className="w-full sm:w-auto">
+          {state === "submitting" ? "Submitting..." : "Submit Project Enquiry"}
+        </Button>
+      </div>
 
       {message ? (
-        <div className={state === "success" ? "text-sm text-emerald" : "text-sm text-red-300"} role="status" aria-live="polite">
-          {state === "success" ? <p className="font-semibold text-white">Your enquiry has been submitted</p> : null}
-          <p className={state === "success" ? "mt-1" : undefined}>{message}</p>
+        <div
+          className={`rounded-xl border p-4 text-sm leading-6 ${state === "success" ? "border-emerald/25 bg-emerald/[0.07] text-emerald" : "border-red-400/25 bg-red-500/[0.07] text-red-200"}`}
+          role="status"
+          aria-live="polite"
+        >
+          {state === "success" ? <p className="font-semibold text-white">Your enquiry has been submitted</p> : <p className="font-semibold text-white">The enquiry was not submitted</p>}
+          <p className="mt-1">{message}</p>
           {state === "success" ? (
-            <div className="mt-4 flex flex-wrap gap-3">
-              <Link href="/games" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">
-                Return to Games
-              </Link>
-              <Link href="/portfolio" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">
-                View Projects
-              </Link>
+            <div className="mt-4 flex flex-wrap gap-4">
+              <Link href="/games" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">Explore Games</Link>
+              <Link href="/portfolio" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">View Portfolio</Link>
             </div>
           ) : null}
         </div>
@@ -257,9 +292,12 @@ function Field({
     <label className="grid gap-2 text-sm font-medium text-slate-200">
       <LabelText label={label} required={required} />
       <input
+        id={name}
         name={name}
         type={type}
         required={required}
+        maxLength={fieldMaxLengths[name]}
+        autoComplete={fieldAutoComplete[name] || "off"}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
         className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
@@ -298,6 +336,7 @@ function Select({
     <label className="grid gap-2 text-sm font-medium text-slate-200">
       <LabelText label={label} required={required} />
       <select
+        id={name}
         key={defaultValue || "empty"}
         name={name}
         defaultValue={defaultValue}
