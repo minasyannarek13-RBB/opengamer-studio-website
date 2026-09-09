@@ -9,18 +9,8 @@ node_modules/
 *.log
 .DS_Store
 
-# Keep authentic high-resolution LC App source files in Git, but ship only the
-# optimized public variants currently referenced by the website.
-public/assets/projects/lc-app/lc-app-desktop-experience.webp
-public/assets/projects/lc-app/lc-app-device-ecosystem.webp
-public/assets/projects/lc-app/lc-app-mobile-community.webp
-public/assets/projects/lc-app/lc-app-mobile-creator-profile.webp
-public/assets/projects/lc-app/lc-app-mobile-discover.png
-public/assets/projects/lc-app/lc-app-mobile-social-feed.webp
-
-# Keep archival/source slot artwork in Git when a separate WebP (or another
-# referenced asset) already carries the public website visual. These files are
-# deliberately not part of the deployment payload.
+# Exclude archival/source slot artwork where an optimized or otherwise
+# referenced public asset already carries the website visual.
 public/assets/games/cake-bonanza/artwork.jpg
 public/assets/games/choco-boom/source.jpg
 public/assets/games/deep-dive/source.jpg
