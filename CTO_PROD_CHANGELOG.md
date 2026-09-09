@@ -2,6 +2,18 @@
 
 Cumulative production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded. Production/DNS/aliases/secrets/env are not changed by this branch.
 
+## 2026-09-09 17:57 +04 — About credibility-first visual hierarchy
+- **Status:** BLOCKED
+- **Commit:** `aa63b31c642d25f10aed5666c76f39c266d7170c`.
+- **Purpose:** move real OpenGamer work above the fold on About, reduce template-like discipline-list treatment, and make company positioning legible in seconds without adding unsupported proof.
+- **Files/components changed:** `app/about/page.tsx`.
+- **User-visible effect:** About hero now leads with direct B2B positioning, project CTA paths and real Forest Fortune / ELEMENTALS / LC App proof; disciplines become a compact support band; the duplicate lower product-proof section is removed; delivery modes and operating principles use a cleaner editorial hierarchy. ELEMENTALS remains `Original IP · In development`; LC App remains `B2B product direction · In development`.
+- **Rationale:** credibility belongs next to the company claim; keeping real work near the bottom made About read like a template before showing tangible output.
+- **Verification:** source update committed; no GitHub Actions run surfaced for the commit. The latest pre-change Vercel READY preview remains deployment `dpl_9GpZ1fvvMGcECdi71vAtnGRWjfZ9` on older head `4bb638f770f7138acd81702f6b936c9cda693061`. Exact-commit preview/build is blocked by the Vercel Hobby build-rate limit, so no green build/typecheck or rendered multi-viewport verification is claimed. Protected preview rendering was also unavailable in the automation environment because Vercel SSO plus container network/browser access prevented capture.
+- **Env/migration/config dependency:** none.
+- **Rollback:** revert `aa63b31c642d25f10aed5666c76f39c266d7170c`.
+- **CTO production action required:** allow the normal preview build when quota permits; confirm the exact implementation head passes the configured production test + Next build gate; responsive-smoke `/about` at 390/430/1024/1440/1920, verify Forest Fortune/ELEMENTALS/LC App assets and both CTA routes; merge/port only after the exact preview is READY.
+
 ## 2026-09-09 16:20 +04 — Preview rebuild trigger for current RC head
 - **Status:** NEEDS CTO REVIEW
 - **Purpose:** trigger a fresh Vercel preview for the complete current implementation after the previous build-rate interruption, without changing production behavior.
