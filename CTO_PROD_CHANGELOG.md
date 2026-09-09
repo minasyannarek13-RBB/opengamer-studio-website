@@ -4,6 +4,23 @@ Current release-candidate handoff for the OpenGamer website. Git history is the 
 
 Production/DNS/domain aliases/secrets/environment variables are not changed by this branch.
 
+## Latest automation pass — 2026-09-09 19:xx +04
+
+- **Status:** BLOCKED on exact-head Vercel verification; implementation fixes are committed.
+- **Purpose:** restore the release build contract after explicit game-demo status changes, harden public contact configuration, and bring the dedicated Live Casino Development page up to the current commercial/visual quality bar.
+- **Key commits:**
+  - `1e27d60b7f82f3eab6a4d41a154fa2f05c973da4` — regression test updated for explicit `No Public Demo` state.
+  - `ab4483e87eb783c7901aed71bee248aa4fdfc847` — Live Casino Development rebuilt around buyer scope, ELEMENTALS proof and separate LC App context.
+  - `b571e27680da48d9edd99036d1ce2855f23ece9b` — public contact email validation restored before rendering.
+  - `1b013452543b895c0bb44a582e293d7a4f8a1a65` — production-config test aligned with confirmed default OpenGamer LinkedIn while retaining invalid-URL rejection.
+- **Files/components changed:** `scripts/production-config-tests.mjs`, `app/services/live-casino-development/page.tsx`, `content/company.ts`.
+- **User-visible effect:** Live Casino buyers now see three clear engagement starting points, an explicit multidisciplinary delivery scope, real ELEMENTALS concept proof and a clearly separated LC App product-direction reference. Invalid configured contact-email strings are no longer eligible to render publicly.
+- **Factuality:** no client, partner, certification, integration, revenue, metric, launch or production-readiness claim added. ELEMENTALS remains `Original Live Casino IP · In development`; LC App remains a separate in-development B2B product concept.
+- **Verification:** latest known READY preview remains older deployment `dpl_9xActMTn5daiMUvS9RgWnDAKLgTn` on commit `e1ddacece1a14036cf3151749cb56b0b08df5295`. The next observed deployment `dpl_GAwgwjy3LFDTRBzBk7CLGSe47eDi` failed on an intermediate head because the company-config regression test correctly caught an invalid public email being accepted. That source defect and the test contract were then fixed. No newer Vercel deployment has been created for exact head `1b013452543b895c0bb44a582e293d7a4f8a1a65`, so green build/preview is not claimed. Local clone/build verification is unavailable in the automation runtime because outbound GitHub DNS is blocked.
+- **Env/config dependency:** none; no DNS, aliases, production domain, secrets or environment values changed.
+- **Rollback:** revert `1b013452543b895c0bb44a582e293d7a4f8a1a65`, `b571e27680da48d9edd99036d1ce2855f23ece9b`, then `ab4483e87eb783c7901aed71bee248aa4fdfc847` if the batch must be removed; keep the `No Public Demo` test contract if the explicit status model remains.
+- **CTO production action required:** allow/trigger one preview build from the final handoff head after Vercel accepts a new build; require the configured production-config tests and Next build to pass; smoke `/services/live-casino-development`, `/portfolio/elementals`, `/portfolio/lc-app`, `/games`, `/games/cake-bonanza`, Header/Footer and enquiry deep-links; then perform 390/430/1024/1440/1920 responsive review before any production port.
+
 ## Current branch
 
 - Branch: `build/contact-conversion-handoff-20260908`
@@ -47,6 +64,7 @@ Recent implementation lineage includes:
 - `fd7ba91cff2980ff55cbe1c1447be735ce5a9812`
 - `339ea1241f0b59f810bf15d182746d85fedda959`
 - `ebf0fe107ed7842523d3abd0d2f3ee6efe400888`
+- `ab4483e87eb783c7901aed71bee248aa4fdfc847` — dedicated Live Casino Development commercial/product rebuild.
 
 ### Technology
 
@@ -65,6 +83,8 @@ Portfolio differentiates three proof types rather than presenting one generic gr
 Recent implementation lineage includes:
 - `2441126da61386f07c8e836e82c7cd5b668b29d5`
 - `0dc9056fd7d2ac43e987b8983042947b6afe7c4c`
+- `72059ed1cdcf65ee4ebb844e31c26ed5e0476c03` — ELEMENTALS public-product structure.
+- `01e182247944f9fb3c02efbfbe7b9cb1f95efcbe` — LC App product narrative/status structure.
 
 ### About
 
@@ -90,6 +110,7 @@ Recent implementation:
 - `5ba53a7e9889d2b4bd0d0d6e4aa887ad985e0119` — normalized portfolio-only wording.
 - `94d50e24a11b674eaad8ff3354a3e0fe9f04bd44` — Games page mixed playable/portfolio proof.
 - `ed7247e18b3c276a3d09a7a8972dbb2cd49fa5ee` — game detail template aligned with status model.
+- `1e27d60b7f82f3eab6a4d41a154fa2f05c973da4` — test contract aligned with `No Public Demo` state.
 
 ## Repository cleanup
 
@@ -99,7 +120,8 @@ Removed:
 - old homepage generations: `GameProofRail`, `HeroGenesis`, `HeroGenesisMotionRoot`, `StudioHomepage`, `ProjectShowcaseSlider`, old hero visuals;
 - stale QA/status/release snapshot documents;
 - obsolete `WEBSITE_CONTENT_HANDOFF.md` and old visual/component/design-system implementation specs that described superseded architecture;
-- redundant individual localized redirect wrappers now covered by the universal `[locale]/[...path]` compatibility redirect.
+- redundant individual localized redirect wrappers now covered by the universal `[locale]/[...path]` compatibility redirect;
+- redundant legacy studio redirect wrappers covered by canonical routing.
 
 Keep as active root guidance:
 - `README.md`
@@ -130,7 +152,7 @@ Before production port/merge:
 5. responsive QA at minimum 390, 430, 1024, 1440 and 1920 widths
 6. verify all referenced game/project images resolve and crops are intentional
 7. verify `/games` playable vs portfolio-only states and all game detail CTAs
-8. verify `/services`, `/technology`, `/portfolio`, `/about`, `/contact`
+8. verify `/services`, `/services/live-casino-development`, `/technology`, `/portfolio`, `/about`, `/contact`
 9. verify Header/Footer navigation, focus states and mobile navigation
 10. verify contact intent/query routing and form submission behavior with approved environment variables
 11. verify canonical metadata, OG metadata, sitemap, robots and security headers
