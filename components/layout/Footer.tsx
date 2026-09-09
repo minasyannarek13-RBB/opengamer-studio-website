@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { company, logoAsset } from "@/content/company";
+import { getGameDemoStatusLabel, getGameStatusLabel } from "@/content/games";
 import { footerCompanyNavigation, footerSolutionsNavigation, legalNavigation } from "@/content/navigation";
+import { getCompactGameProof } from "@/lib/gameShowcase";
 import type { Locale } from "@/lib/i18n";
 import { getLocalizedHomePath } from "@/lib/routes";
 
@@ -59,12 +61,25 @@ const footerCopy: Record<Locale, { solutions: string; company: string; legalCont
   }
 };
 
+const compactGameProof = getCompactGameProof();
 const proofLinks = [
-  { label: "Forest Fortune", meta: "Playable slot", href: "/games/forest-fortune" },
-  { label: "Cake Bonanza", meta: "Portfolio title · No public demo", href: "/games/cake-bonanza" },
+  compactGameProof.playable
+    ? {
+        label: compactGameProof.playable.title,
+        meta: `${getGameStatusLabel(compactGameProof.playable)} · ${getGameDemoStatusLabel(compactGameProof.playable)}`,
+        href: `/games/${compactGameProof.playable.slug}`
+      }
+    : null,
+  compactGameProof.portfolio
+    ? {
+        label: compactGameProof.portfolio.title,
+        meta: `${getGameStatusLabel(compactGameProof.portfolio)} · ${getGameDemoStatusLabel(compactGameProof.portfolio)}`,
+        href: `/games/${compactGameProof.portfolio.slug}`
+      }
+    : null,
   { label: "ELEMENTALS", meta: "Original Live Casino IP · In development", href: "/portfolio/elementals" },
   { label: "LC App", meta: "B2B product concept · In development", href: "/portfolio/lc-app" }
-];
+].filter(Boolean) as Array<{ label: string; meta: string; href: string }>;
 
 export function Footer({ locale = "en" }: { locale?: Locale }) {
   const copy = footerCopy[locale];
