@@ -5,9 +5,9 @@ import { ManualHomepageBody } from "@/components/home/ManualHomepageBody";
 
 const meta = {
   title: "OpenGamer Studio | iGaming Development Studio",
-  description: "OpenGamer creates games, gaming products, technology and complete iGaming experiences for operators, aggregators, brands and providers.",
+  description: "OpenGamer builds casino games, original product concepts, dedicated development capacity and integration-oriented engineering for iGaming businesses.",
   ogTitle: "OpenGamer Studio | Games, Products and iGaming Technology",
-  ogDescription: "A multi-product iGaming development studio for games, technology, integrations and original product concepts."
+  ogDescription: "An iGaming development studio for casino games, original product concepts, dedicated development and integration-oriented engineering."
 };
 
 const socialPreview = {
