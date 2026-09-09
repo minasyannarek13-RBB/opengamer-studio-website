@@ -10,7 +10,7 @@ export const mainNavigation = [
 
 export const solutionsNavigation = [
   { label: "Slot Game Development", href: "/services#game-production" },
-  { label: "Live Casino Development", href: "/services/live-casino-development" },
+  { label: "Live Casino Development", href: "/services#live-casino" },
   { label: "Frontend Development", href: "/services#game-production" },
   { label: "Backend and RGS Engineering", href: "/services#technology-and-integration" },
   { label: "Integrations", href: "/services#technology-and-integration" },
@@ -41,7 +41,7 @@ export const solutionsMegaMenu = [
   {
     title: "Products and Delivery",
     items: [
-      { label: "Live Casino Development", href: "/services/live-casino-development", description: "Live product formats, player UX and presenter flows." },
+      { label: "Live Casino Development", href: "/services#live-casino", description: "Live product formats, player UX and presenter flows." },
       { label: "Portfolio Licensing and Reskins", href: "/services#portfolio-services", description: "Commercial evaluation of existing titles and variants." },
       { label: "Dedicated Development Teams", href: "/services#delivery-and-support", description: "Specialist iGaming capacity for partner roadmaps." },
       { label: "QA and Certification Preparation", href: "/services#delivery-and-support", description: "Structured QA evidence and release preparation." }
@@ -51,7 +51,7 @@ export const solutionsMegaMenu = [
 
 export const footerSolutionsNavigation = [
   { label: "Slot Game Development", href: "/services#game-production" },
-  { label: "Live Casino Development", href: "/services/live-casino-development" },
+  { label: "Live Casino Development", href: "/services#live-casino" },
   { label: "Frontend Development", href: "/services#game-production" },
   { label: "Backend and RGS Engineering", href: "/services#technology-and-integration" },
   { label: "Integrations", href: "/services#technology-and-integration" },
