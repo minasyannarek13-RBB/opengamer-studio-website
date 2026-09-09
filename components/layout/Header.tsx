@@ -27,6 +27,15 @@ const exploreGamesLabel: Record<Locale, string> = {
   pt: "Explorar jogos"
 };
 
+const focusableSelector = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  "[tabindex]:not([tabindex='-1'])"
+].join(",");
+
 export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -46,6 +55,7 @@ export function Header({ locale }: { locale: Locale }) {
   useEffect(() => {
     setIsOpen(false);
     setIsSolutionsOpen(false);
+    setIsMobileSolutionsOpen(true);
   }, [pathname]);
 
   useEffect(() => {
@@ -65,16 +75,38 @@ export function Header({ locale }: { locale: Locale }) {
 
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const firstInteractive = mobileNavRef.current?.querySelector<HTMLElement>("a, button");
+    const firstInteractive = mobileNavRef.current?.querySelector<HTMLElement>(focusableSelector);
     firstInteractive?.focus();
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key !== "Escape") {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        menuButtonRef.current?.focus();
         return;
       }
 
-      setIsOpen(false);
-      menuButtonRef.current?.focus();
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusable = Array.from(mobileNavRef.current?.querySelectorAll<HTMLElement>(focusableSelector) ?? []).filter(
+        (element) => element.offsetParent !== null
+      );
+      if (!focusable.length) {
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const activeElement = document.activeElement;
+
+      if (event.shiftKey && activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
 
     document.addEventListener("keydown", onKeyDown);
@@ -218,12 +250,12 @@ export function Header({ locale }: { locale: Locale }) {
         <nav
           id="mobile-navigation"
           ref={mobileNavRef}
-          className="mobile-nav-panel border-t border-white/10 bg-ink/96 shadow-[0_22px_60px_rgba(0,0,0,0.36)] lg:hidden"
+          className="mobile-nav-panel max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain border-t border-white/10 bg-ink/96 shadow-[0_22px_60px_rgba(0,0,0,0.36)] lg:hidden"
           data-state={isOpen ? "open" : "closed"}
           aria-label="Mobile navigation"
           aria-hidden={!isOpen}
         >
-          <Container className="grid gap-2 py-4">
+          <Container className="grid gap-2 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
             {navRoutes.map((route) =>
               route.path === "/services" ? (
                 <div key={route.path} className="rounded-xl border border-white/10 bg-white/[0.035] p-2">
