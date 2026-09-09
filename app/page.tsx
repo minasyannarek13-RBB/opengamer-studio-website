@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { ManualHero } from "@/components/home/ManualHero";
-import { StudioHomepage } from "@/components/home/StudioHomepage";
+import { ManualHomepageBody } from "@/components/home/ManualHomepageBody";
 import { homepageCopy } from "@/content/studioHomepage";
 
 const copy = homepageCopy.en;
@@ -15,9 +15,7 @@ const socialPreview = {
 export const metadata: Metadata = {
   title: copy.meta.title,
   description: copy.meta.description,
-  alternates: {
-    canonical: "/"
-  },
+  alternates: { canonical: "/" },
   openGraph: {
     title: copy.meta.ogTitle,
     description: copy.meta.ogDescription,
@@ -39,9 +37,7 @@ export default function HomePage() {
   return (
     <SiteShell locale="en">
       <ManualHero />
-      <div className="[&_.studio-static-hero]:hidden">
-        <StudioHomepage locale="en" />
-      </div>
+      <ManualHomepageBody />
     </SiteShell>
   );
 }
