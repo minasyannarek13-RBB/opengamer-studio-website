@@ -197,6 +197,34 @@ export default function ServicesPage() {
                 </div>
               )}
 
+              {group.id === "portfolio-services" && (
+                <div className="mb-9 overflow-hidden rounded-[1.4rem] border border-white/10 bg-white/[0.02]">
+                  <div className="grid sm:grid-cols-3">
+                    {[
+                      { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp" },
+                      { title: "Sweet Wins", slug: "sweet-wins", image: "/assets/games/sweet-wins/artwork.webp" },
+                      { title: "Fruit Elixir", slug: "fruit-elixir", image: "/assets/games/fruit-elixir/artwork.webp" }
+                    ].map((game, gameIndex) => (
+                      <Link key={game.slug} href={`/games/${game.slug}`} className={`group/portfolio relative min-h-[190px] overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[220px] ${gameIndex > 0 ? "border-t border-white/10 sm:border-l sm:border-t-0" : ""}`}>
+                        <Image src={game.image} alt={`${game.title} portfolio artwork`} fill sizes="(min-width:1024px) 20vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/portfolio:scale-[1.02]" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
+                        <div className="absolute inset-x-0 bottom-0 p-4"><span className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-emerald">Portfolio title</span><strong className="mt-1 block text-base text-white">{game.title}</strong></div>
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="grid gap-4 border-t border-white/10 p-5 sm:grid-cols-4 sm:p-6">
+                    {[
+                      ["01", "License", "Evaluate existing work for an agreed portfolio model."],
+                      ["02", "Reskin", "Replace theme, symbols, UI and supporting visual assets."],
+                      ["03", "Brand", "Adapt content around a partner brand or campaign direction."],
+                      ["04", "Modernise", "Refresh frontend, mobile UX or integration readiness."]
+                    ].map(([number, title, text]) => (
+                      <div key={number}><span className="text-[0.56rem] font-semibold tracking-[0.16em] text-emerald">{number}</span><h3 className="mt-2 text-sm font-semibold text-white">{title}</h3><p className="mt-2 text-xs leading-5 text-slate-500">{text}</p></div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div className="divide-y divide-white/10 border-y border-white/10">
                 {group.services.map(([title, clientType, deliverables], serviceIndex) => (
                   <article key={title} className="grid gap-4 py-6 sm:grid-cols-[3rem_0.9fr_1.1fr] sm:gap-6 sm:py-7">
