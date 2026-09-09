@@ -15,6 +15,16 @@ const nextConfig: NextConfig = {
         headers: securityHeaders
       }
     ];
+  },
+  async redirects() {
+    return [
+      { source: "/capabilities", destination: "/services", permanent: true },
+      { source: "/studios", destination: "/services", permanent: true },
+      { source: "/studios/slot-studio", destination: "/services#game-production", permanent: true },
+      { source: "/studios/engineering", destination: "/technology", permanent: true },
+      { source: "/studios/live-casino-studio", destination: "/services#live-casino", permanent: true },
+      { source: "/services/live-casino-development", destination: "/services#live-casino", permanent: true }
+    ];
   }
 };
 
