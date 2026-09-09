@@ -40,6 +40,48 @@ const fieldAutoComplete: Record<string, string> = {
   website: "url"
 };
 
+const serviceAliasMap: Record<string, string> = {
+  elementals: "Strategic Partnership",
+  "lc-app": "Strategic Partnership",
+  "slot-development": "Slot Game Development",
+  game: "Slot Game Development",
+  "game production": "Slot Game Development",
+  "custom slot development": "Slot Game Development",
+  "turnkey slot development": "Slot Game Development",
+  "game art & animation": "Slot Game Development",
+  "mathematics & game design": "Slot Game Development",
+  "frontend development": "Frontend or Backend Engineering",
+  dedicated: "Dedicated Development Team",
+  "dedicated delivery": "Dedicated Development Team",
+  "dedicated teams": "Dedicated Development Team",
+  "dedicated development teams": "Dedicated Development Team",
+  technology: "Frontend or Backend Engineering",
+  "technology & integration": "Frontend or Backend Engineering",
+  "backend & rgs engineering": "Frontend or Backend Engineering",
+  "technical modernisation": "Frontend or Backend Engineering",
+  integration: "Game or Platform Integration",
+  "game integration": "Game or Platform Integration",
+  "platform integration": "Game or Platform Integration",
+  "live-casino": "Live Casino Product Design",
+  "live casino product": "Live Casino Product Design",
+  "live casino development": "Live Casino Product Design",
+  "live casino game design": "Live Casino Product Design",
+  "live show-game development": "Live Casino Product Design",
+  "presenter & studio product ux": "Live Casino Product Design",
+  "frontend product interfaces": "Live Casino Product Design",
+  portfolio: "Portfolio Licensing or Reskin",
+  "portfolio & product": "Portfolio Licensing or Reskin",
+  "portfolio-services": "Portfolio Licensing or Reskin",
+  "white-label games": "Portfolio Licensing or Reskin",
+  reskins: "Portfolio Licensing or Reskin",
+  "branded games": "Portfolio Licensing or Reskin",
+  "legacy game modernisation": "Portfolio Licensing or Reskin",
+  "qa and certification preparation": "Other",
+  "certification preparation support": "Other",
+  qa: "Other",
+  "product & technical advisory": "Other"
+};
+
 export function LeadForm() {
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
@@ -70,16 +112,12 @@ export function LeadForm() {
       utmContent: params.get("utm_content") || "",
       utmTerm: params.get("utm_term") || ""
     });
-    if (mappedInterest) {
-      setServiceDefault(mappedInterest);
-    }
+    if (mappedInterest) setServiceDefault(mappedInterest);
   }, []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (state === "submitting") {
-      return;
-    }
+    if (state === "submitting") return;
 
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -128,9 +166,7 @@ export function LeadForm() {
     setMessage(result.message || "Please check the form and try again.");
 
     const firstInvalidField = Object.keys(nextErrors)[0];
-    if (firstInvalidField) {
-      window.requestAnimationFrame(() => focusFormField(form, firstInvalidField));
-    }
+    if (firstInvalidField) window.requestAnimationFrame(() => focusFormField(form, firstInvalidField));
   }
 
   const errorEntries = Object.entries(errors);
@@ -167,9 +203,7 @@ export function LeadForm() {
         <div className="rounded-xl border border-red-400/30 bg-red-500/[0.08] p-4 text-sm leading-6 text-red-100" role="alert">
           <p className="font-semibold text-white">Please review these fields:</p>
           <ul className="mt-2 list-disc pl-5">
-            {errorEntries.map(([field, error]) => (
-              <li key={field}>{error}</li>
-            ))}
+            {errorEntries.map(([field, error]) => <li key={field}>{error}</li>)}
           </ul>
         </div>
       ) : null}
@@ -196,11 +230,7 @@ export function LeadForm() {
             className="min-h-36 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70 motion-reduce:transition-none"
           />
           <span id="projectDescription-hint" className="text-xs leading-5 text-slate-500">Describe what needs to be built, extended or integrated. Up to 5,000 characters.</span>
-          {errors.projectDescription ? (
-            <span id="projectDescription-error" className="text-xs text-red-300">
-              {errors.projectDescription}
-            </span>
-          ) : null}
+          {errors.projectDescription ? <span id="projectDescription-error" className="text-xs text-red-300">{errors.projectDescription}</span> : null}
         </label>
       </fieldset>
 
@@ -219,37 +249,18 @@ export function LeadForm() {
           <Field label="Existing platform" name="existingPlatform" />
           <Field label="Required integration" name="requiredIntegration" />
           <Field label="Reference link" name="website" type="url" />
-          <Select
-            label="Preferred contact method"
-            name="preferredContactMethod"
-            options={contactMethods}
-            value={preferredContactMethod}
-            onChange={setPreferredContactMethod}
-          />
+          <Select label="Preferred contact method" name="preferredContactMethod" options={contactMethods} value={preferredContactMethod} onChange={setPreferredContactMethod} />
           {preferredContactMethod === "Phone" ? <Field label="Phone number" name="phone" type="tel" required error={errors.phone} /> : null}
         </div>
       </details>
 
       <label className="flex gap-3 rounded-xl border border-white/[0.08] bg-black/15 p-4 text-sm leading-6 text-slate-300">
-        <input
-          name="consent"
-          type="checkbox"
-          required
-          aria-invalid={Boolean(errors.consent)}
-          aria-describedby={errors.consent ? "consent-error" : undefined}
-          className="mt-1 h-5 w-5 shrink-0 accent-emerald"
-        />
+        <input name="consent" type="checkbox" required aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "consent-error" : undefined} className="mt-1 h-5 w-5 shrink-0 accent-emerald" />
         <span>
           I agree that OpenGamer may use this information to respond to my business enquiry. See the{" "}
-          <Link href="/privacy-policy" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">
-            Privacy Policy
-          </Link>{" "}
+          <Link href="/privacy-policy" className="font-semibold text-emerald underline-offset-4 hover:text-white hover:underline">Privacy Policy</Link>{" "}
           for details.
-          {errors.consent ? (
-            <span id="consent-error" className="mt-1 block text-xs text-red-300">
-              {errors.consent}
-            </span>
-          ) : null}
+          {errors.consent ? <span id="consent-error" className="mt-1 block text-xs text-red-300">{errors.consent}</span> : null}
         </span>
       </label>
 
@@ -261,11 +272,7 @@ export function LeadForm() {
       </div>
 
       {message ? (
-        <div
-          className={`rounded-xl border p-4 text-sm leading-6 ${state === "success" ? "border-emerald/25 bg-emerald/[0.07] text-emerald" : "border-red-400/25 bg-red-500/[0.07] text-red-200"}`}
-          role="status"
-          aria-live="polite"
-        >
+        <div className={`rounded-xl border p-4 text-sm leading-6 ${state === "success" ? "border-emerald/25 bg-emerald/[0.07] text-emerald" : "border-red-400/25 bg-red-500/[0.07] text-red-200"}`} role="status" aria-live="polite">
           {state === "success" ? <p className="font-semibold text-white">Your enquiry has been submitted</p> : <p className="font-semibold text-white">The enquiry was not submitted</p>}
           <p className="mt-1">{message}</p>
           {state === "success" ? (
@@ -280,21 +287,8 @@ export function LeadForm() {
   );
 }
 
-function Field({
-  label,
-  name,
-  type = "text",
-  required = false,
-  error
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
-  error?: string;
-}) {
+function Field({ label, name, type = "text", required = false, error }: { label: string; name: string; type?: string; required?: boolean; error?: string }) {
   const errorId = `${name}-error`;
-
   return (
     <label className="grid gap-2 text-sm font-medium text-slate-200">
       <LabelText label={label} required={required} />
@@ -309,34 +303,12 @@ function Field({
         aria-describedby={error ? errorId : undefined}
         className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70 motion-reduce:transition-none"
       />
-      {error ? (
-        <span id={errorId} className="text-xs text-red-300">
-          {error}
-        </span>
-      ) : null}
+      {error ? <span id={errorId} className="text-xs text-red-300">{error}</span> : null}
     </label>
   );
 }
 
-function Select({
-  label,
-  name,
-  options,
-  required = false,
-  error,
-  defaultValue = "",
-  value,
-  onChange
-}: {
-  label: string;
-  name: string;
-  options: string[];
-  required?: boolean;
-  error?: string;
-  defaultValue?: string;
-  value?: string;
-  onChange?: (value: string) => void;
-}) {
+function Select({ label, name, options, required = false, error, defaultValue = "", value, onChange }: { label: string; name: string; options: string[]; required?: boolean; error?: string; defaultValue?: string; value?: string; onChange?: (value: string) => void }) {
   const errorId = `${name}-error`;
   const controlledProps = onChange
     ? { value: value ?? "", onChange: (event: React.ChangeEvent<HTMLSelectElement>) => onChange(event.target.value) }
@@ -356,43 +328,20 @@ function Select({
         {...controlledProps}
       >
         <option value="">Select</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
+        {options.map((option) => <option key={option} value={option}>{option}</option>)}
       </select>
-      {error ? (
-        <span id={errorId} className="text-xs text-red-300">
-          {error}
-        </span>
-      ) : null}
+      {error ? <span id={errorId} className="text-xs text-red-300">{error}</span> : null}
     </label>
   );
 }
 
 function mapInterestToService(value: string | null) {
-  switch (value) {
-    case "elementals":
-      return "Strategic Partnership";
-    case "lc-app":
-      return "Strategic Partnership";
-    case "slot-development":
-    case "game":
-      return "Slot Game Development";
-    case "dedicated":
-      return "Dedicated Development Team";
-    case "technology":
-      return "Frontend or Backend Engineering";
-    case "live-casino":
-      return "Live Casino Product Design";
-    case "integration":
-      return "Game or Platform Integration";
-    case "portfolio":
-      return "Portfolio Licensing or Reskin";
-    default:
-      return "";
-  }
+  if (!value) return "";
+
+  const exactOption = serviceInterests.find((option) => option.toLowerCase() === value.trim().toLowerCase());
+  if (exactOption) return exactOption;
+
+  return serviceAliasMap[value.trim().toLowerCase()] || "";
 }
 
 function isValidPhone(value: string) {
@@ -412,12 +361,7 @@ function LabelText({ label, required }: { label: string; required: boolean }) {
     <span className="flex items-center justify-between gap-3">
       <span>
         {label}
-        {required ? (
-          <span className="text-emerald" aria-hidden="true">
-            {" "}
-            *
-          </span>
-        ) : null}
+        {required ? <span className="text-emerald" aria-hidden="true"> *</span> : null}
       </span>
       {!required ? <span className="text-xs font-normal text-slate-500">Optional</span> : null}
     </span>
