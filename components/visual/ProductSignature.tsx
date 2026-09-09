@@ -23,7 +23,9 @@ export function ProductSignature({ eyebrow, title, description, image, href, act
         <p>{eyebrow}</p>
         <h2>{title}</h2>
         {description ? <span>{description}</span> : null}
-        <Link href={href}>{actionLabel}</Link>
+        <Link href={href} className="rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
+          {actionLabel}
+        </Link>
       </div>
     </aside>
   );
