@@ -21,7 +21,7 @@ function getHomepageStatus(game: Game) {
   const status = getGameStatus(game);
   if (status === "playable") return "Playable";
   if (status === "in-development") return "In development";
-  return "Portfolio · No public demo";
+  return "Portfolio title · No public demo";
 }
 
 export function ManualHero() {
