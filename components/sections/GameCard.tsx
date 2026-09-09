@@ -44,7 +44,8 @@ export function GameCard({ game }: { game: Game }) {
           alt={`${game.title} artwork`}
           width={game.imageWidth}
           height={game.imageHeight}
-          sizes="(min-width:1280px) 300px,(min-width:768px) 50vw,100vw"
+          quality={92}
+          sizes="(min-width:1536px) 390px,(min-width:1280px) 31vw,(min-width:768px) 50vw,100vw"
           className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025] group-focus-within:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-focus-within:scale-100"
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/88 via-black/25 to-transparent" />
