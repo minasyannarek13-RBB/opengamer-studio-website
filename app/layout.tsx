@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     default: "OpenGamer Studio | iGaming Development Studio",
     template: "%s"
   },
-  description: "An iGaming development studio focused on casino games, technology, integrations and product delivery.",
+  description: "OpenGamer develops casino games, original product concepts, dedicated development capacity and integration-oriented engineering for iGaming businesses.",
   robots: robotsConfig,
   icons: {
     apple: "/assets/brand/apple-touch-icon.png",
@@ -40,7 +40,9 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   width: "device-width",
-  initialScale: 1
+  initialScale: 1,
+  themeColor: "#05070a",
+  colorScheme: "dark"
 };
 
 const organizationSchema = {
