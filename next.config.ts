@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/capabilities", destination: "/services", permanent: true },
       { source: "/studios", destination: "/services", permanent: true },
+      { source: "/studios/capabilities", destination: "/services", permanent: true },
       { source: "/studios/slot-studio", destination: "/services#game-production", permanent: true },
       { source: "/studios/engineering", destination: "/technology", permanent: true },
       { source: "/studios/live-casino-studio", destination: "/services#live-casino", permanent: true },
