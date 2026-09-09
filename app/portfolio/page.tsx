@@ -8,7 +8,8 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { games } from "@/content/games";
+import { getGameStatusLabel } from "@/content/games";
+import { getBalancedGameShowcase } from "@/lib/gameShowcase";
 
 export const metadata: Metadata = {
   title: "Portfolio | OpenGamer Studio",
@@ -23,15 +24,8 @@ const proofModes = [
   ["04", "Product interfaces", "B2B product and UX direction beyond conventional slot production.", "Interface proof"]
 ];
 
-const gameProof = [
-  { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp", status: "Playable" },
-  { title: "Deep Dive", slug: "deep-dive", image: "/assets/games/deep-dive/artwork.webp", status: "Playable" },
-  { title: "Dragon Rush", slug: "dragon-rush", image: "/assets/games/dragon-rush/artwork.webp", status: "Playable" },
-  { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp", status: "Portfolio title" }
-];
-
-const selectedGameSlugs = ["forest-fortune", "deep-dive", "dragon-rush", "cake-bonanza", "dragon-fruits", "goblin-gems"];
-const selectedGames = selectedGameSlugs.map((slug) => games.find((game) => game.slug === slug)).filter(Boolean) as typeof games;
+const gameProof = getBalancedGameShowcase({ playable: 2, portfolio: 2 });
+const selectedGames = getBalancedGameShowcase({ playable: 3, portfolio: 3 });
 
 export default function PortfolioPage() {
   return (
@@ -89,10 +83,10 @@ export default function PortfolioPage() {
                   {gameProof.map((game) => (
                     <Link key={game.slug} href={`/games/${game.slug}`} className="group/game relative overflow-hidden rounded-xl border border-white/10 bg-black/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                       <div className="relative aspect-[10/7] overflow-hidden">
-                        <Image src={game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1024px) 11vw,(min-width:640px) 23vw,48vw" className="object-cover transition duration-500 motion-reduce:transition-none group-hover/game:scale-[1.025] motion-reduce:group-hover/game:scale-100" />
+                        <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1024px) 11vw,(min-width:640px) 23vw,48vw" className="object-cover transition duration-500 motion-reduce:transition-none group-hover/game:scale-[1.025] motion-reduce:group-hover/game:scale-100" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-transparent to-transparent" />
                         <div className="absolute inset-x-0 bottom-0 p-3">
-                          <span className={`text-[0.48rem] font-semibold uppercase tracking-[0.12em] ${game.status === "Playable" ? "text-emerald" : "text-slate-300"}`}>{game.status}</span>
+                          <span className={`text-[0.48rem] font-semibold uppercase tracking-[0.12em] ${game.status === "playable" ? "text-emerald" : "text-slate-300"}`}>{getGameStatusLabel(game)}</span>
                           <strong className="mt-0.5 block text-xs text-white sm:text-sm">{game.title}</strong>
                         </div>
                       </div>
