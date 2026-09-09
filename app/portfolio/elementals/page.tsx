@@ -81,9 +81,9 @@ export default function ElementalsPage() {
 
             <div className="grid gap-6">
               <Card tone="strong" className="elementals-stage-frame overflow-hidden p-0">
-                <div className="relative aspect-[16/10] min-h-[360px] xl:min-h-[500px]">
-                  <Image src={elementalsWheelImage} alt="ELEMENTALS Great Wheel artwork" fill className="object-cover" sizes="(min-width:1280px) 58vw,100vw" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/5" />
+                <div className="relative mx-auto aspect-[16/9] w-full max-w-[58rem] bg-[radial-gradient(circle_at_50%_48%,rgba(46,230,166,0.055),transparent_45%),#05070a] sm:aspect-[16/8] xl:max-h-[430px]">
+                  <Image src={elementalsWheelImage} alt="ELEMENTALS Great Wheel artwork" fill className="object-contain object-center p-3 sm:p-5 xl:p-6" sizes="(min-width:1280px) 56vw,100vw" />
+                  <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/[0.035]" />
                 </div>
               </Card>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -91,11 +91,16 @@ export default function ElementalsPage() {
                   <Card key={realm.title} className={`elementals-realm-card overflow-hidden bg-gradient-to-br ${realm.tone} p-0`} style={{ "--realm-accent": realm.title === "Fire" ? "var(--realm-fire)" : realm.title === "Water" ? "var(--realm-water)" : realm.title === "Earth" ? "var(--realm-earth)" : "var(--realm-air)" } as CSSProperties}>
                     <div className="relative aspect-[4/5] overflow-hidden bg-black/40">
                       <Image src={realm.portalImage} alt={`${realm.title} elemental portal`} fill className="object-cover" sizes="(min-width:1280px) 17vw,(min-width:768px) 45vw,100vw" />
-                      <div className="absolute left-3 top-3 h-12 w-12 overflow-hidden rounded-lg border border-white/15 bg-black/60">
-                        <Image src={realm.iconImage} alt={`${realm.title} elemental icon`} fill className="object-cover" sizes="48px" />
-                      </div>
                     </div>
-                    <div className="p-4"><h3 className="text-lg font-semibold text-white">{realm.title}</h3><p className="mt-2 text-sm leading-6 text-slate-300">{realm.description}</p></div>
+                    <div className="p-4">
+                      <div className="flex items-center gap-3">
+                        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-white/12 bg-black/35 shadow-[0_8px_24px_rgba(0,0,0,0.2)]">
+                          <Image src={realm.iconImage} alt="" fill className="object-cover" sizes="40px" />
+                        </div>
+                        <h3 className="text-lg font-semibold text-white">{realm.title}</h3>
+                      </div>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">{realm.description}</p>
+                    </div>
                   </Card>
                 ))}
               </div>
