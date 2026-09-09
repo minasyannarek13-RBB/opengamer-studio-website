@@ -45,13 +45,17 @@ a[href$="/portfolio/lc-app"] > div:nth-of-type(4) {
   padding-right: 1rem;
 }
 
-/* Prevent the Services featured artwork from looking zoomed or smeared. */
+/* Use the sharper ELEMENTALS studio frame in the Services feature tile. */
+.solutions-dropdown__feature {
+  background-image:
+    linear-gradient(180deg, rgba(5, 6, 8, 0.08), rgba(5, 6, 8, 0.72)),
+    url("/assets/projects/elementals/expositions/nexus-studio-wheel.webp");
+  background-position: center;
+  background-size: cover;
+}
+
 .solutions-dropdown__feature-image {
-  object-fit: contain;
-  object-position: center 34%;
-  background: #07100c;
-  opacity: 0.78;
-  transform: scale(0.94);
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
