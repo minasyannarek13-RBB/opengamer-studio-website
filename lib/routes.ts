@@ -18,13 +18,6 @@ export const routes: RouteItem[] = [
 
 export const navRoutes = routes.filter((route) => route.nav);
 
-export function getLocalizedPath(locale: Locale, path: string): string {
-  if (locale === "en") {
-    return path;
-  }
-  return path === "/" ? `/${locale}` : `/${locale}${path}`;
-}
-
 /**
  * Localized route files currently exist as compatibility redirects to the
  * canonical English launch pages, including locale-prefixed home routes.
