@@ -35,11 +35,11 @@ export function ArchitectureDiagram({ items }: { items: string[] }) {
           <p className="max-w-sm text-xs leading-5 text-slate-500 sm:text-right">Each boundary stays explicit so scope, ownership and partner dependencies remain visible.</p>
         </div>
 
-        <div className="grid gap-3 lg:grid-cols-4 lg:gap-0">
+        <ol className="grid gap-3 md:grid-cols-2 xl:grid-cols-4 xl:gap-0" aria-label="OpenGamer architecture layers">
           {layers.map((layer, index) => (
-            <div
+            <li
               key={layer.title}
-              className="group relative border border-white/[0.08] bg-white/[0.022] p-4 transition duration-300 hover:border-emerald/25 hover:bg-white/[0.035] lg:border-r-0 lg:p-5 lg:first:rounded-l-xl lg:last:rounded-r-xl lg:last:border-r"
+              className="group relative border border-white/[0.08] bg-white/[0.022] p-4 transition duration-300 hover:border-emerald/25 hover:bg-white/[0.035] motion-reduce:transition-none md:rounded-xl xl:rounded-none xl:border-r-0 xl:p-5 xl:first:rounded-l-xl xl:last:rounded-r-xl xl:last:border-r"
             >
               <div className="flex items-center justify-between gap-3">
                 <span className="text-[0.55rem] font-semibold tracking-[0.15em] text-emerald">0{index + 1}</span>
@@ -48,11 +48,11 @@ export function ArchitectureDiagram({ items }: { items: string[] }) {
               <h3 className="mt-4 text-base font-semibold leading-tight text-white sm:text-lg">{layer.title}</h3>
               <p className="mt-2.5 text-sm leading-6 text-slate-400">{layer.description}</p>
               {index < layers.length - 1 ? (
-                <span aria-hidden="true" className="absolute -bottom-2.5 left-1/2 z-10 -translate-x-1/2 rounded-full border border-emerald/20 bg-[#07100d] px-2 py-0.5 text-[0.6rem] text-emerald lg:-right-3 lg:bottom-auto lg:left-auto lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-0">→</span>
+                <span aria-hidden="true" className="absolute -bottom-2.5 left-1/2 z-10 -translate-x-1/2 rounded-full border border-emerald/20 bg-[#07100d] px-2 py-0.5 text-[0.6rem] text-emerald md:hidden xl:-right-3 xl:bottom-auto xl:left-auto xl:top-1/2 xl:block xl:-translate-y-1/2 xl:translate-x-0">→</span>
               ) : null}
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
 
         <div className="mt-5 grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-[0.32fr_1fr] sm:items-start">
           <p className="text-[0.56rem] font-semibold uppercase tracking-[0.15em] text-slate-500">Partner-specific boundary</p>
