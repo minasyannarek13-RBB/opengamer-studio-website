@@ -119,35 +119,75 @@ export function ManualHomepageBody() {
         </Container>
       </section>
 
-      <section className="overflow-hidden border-b border-white/10 py-20 sm:py-28">
-        <Container>
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <section className="relative overflow-hidden border-b border-white/10 py-20 sm:py-28">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_24%_60%,rgba(46,230,166,0.05),transparent_28rem),radial-gradient(circle_at_86%_30%,rgba(93,156,255,0.045),transparent_24rem)]" />
+        <Container className="relative">
+          <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="premium-kicker text-xs font-semibold uppercase">Selected work</p>
-              <h2 className="mt-4 max-w-2xl text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-5xl">Start with what we actually build.</h2>
-              <p className="mt-5 max-w-2xl text-base leading-7 text-slate-400">Playable slot titles, original Live Casino IP and product work show different sides of the studio without pretending they are the same thing.</p>
+              <p className="premium-kicker text-xs font-semibold uppercase">Playable work</p>
+              <h2 className="mt-4 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.025em] sm:text-5xl">A portfolio you can actually open.</h2>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-slate-400">Selected OpenGamer titles with verified public demos. Use them to inspect visual direction, game presentation and the kind of production work already in the portfolio.</p>
             </div>
-            <Button href="/games" variant="secondary">View All Games</Button>
+            <div className="flex flex-wrap gap-3">
+              <Button href="/games" variant="secondary">View All Games</Button>
+              <Button href="/contact?interest=portfolio#project-enquiry" variant="secondary">Request Portfolio</Button>
+            </div>
           </div>
 
-          <div className="mt-12 grid gap-5 lg:grid-cols-12 lg:grid-rows-2">
-            <Link href="/games/forest-fortune" className="group relative min-h-[430px] overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/40 lg:col-span-7 lg:row-span-2">
-              <Image src="/assets/games/forest-fortune/artwork.webp" alt="Forest Fortune slot artwork" fill sizes="(min-width:1024px) 58vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8"><span className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">Playable slot</span><h3 className="mt-2 text-3xl font-semibold sm:text-4xl">Forest Fortune</h3><p className="mt-2 max-w-lg text-sm text-slate-300">Explore a selected OpenGamer title and open the public demo where available.</p></div>
+          <div className="mt-12 grid gap-4 lg:grid-cols-12 lg:grid-rows-2">
+            <Link href="/games/forest-fortune" className="group relative min-h-[420px] overflow-hidden rounded-[1.55rem] border border-white/12 bg-black/40 shadow-[0_28px_90px_rgba(0,0,0,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 lg:col-span-6 lg:row-span-2">
+              <Image src="/assets/games/forest-fortune/artwork.webp" alt="Forest Fortune slot artwork" fill sizes="(min-width:1024px) 48vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,5,7,0.02)_30%,rgba(3,5,7,0.9)_100%)]" />
+              <div className="absolute left-5 top-5 flex items-center gap-2">
+                <span className="rounded-full border border-emerald/25 bg-[#07100d]/80 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-emerald backdrop-blur">Playable</span>
+                <span className="rounded-full border border-white/10 bg-black/45 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-slate-300 backdrop-blur">Portfolio title</span>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+                <span className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-emerald">Fantasy slot</span>
+                <h3 className="mt-2 text-3xl font-semibold tracking-[-0.02em] sm:text-4xl">Forest Fortune</h3>
+                <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">Mystical forest direction, scroll-led feature anticipation and a public demo for direct evaluation.</p>
+                <span className="mt-5 inline-flex text-sm font-semibold text-white/85 transition group-hover:text-emerald">View game →</span>
+              </div>
             </Link>
-            <Link href="/games/deep-dive" className="group relative min-h-[250px] overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/40 lg:col-span-5">
-              <Image src="/assets/games/deep-dive/artwork.webp" alt="Deep Dive slot artwork" fill sizes="(min-width:1024px) 40vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6"><span className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">Playable slot</span><h3 className="mt-2 text-2xl font-semibold">Deep Dive</h3></div>
+
+            <Link href="/games/deep-dive" className="group relative min-h-[250px] overflow-hidden rounded-[1.45rem] border border-white/12 bg-black/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 lg:col-span-6">
+              <Image src="/assets/games/deep-dive/artwork.webp" alt="Deep Dive slot artwork" fill sizes="(min-width:1024px) 48vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-black/5" />
+              <div className="absolute inset-0 flex items-end p-6 sm:p-7">
+                <div>
+                  <span className="text-[0.62rem] font-semibold uppercase tracking-[0.17em] text-emerald">Playable · Portfolio title</span>
+                  <h3 className="mt-2 text-2xl font-semibold tracking-[-0.015em] sm:text-3xl">Deep Dive</h3>
+                  <p className="mt-2 max-w-sm text-sm leading-6 text-slate-300">Underwater slot direction with sticky-wild and treasure-feature positioning.</p>
+                </div>
+              </div>
             </Link>
-            <Link href="/portfolio/elementals" className="group relative min-h-[250px] overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/40 lg:col-span-5">
-              <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="ELEMENTALS original Live Casino IP concept" fill sizes="(min-width:1024px) 40vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6"><span className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">Original Live Casino IP · In development</span><h3 className="mt-2 text-2xl font-semibold">ELEMENTALS</h3></div>
+
+            <Link href="/games/dragon-rush" className="group relative min-h-[250px] overflow-hidden rounded-[1.45rem] border border-white/12 bg-black/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 lg:col-span-6">
+              <Image src="/assets/games/dragon-rush/artwork.webp" alt="Dragon Rush slot artwork" fill sizes="(min-width:1024px) 48vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-black/5" />
+              <div className="absolute inset-0 flex items-end p-6 sm:p-7">
+                <div>
+                  <span className="text-[0.62rem] font-semibold uppercase tracking-[0.17em] text-emerald">Playable · Portfolio title</span>
+                  <h3 className="mt-2 text-2xl font-semibold tracking-[-0.015em] sm:text-3xl">Dragon Rush</h3>
+                  <p className="mt-2 max-w-sm text-sm leading-6 text-slate-300">High-contrast fantasy artwork and bonus-led commercial positioning.</p>
+                </div>
+              </div>
             </Link>
           </div>
-          <div className="mt-7 flex flex-wrap gap-3"><Button href="/contact?interest=portfolio#project-enquiry" variant="secondary">Request Portfolio</Button><Button href="/contact?interest=game#project-enquiry" variant="secondary">Discuss Custom Production</Button></div>
+
+          <div className="mt-6 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-2" aria-hidden="true">
+                {["sweet-wins", "fruit-elixir", "the-aztecs"].map((slug) => (
+                  <span key={slug} className="relative h-9 w-9 overflow-hidden rounded-lg border border-[#05070a] bg-black">
+                    <Image src={`/assets/games/${slug}/artwork.webp`} alt="" fill sizes="36px" className="object-cover" />
+                  </span>
+                ))}
+              </div>
+              <p className="text-sm text-slate-400">More playable titles continue in the full games catalogue.</p>
+            </div>
+            <Button href="/contact?interest=game#project-enquiry" variant="secondary">Discuss Custom Production</Button>
+          </div>
         </Container>
       </section>
 
