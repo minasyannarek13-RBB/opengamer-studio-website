@@ -1,4 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "git": {
+    "deploymentEnabled": {
+      "build/contact-conversion-handoff-20260908": false
+    }
+  },
   "ignoreCommand": "if [ \"$VERCEL_GIT_COMMIT_REF\" = \"build/contact-conversion-handoff-20260908\" ] && [ ! -f .deploy-preview ]; then exit 0; else exit 1; fi"
 }
