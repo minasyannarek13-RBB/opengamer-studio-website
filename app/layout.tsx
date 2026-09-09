@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
+import "@/styles/accessibility.css";
 import { company, logoAsset } from "@/content/company";
 import { robotsConfig, siteUrl } from "@/lib/site";
 import { ScrollRevealController } from "@/components/motion/ScrollRevealController";
