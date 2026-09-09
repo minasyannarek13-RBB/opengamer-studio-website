@@ -40,8 +40,8 @@ export default function GamesPage() {
     <SiteShell atmosphere="games">
       <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#05070a] py-14 sm:py-20 xl:py-24">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(46,230,166,0.10),transparent_26rem),radial-gradient(circle_at_92%_72%,rgba(117,103,248,0.055),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.025),transparent_62%)]" />
-        <Container className="relative grid gap-10 xl:grid-cols-[0.78fr_1.22fr] xl:items-end xl:gap-14">
-          <div>
+        <Container className="relative grid gap-10 xl:grid-cols-[0.8fr_1.2fr] xl:items-start xl:gap-14">
+          <div className="xl:pt-3">
             <SectionHeader
               eyebrow="OpenGamer game catalogue"
               title="Playable Titles and Confirmed Portfolio Work"
@@ -64,14 +64,15 @@ export default function GamesPage() {
               <Link
                 key={game.slug}
                 href={`/games/${game.slug}`}
-                className={`group relative min-h-[220px] overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/40 shadow-[0_24px_70px_rgba(0,0,0,0.25)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transform-none motion-reduce:transition-none ${index === 0 ? "sm:col-span-2 sm:min-h-[380px] xl:col-span-7 xl:row-span-2 xl:min-h-[470px]" : "sm:min-h-[250px] xl:col-span-5"}`}
+                className={`group overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#080b0e] shadow-[0_24px_70px_rgba(0,0,0,0.25)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transform-none motion-reduce:transition-none ${index === 0 ? "sm:col-span-2 xl:col-span-7 xl:row-span-2" : "xl:col-span-5"}`}
               >
-                <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill priority={index === 0} sizes={index === 0 ? "(min-width:1280px) 55vw,100vw" : "(min-width:1280px) 40vw,(min-width:640px) 50vw,100vw"} className="object-cover transition duration-700 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/94 via-black/10 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                  <span className="text-[0.62rem] font-semibold uppercase tracking-[0.15em] text-emerald">{getGameStatusLabel(game)} · {getGameDemoStatusLabel(game)}</span>
+                <div className={`relative overflow-hidden bg-black/40 ${index === 0 ? "aspect-[16/10] xl:aspect-[4/3]" : "aspect-[16/8] xl:aspect-[16/9]"}`}>
+                  <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill priority={index === 0} sizes={index === 0 ? "(min-width:1280px) 55vw,100vw" : "(min-width:1280px) 40vw,(min-width:640px) 50vw,100vw"} className="object-cover transition duration-700 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
+                </div>
+                <div className={`${index === 0 ? "p-5 sm:p-6 xl:p-7" : "p-5"}`}>
+                  <span className="text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-emerald">{getGameStatusLabel(game)} · {getGameDemoStatusLabel(game)}</span>
                   <h2 className={`mt-2 font-semibold text-white ${index === 0 ? "text-3xl sm:text-4xl" : "text-2xl"}`}>{game.title}</h2>
-                  <p className="mt-2 max-w-md text-sm leading-6 text-slate-300">{game.shortDescription}</p>
+                  <p className="mt-2 max-w-md text-sm leading-6 text-slate-400">{game.shortDescription}</p>
                 </div>
               </Link>
             ))}
@@ -95,11 +96,10 @@ export default function GamesPage() {
                 <Link key={game.slug} href={`/games/${game.slug}`} className="group relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.025] p-3 transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transform-none motion-reduce:transition-none">
                   <div className="relative aspect-[10/7] overflow-hidden rounded-[0.9rem] border border-white/[0.06] bg-black/30">
                     <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1280px) 22vw,(min-width:640px) 46vw,100vw" className="object-cover transition duration-500 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                    <span className="absolute left-3 top-3 rounded-full border border-white/10 bg-black/55 px-2.5 py-1 text-[0.52rem] font-semibold uppercase tracking-[0.14em] text-slate-300 backdrop-blur">No Public Demo</span>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
                   </div>
                   <div className="px-1 pb-1 pt-4">
-                    <p className="text-[0.56rem] font-semibold uppercase tracking-[0.15em] text-slate-500">Portfolio Title</p>
+                    <p className="text-[0.56rem] font-semibold uppercase tracking-[0.15em] text-slate-500">Portfolio Title · No Public Demo</p>
                     <div className="mt-1.5 flex items-center justify-between gap-3">
                       <h3 className="text-lg font-semibold text-white">{game.title}</h3>
                       <span aria-hidden="true" className="text-slate-600 transition group-hover:translate-x-1 group-hover:text-emerald motion-reduce:transform-none motion-reduce:transition-none">→</span>
@@ -128,11 +128,10 @@ export default function GamesPage() {
                 <Link key={game.slug} href={`/games/${game.slug}`} className="group overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.025] transition hover:border-emerald/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">
                   <div className="relative aspect-[10/7] overflow-hidden bg-black/30">
                     <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1280px) 22vw,(min-width:640px) 46vw,100vw" className="object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 p-4">
-                      <span className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-emerald">In Development</span>
-                      <h3 className="mt-1.5 text-lg font-semibold text-white">{game.title}</h3>
-                    </div>
+                  </div>
+                  <div className="p-4">
+                    <span className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-emerald">In Development</span>
+                    <h3 className="mt-1.5 text-lg font-semibold text-white">{game.title}</h3>
                   </div>
                 </Link>
               ))}
