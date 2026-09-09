@@ -1,19 +1,28 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
+import ts from "typescript";
 
 let importCounter = 0;
 
-function cacheSafeImport(relativePath) {
+async function cacheSafeImport(relativePath) {
   importCounter += 1;
-  const url = new URL(relativePath, import.meta.url);
-  url.searchParams.set("test", String(importCounter));
-  return import(url.href);
+  const source = await readFile(new URL(relativePath, import.meta.url), "utf8");
+  const transpiled = ts.transpileModule(source, {
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext,
+      target: ts.ScriptTarget.ES2022
+    },
+    fileName: relativePath
+  }).outputText;
+  const encoded = Buffer.from(`${transpiled}\n//# sourceURL=${relativePath}?test=${importCounter}`).toString("base64");
+  return import(`data:text/javascript;base64,${encoded}#${importCounter}`);
 }
 
 function resetEnv() {
   delete process.env.NEXT_PUBLIC_SITE_URL;
   delete process.env.NEXT_PUBLIC_DEPLOYMENT_ENV;
+  delete process.env.VERCEL_ENV;
   delete process.env.NEXT_PUBLIC_CONTACT_EMAIL;
   delete process.env.NEXT_PUBLIC_LINKEDIN_URL;
   delete process.env.NEXT_PUBLIC_MEETING_URL;
@@ -37,7 +46,7 @@ test("production URL defaults to OpenGamer canonical URL", async () => {
 test("preview deployment stays noindex even if NEXT_PUBLIC_SITE_URL is production", async () => {
   resetEnv();
   process.env.NEXT_PUBLIC_SITE_URL = "https://open-gamer.com";
-  process.env.NEXT_PUBLIC_DEPLOYMENT_ENV = "preview";
+  process.env.VERCEL_ENV = "preview";
   const { isIndexableProduction } = await cacheSafeImport("../lib/site.ts");
   assert.equal(isIndexableProduction, false);
 });
@@ -45,7 +54,7 @@ test("preview deployment stays noindex even if NEXT_PUBLIC_SITE_URL is productio
 test("production deployment becomes indexable only on canonical production URL", async () => {
   resetEnv();
   process.env.NEXT_PUBLIC_SITE_URL = "https://open-gamer.com";
-  process.env.NEXT_PUBLIC_DEPLOYMENT_ENV = "production";
+  process.env.VERCEL_ENV = "production";
   const { isIndexableProduction } = await cacheSafeImport("../lib/site.ts");
   assert.equal(isIndexableProduction, true);
 });
@@ -53,7 +62,7 @@ test("production deployment becomes indexable only on canonical production URL",
 test("production deployment on a non-canonical URL stays noindex", async () => {
   resetEnv();
   process.env.NEXT_PUBLIC_SITE_URL = "https://example.com";
-  process.env.NEXT_PUBLIC_DEPLOYMENT_ENV = "production";
+  process.env.VERCEL_ENV = "production";
   const { isIndexableProduction } = await cacheSafeImport("../lib/site.ts");
   assert.equal(isIndexableProduction, false);
 });
@@ -90,6 +99,8 @@ test("game statuses and demo buttons are explicit", async () => {
   const deepDive = games.find((game) => game.slug === "deep-dive");
   const cakeBonanza = games.find((game) => game.slug === "cake-bonanza");
 
+  assert.ok(deepDive);
+  assert.ok(cakeBonanza);
   assert.equal(getGameCommercialStatusLabel(deepDive), "Portfolio Title");
   assert.equal(getGameDemoStatusLabel(deepDive), "Demo Available");
   assert.equal(hasVerifiedDemo(deepDive), true);
