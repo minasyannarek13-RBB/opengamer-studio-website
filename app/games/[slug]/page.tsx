@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import {
+  catalogueGames,
   games,
   getGameDemoStatusLabel,
   getGamePrimaryActionLabel,
@@ -54,14 +55,16 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
   const availabilityLabel = getGameDemoStatusLabel(game);
   const demoUrl = getVerifiedDemoUrl(game);
   const enquiryHref = `/contact?interest=game&game=${game.slug}#project-enquiry`;
-  const gameIndex = games.findIndex((item) => item.slug === game.slug);
-  const relatedGames = [games[(gameIndex - 1 + games.length) % games.length], games[(gameIndex + 1) % games.length]].filter(
-    (item) => item.slug !== game.slug
-  );
+  const catalogueIndex = catalogueGames.findIndex((item) => item.slug === (game.seriesSlug || game.slug));
+  const relatedAnchor = catalogueIndex >= 0 ? catalogueIndex : 0;
+  const relatedGames = [
+    catalogueGames[(relatedAnchor - 1 + catalogueGames.length) % catalogueGames.length],
+    catalogueGames[(relatedAnchor + 1) % catalogueGames.length]
+  ].filter((item) => item && item.slug !== game.slug && item.slug !== game.seriesSlug);
 
   const gameDetails: [string, string][] = [
     ["Status", statusLabel],
-    ["Public demo", status === "playable" ? "Available" : "Not available"],
+    ["Public demo", availabilityLabel],
     ...(game.lineCount ? [["Configuration", game.lineCount] as [string, string]] : []),
     ...(game.variants?.length ? [["Confirmed variants", game.variants.join(", ")] as [string, string]] : [])
   ];
@@ -117,7 +120,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Game profile</p>
             <h2 className="mt-4 text-3xl font-semibold text-white">Confirmed public information</h2>
-            <p className="mt-4 max-w-xl leading-7 text-slate-400">This page shows only information supported by the current catalogue record. Unconfirmed mechanics, RTP, volatility, certification, integrations and commercial use are not presented.</p>
+            <p className="mt-4 max-w-xl leading-7 text-slate-400">This page shows information supported by the current catalogue record. Product and commercial details can be expanded when they are confirmed for the relevant title.</p>
             <dl className="mt-7 border-t border-white/10">
               {gameDetails.map(([label, value]) => (
                 <div key={label} className="grid grid-cols-[0.42fr_0.58fr] gap-4 border-b border-white/10 py-4 text-sm">
@@ -147,7 +150,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Next action</p>
               <h2 className="mt-4 text-3xl font-semibold text-white">{status === "playable" ? "Review the public demo or discuss the title" : status === "portfolio" ? "Discuss this portfolio title" : "Discuss the title in development"}</h2>
-              <p className="mt-4 max-w-3xl leading-7 text-slate-300">Public demos are linked only where verified. Other commercial, technical or delivery details are handled separately when confirmed for the relevant discussion.</p>
+              <p className="mt-4 max-w-3xl leading-7 text-slate-300">Public demos are linked only where verified. Commercial, technical and delivery scope can then be defined around the relevant discussion.</p>
               <div className="mt-6 flex flex-wrap gap-3">
                 {demoUrl ? <Button href={demoUrl} target="_blank" rel="noopener noreferrer">Play Demo</Button> : null}
                 <Button href={enquiryHref} variant={demoUrl ? "secondary" : "primary"}>{demoUrl ? "Discuss This Title" : getGamePrimaryActionLabel(game)}</Button>
@@ -167,9 +170,9 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
         </div>
         <nav className="mt-8 grid gap-5 md:grid-cols-2" aria-label="Related games">
           {relatedGames.map((item) => (
-            <Link key={item.slug} href={`/games/${item.slug}`} className="group grid min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-white/[0.035] transition hover:-translate-y-0.5 hover:border-emerald/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:grid-cols-[0.42fr_0.58fr]">
+            <Link key={item.slug} href={`/games/${item.slug}`} className="group grid min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-white/[0.035] transition hover:-translate-y-0.5 hover:border-emerald/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transform-none motion-reduce:transition-none sm:grid-cols-[0.42fr_0.58fr]">
               <div className="relative min-h-48 sm:min-h-full">
-                <Image src={item.artwork?.hero || item.image} alt={`${item.title} artwork`} fill className="object-cover transition duration-500 group-hover:scale-[1.025]" sizes="(min-width: 768px) 20vw, 100vw" />
+                <Image src={item.artwork?.hero || item.image} alt={`${item.title} artwork`} fill className="object-cover transition duration-500 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" sizes="(min-width: 768px) 20vw, 100vw" />
               </div>
               <div className="p-5 sm:p-6">
                 <div className="flex flex-wrap gap-2">
