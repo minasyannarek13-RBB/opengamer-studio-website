@@ -68,6 +68,7 @@ const proofLinks = [
 
 export function Footer({ locale = "en" }: { locale?: Locale }) {
   const copy = footerCopy[locale];
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="border-t border-white/10 bg-black/40 py-14 sm:py-16">
@@ -77,13 +78,13 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
             <Link
               key={item.label}
               href={getLocalizedHomePath(locale, item.href)}
-              className="group flex min-h-[4.75rem] items-center justify-between gap-4 rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-3 transition hover:border-emerald/25 hover:bg-white/[0.045] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+              className="group flex min-h-[4.75rem] items-center justify-between gap-4 rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-3 transition hover:border-emerald/25 hover:bg-white/[0.045] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none"
             >
               <span>
                 <span className="block text-sm font-semibold text-white">{item.label}</span>
                 <span className="mt-1 block text-[0.64rem] uppercase leading-5 tracking-[0.12em] text-slate-500">{item.meta}</span>
               </span>
-              <span className="text-emerald transition group-hover:translate-x-0.5" aria-hidden="true">→</span>
+              <span className="text-emerald transition group-hover:translate-x-0.5 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true">→</span>
             </Link>
           ))}
         </div>
@@ -101,7 +102,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
             <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400">{company.description}</p>
             <Link
               href={getLocalizedHomePath(locale, "/contact#project-enquiry")}
-              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none"
             >
               {copy.contact} <span aria-hidden="true">→</span>
             </Link>
@@ -156,7 +157,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
           </div>
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>Copyright © 2026 OpenGamer. {copy.rights}</p>
+          <p>Copyright © {currentYear} OpenGamer. {copy.rights}</p>
           <p className="max-w-xl sm:text-right">{copy.scope}</p>
         </div>
       </Container>
