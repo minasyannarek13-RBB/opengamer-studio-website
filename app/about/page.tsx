@@ -36,11 +36,12 @@ const principles = [
   ["Product before output", "Start with the commercial and product outcome, then define the implementation scope."],
   ["Defined responsibility", "Make ownership, dependencies and delivery boundaries explicit before production starts."],
   ["Technical transparency", "Keep architecture, constraints and integration assumptions visible throughout delivery."],
-  ["Maintainable delivery", "Build for continued operation and iteration rather than a one-off handoff that becomes somebody else's archaeology project."]
+  ["Maintainable delivery", "Build for continued operation and iteration, with a handoff another team can understand and maintain."]
 ];
 
 const proofReferences = [
   { title: "Forest Fortune", label: "Playable game", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune" },
+  { title: "Cake Bonanza", label: "Portfolio title · No public demo", image: "/assets/games/cake-bonanza/artwork.webp", href: "/games/cake-bonanza" },
   { title: "ELEMENTALS", label: "Original IP · In development", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals" },
   { title: "LC App", label: "B2B product concept", image: "/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp", href: "/portfolio/lc-app", contain: true }
 ];
@@ -66,7 +67,7 @@ export default function AboutPage() {
                 <Button href="/portfolio" variant="secondary" className="w-full min-[480px]:w-auto">View Portfolio</Button>
               </div>
               <div className="mt-8 flex flex-wrap gap-2" aria-label="OpenGamer company scope">
-                {["Game production", "Dedicated development", "Technology & integration"].map((item) => (
+                {["Game production", "Dedicated development", "Technology & integration", "Portfolio & original IP"].map((item) => (
                   <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-400">{item}</span>
                 ))}
               </div>
@@ -91,18 +92,21 @@ export default function AboutPage() {
                 </div>
 
                 <div className="mt-6">
-                  <p className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-slate-500">Work you can inspect</p>
-                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  <div className="flex items-end justify-between gap-4">
+                    <p className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-slate-500">Selected work you can inspect</p>
+                    <Link href="/portfolio" className="text-xs font-semibold text-emerald/85 transition hover:text-emerald focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">View portfolio →</Link>
+                  </div>
+                  <div className="mt-4 grid gap-2 sm:grid-cols-2">
                     {proofReferences.map((item) => (
-                      <Link key={item.title} href={item.href} className="group overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.025] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
-                        <div className="relative aspect-[10/7] overflow-hidden bg-black/40">
-                          <Image src={item.image} alt={`${item.title} OpenGamer work`} fill sizes="(min-width:1024px) 15vw,(min-width:640px) 30vw,100vw" className={`${item.contain ? "object-contain p-2" : "object-cover"} transition duration-500 group-hover:scale-[1.02]`} />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
+                      <Link key={item.title} href={item.href} className="group grid grid-cols-[4.4rem_1fr_auto] items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] p-2.5 transition hover:border-emerald/25 hover:bg-white/[0.035] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                        <div className="relative aspect-[10/7] overflow-hidden rounded-lg bg-black/40">
+                          <Image src={item.image} alt={`${item.title} OpenGamer work`} fill sizes="72px" className={`${item.contain ? "object-contain p-1" : "object-cover"} transition duration-500 group-hover:scale-[1.025]`} />
                         </div>
-                        <div className="p-3.5">
-                          <span className="text-[0.5rem] font-semibold uppercase tracking-[0.12em] text-emerald">{item.label}</span>
-                          <strong className="mt-1 block text-sm text-white">{item.title}</strong>
+                        <div className="min-w-0">
+                          <span className="block text-[0.48rem] font-semibold uppercase tracking-[0.11em] text-emerald">{item.label}</span>
+                          <strong className="mt-1 block truncate text-sm text-white">{item.title}</strong>
                         </div>
+                        <span aria-hidden="true" className="pr-1 text-sm text-slate-600 transition group-hover:translate-x-0.5 group-hover:text-emerald">→</span>
                       </Link>
                     ))}
                   </div>
@@ -146,7 +150,7 @@ export default function AboutPage() {
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_30%,rgba(46,230,166,0.04),transparent_24rem)]" />
         <div className="relative grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-16">
           <div className="lg:sticky lg:top-28">
-            <SectionHeader eyebrow="Operating principles" title="Built to Survive Contact With Production" description="Delivery is organized around responsibility, technical visibility and decisions that remain understandable after the kickoff meeting is forgotten." />
+            <SectionHeader eyebrow="Operating principles" title="Built for Real Production Constraints" description="Delivery is organized around responsibility, technical visibility and decisions that remain understandable throughout the project lifecycle." />
           </div>
           <div className="border-t border-white/10">
             {principles.map(([title, description], index) => (
