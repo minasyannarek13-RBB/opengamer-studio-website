@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
@@ -112,11 +113,12 @@ const solutionGroups = [
 export default function ServicesPage() {
   return (
     <SiteShell atmosphere="solutions">
-      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-16 sm:py-24">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(46,230,166,0.08),transparent_28rem)]" />
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#05070a] py-16 sm:py-24 lg:py-20">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_77%_28%,rgba(46,230,166,0.10),transparent_26rem),radial-gradient(circle_at_92%_72%,rgba(93,156,255,0.055),transparent_24rem),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_45%)]" />
+        <div aria-hidden="true" className="absolute right-[-10rem] top-[8%] h-[34rem] w-[34rem] rounded-full border border-emerald/[0.07]" />
         <Container className="relative">
-          <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
-            <div>
+          <div className="grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-14 xl:grid-cols-[0.72fr_1.28fr] xl:gap-20">
+            <div className="relative z-10">
               <SectionHeader
                 eyebrow="Solutions"
                 title="Bring the Problem. Build the Right Scope."
@@ -127,18 +129,52 @@ export default function ServicesPage() {
                 <Button href="/contact#project-enquiry" className="w-full min-[480px]:w-auto">Discuss a Project</Button>
                 <Button href="/games" variant="secondary" className="w-full min-[480px]:w-auto">Explore Games</Button>
               </div>
+              <div className="mt-8 flex flex-wrap gap-2" aria-label="OpenGamer solution scope">
+                {["Game production", "Dedicated development", "Technology & integration", "Portfolio adaptation"].map((item) => (
+                  <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.63rem] font-semibold uppercase tracking-[0.12em] text-slate-400">{item}</span>
+                ))}
+              </div>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {buyerJobs.map((job) => (
-                <Link key={job.title} href={job.href} className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30 hover:bg-white/[0.055] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald">{job.number}</span>
-                    <span aria-hidden="true" className="text-sm text-slate-500 transition group-hover:translate-x-0.5 group-hover:text-white">→</span>
-                  </div>
-                  <h2 className="mt-5 text-xl font-semibold text-white">{job.title}</h2>
-                  <p className="mt-2 text-sm leading-6 text-slate-400">{job.description}</p>
-                </Link>
-              ))}
+
+            <div className="relative min-h-[520px] sm:min-h-[620px] lg:min-h-[600px]" aria-label="Selected OpenGamer work supporting the service offering">
+              <div aria-hidden="true" className="absolute inset-[8%] rounded-[3rem] bg-emerald/[0.045] blur-3xl" />
+
+              <Link href="/games/forest-fortune" className="group absolute left-0 top-[3%] h-[62%] w-[72%] overflow-hidden rounded-[1.6rem] border border-white/15 bg-black/45 shadow-[0_34px_110px_rgba(0,0,0,0.42)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <Image src="/assets/games/forest-fortune/artwork.webp" alt="Forest Fortune playable OpenGamer slot" fill priority sizes="(min-width:1280px) 43vw,(min-width:1024px) 40vw,75vw" className="object-cover transition duration-700 group-hover:scale-[1.02]" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0.02)_30%,rgba(4,6,8,0.84)_100%)]" />
+                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
+                  <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-emerald">Playable portfolio · Game production proof</span>
+                  <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">Forest Fortune</h2>
+                  <p className="mt-2 max-w-md text-sm leading-6 text-slate-300">A real game reference behind the production offer.</p>
+                </div>
+              </Link>
+
+              <Link href="/portfolio/elementals" className="group absolute right-0 top-[10%] h-[45%] w-[35%] overflow-hidden rounded-[1.45rem] border border-white/15 bg-black/45 shadow-[0_28px_90px_rgba(0,0,0,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="ELEMENTALS original Live Casino IP" fill sizes="(min-width:1280px) 20vw,(min-width:1024px) 19vw,38vw" className="object-cover transition duration-700 group-hover:scale-[1.02]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                  <span className="text-[0.52rem] font-semibold uppercase tracking-[0.14em] text-emerald">Original IP</span>
+                  <strong className="mt-1.5 block text-base text-white sm:text-lg">ELEMENTALS</strong>
+                </div>
+              </Link>
+
+              <Link href="/portfolio/lc-app" className="group absolute bottom-[3%] right-[4%] h-[46%] w-[30%] overflow-hidden rounded-[1.55rem] border border-white/15 bg-[#06090b] shadow-[0_30px_95px_rgba(0,0,0,0.42)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(46,230,166,0.08),transparent_15rem)]" />
+                <Image src="/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp" alt="LC App B2B product concept" fill sizes="(min-width:1280px) 17vw,(min-width:1024px) 16vw,34vw" className="object-contain object-center p-3 transition duration-700 group-hover:scale-[1.015] sm:p-4" />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 sm:p-5">
+                  <span className="text-[0.5rem] font-semibold uppercase tracking-[0.13em] text-emerald">Product direction</span>
+                  <strong className="mt-1 block text-base text-white">LC App</strong>
+                </div>
+              </Link>
+
+              <div className="absolute bottom-[4%] left-0 w-[58%] border-t border-white/10 pt-5">
+                <p className="text-[0.61rem] font-semibold uppercase tracking-[0.17em] text-slate-500">Scope around real work</p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {["Custom game development", "Dedicated capacity", "RGS-related engineering", "Integration support"].map((item) => (
+                    <div key={item} className="flex items-center gap-2 text-xs text-slate-300 sm:text-sm"><span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald" /><span>{item}</span></div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </Container>
