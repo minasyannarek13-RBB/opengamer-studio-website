@@ -2,6 +2,16 @@
 
 Cumulative production-handoff record for the OpenGamer v2 implementation branch. `v2-current` remains the authoritative baseline unless explicitly superseded. Production/DNS/aliases/secrets/env are not changed by this branch.
 
+## 2026-09-09 16:20 +04 — Preview rebuild trigger for current RC head
+- **Status:** NEEDS CTO REVIEW
+- **Purpose:** trigger a fresh Vercel preview for the complete current implementation after the previous build-rate interruption, without changing production behavior.
+- **Files/components changed:** documentation only: `CTO_PROD_CHANGELOG.md`.
+- **User-visible effect:** none.
+- **Verification:** pending Vercel preview for this exact new docs head; implementation content remains the same as prior head `20bf459f8e71822685e61c8a627061f3857b4e1a`.
+- **Env/migration/config dependency:** none.
+- **Rollback:** documentation-only commit can be reverted without product impact.
+- **CTO production action required:** use the resulting preview only as RC verification; do not deploy production until explicitly authorized.
+
 ## 2026-09-09 03:00 +04 — Global enquiry CTA deep-link consistency
 - **Status:** BLOCKED
 - **Implementation commits:** `7d871d8e94a042eb065c36cf52293cafccc0b555`, `1d02edc91ed933ff36cb256f5a731a326ded88ab`.
