@@ -180,26 +180,40 @@ export default function ServicesPage() {
         </Container>
       </section>
 
-      <Section>
-        <SectionHeader eyebrow="Four ways to work with OpenGamer" title="Choose the Outcome Before the Service List" description="The detailed service catalogue remains available below, but most conversations begin with one of these four commercial needs." />
-        <div className="mt-10 grid gap-5 lg:grid-cols-2">
-          {buyerJobs.map((job) => (
-            <article key={job.title} className="rounded-[1.35rem] border border-white/10 bg-white/[0.035] p-6 sm:p-7">
-              <div className="flex items-start gap-5">
-                <span className="text-sm font-semibold text-emerald">{job.number}</span>
-                <div className="min-w-0 flex-1">
-                  <h2 className="text-2xl font-semibold text-white">{job.title}</h2>
-                  <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400">{job.description}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">
+      <Section className="relative overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_88%_18%,rgba(46,230,166,0.045),transparent_24rem)]" />
+        <div className="relative grid gap-12 lg:grid-cols-[0.62fr_1.38fr] lg:gap-16 xl:gap-24">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <SectionHeader eyebrow="Four ways to work with OpenGamer" title="Choose the Outcome Before the Service List" description="Most commercial conversations start with the result you need, not a catalogue of disciplines. Pick the engagement model first; define the detailed scope second." />
+            <div className="mt-7 flex flex-wrap gap-2">
+              {["Full build", "Embedded capacity", "Technical scope", "Portfolio adaptation"].map((item) => (
+                <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{item}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="border-t border-white/10">
+            {buyerJobs.map((job) => (
+              <Link key={job.title} href={job.href} className="group grid gap-5 border-b border-white/10 py-8 transition duration-300 hover:border-emerald/30 sm:grid-cols-[3.2rem_0.8fr_1.2fr_auto] sm:items-start sm:gap-6 sm:py-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070a]">
+                <span className="text-[0.68rem] font-semibold tracking-[0.2em] text-emerald/90">{job.number}</span>
+                <div>
+                  <h2 className="text-2xl font-semibold tracking-[-0.015em] text-white transition group-hover:text-emerald">{job.title}</h2>
+                  <span className="mt-3 inline-flex text-sm font-semibold text-white/75 transition group-hover:text-white">View relevant scope →</span>
+                </div>
+                <div>
+                  <p className="max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{job.description}</p>
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
                     {job.items.map((item) => (
-                      <span key={item} className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs text-slate-300">{item}</span>
+                      <span key={item} className="flex items-center gap-2 text-xs text-slate-500 sm:text-sm"><span aria-hidden="true" className="h-1 w-1 rounded-full bg-emerald/80" />{item}</span>
                     ))}
                   </div>
-                  <Link href={job.href} className="mt-6 inline-flex text-sm font-semibold text-emerald transition hover:text-white">View relevant services →</Link>
                 </div>
-              </div>
-            </article>
-          ))}
+                <div className="hidden items-center sm:flex">
+                  <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-slate-500 transition duration-300 group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:text-emerald">→</span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </Section>
 
