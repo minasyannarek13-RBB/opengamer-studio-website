@@ -54,7 +54,8 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
   const statusLabel = getGameStatusLabel(game);
   const availabilityLabel = getGameDemoStatusLabel(game);
   const demoUrl = getVerifiedDemoUrl(game);
-  const enquiryHref = `/contact?interest=game&game=${game.slug}#project-enquiry`;
+  const enquiryInterest = status === "portfolio" ? "portfolio" : "game";
+  const enquiryHref = `/contact?interest=${enquiryInterest}&game=${game.slug}#project-enquiry`;
   const catalogueIndex = catalogueGames.findIndex((item) => item.slug === (game.seriesSlug || game.slug));
   const relatedAnchor = catalogueIndex >= 0 ? catalogueIndex : 0;
   const relatedGames = [
@@ -71,18 +72,18 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
 
   return (
     <SiteShell atmosphere="games">
-      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-12 sm:py-16 lg:py-20">
+      <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-12 sm:py-16 xl:py-20">
         <ProductHeroBackground image={game.artwork?.hero || game.image} accentPrimary={game.visualAccent || "#2ee6a6"} pattern="grid" />
-        <Container className="relative grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14">
+        <Container className="relative grid gap-10 xl:grid-cols-[0.82fr_1.18fr] xl:items-center xl:gap-14">
           <div className="min-w-0">
             <nav className="mb-7 flex flex-wrap items-center gap-2 text-sm text-slate-500" aria-label="Breadcrumb">
-              <Link href="/games" className="transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">Games</Link>
+              <Link href="/games" className="transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">Games</Link>
               <span aria-hidden="true">/</span>
               <span className="text-slate-300">{game.title}</span>
             </nav>
 
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">OpenGamer game catalogue</p>
-            <h1 className="mt-4 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">{game.title}</h1>
+            <h1 className="mt-4 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl xl:text-6xl">{game.title}</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">{game.shortDescription}</p>
 
             <div className="mt-6 flex flex-wrap gap-2" aria-label="Game status">
@@ -101,10 +102,10 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
             </div>
           </div>
 
-          <div className="relative min-h-[22rem] overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-[#050609] shadow-[0_30px_100px_rgba(0,0,0,0.35)] sm:min-h-[28rem] lg:min-h-[32rem]">
-            <Image src={game.artwork?.hero || game.image} alt={`${game.title} artwork`} fill priority className="object-cover" sizes="(min-width: 1024px) 54vw, 100vw" />
+          <div className="relative min-h-[22rem] overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-[#050609] shadow-[0_30px_100px_rgba(0,0,0,0.35)] sm:min-h-[28rem] xl:min-h-[32rem]">
+            <Image src={game.artwork?.hero || game.image} alt={`${game.title} artwork`} fill priority className="object-cover" sizes="(min-width:1280px) 54vw,100vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10" />
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7">
+            <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 p-5 min-[520px]:flex-row min-[520px]:items-end min-[520px]:justify-between sm:p-7">
               <div>
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-emerald">{statusLabel}</p>
                 <p className="mt-1 text-sm text-slate-300">Artwork from the OpenGamer game catalogue.</p>
@@ -116,8 +117,8 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
       </section>
 
       <Section>
-        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
-          <aside className="lg:sticky lg:top-28 lg:self-start">
+        <div className="grid gap-10 xl:grid-cols-[0.72fr_1.28fr] xl:gap-14">
+          <aside className="xl:sticky xl:top-28 xl:self-start">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Game profile</p>
             <h2 className="mt-4 text-3xl font-semibold text-white">Confirmed public information</h2>
             <p className="mt-4 max-w-xl leading-7 text-slate-400">This page shows information supported by the current catalogue record. Product and commercial details can be expanded when they are confirmed for the relevant title.</p>
@@ -125,7 +126,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
               {gameDetails.map(([label, value]) => (
                 <div key={label} className="grid grid-cols-[0.42fr_0.58fr] gap-4 border-b border-white/10 py-4 text-sm">
                   <dt className="text-slate-500">{label}</dt>
-                  <dd className="text-right text-slate-200">{value}</dd>
+                  <dd className="break-words text-right text-slate-200">{value}</dd>
                 </div>
               ))}
             </dl>
@@ -151,9 +152,9 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Next action</p>
               <h2 className="mt-4 text-3xl font-semibold text-white">{status === "playable" ? "Review the public demo or discuss the title" : status === "portfolio" ? "Discuss this portfolio title" : "Discuss the title in development"}</h2>
               <p className="mt-4 max-w-3xl leading-7 text-slate-300">Public demos are linked only where verified. Commercial, technical and delivery scope can then be defined around the relevant discussion.</p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {demoUrl ? <Button href={demoUrl} target="_blank" rel="noopener noreferrer">Play Demo</Button> : null}
-                <Button href={enquiryHref} variant={demoUrl ? "secondary" : "primary"}>{demoUrl ? "Discuss This Title" : getGamePrimaryActionLabel(game)}</Button>
+              <div className="mt-6 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap">
+                {demoUrl ? <Button href={demoUrl} target="_blank" rel="noopener noreferrer" className="w-full min-[480px]:w-auto">Play Demo</Button> : null}
+                <Button href={enquiryHref} variant={demoUrl ? "secondary" : "primary"} className="w-full min-[480px]:w-auto">{demoUrl ? "Discuss This Title" : getGamePrimaryActionLabel(game)}</Button>
               </div>
             </div>
           </div>
@@ -172,7 +173,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
           {relatedGames.map((item) => (
             <Link key={item.slug} href={`/games/${item.slug}`} className="group grid min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-white/[0.035] transition hover:-translate-y-0.5 hover:border-emerald/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transform-none motion-reduce:transition-none sm:grid-cols-[0.42fr_0.58fr]">
               <div className="relative min-h-48 sm:min-h-full">
-                <Image src={item.artwork?.hero || item.image} alt={`${item.title} artwork`} fill className="object-cover transition duration-500 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" sizes="(min-width: 768px) 20vw, 100vw" />
+                <Image src={item.artwork?.hero || item.image} alt={`${item.title} artwork`} fill className="object-cover transition duration-500 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" sizes="(min-width:768px) 20vw,100vw" />
               </div>
               <div className="p-5 sm:p-6">
                 <div className="flex flex-wrap gap-2">
@@ -181,7 +182,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
                 </div>
                 <h3 className="mt-3 text-2xl font-semibold text-white">{item.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-400">{item.shortDescription}</p>
-                <span className="mt-5 inline-flex text-sm font-semibold text-emerald transition group-hover:text-white">View Title</span>
+                <span className="mt-5 inline-flex text-sm font-semibold text-emerald transition group-hover:text-white motion-reduce:transition-none">View Title</span>
               </div>
             </Link>
           ))}
