@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 
-const excludedPublicAssets = [
+const forbiddenLegacyAssetPaths = [
   "/assets/projects/lc-app/lc-app-desktop-experience.webp",
   "/assets/projects/lc-app/lc-app-device-ecosystem.webp",
   "/assets/projects/lc-app/lc-app-mobile-community.webp",
@@ -39,7 +39,7 @@ async function collectSourceFiles(directoryUrl) {
   return files;
 }
 
-test("public source never references deployment-excluded visual assets", async () => {
+test("public source never references removed legacy visual assets", async () => {
   const sourceFiles = [];
   for (const root of ["app/", "components/", "content/", "lib/"]) {
     sourceFiles.push(...(await collectSourceFiles(new URL(`../${root}`, import.meta.url))));
@@ -47,17 +47,20 @@ test("public source never references deployment-excluded visual assets", async (
 
   for (const fileUrl of sourceFiles) {
     const source = await readFile(fileUrl, "utf8");
-    for (const assetPath of excludedPublicAssets) {
-      assert.equal(source.includes(assetPath), false, `${fileUrl.pathname} references excluded asset ${assetPath}`);
+    for (const assetPath of forbiddenLegacyAssetPaths) {
+      assert.equal(source.includes(assetPath), false, `${fileUrl.pathname} references removed legacy asset ${assetPath}`);
     }
   }
 });
 
-test("Vercel ignore contract includes every deployment-excluded visual asset", async () => {
+test("Vercel ignore stays limited to build and QA artifacts", async () => {
   const ignoreSource = await readFile(new URL("../.vercelignore", import.meta.url), "utf8");
-  for (const assetPath of excludedPublicAssets) {
-    assert.match(ignoreSource, new RegExp(`public${assetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
+  for (const staleAssetPath of forbiddenLegacyAssetPaths) {
+    assert.equal(ignoreSource.includes(`public${staleAssetPath}`), false, `stale asset ignore rule remains for ${staleAssetPath}`);
   }
+  assert.match(ignoreSource, /qa\/screenshots\//);
+  assert.match(ignoreSource, /\.next\//);
+  assert.match(ignoreSource, /node_modules\//);
 });
 
 test("game cards resolve artwork through the optimized delivery helper", async () => {
@@ -67,12 +70,15 @@ test("game cards resolve artwork through the optimized delivery helper", async (
   assert.doesNotMatch(cardSource, /src=\{game\.artwork\?\.catalogue \|\| game\.image\}/);
 });
 
-test("homepage showcase uses optimized game artwork where WebP variants exist", async () => {
-  const homepageSource = await readFile(new URL("../content/studioHomepage.ts", import.meta.url), "utf8");
+test("current homepage uses optimized artwork variants where available", async () => {
+  const heroSource = await readFile(new URL("../components/home/ManualHero.tsx", import.meta.url), "utf8");
+  const bodySource = await readFile(new URL("../components/home/ManualHomepageBody.tsx", import.meta.url), "utf8");
+  const homepageSource = `${heroSource}\n${bodySource}`;
+
   for (const assetPath of homepageLegacyArtwork) {
     assert.equal(homepageSource.includes(assetPath), false, `homepage references legacy artwork ${assetPath}`);
   }
   assert.match(homepageSource, /\/assets\/games\/forest-fortune\/artwork\.webp/);
-  assert.match(homepageSource, /\/assets\/games\/deep-dive\/artwork\.webp/);
-  assert.match(homepageSource, /\/assets\/games\/choco-boom\/artwork\.webp/);
+  assert.match(homepageSource, /\/assets\/games\/cake-bonanza\/artwork\.webp/);
+  assert.match(homepageSource, /\/assets\/games\/dragon-rush\/artwork\.webp/);
 });
