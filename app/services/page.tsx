@@ -10,7 +10,7 @@ import { Section } from "@/components/ui/Section";
 
 export const metadata: Metadata = {
   title: "Solutions | OpenGamer Studio",
-  description: "Modular and full-cycle iGaming development solutions for slot games, live products, integrations, reskins, QA and dedicated development teams.",
+  description: "Modular iGaming development solutions for slot games, live-product design, integrations, reskins, QA and dedicated development teams.",
   alternates: { canonical: "/services" }
 };
 
@@ -18,7 +18,7 @@ const buyerJobs = [
   {
     number: "01",
     title: "Build a Game",
-    description: "Create an original, branded or turnkey casino game with one coordinated production scope.",
+    description: "Create an original, branded or custom casino game with one coordinated production scope.",
     items: ["Game concept", "Mathematics", "Art & animation", "Frontend", "Backend coordination", "QA"],
     href: "#game-production"
   },
@@ -39,7 +39,7 @@ const buyerJobs = [
   {
     number: "04",
     title: "Transform Existing Content",
-    description: "Adapt an existing game, portfolio or concept for a new brand, market or technical requirement.",
+    description: "Adapt an existing game, portfolio or supplied concept for a new brand, market or technical requirement.",
     items: ["Reskins", "Branded games", "Portfolio licensing", "Modernisation", "Live product design", "Product UX"],
     href: "#portfolio-services"
   }
@@ -75,22 +75,22 @@ const solutionGroups = [
     id: "portfolio-services",
     eyebrow: "Portfolio & product",
     title: "Adapt, Brand or Reposition Existing Work",
-    description: "Existing OpenGamer titles and partner content can be evaluated for licensing, branded adaptation, reskin or other commercially agreed delivery models.",
+    description: "Existing OpenGamer titles can be evaluated for licensing or adaptation, while supplied content can be scoped for reskin, branding or modernisation.",
     services: [
-      ["White-Label Games", "Evaluate existing OpenGamer content or custom variants.", "Portfolio review, demo access where available, scope definition and commercial discussion."],
+      ["White-Label Games", "Evaluate existing OpenGamer content or custom variants.", "Portfolio review, public demo access where available, scope definition and commercial discussion."],
       ["Reskins", "Reposition an existing game around a new theme, brand or market fit.", "Theme replacement, symbol sets, UI refresh, animation updates and launch preparation."],
-      ["Branded Games", "Custom content built around a partner brand, campaign or audience.", "Brand adaptation, game concept, asset direction and production scope."],
+      ["Branded Games", "Custom content built around a supplied brand, campaign or audience brief.", "Brand adaptation, game concept, asset direction and production scope."],
       ["Legacy Game Modernisation", "Refresh older titles that need stronger mobile UX, assets or integration readiness.", "Visual refresh, frontend improvements, QA and delivery planning."]
     ]
   },
   {
     id: "live-casino",
     eyebrow: "Live Casino product",
-    title: "Design Live Casino Products Without Pretending to Operate the Studio",
-    description: "OpenGamer can support Live Casino product design, interfaces and show-game concepts without claiming studio operation, licensing or broadcast ownership.",
+    title: "Design the Live Product, Interface and Show-Game Experience",
+    description: "OpenGamer can support Live Casino product design, player and presenter interfaces, and show-game concepts. Studio operation, licensing and broadcast ownership are outside the scope represented here.",
     services: [
-      ["Live Casino Game Design", "Table, game-show and hybrid live product concepts.", "Market concept, rules, player journey, round flow and product documentation."],
-      ["Live Show-Game Development", "Original show formats built around differentiated mechanics.", "Format logic, bonus structure, visual identity, player UX and delivery scope."],
+      ["Live Casino Game Design", "Table, game-show and hybrid live product concepts.", "Product concept, rules, player journey, round flow and product documentation."],
+      ["Live Show-Game Development", "Original show formats scoped around differentiated mechanics and player experience.", "Format logic, bonus structure, visual identity, player UX and delivery scope."],
       ["Presenter & Studio Product UX", "Product flows where the dealer, presenter and operating team are part of the experience.", "Presenter prompts, round states, studio-facing flows, display logic and error-state planning."],
       ["Frontend Product Interfaces", "Player-facing and operator-facing interfaces for Live Casino products.", "Betting interfaces, live-session states, result communication, mobile UX and integration preparation."]
     ]
@@ -99,7 +99,7 @@ const solutionGroups = [
     id: "delivery-and-support",
     eyebrow: "Dedicated delivery",
     title: "Add iGaming Capacity Without Building Every Team Internally",
-    description: "Specialist production capacity and delivery support for partners that need to move faster without adding every discipline in-house.",
+    description: "Specialist production capacity and delivery support for teams that need to move faster without adding every discipline in-house.",
     services: [
       ["Dedicated Teams", "Embedded iGaming development capacity for providers, platforms and startups.", "Frontend, backend, game art, QA, product and technical leadership support."],
       ["QA", "Structured release confidence for games and product builds.", "Functional testing, regression, device checks, integration scenarios and acceptance support."],
@@ -166,12 +166,12 @@ export default function ServicesPage() {
               {group.id === "game-production" && (
                 <div className="mb-8 grid gap-3 sm:grid-cols-3">
                   {[
-                    { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp" },
-                    { title: "Deep Dive", slug: "deep-dive", image: "/assets/games/deep-dive/artwork.webp" },
-                    { title: "Dragon Rush", slug: "dragon-rush", image: "/assets/games/dragon-rush/artwork.webp" }
+                    { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp", status: "Playable" },
+                    { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp", status: "Portfolio title · No public demo" },
+                    { title: "Dragon Rush", slug: "dragon-rush", image: "/assets/games/dragon-rush/artwork.webp", status: "Playable" }
                   ].map((game) => (
                     <Link key={game.slug} href={`/games/${game.slug}`} className="group/game relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
-                      <div className="relative aspect-[10/7] overflow-hidden"><Image src={game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1024px) 20vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/game:scale-[1.025]" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" /><div className="absolute inset-x-0 bottom-0 p-4"><span className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-emerald">Playable portfolio</span><strong className="mt-1 block text-sm text-white sm:text-base">{game.title}</strong></div></div>
+                      <div className="relative aspect-[10/7] overflow-hidden"><Image src={game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1024px) 20vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/game:scale-[1.025]" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" /><div className="absolute inset-x-0 bottom-0 p-4"><span className={`text-[0.54rem] font-semibold uppercase tracking-[0.14em] ${game.status === "Playable" ? "text-emerald" : "text-slate-300"}`}>{game.status}</span><strong className="mt-1 block text-sm text-white sm:text-base">{game.title}</strong></div></div>
                     </Link>
                   ))}
                 </div>
@@ -200,12 +200,12 @@ export default function ServicesPage() {
                 <div className="mb-9 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
                   <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                     {[
-                      { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp" },
-                      { title: "Sweet Wins", slug: "sweet-wins", image: "/assets/games/sweet-wins/artwork.webp" },
-                      { title: "Fruit Elixir", slug: "fruit-elixir", image: "/assets/games/fruit-elixir/artwork.webp" }
+                      { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp" },
+                      { title: "Dragon Fruits", slug: "dragon-fruits", image: "/assets/games/dragon-fruits/artwork.webp" },
+                      { title: "Goblin Gems", slug: "goblin-gems", image: "/assets/games/goblin-gems/artwork.webp" }
                     ].map((game) => (
                       <Link key={game.slug} href={`/games/${game.slug}`} className="group/game relative overflow-hidden rounded-[1.1rem] border border-white/10 bg-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
-                        <div className="relative aspect-[10/7] overflow-hidden"><Image src={game.image} alt={`${game.title} portfolio artwork`} fill sizes="(min-width:1280px) 13vw,(min-width:1024px) 38vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/game:scale-[1.02]" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" /><div className="absolute inset-x-0 bottom-0 p-3.5"><span className="text-[0.52rem] font-semibold uppercase tracking-[0.13em] text-emerald">Portfolio title</span><strong className="mt-1 block text-sm text-white">{game.title}</strong></div></div>
+                        <div className="relative aspect-[10/7] overflow-hidden"><Image src={game.image} alt={`${game.title} portfolio artwork`} fill sizes="(min-width:1280px) 13vw,(min-width:1024px) 38vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/game:scale-[1.02]" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" /><div className="absolute inset-x-0 bottom-0 p-3.5"><span className="text-[0.52rem] font-semibold uppercase tracking-[0.13em] text-slate-300">Portfolio title · No public demo</span><strong className="mt-1 block text-sm text-white">{game.title}</strong></div></div>
                       </Link>
                     ))}
                   </div>
@@ -215,7 +215,7 @@ export default function ServicesPage() {
                       {[
                         ["License", "Evaluate existing OpenGamer content where a licensing model fits."],
                         ["Reskin", "Rework theme, assets and presentation around a new brief."],
-                        ["Brand", "Develop a branded variant or new game around partner requirements."],
+                        ["Brand", "Develop a branded variant or new game around supplied requirements."],
                         ["Modernise", "Refresh older content for stronger UX, maintainability or integration readiness."]
                       ].map(([title, text]) => <div key={title} className="border-t border-white/10 pt-4 first:border-t-0 first:pt-0"><h3 className="text-sm font-semibold text-white">{title}</h3><p className="mt-1.5 text-sm leading-6 text-slate-400">{text}</p></div>)}
                     </div>
@@ -235,7 +235,7 @@ export default function ServicesPage() {
                     <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
                       <p className="text-[0.62rem] font-semibold uppercase tracking-[0.19em] text-emerald">Product concept · Mechanics · UX · Interface direction</p>
                       <h3 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">ELEMENTALS</h3>
-                      <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">A concrete OpenGamer reference for Live Casino product thinking: a cinematic show-game concept built around a central wheel, elemental bonus worlds and a host-led player experience.</p>
+                      <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">A concrete OpenGamer reference for Live Casino product thinking: a cinematic show-game concept built around a central wheel and an elemental world system.</p>
                       <Link href="/portfolio/elementals" className="mt-5 inline-flex text-sm font-semibold text-white/85 transition hover:text-emerald">Explore ELEMENTALS →</Link>
                     </div>
                   </div>
@@ -262,7 +262,7 @@ export default function ServicesPage() {
                     <div>
                       <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Embedded capacity</p>
                       <h3 className="mt-3 text-2xl font-semibold tracking-[-0.015em] text-white sm:text-3xl">Add the disciplines the roadmap is missing.</h3>
-                      <p className="mt-4 text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">The engagement can be shaped around a focused specialist scope or a broader dedicated team. The point is to fill a delivery gap without forcing the partner to recreate every role internally.</p>
+                      <p className="mt-4 text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">The engagement can be shaped around a focused specialist scope or a broader dedicated team. The point is to fill a delivery gap without forcing the client team to recreate every role internally.</p>
                       <div className="mt-6 flex flex-wrap gap-2">
                         {["Frontend", "Backend", "Game art", "QA", "Product", "Technical leadership"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.1em] text-slate-400">{item}</span>)}
                       </div>
