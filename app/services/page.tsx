@@ -5,12 +5,15 @@ import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { ServicesHero } from "@/components/services/ServicesHero";
+import { ServicesTechnologyFlow } from "@/components/services/ServicesTechnologyFlow";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
+import { getGameDemoStatusLabel, getGameStatusLabel, playableGames, portfolioGames, type Game } from "@/content/games";
+import { getOptimizedGameArtwork } from "@/lib/gameAssets";
 
 export const metadata: Metadata = {
-  title: "Solutions | OpenGamer Studio",
-  description: "Modular iGaming development solutions for slot games, live-product design, integrations, reskins, QA and dedicated development teams.",
+  title: "Services | OpenGamer Studio",
+  description: "iGaming development services for casino games, dedicated teams, integrations, portfolio adaptation and Live Casino product design.",
   alternates: { canonical: "/services" }
 };
 
@@ -48,6 +51,7 @@ const buyerJobs = [
 const solutionGroups = [
   {
     id: "game-production",
+    interest: "game",
     eyebrow: "Game production",
     title: "From Concept to Playable Game",
     description: "Original and custom casino game production can be scoped as a complete build or around the disciplines your team actually needs.",
@@ -61,6 +65,7 @@ const solutionGroups = [
   },
   {
     id: "technology-and-integration",
+    interest: "technology",
     eyebrow: "Technology & integration",
     title: "Engineering Around the Game",
     description: "Backend modules, RGS-related engineering and partner integration work can be added around the game client when the project requires it.",
@@ -73,6 +78,7 @@ const solutionGroups = [
   },
   {
     id: "portfolio-services",
+    interest: "portfolio",
     eyebrow: "Portfolio & product",
     title: "Adapt, Brand or Reposition Existing Work",
     description: "Existing OpenGamer titles can be evaluated for licensing or adaptation, while supplied content can be scoped for reskin, branding or modernisation.",
@@ -85,6 +91,7 @@ const solutionGroups = [
   },
   {
     id: "live-casino",
+    interest: "live-casino",
     eyebrow: "Live Casino product",
     title: "Design the Live Product, Interface and Show-Game Experience",
     description: "OpenGamer can support Live Casino product design, player and presenter interfaces, and show-game concepts. Studio operation, licensing and broadcast ownership are outside the scope represented here.",
@@ -97,6 +104,7 @@ const solutionGroups = [
   },
   {
     id: "delivery-and-support",
+    interest: "dedicated",
     eyebrow: "Dedicated delivery",
     title: "Add iGaming Capacity Without Building Every Team Internally",
     description: "Specialist production capacity and delivery support for teams that need to move faster without adding every discipline in-house.",
@@ -109,12 +117,34 @@ const solutionGroups = [
   }
 ];
 
-const technologyFlow = [
-  { number: "01", title: "Game client", text: "Responsive player-facing game experience and launch-state handling." },
-  { number: "02", title: "Game services", text: "Session, round, configuration and reporting logic where the scope requires it." },
-  { number: "03", title: "Integration layer", text: "API mapping, wallet communication, authentication and error-state handling." },
-  { number: "04", title: "Partner environment", text: "Sandbox alignment, acceptance support, monitoring expectations and release handoff." }
-];
+const gameProductionProof = [playableGames[0], portfolioGames[0], playableGames[1]].filter(Boolean) as Game[];
+const portfolioProof = portfolioGames.slice(0, 3);
+
+function GameProofCard({ game, portfolio = false }: { game: Game; portfolio?: boolean }) {
+  return (
+    <Link
+      href={`/games/${game.slug}`}
+      className="group relative overflow-hidden rounded-[1.1rem] border border-white/10 bg-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+    >
+      <div className="relative aspect-[10/7] overflow-hidden">
+        <Image
+          src={getOptimizedGameArtwork(game)}
+          alt={`${game.title} artwork`}
+          fill
+          sizes="(min-width:1280px) 18vw,(min-width:640px) 31vw,100vw"
+          className="object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-transparent to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-4">
+          <span className={`text-[0.52rem] font-semibold uppercase tracking-[0.13em] ${portfolio ? "text-slate-300" : "text-emerald"}`}>
+            {getGameStatusLabel(game)} · {getGameDemoStatusLabel(game)}
+          </span>
+          <strong className="mt-1 block text-sm text-white sm:text-base">{game.title}</strong>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 export default function ServicesPage() {
   return (
@@ -123,62 +153,75 @@ export default function ServicesPage() {
 
       <Section className="relative overflow-hidden">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_88%_18%,rgba(46,230,166,0.045),transparent_24rem)]" />
-        <div className="relative grid gap-12 lg:grid-cols-[0.62fr_1.38fr] lg:gap-16 xl:gap-24">
-          <div className="lg:sticky lg:top-28 lg:self-start"><SectionHeader eyebrow="Four ways to work with OpenGamer" title="Choose the Outcome Before the Service List" description="Most commercial conversations start with the result you need, not a catalogue of disciplines. Pick the engagement model first; define the detailed scope second." /><div className="mt-7 flex flex-wrap gap-2">{["Full build", "Embedded capacity", "Technical scope", "Portfolio adaptation"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{item}</span>)}</div></div>
-          <div className="border-t border-white/10">{buyerJobs.map((job) => <Link key={job.title} href={job.href} className="group grid gap-5 border-b border-white/10 py-8 transition duration-300 hover:border-emerald/30 sm:grid-cols-[3.2rem_0.8fr_1.2fr_auto] sm:items-start sm:gap-6 sm:py-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070a]"><span className="text-[0.68rem] font-semibold tracking-[0.2em] text-emerald/90">{job.number}</span><div><h2 className="text-2xl font-semibold tracking-[-0.015em] text-white transition group-hover:text-emerald">{job.title}</h2><span className="mt-3 inline-flex text-sm font-semibold text-white/75 transition group-hover:text-white">View relevant scope →</span></div><div><p className="max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{job.description}</p><div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">{job.items.map((item) => <span key={item} className="flex items-center gap-2 text-xs text-slate-500 sm:text-sm"><span aria-hidden="true" className="h-1 w-1 rounded-full bg-emerald/80" />{item}</span>)}</div></div><div className="hidden items-center sm:flex"><span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-slate-500 transition duration-300 group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:text-emerald">→</span></div></Link>)}</div>
+        <div className="relative grid gap-12 xl:grid-cols-[0.62fr_1.38fr] xl:gap-24">
+          <div className="xl:sticky xl:top-28 xl:self-start">
+            <SectionHeader
+              eyebrow="Four ways to work with OpenGamer"
+              title="Choose the Outcome Before the Service List"
+              description="Most commercial conversations start with the result you need, not a catalogue of disciplines. Pick the engagement model first; define the detailed scope second."
+            />
+            <div className="mt-7 flex flex-wrap gap-2">
+              {["Full build", "Embedded capacity", "Technical scope", "Portfolio adaptation"].map((item) => (
+                <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-500">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="border-t border-white/10">
+            {buyerJobs.map((job) => (
+              <Link
+                key={job.title}
+                href={job.href}
+                className="group grid gap-5 border-b border-white/10 py-7 transition duration-300 hover:border-emerald/30 md:grid-cols-[3.2rem_0.8fr_1.2fr_auto] md:items-start md:gap-6 md:py-9 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070a] motion-reduce:transition-none"
+              >
+                <span className="text-[0.68rem] font-semibold tracking-[0.2em] text-emerald/90">{job.number}</span>
+                <div>
+                  <h2 className="text-2xl font-semibold tracking-[-0.015em] text-white transition group-hover:text-emerald motion-reduce:transition-none">{job.title}</h2>
+                  <span className="mt-3 inline-flex text-sm font-semibold text-white/75 transition group-hover:text-white motion-reduce:transition-none">View relevant scope →</span>
+                </div>
+                <div>
+                  <p className="max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{job.description}</p>
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
+                    {job.items.map((item) => (
+                      <span key={item} className="flex items-center gap-2 text-xs text-slate-500 sm:text-sm">
+                        <span aria-hidden="true" className="h-1 w-1 shrink-0 rounded-full bg-emerald/80" />
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="hidden items-center md:flex">
+                  <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-slate-500 transition duration-300 group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:text-emerald motion-reduce:transform-none motion-reduce:transition-none">→</span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </Section>
 
       {solutionGroups.map((group, index) => (
         <Section key={group.id} id={group.id} className={index % 2 ? "bg-black/20" : ""}>
-          <div className="grid gap-10 lg:grid-cols-[0.4fr_1fr] lg:gap-14">
-            <div className="lg:sticky lg:top-28 lg:self-start"><SectionHeader eyebrow={group.eyebrow} title={group.title} description={group.description} /><Button href={`/contact?service=${encodeURIComponent(group.eyebrow)}#project-enquiry`} variant="secondary" className="mt-7">Discuss This Scope</Button></div>
+          <div className="grid gap-10 xl:grid-cols-[0.4fr_1fr] xl:gap-14">
+            <div className="xl:sticky xl:top-28 xl:self-start">
+              <SectionHeader eyebrow={group.eyebrow} title={group.title} description={group.description} />
+              <Button href={`/contact?interest=${group.interest}#project-enquiry`} variant="secondary" className="mt-7">Discuss This Scope</Button>
+            </div>
+
             <div>
-              {group.id === "game-production" && (
+              {group.id === "game-production" && gameProductionProof.length ? (
                 <div className="mb-8 grid gap-3 sm:grid-cols-3">
-                  {[
-                    { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp", status: "Playable" },
-                    { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp", status: "Portfolio title · No public demo" },
-                    { title: "Dragon Rush", slug: "dragon-rush", image: "/assets/games/dragon-rush/artwork.webp", status: "Playable" }
-                  ].map((game) => (
-                    <Link key={game.slug} href={`/games/${game.slug}`} className="group/game relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
-                      <div className="relative aspect-[10/7] overflow-hidden"><Image src={game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1024px) 20vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/game:scale-[1.025]" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" /><div className="absolute inset-x-0 bottom-0 p-4"><span className={`text-[0.54rem] font-semibold uppercase tracking-[0.14em] ${game.status === "Playable" ? "text-emerald" : "text-slate-300"}`}>{game.status}</span><strong className="mt-1 block text-sm text-white sm:text-base">{game.title}</strong></div></div>
-                    </Link>
-                  ))}
+                  {gameProductionProof.map((game) => <GameProofCard key={game.slug} game={game} portfolio={getGameStatusLabel(game) === "Portfolio Title"} />)}
                 </div>
-              )}
+              ) : null}
 
-              {group.id === "technology-and-integration" && (
-                <div className="relative mb-9 overflow-hidden rounded-[1.4rem] border border-white/10 bg-[#06090b] p-5 sm:p-7">
-                  <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_48%_8%,rgba(46,230,166,0.07),transparent_21rem)]" />
-                  <div className="relative flex flex-col gap-3 lg:grid lg:grid-cols-4 lg:gap-0">
-                    {technologyFlow.map((step, flowIndex) => (
-                      <div key={step.number} className="relative rounded-xl border border-white/[0.08] bg-white/[0.025] p-4 lg:rounded-none lg:border-y lg:border-r-0 lg:bg-transparent lg:p-5 lg:first:rounded-l-xl lg:first:border-l lg:last:rounded-r-xl lg:last:border-r">
-                        {flowIndex < technologyFlow.length - 1 && <span aria-hidden="true" className="absolute -bottom-[1.05rem] left-1/2 z-10 -translate-x-1/2 text-sm text-emerald/70 lg:-right-2.5 lg:bottom-auto lg:left-auto lg:top-1/2 lg:translate-x-0 lg:-translate-y-1/2">→</span>}
-                        <span className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-emerald">{step.number}</span>
-                        <h3 className="mt-3 text-base font-semibold text-white sm:text-lg">{step.title}</h3>
-                        <p className="mt-2 text-sm leading-6 text-slate-400">{step.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="relative mt-5 flex flex-wrap gap-x-5 gap-y-2 border-t border-white/10 pt-5">
-                    {["RGS-related engineering", "Wallet flows", "API mapping", "Acceptance support"].map((item) => <span key={item} className="flex items-center gap-2 text-xs text-slate-500 sm:text-sm"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald/80" />{item}</span>)}
-                  </div>
-                </div>
-              )}
+              {group.id === "technology-and-integration" ? <ServicesTechnologyFlow /> : null}
 
-              {group.id === "portfolio-services" && (
-                <div className="mb-9 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
-                  <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                    {[
-                      { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp" },
-                      { title: "Dragon Fruits", slug: "dragon-fruits", image: "/assets/games/dragon-fruits/artwork.webp" },
-                      { title: "Goblin Gems", slug: "goblin-gems", image: "/assets/games/goblin-gems/artwork.webp" }
-                    ].map((game) => (
-                      <Link key={game.slug} href={`/games/${game.slug}`} className="group/game relative overflow-hidden rounded-[1.1rem] border border-white/10 bg-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
-                        <div className="relative aspect-[10/7] overflow-hidden"><Image src={game.image} alt={`${game.title} portfolio artwork`} fill sizes="(min-width:1280px) 13vw,(min-width:1024px) 38vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/game:scale-[1.02]" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" /><div className="absolute inset-x-0 bottom-0 p-3.5"><span className="text-[0.52rem] font-semibold uppercase tracking-[0.13em] text-slate-300">Portfolio title · No public demo</span><strong className="mt-1 block text-sm text-white">{game.title}</strong></div></div>
-                      </Link>
-                    ))}
+              {group.id === "portfolio-services" ? (
+                <div className="mb-9 grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {portfolioProof.map((game) => <GameProofCard key={game.slug} game={game} portfolio />)}
                   </div>
                   <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.025] p-5 sm:p-6">
                     <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Commercial routes</p>
@@ -188,29 +231,34 @@ export default function ServicesPage() {
                         ["Reskin", "Rework theme, assets and presentation around a new brief."],
                         ["Brand", "Develop a branded variant or new game around supplied requirements."],
                         ["Modernise", "Refresh older content for stronger UX, maintainability or integration readiness."]
-                      ].map(([title, text]) => <div key={title} className="border-t border-white/10 pt-4 first:border-t-0 first:pt-0"><h3 className="text-sm font-semibold text-white">{title}</h3><p className="mt-1.5 text-sm leading-6 text-slate-400">{text}</p></div>)}
+                      ].map(([title, text]) => (
+                        <div key={title} className="border-t border-white/10 pt-4 first:border-t-0 first:pt-0">
+                          <h3 className="text-sm font-semibold text-white">{title}</h3>
+                          <p className="mt-1.5 text-sm leading-6 text-slate-400">{text}</p>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
-              )}
+              ) : null}
 
-              {group.id === "live-casino" && (
+              {group.id === "live-casino" ? (
                 <div className="relative mb-9 overflow-hidden rounded-[1.45rem] border border-white/10 bg-black/40 shadow-[0_28px_90px_rgba(0,0,0,0.28)]">
                   <div className="relative min-h-[390px] sm:min-h-[470px]">
-                    <Image src="/assets/projects/elementals/expositions/nexus-studio-wheel.webp" alt="ELEMENTALS original Live Casino IP concept" fill sizes="(min-width:1024px) 58vw,100vw" className="object-cover" />
+                    <Image src="/assets/projects/elementals/expositions/nexus-studio-wheel.webp" alt="ELEMENTALS original Live Casino IP concept" fill sizes="(min-width:1280px) 58vw,100vw" className="object-cover" />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,10,0.03)_18%,rgba(5,7,10,0.92)_100%)]" />
                     <div className="absolute left-5 top-5 flex flex-wrap gap-2 sm:left-7 sm:top-7">
                       <span className="rounded-full border border-emerald/25 bg-[#07100d]/80 px-3 py-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.15em] text-emerald backdrop-blur">Original Live Casino IP</span>
                       <span className="rounded-full border border-white/12 bg-black/45 px-3 py-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.15em] text-slate-300 backdrop-blur">In development</span>
                     </div>
-                    <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-                      <p className="text-[0.62rem] font-semibold uppercase tracking-[0.19em] text-emerald">Product concept · Mechanics · UX · Interface direction</p>
+                    <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
+                      <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Product concept · Mechanics · UX · Interface direction</p>
                       <h3 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">ELEMENTALS</h3>
                       <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">A concrete OpenGamer reference for Live Casino product thinking: a cinematic show-game concept built around a central wheel and an elemental world system.</p>
-                      <Link href="/portfolio/elementals" className="mt-5 inline-flex text-sm font-semibold text-white/85 transition hover:text-emerald">Explore ELEMENTALS →</Link>
+                      <Link href="/portfolio/elementals" className="mt-5 inline-flex text-sm font-semibold text-white/85 transition hover:text-emerald focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">Explore ELEMENTALS →</Link>
                     </div>
                   </div>
-                  <div className="grid gap-0 border-t border-white/10 sm:grid-cols-2 lg:grid-cols-4">
+                  <div className="grid border-t border-white/10 sm:grid-cols-2 xl:grid-cols-4">
                     {[
                       ["Game format", "Rules, round flow and bonus structure"],
                       ["Presenter UX", "Host prompts, states and studio-facing flow"],
@@ -224,18 +272,20 @@ export default function ServicesPage() {
                     ))}
                   </div>
                 </div>
-              )}
+              ) : null}
 
-              {group.id === "delivery-and-support" && (
+              {group.id === "delivery-and-support" ? (
                 <div className="relative mb-9 overflow-hidden rounded-[1.4rem] border border-white/10 bg-[#06090b] p-5 sm:p-7">
                   <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(46,230,166,0.055),transparent_20rem),radial-gradient(circle_at_90%_80%,rgba(93,156,255,0.035),transparent_18rem)]" />
-                  <div className="relative grid gap-7 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+                  <div className="relative grid gap-7 xl:grid-cols-[0.8fr_1.2fr] xl:items-start">
                     <div>
                       <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Embedded capacity</p>
                       <h3 className="mt-3 text-2xl font-semibold tracking-[-0.015em] text-white sm:text-3xl">Add the disciplines the roadmap is missing.</h3>
                       <p className="mt-4 text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">The engagement can be shaped around a focused specialist scope or a broader dedicated team. The point is to fill a delivery gap without forcing the client team to recreate every role internally.</p>
                       <div className="mt-6 flex flex-wrap gap-2">
-                        {["Frontend", "Backend", "Game art", "QA", "Product", "Technical leadership"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.1em] text-slate-400">{item}</span>)}
+                        {["Frontend", "Backend", "Game art", "QA", "Product", "Technical leadership"].map((item) => (
+                          <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.1em] text-slate-400">{item}</span>
+                        ))}
                       </div>
                     </div>
                     <div className="grid gap-3 sm:grid-cols-2">
@@ -244,21 +294,31 @@ export default function ServicesPage() {
                         ["Dedicated team", "Combine several disciplines around an agreed product or engineering roadmap."],
                         ["Release confidence", "Use QA, regression and integration scenarios to support acceptance."],
                         ["Advisory", "Clarify scope, architecture and delivery risk before committing to a larger build."]
-                      ].map(([title, text]) => <div key={title} className="rounded-xl border border-white/[0.08] bg-white/[0.025] p-4 sm:p-5"><h4 className="text-sm font-semibold text-white">{title}</h4><p className="mt-2 text-sm leading-6 text-slate-500">{text}</p></div>)}
+                      ].map(([title, text]) => (
+                        <div key={title} className="rounded-xl border border-white/[0.08] bg-white/[0.025] p-4 sm:p-5">
+                          <h4 className="text-sm font-semibold text-white">{title}</h4>
+                          <p className="mt-2 text-sm leading-6 text-slate-500">{text}</p>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                  <div className="relative mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-slate-500">
-                    Certification preparation support means implementation, documentation and QA support before independent review. It does not imply that OpenGamer owns or issues a certification.
-                  </div>
+                  <div className="relative mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-slate-500">Certification preparation support means implementation, documentation and QA support before independent review. It does not imply that OpenGamer owns or issues a certification.</div>
                 </div>
-              )}
+              ) : null}
 
               <div className="divide-y divide-white/10 border-y border-white/10">
                 {group.services.map(([title, clientType, deliverables], serviceIndex) => (
-                  <article key={title} className="grid gap-4 py-6 sm:grid-cols-[3rem_0.9fr_1.1fr] sm:gap-6 sm:py-7">
+                  <article key={title} className="grid gap-4 py-6 md:grid-cols-[3rem_0.9fr_1.1fr] md:gap-6 md:py-7">
                     <span className="text-xs font-semibold tracking-[0.16em] text-emerald/80">{String(serviceIndex + 1).padStart(2, "0")}</span>
-                    <div><h3 className="text-lg font-semibold text-white">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-300">{clientType}</p></div>
-                    <div className="sm:border-l sm:border-white/10 sm:pl-6"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Typical scope</p><p className="mt-2 text-sm leading-6 text-slate-400">{deliverables}</p><Link href={`/contact?service=${encodeURIComponent(title)}#project-enquiry`} className="mt-4 inline-flex text-sm font-semibold text-emerald transition hover:text-white">Discuss service →</Link></div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">{title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-300">{clientType}</p>
+                    </div>
+                    <div className="md:border-l md:border-white/10 md:pl-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Typical scope</p>
+                      <p className="mt-2 text-sm leading-6 text-slate-400">{deliverables}</p>
+                      <Link href={`/contact?interest=${group.interest}&service=${encodeURIComponent(title)}#project-enquiry`} className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">Discuss service →</Link>
+                    </div>
                   </article>
                 ))}
               </div>
@@ -269,11 +329,13 @@ export default function ServicesPage() {
 
       <Section className="relative overflow-hidden bg-black/20">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(46,230,166,0.05),transparent_25rem)]" />
-        <div className="relative grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16 xl:gap-24">
+        <div className="relative grid gap-12 xl:grid-cols-[0.7fr_1.3fr] xl:gap-24">
           <div>
-            <SectionHeader eyebrow="Before we scope it" title="A Useful First Conversation Needs Four Things" description="No procurement theatre is required. A short brief is enough when it explains the current situation and the gap that needs to be closed." />
+            <SectionHeader eyebrow="Before we scope it" title="A Useful First Conversation Needs Four Things" description="A short brief is enough when it explains the current situation and the gap that needs to be closed." />
             <div className="mt-7 flex flex-wrap gap-2" aria-label="OpenGamer project entry points">
-              {["New build", "Existing product", "Technical gap", "Capacity gap"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{item}</span>)}
+              {["New build", "Existing product", "Technical gap", "Capacity gap"].map((item) => (
+                <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{item}</span>
+              ))}
             </div>
           </div>
           <div className="border-t border-white/10">
@@ -283,7 +345,7 @@ export default function ServicesPage() {
               ["03", "What does it depend on?", "Platform, APIs, wallet flows, existing architecture, third-party review, internal stakeholders or launch constraints."],
               ["04", "What is missing internally?", "A complete build, one specialist discipline, several embedded roles, QA, integration support or product and technical guidance."]
             ].map(([number, title, text]) => (
-              <div key={number} className="grid gap-3 border-b border-white/10 py-7 sm:grid-cols-[3rem_0.8fr_1.2fr] sm:gap-6 sm:py-8">
+              <div key={number} className="grid gap-3 border-b border-white/10 py-7 md:grid-cols-[3rem_0.8fr_1.2fr] md:gap-6 md:py-8">
                 <span className="text-[0.66rem] font-semibold tracking-[0.18em] text-emerald">{number}</span>
                 <h3 className="text-lg font-semibold text-white sm:text-xl">{title}</h3>
                 <p className="text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{text}</p>
@@ -293,7 +355,14 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <CTASection title="Bring the Gap. We’ll Define the Smallest Useful Scope." description="Share the project type, current stage, technical dependencies and what is missing internally. The first conversation can stay focused on the work that actually needs to happen." ctaLabel="Discuss a Project" ctaHref="/contact#project-enquiry" secondaryLabel="Explore Games" secondaryHref="/games" />
+      <CTASection
+        title="Bring the Gap. We’ll Define the Smallest Useful Scope."
+        description="Share the project type, current stage, technical dependencies and what is missing internally. The first conversation can stay focused on the work that actually needs to happen."
+        ctaLabel="Discuss a Project"
+        ctaHref="/contact#project-enquiry"
+        secondaryLabel="Explore Games"
+        secondaryHref="/games"
+      />
     </SiteShell>
   );
 }
