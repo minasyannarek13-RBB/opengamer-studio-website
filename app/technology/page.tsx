@@ -56,6 +56,13 @@ const heroTechnologyFlow = [
   ["04", "Partner environment", "Acceptance & release"]
 ];
 
+const architectureBoundaries = [
+  ["Player layer", "Game client, responsive UI, launch state and player interaction."],
+  ["Game service layer", "Session, round, configuration and reporting logic where required."],
+  ["Partner boundary", "Wallet, authentication, API mapping and acceptance expectations."],
+  ["Release boundary", "QA, monitoring expectations, handoff and post-release support scope."]
+];
+
 export default function TechnologyPage() {
   return (
     <SiteShell atmosphere="technology">
@@ -166,20 +173,34 @@ export default function TechnologyPage() {
         <div className="relative mt-5 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500"><span className="h-px w-8 bg-white/10" /><span>Connected through product and integration scope</span><span className="h-px w-8 bg-white/10" /></div>
       </Section>
 
-      <Section>
-        <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-          <SectionHeader eyebrow="Architecture" title="Reference Integration Architecture" description="A layered view separating player, partner, game technology and operational environments." />
-          <ArchitectureDiagram items={technologyArchitectureFlow} />
+      <Section className="relative overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_78%_28%,rgba(46,230,166,0.045),transparent_24rem)]" />
+        <div className="relative grid gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start lg:gap-16">
+          <div className="lg:sticky lg:top-28">
+            <SectionHeader eyebrow="Architecture" title="Reference Integration Architecture" description="A layered view separating player, partner, game technology and operational environments." />
+            <div className="mt-7 space-y-4 border-t border-white/10 pt-5">
+              <p className="text-sm leading-6 text-slate-400">The exact boundary depends on the partner environment. Authentication, wallet behavior, API contracts and operational requirements are defined from actual partner documentation, not assumed in advance.</p>
+              <Button href="/contact?service=technology#project-enquiry" variant="secondary">Discuss Architecture</Button>
+            </div>
+          </div>
+          <div>
+            <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#06090b] p-4 sm:p-6">
+              <ArchitectureDiagram items={technologyArchitectureFlow} />
+              <div className="mt-6 grid gap-3 border-t border-white/10 pt-6 sm:grid-cols-2">
+                {architectureBoundaries.map(([title, text]) => <div key={title} className="rounded-xl border border-white/[0.08] bg-white/[0.025] p-4"><h3 className="text-sm font-semibold text-white">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-500">{text}</p></div>)}
+              </div>
+            </div>
+          </div>
         </div>
       </Section>
 
       <Section className="bg-black/20">
-        <SectionHeader eyebrow="Product references" title="Technology Connected to Real Product Work" description="Real OpenGamer games and product concepts provide the visual proof layer for the engineering story." />
+        <SectionHeader eyebrow="Product references" title="Different Products. Different Engineering Surfaces." description="The technology story is connected to multiple kinds of OpenGamer work rather than one repeated showcase title." />
         <div className="mt-10">
           <RelatedProductStrip items={[
-            { eyebrow: "Playable game", title: "Deep Dive", description: "Public game demo showing the player-facing product layer technology supports.", image: "/assets/games/deep-dive/artwork.webp", href: "/games/deep-dive", actionLabel: "View Game", accent: "#5d9cff" },
-            { eyebrow: "Product interface", title: "LC App", description: "B2B social live casino product-interface reference.", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" },
-            { eyebrow: "Playable game", title: "Forest Fortune", description: "Portfolio game content connected to frontend and backend delivery.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" }
+            { eyebrow: "Playable game client", title: "Dragon Rush", description: "A public game reference for responsive player-facing client and presentation work.", image: "/assets/games/dragon-rush/artwork.webp", href: "/games/dragon-rush", actionLabel: "View Game", accent: "#5d9cff" },
+            { eyebrow: "Product interface", title: "LC App", description: "B2B social Live Casino product-interface work showing a different product and UX surface.", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" },
+            { eyebrow: "Playable portfolio", title: "Forest Fortune", description: "A second game-production reference connecting product presentation with the wider delivery stack.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" }
           ]} />
         </div>
       </Section>
