@@ -10,6 +10,7 @@ export function GameCard({ game }: { game: Game }) {
   const demoUrl = getVerifiedDemoUrl(game);
   const primaryCategory = game.category?.[0];
   const artwork = getOptimizedGameArtwork(game);
+  const imageStatus = demoUrl ? "Playable" : game.commercialStatus === "in-development" ? "In development" : "Portfolio title";
 
   return (
     <article className="premium-card game-card group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] shadow-[0_18px_60px_rgba(0,0,0,0.20)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 hover:bg-white/[0.05] hover:shadow-[0_24px_76px_rgba(0,0,0,0.26)] focus-within:-translate-y-0.5 focus-within:border-emerald/45" style={{ "--game-accent": game.visualAccent || "#2ee6a6" } as CSSProperties}>
@@ -18,7 +19,7 @@ export function GameCard({ game }: { game: Game }) {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/88 via-black/25 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-2 p-4">
           {primaryCategory ? <span className="max-w-full break-words rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur">{primaryCategory}</span> : <span />}
-          {demoUrl ? <span className="shrink-0 rounded-full border border-emerald/25 bg-emerald/10 px-3 py-1 text-xs font-medium text-emerald backdrop-blur">Playable</span> : null}
+          <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium backdrop-blur ${demoUrl ? "border border-emerald/25 bg-emerald/10 text-emerald" : "border border-white/15 bg-black/55 text-slate-300"}`}>{imageStatus}</span>
         </div>
       </Link>
       <div className="flex min-w-0 flex-1 flex-col p-5 sm:p-6">
@@ -28,7 +29,11 @@ export function GameCard({ game }: { game: Game }) {
         </div>
         <p className="mt-3 break-words text-sm leading-6 text-slate-400">{game.shortDescription}</p>
         <div className="mt-auto grid gap-3 pt-6 sm:flex sm:flex-wrap sm:items-center">
-          {demoUrl ? <Button href={demoUrl} className="min-h-10 w-full px-4 sm:w-auto" target="_blank" rel="noopener noreferrer">Play Demo</Button> : <Button href={`/contact?interest=game&game=${game.slug}#project-enquiry`} variant="secondary" className="min-h-10 w-full px-4 sm:w-auto">Request Demo</Button>}
+          {demoUrl ? (
+            <Button href={demoUrl} className="min-h-10 w-full px-4 sm:w-auto" target="_blank" rel="noopener noreferrer">Play Demo</Button>
+          ) : (
+            <Button href={`/contact?interest=game&game=${game.slug}#project-enquiry`} variant="secondary" className="min-h-10 w-full px-4 sm:w-auto">Discuss This Game</Button>
+          )}
           <Button href={`/games/${game.slug}`} variant="link" className="justify-self-start" aria-label={`View details for ${game.title}`}>View Game</Button>
         </div>
       </div>
