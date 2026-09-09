@@ -52,7 +52,7 @@ export function getGameCommercialStatusLabel(game: Game) {
 }
 
 export function getGameDemoStatusLabel(game: Game) {
-  return hasVerifiedDemo(game) ? "Demo Available" : null;
+  return hasVerifiedDemo(game) ? "Demo Available" : "No Public Demo";
 }
 
 export function hasVerifiedDemo(game: Game) {
@@ -232,7 +232,7 @@ const rawGames: Game[] = [
     image: "/assets/games/passion-paradise-20l/artwork.jpg",
     imageWidth: 600,
     imageHeight: 420,
-    shortDescription: "Bright fruits and 20 paylines deliver nonstop excitement in this classic slot.",
+    shortDescription: "Experience a fruit slot frenzy with 20 paylines of juicy, fast-paced spins.",
     category: ["Slot Game"],
     commercialStatus: "portfolio",
     demoStatus: "verified",
@@ -402,7 +402,7 @@ const gameContentOverrides: Record<string, Partial<Game>> = {
     shortDescription: "A fantasy gem slot concept using goblin-world character direction and jewel collection cues for portfolio review.",
     longDescription: "Goblin Gems is positioned for portfolio and custom-scope conversations where character styling, gem symbols and fantasy UX can be adapted around partner needs.",
     mechanics: ["Gem collection cues", "Fantasy theme", "Character-led artwork"],
-    features: ["Portfolio artwork", "Request demo state", "Customisation candidate"],
+    features: ["Portfolio artwork", "No public demo", "Customisation candidate"],
     status: "request-access"
   },
   "passion-paradise": {
@@ -421,7 +421,7 @@ const gameContentOverrides: Record<string, Partial<Game>> = {
     shortDescription: "A royal-themed fruit slot concept designed around familiar symbols, premium framing and portfolio-ready artwork.",
     longDescription: "Royal Fruits brings a more formal visual layer to classic fruit-slot readability, making it suitable for portfolio review and branded adaptation discussions.",
     mechanics: ["Fruit symbols", "Royal theme", "Classic slot structure"],
-    features: ["Portfolio artwork", "Request demo state", "Customisation candidate"],
+    features: ["Portfolio artwork", "No public demo", "Customisation candidate"],
     status: "request-access"
   },
   "sweet-wins": {
@@ -488,7 +488,7 @@ export const games: Game[] = rawGames.map((game) => {
     gameType: merged.gameType || "Portfolio Slot",
     status,
     mechanics: merged.mechanics || ["Slot gameplay", "Portfolio artwork"],
-    features: merged.features || ["Portfolio review", hasVerifiedDemo(merged) ? "Public demo" : "Request demo"],
+    features: merged.features || ["Portfolio review", hasVerifiedDemo(merged) ? "Public demo" : "No public demo"],
     supportedDevices: merged.supportedDevices || defaultDevices,
     artwork: merged.artwork || withArtwork(merged)
   };
