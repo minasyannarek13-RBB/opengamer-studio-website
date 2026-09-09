@@ -2,9 +2,14 @@ import type { Metadata } from "next";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { ManualHero } from "@/components/home/ManualHero";
 import { ManualHomepageBody } from "@/components/home/ManualHomepageBody";
-import { homepageCopy } from "@/content/studioHomepage";
 
-const copy = homepageCopy.en;
+const meta = {
+  title: "OpenGamer Studio | iGaming Development Studio",
+  description: "OpenGamer creates games, gaming products, technology and complete iGaming experiences for operators, aggregators, brands and providers.",
+  ogTitle: "OpenGamer Studio | Games, Products and iGaming Technology",
+  ogDescription: "A multi-product iGaming development studio for games, technology, integrations and original product concepts."
+};
+
 const socialPreview = {
   url: "/assets/brand/opengamer-og.png",
   width: 1200,
@@ -13,12 +18,12 @@ const socialPreview = {
 };
 
 export const metadata: Metadata = {
-  title: copy.meta.title,
-  description: copy.meta.description,
+  title: meta.title,
+  description: meta.description,
   alternates: { canonical: "/" },
   openGraph: {
-    title: copy.meta.ogTitle,
-    description: copy.meta.ogDescription,
+    title: meta.ogTitle,
+    description: meta.ogDescription,
     url: "/",
     siteName: "OpenGamer Studio",
     type: "website",
@@ -27,8 +32,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: copy.meta.ogTitle,
-    description: copy.meta.ogDescription,
+    title: meta.ogTitle,
+    description: meta.ogDescription,
     images: [socialPreview.url]
   }
 };
