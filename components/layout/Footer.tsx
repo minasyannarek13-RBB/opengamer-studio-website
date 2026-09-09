@@ -61,8 +61,9 @@ const footerCopy: Record<Locale, { solutions: string; company: string; legalCont
 
 const proofLinks = [
   { label: "Forest Fortune", meta: "Playable slot", href: "/games/forest-fortune" },
-  { label: "ELEMENTALS", meta: "Original Live Casino IP", href: "/portfolio/elementals" },
-  { label: "LC App", meta: "B2B product concept", href: "/portfolio/lc-app" }
+  { label: "Cake Bonanza", meta: "Portfolio title · No public demo", href: "/games/cake-bonanza" },
+  { label: "ELEMENTALS", meta: "Original Live Casino IP · In development", href: "/portfolio/elementals" },
+  { label: "LC App", meta: "B2B product concept · In development", href: "/portfolio/lc-app" }
 ];
 
 export function Footer({ locale = "en" }: { locale?: Locale }) {
@@ -71,16 +72,16 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
   return (
     <footer className="border-t border-white/10 bg-black/40 py-14 sm:py-16">
       <Container>
-        <div className="mb-10 grid gap-3 border-b border-white/10 pb-8 sm:grid-cols-3" aria-label={copy.proof}>
+        <div className="mb-10 grid gap-3 border-b border-white/10 pb-8 sm:grid-cols-2 lg:grid-cols-4" aria-label={copy.proof}>
           {proofLinks.map((item) => (
             <Link
               key={item.label}
               href={getLocalizedHomePath(locale, item.href)}
-              className="group flex items-center justify-between gap-4 rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-3 transition hover:border-emerald/25 hover:bg-white/[0.045] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+              className="group flex min-h-[4.75rem] items-center justify-between gap-4 rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-3 transition hover:border-emerald/25 hover:bg-white/[0.045] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
             >
               <span>
                 <span className="block text-sm font-semibold text-white">{item.label}</span>
-                <span className="mt-1 block text-[0.68rem] uppercase tracking-[0.14em] text-slate-500">{item.meta}</span>
+                <span className="mt-1 block text-[0.64rem] uppercase leading-5 tracking-[0.12em] text-slate-500">{item.meta}</span>
               </span>
               <span className="text-emerald transition group-hover:translate-x-0.5" aria-hidden="true">→</span>
             </Link>
