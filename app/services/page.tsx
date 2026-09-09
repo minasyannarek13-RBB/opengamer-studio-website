@@ -110,6 +110,13 @@ const solutionGroups = [
   }
 ];
 
+const technologyFlow = [
+  { number: "01", title: "Game client", text: "Responsive player-facing game experience and launch-state handling." },
+  { number: "02", title: "Game services", text: "Session, round, configuration and reporting logic where the scope requires it." },
+  { number: "03", title: "Integration layer", text: "API mapping, wallet communication, authentication and error-state handling." },
+  { number: "04", title: "Partner environment", text: "Sandbox alignment, acceptance support, monitoring expectations and release handoff." }
+];
+
 export default function ServicesPage() {
   return (
     <SiteShell atmosphere="solutions">
@@ -168,6 +175,25 @@ export default function ServicesPage() {
                       <div className="relative aspect-[10/7] overflow-hidden"><Image src={game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1024px) 20vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/game:scale-[1.025]" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" /><div className="absolute inset-x-0 bottom-0 p-4"><span className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-emerald">Playable portfolio</span><strong className="mt-1 block text-sm text-white sm:text-base">{game.title}</strong></div></div>
                     </Link>
                   ))}
+                </div>
+              )}
+
+              {group.id === "technology-and-integration" && (
+                <div className="relative mb-9 overflow-hidden rounded-[1.4rem] border border-white/10 bg-[#06090b] p-5 sm:p-7">
+                  <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_48%_8%,rgba(46,230,166,0.07),transparent_21rem)]" />
+                  <div className="relative flex flex-col gap-3 lg:grid lg:grid-cols-4 lg:gap-0">
+                    {technologyFlow.map((step, flowIndex) => (
+                      <div key={step.number} className="relative rounded-xl border border-white/[0.08] bg-white/[0.025] p-4 lg:rounded-none lg:border-y lg:border-r-0 lg:bg-transparent lg:p-5 lg:first:rounded-l-xl lg:first:border-l lg:last:rounded-r-xl lg:last:border-r">
+                        {flowIndex < technologyFlow.length - 1 && <span aria-hidden="true" className="absolute -bottom-[1.05rem] left-1/2 z-10 -translate-x-1/2 text-sm text-emerald/70 lg:-right-2.5 lg:bottom-auto lg:left-auto lg:top-1/2 lg:translate-x-0 lg:-translate-y-1/2">→</span>}
+                        <span className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-emerald">{step.number}</span>
+                        <h3 className="mt-3 text-base font-semibold text-white sm:text-lg">{step.title}</h3>
+                        <p className="mt-2 text-sm leading-6 text-slate-400">{step.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="relative mt-5 flex flex-wrap gap-x-5 gap-y-2 border-t border-white/10 pt-5">
+                    {["RGS-related engineering", "Wallet flows", "API mapping", "Acceptance support"].map((item) => <span key={item} className="flex items-center gap-2 text-xs text-slate-500 sm:text-sm"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald/80" />{item}</span>)}
+                  </div>
                 </div>
               )}
 
