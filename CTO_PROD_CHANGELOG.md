@@ -6,12 +6,11 @@ Current production-relevant state for the OpenGamer website. Git history is the 
 
 - Branch: `build/contact-conversion-handoff-20260908`
 - Baseline lineage: `v2-current`
-- Current code candidate: `5486ae29c2fbcce687ba2b9d2ff4c4fe7fa35612`
-- Last fully tested code head: `7e06037653d96db3d0a72caf5acc6854f10ea8c9`
-- QA at last fully tested head: `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` PASS; `pnpm build` PASS.
-- Current candidate QA: GitHub Quality queued/pending; do not classify READY until exact-head checks pass.
+- Current code candidate: `475bc24563e2effbeb6f750026cedd6058069d48`
+- Last fully tested code head: `475bc24563e2effbeb6f750026cedd6058069d48`
+- Exact-head GitHub Quality: lint PASS; typecheck PASS; production config tests PASS; build PASS.
 - Production domain/DNS/aliases/secrets/env: unchanged.
-- Deployment policy: ignore Vercel during iterative development. Finish code + QA first, then create one fresh RC preview.
+- Deployment policy: Vercel is rate-limited and intentionally deferred during iterative development. Finish code + QA first, then create one fresh RC preview.
 
 ## Current architecture
 
@@ -44,7 +43,7 @@ Locale routes exist only as compatibility redirects to the canonical non-localiz
 
 ## Current site state
 
-- Homepage: buyer-first hero now states the three core buying intents directly: build a game, extend delivery capacity, solve a product/engineering gap. Capability proof is explicit about custom games, frontend/backend/math modules and integration/RGS-related engineering. Visual proof remains catalogue-driven and separates ELEMENTALS, LC App and slot work.
+- Homepage: first screen now leads with the three buying intents — build casino games, extend delivery and solve a product gap — with three restrained engagement signals instead of a dense capability checklist. Hero proof is catalogue-driven and reduced to four selected game cards for clearer hierarchy; ELEMENTALS and LC App remain visibly separate in-development product directions.
 - Services: one canonical services surface covering game production, technology/integration, portfolio adaptation, Live Casino product scope and dedicated delivery.
 - Technology: engineering stack, frontend/backend roles, architecture boundaries, partner dependencies, workflow and engagement models.
 - Portfolio: separates playable games, original IP and product/interface work; supports playable and portfolio-only titles together.
@@ -66,7 +65,7 @@ Active sources of truth:
 - `OPEN_GAMER_BRAND_GUIDELINES.md`
 - this handoff
 
-Do not restore removed files because an older commit, preview or document references them.
+Do not restore removed files because an older commit, preview or document references them. A helper/component is not dead if current branch consumers or typecheck still require it.
 
 ## Release gate
 
@@ -85,7 +84,7 @@ Before production merge/port:
 11. verify contact intent routing + submission with approved env
 12. verify canonical/OG metadata, sitemap, robots and security headers
 13. confirm legal review status
-14. create one fresh Vercel RC preview from the exact tested head
+14. create one fresh Vercel RC preview from the exact tested head after quota reset
 15. only then decide production merge/alias/domain action
 
 ## Rollback
