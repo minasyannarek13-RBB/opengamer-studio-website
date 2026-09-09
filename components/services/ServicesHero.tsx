@@ -3,9 +3,13 @@ import Link from "next/link";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { getGameStatusLabel } from "@/content/games";
+import { getOptimizedGameArtwork } from "@/lib/gameAssets";
+import { getCompactGameProof } from "@/lib/gameShowcase";
 
 const scopeItems = ["Game production", "Dedicated development", "Technology & integration", "Portfolio adaptation"];
 const supportItems = ["Custom game development", "Dedicated capacity", "RGS-related engineering", "Integration support"];
+const primaryGameProof = getCompactGameProof().playable;
 
 export function ServicesHero() {
   return (
@@ -38,18 +42,20 @@ export function ServicesHero() {
           <div className="relative grid gap-4 sm:grid-cols-[1fr_0.44fr] xl:block xl:min-h-[600px]" aria-label="Selected OpenGamer work supporting the service offering">
             <div aria-hidden="true" className="absolute inset-[8%] hidden rounded-[3rem] bg-emerald/[0.045] blur-3xl xl:block" />
 
-            <Link
-              href="/games/forest-fortune"
-              className="group relative min-h-[310px] overflow-hidden rounded-[1.6rem] border border-white/15 bg-black/45 shadow-[0_34px_110px_rgba(0,0,0,0.42)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:row-span-2 sm:min-h-[540px] xl:absolute xl:left-0 xl:top-[3%] xl:h-[62%] xl:w-[72%] xl:min-h-0"
-            >
-              <Image src="/assets/games/forest-fortune/artwork.webp" alt="Forest Fortune playable OpenGamer slot" fill priority sizes="(min-width:1280px) 43vw,(min-width:640px) 66vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0.02)_30%,rgba(4,6,8,0.84)_100%)]" />
-              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
-                <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-emerald">Playable · Game production proof</span>
-                <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">Forest Fortune</h2>
-                <p className="mt-2 max-w-md text-sm leading-6 text-slate-300">A public game reference behind the production offer.</p>
-              </div>
-            </Link>
+            {primaryGameProof ? (
+              <Link
+                href={`/games/${primaryGameProof.slug}`}
+                className="group relative min-h-[310px] overflow-hidden rounded-[1.6rem] border border-white/15 bg-black/45 shadow-[0_34px_110px_rgba(0,0,0,0.42)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:row-span-2 sm:min-h-[540px] xl:absolute xl:left-0 xl:top-[3%] xl:h-[62%] xl:w-[72%] xl:min-h-0"
+              >
+                <Image src={getOptimizedGameArtwork(primaryGameProof)} alt={`${primaryGameProof.title} playable OpenGamer game`} fill priority sizes="(min-width:1280px) 43vw,(min-width:640px) 66vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0.02)_30%,rgba(4,6,8,0.84)_100%)]" />
+                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
+                  <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-emerald">{getGameStatusLabel(primaryGameProof)} · Game production proof</span>
+                  <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">{primaryGameProof.title}</h2>
+                  <p className="mt-2 max-w-md text-sm leading-6 text-slate-300">A public game reference behind the production offer.</p>
+                </div>
+              </Link>
+            ) : null}
 
             <Link
               href="/portfolio/elementals"
