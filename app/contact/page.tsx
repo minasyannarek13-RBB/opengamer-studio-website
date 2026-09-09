@@ -58,9 +58,9 @@ const enquiryGuidance = [
 export default function ContactPage() {
   return (
     <SiteShell atmosphere="contact">
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#05070a] py-14 sm:py-20 lg:py-20">
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#05070a] py-14 sm:py-20 xl:py-20">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_0%,rgba(46,230,166,0.085),transparent_26rem),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_58%)]" />
-        <Container className="relative grid gap-8 lg:grid-cols-[0.74fr_0.26fr] lg:items-end lg:gap-14">
+        <Container className="relative grid gap-8 xl:grid-cols-[0.74fr_0.26fr] xl:items-end xl:gap-14">
           <div>
             <SectionHeader
               eyebrow="Start a commercial conversation"
@@ -72,7 +72,7 @@ export default function ContactPage() {
               Start enquiry <span aria-hidden="true">↓</span>
             </Link>
           </div>
-          <div className="border-t border-white/10 pt-5 text-sm text-slate-400 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+          <div className="border-t border-white/10 pt-5 text-sm text-slate-400 xl:border-l xl:border-t-0 xl:pl-8 xl:pt-0">
             <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-emerald">Enough for a first message</p>
             <p className="mt-3 leading-6">Project type · current stage · missing scope · known dependencies</p>
           </div>
@@ -81,8 +81,8 @@ export default function ContactPage() {
 
       <Section className="relative overflow-hidden">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_90%_12%,rgba(46,230,166,0.04),transparent_22rem)]" />
-        <div className="relative grid gap-10 lg:grid-cols-[0.48fr_1.52fr] lg:gap-14 xl:gap-20">
-          <div className="lg:sticky lg:top-28 lg:self-start">
+        <div className="relative grid gap-10 xl:grid-cols-[0.48fr_1.52fr] xl:gap-20">
+          <div className="xl:sticky xl:top-28 xl:self-start">
             <SectionHeader eyebrow="Choose a starting point" title="Route the Conversation by Outcome" description="Pick the closest path. The detailed production or engineering scope can be defined after the actual context is clear." />
             <p className="mt-6 max-w-md text-sm leading-6 text-slate-500">Selecting a route only pre-fills the enquiry context. It does not lock the project into a fixed service package.</p>
           </div>
@@ -91,7 +91,7 @@ export default function ContactPage() {
               <Link
                 key={route.title}
                 href={route.href}
-                className="group grid gap-4 border-b border-white/10 py-6 transition duration-300 last:border-b-0 hover:border-emerald/30 sm:grid-cols-[3rem_0.72fr_1.28fr_auto] sm:items-start sm:gap-6 sm:py-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070a] motion-reduce:transition-none"
+                className="group grid gap-4 border-b border-white/10 py-6 transition duration-300 last:border-b-0 hover:border-emerald/30 md:grid-cols-[3rem_0.72fr_1.28fr_auto] md:items-start md:gap-6 md:py-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070a] motion-reduce:transition-none"
               >
                 <span className="text-[0.62rem] font-semibold tracking-[0.18em] text-emerald/90">{route.index}</span>
                 <div>
@@ -102,7 +102,7 @@ export default function ContactPage() {
                   <p className="text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{route.description}</p>
                   <p className="mt-3 text-xs leading-5 text-slate-500">{route.scope}</p>
                 </div>
-                <span aria-hidden="true" className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/10 text-slate-500 transition group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:text-emerald motion-reduce:transform-none motion-reduce:transition-none sm:flex">→</span>
+                <span aria-hidden="true" className="hidden h-11 w-11 items-center justify-center rounded-full border border-white/10 text-slate-500 transition group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:text-emerald motion-reduce:transform-none motion-reduce:transition-none md:flex">→</span>
               </Link>
             ))}
           </div>
@@ -111,8 +111,8 @@ export default function ContactPage() {
 
       <Section className="relative overflow-hidden bg-black/20">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(46,230,166,0.035),transparent_25rem)]" />
-        <div className="relative grid gap-10 lg:grid-cols-[0.34fr_1fr] lg:gap-12 xl:gap-16">
-          <aside className="grid content-start gap-7 lg:sticky lg:top-28 lg:self-start">
+        <div className="relative grid gap-10 xl:grid-cols-[0.34fr_1fr] xl:gap-16">
+          <aside className="grid content-start gap-7 xl:sticky xl:top-28 xl:self-start">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">Short brief, useful context</p>
               <h2 className="mt-3 text-2xl font-semibold text-white">Start with what is already known.</h2>
@@ -137,12 +137,12 @@ export default function ContactPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Business contact</p>
               <div className="mt-3 grid gap-2">
                 {company.email ? (
-                  <a href={`mailto:${company.email}`} className="w-fit text-slate-300 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">{company.email}</a>
+                  <a href={`mailto:${company.email}`} className="w-fit text-slate-300 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">{company.email}</a>
                 ) : (
                   <p>Use the project enquiry form for commercial requests.</p>
                 )}
                 {company.social.map((item) => (
-                  <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="w-fit text-slate-300 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">{item.label}</a>
+                  <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="w-fit text-slate-300 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">{item.label}</a>
                 ))}
               </div>
             </div>
