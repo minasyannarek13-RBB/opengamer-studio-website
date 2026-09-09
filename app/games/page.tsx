@@ -67,7 +67,7 @@ export default function GamesPage() {
                 className={`group overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#080b0e] shadow-[0_24px_70px_rgba(0,0,0,0.25)] transition duration-300 hover:-translate-y-0.5 hover:border-emerald/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transform-none motion-reduce:transition-none ${index === 0 ? "sm:col-span-2 xl:col-span-7 xl:row-span-2" : "xl:col-span-5"}`}
               >
                 <div className={`relative overflow-hidden bg-black/40 ${index === 0 ? "aspect-[16/10] xl:aspect-[4/3]" : "aspect-[16/8] xl:aspect-[16/9]"}`}>
-                  <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill priority={index === 0} sizes={index === 0 ? "(min-width:1280px) 55vw,100vw" : "(min-width:1280px) 40vw,(min-width:640px) 50vw,100vw"} className="object-cover transition duration-700 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
+                  <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill priority={index === 0} quality={92} sizes={index === 0 ? "(min-width:1280px) 55vw,100vw" : "(min-width:1280px) 40vw,(min-width:640px) 50vw,100vw"} className="object-cover transition duration-700 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
                 </div>
                 <div className={`${index === 0 ? "p-5 sm:p-6 xl:p-7" : "p-5"}`}>
                   <span className="text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-emerald">{getGameStatusLabel(game)} · {getGameDemoStatusLabel(game)}</span>
@@ -95,7 +95,7 @@ export default function GamesPage() {
               {portfolioHighlights.map((game) => (
                 <Link key={game.slug} href={`/games/${game.slug}`} className="group relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.025] p-3 transition duration-300 hover:-translate-y-0.5 hover:border-emerald/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transform-none motion-reduce:transition-none">
                   <div className="relative aspect-[10/7] overflow-hidden rounded-[0.9rem] border border-white/[0.06] bg-black/30">
-                    <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1280px) 22vw,(min-width:640px) 46vw,100vw" className="object-cover transition duration-500 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
+                    <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill quality={92} sizes="(min-width:1280px) 22vw,(min-width:640px) 46vw,100vw" className="object-cover transition duration-500 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
                   </div>
                   <div className="px-1 pb-1 pt-4">
@@ -127,7 +127,7 @@ export default function GamesPage() {
               {developmentHighlights.map((game) => (
                 <Link key={game.slug} href={`/games/${game.slug}`} className="group overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.025] transition hover:border-emerald/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">
                   <div className="relative aspect-[10/7] overflow-hidden bg-black/30">
-                    <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1280px) 22vw,(min-width:640px) 46vw,100vw" className="object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
+                    <Image src={game.artwork?.catalogue || game.image} alt={`${game.title} artwork`} fill quality={92} sizes="(min-width:1280px) 22vw,(min-width:640px) 46vw,100vw" className="object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
                   </div>
                   <div className="p-4">
                     <span className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-emerald">In Development</span>
