@@ -9,7 +9,7 @@ export type RouteItem = {
 export const routes: RouteItem[] = [
   { path: "/", nav: true, label: { en: "Home", ru: "Главная", hy: "Գլխավոր", es: "Inicio", pt: "Inicio" } },
   { path: "/games", nav: true, label: { en: "Games", ru: "Игры", hy: "Խաղեր", es: "Juegos", pt: "Jogos" } },
-  { path: "/services", nav: true, label: { en: "Solutions", ru: "Решения", hy: "Լուծումներ", es: "Soluciones", pt: "Soluções" } },
+  { path: "/services", nav: true, label: { en: "Services", ru: "Услуги", hy: "Ծառայություններ", es: "Servicios", pt: "Serviços" } },
   { path: "/portfolio", nav: true, label: { en: "Portfolio", ru: "Портфолио", hy: "Պորտֆոլիո", es: "Portafolio", pt: "Portfólio" } },
   { path: "/technology", nav: true, label: { en: "Technology", ru: "Технологии", hy: "Տեխնոլոգիա", es: "Tecnología", pt: "Tecnologia" } },
   { path: "/about", nav: true, label: { en: "Company", ru: "Компания", hy: "Ընկերություն", es: "Empresa", pt: "Empresa" } },
