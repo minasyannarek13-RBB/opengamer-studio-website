@@ -18,7 +18,7 @@ const enquiryRoutes = [
     index: "01",
     label: "Game production",
     title: "Build a Game",
-    description: "Original, custom or branded slot production, from selected stages to full-cycle delivery.",
+    description: "Original, custom or branded slot production, from selected stages to full delivery scope.",
     scope: "Game design · Art · Math · Frontend · Backend coordination · QA",
     href: "/contact?interest=game#project-enquiry"
   },
@@ -42,7 +42,7 @@ const enquiryRoutes = [
     index: "04",
     label: "Portfolio & partnerships",
     title: "Discuss Existing Work",
-    description: "Portfolio access, licensing discussions and strategic product or distribution conversations.",
+    description: "Portfolio, licensing, branded work and strategic product or distribution conversations.",
     scope: "Portfolio · Licensing · Branded work · Product partnership",
     href: "/contact?interest=portfolio#project-enquiry"
   }
@@ -52,19 +52,19 @@ const enquiryGuidance = [
   "What you want to build, extend or integrate",
   "Current product or platform context",
   "Required scope and internal ownership",
-  "Target timing or launch dependencies"
+  "Target timing or known dependencies"
 ];
 
 export default function ContactPage() {
   return (
     <SiteShell atmosphere="contact">
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#05070a] py-16 sm:py-24 lg:py-20">
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#05070a] py-14 sm:py-20 lg:py-20">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_0%,rgba(46,230,166,0.085),transparent_26rem),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_58%)]" />
-        <Container className="relative grid gap-10 lg:grid-cols-[0.72fr_0.28fr] lg:items-end lg:gap-16">
+        <Container className="relative grid gap-8 lg:grid-cols-[0.74fr_0.26fr] lg:items-end lg:gap-14">
           <SectionHeader
             eyebrow="Start a commercial conversation"
             title="Start With the Gap. Define the Scope From There."
-            description="You do not need a finished specification. Share what needs to be built, extended or integrated, what already exists and where ownership is missing."
+            description="Share what needs to be built, extended or integrated, what already exists and where ownership is missing. A finished specification is not required."
             headingLevel="h1"
           />
           <div className="border-t border-white/10 pt-5 text-sm text-slate-400 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
@@ -76,40 +76,42 @@ export default function ContactPage() {
 
       <Section className="relative overflow-hidden">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_90%_12%,rgba(46,230,166,0.04),transparent_22rem)]" />
-        <div className="relative grid gap-12 lg:grid-cols-[0.58fr_1.42fr] lg:gap-16 xl:gap-24">
+        <div className="relative grid gap-10 lg:grid-cols-[0.48fr_1.52fr] lg:gap-14 xl:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <SectionHeader eyebrow="Choose a starting point" title="Route the Conversation by Outcome" description="Pick the closest commercial path. The detailed production or engineering scope can be defined after the actual context is clear." />
+            <SectionHeader eyebrow="Choose a starting point" title="Route the Conversation by Outcome" description="Pick the closest path. The detailed production or engineering scope can be defined after the actual context is clear." />
+            <p className="mt-6 max-w-md text-sm leading-6 text-slate-500">Selecting a route only pre-fills the enquiry context. It does not lock the project into a fixed service package.</p>
           </div>
           <div className="border-y border-white/10" aria-label="Commercial enquiry routes">
             {enquiryRoutes.map((route) => (
               <Link
                 key={route.title}
                 href={route.href}
-                className="group grid gap-4 border-b border-white/10 py-7 transition duration-300 last:border-b-0 hover:border-emerald/30 sm:grid-cols-[3rem_0.72fr_1.28fr_auto] sm:items-start sm:gap-6 sm:py-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070a]"
+                className="group grid gap-4 border-b border-white/10 py-6 transition duration-300 last:border-b-0 hover:border-emerald/30 sm:grid-cols-[3rem_0.72fr_1.28fr_auto] sm:items-start sm:gap-6 sm:py-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070a] motion-reduce:transition-none"
               >
                 <span className="text-[0.62rem] font-semibold tracking-[0.18em] text-emerald/90">{route.index}</span>
                 <div>
                   <span className="text-[0.56rem] font-semibold uppercase tracking-[0.15em] text-slate-500">{route.label}</span>
-                  <h2 className="mt-2 text-xl font-semibold text-white transition group-hover:text-emerald sm:text-2xl">{route.title}</h2>
+                  <h2 className="mt-2 text-xl font-semibold text-white transition group-hover:text-emerald motion-reduce:transition-none sm:text-2xl">{route.title}</h2>
                 </div>
                 <div>
                   <p className="text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{route.description}</p>
                   <p className="mt-3 text-xs leading-5 text-slate-500">{route.scope}</p>
                 </div>
-                <span aria-hidden="true" className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/10 text-slate-500 transition group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:text-emerald sm:flex">→</span>
+                <span aria-hidden="true" className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/10 text-slate-500 transition group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:text-emerald motion-reduce:transform-none motion-reduce:transition-none sm:flex">→</span>
               </Link>
             ))}
           </div>
         </div>
       </Section>
 
-      <Section className="bg-black/20">
-        <div className="grid gap-10 lg:grid-cols-[0.36fr_1fr] lg:gap-14 xl:gap-20">
+      <Section className="relative overflow-hidden bg-black/20">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(46,230,166,0.035),transparent_25rem)]" />
+        <div className="relative grid gap-10 lg:grid-cols-[0.34fr_1fr] lg:gap-12 xl:gap-16">
           <aside className="grid content-start gap-7 lg:sticky lg:top-28 lg:self-start">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">Before you submit</p>
-              <h2 className="mt-3 text-2xl font-semibold text-white">A short brief is enough.</h2>
-              <p className="mt-3 text-sm leading-7 text-slate-400">Start with what is already known. Unknowns can stay unknown until they matter to scope, architecture or commercial structure.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">Short brief, useful context</p>
+              <h2 className="mt-3 text-2xl font-semibold text-white">Start with what is already known.</h2>
+              <p className="mt-3 text-sm leading-7 text-slate-400">Unknowns can stay unknown until they matter to scope, architecture or commercial structure.</p>
             </div>
 
             <ul className="grid gap-3 text-sm text-slate-300">
@@ -122,19 +124,8 @@ export default function ContactPage() {
             </ul>
 
             <div className="border-t border-white/10 pt-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">What happens next</p>
-              <div className="mt-4 grid gap-3">
-                {[
-                  ["Context review", "The request is evaluated against the relevant game, product or technical scope."],
-                  ["Scope clarification", "Missing dependencies and ownership boundaries are clarified before a larger proposal is shaped."],
-                  ["Commercial path", "The conversation moves toward the smallest useful engagement model that fits the project."]
-                ].map(([title, text], index) => (
-                  <div key={title} className="grid grid-cols-[2rem_1fr] gap-3 border-t border-white/10 pt-3 first:border-t-0 first:pt-0">
-                    <span className="text-[0.56rem] font-semibold tracking-[0.14em] text-emerald/80">0{index + 1}</span>
-                    <div><h3 className="text-sm font-semibold text-white">{title}</h3><p className="mt-1.5 text-sm leading-6 text-slate-500">{text}</p></div>
-                  </div>
-                ))}
-              </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">After submission</p>
+              <p className="mt-3 text-sm leading-6 text-slate-400">The request is reviewed against the relevant game, product or technical scope. Missing dependencies are clarified before a larger commercial proposal is shaped.</p>
             </div>
 
             <div className="border-t border-white/10 pt-5 text-sm text-slate-400">
@@ -158,7 +149,7 @@ export default function ContactPage() {
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">Project enquiry</p>
                 <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">Start with the essentials</h2>
               </div>
-              <p className="max-w-md text-sm leading-6 text-slate-500">Required fields should only capture the information needed to understand and route the request.</p>
+              <p className="max-w-md text-sm leading-6 text-slate-500">Required fields only capture the information needed to understand and route the request.</p>
             </div>
             <LeadForm />
           </div>
