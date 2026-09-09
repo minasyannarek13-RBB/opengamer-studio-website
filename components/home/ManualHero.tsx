@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { games, getVerifiedDemoUrl } from "@/content/games";
+import { getGameStatus, getVerifiedDemoUrl, type Game } from "@/content/games";
 import { getOptimizedGameArtwork } from "@/lib/gameAssets";
+import { getBalancedGameShowcase } from "@/lib/gameShowcase";
 
 const capabilities = [
   "Custom game development",
@@ -12,15 +13,15 @@ const capabilities = [
   "Original IP & branded games"
 ];
 
-const selectedGameSlugs = ["forest-fortune", "cake-bonanza", "dragon-fruits", "dragon-rush", "goblin-gems", "sweet-wins"];
-const gameShowcase = selectedGameSlugs.flatMap((slug) => {
-  const game = games.find((item) => item.slug === slug && !item.isVariant);
-  return game ? [{ game, image: getOptimizedGameArtwork(game) }] : [];
-});
+const gameShowcase = getBalancedGameShowcase({ playable: 3, portfolio: 3 }).map((game) => ({
+  game,
+  image: getOptimizedGameArtwork(game)
+}));
 
-function getHomepageStatus(game: (typeof games)[number]) {
-  if (getVerifiedDemoUrl(game)) return "Playable";
-  if (game.status === "in-development") return "In development";
+function getHomepageStatus(game: Game) {
+  const status = getGameStatus(game);
+  if (status === "playable") return "Playable";
+  if (status === "in-development") return "In development";
   return "Portfolio title · No public demo";
 }
 
