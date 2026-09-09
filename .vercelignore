@@ -8,17 +8,3 @@ qa/lighthouse*.json
 node_modules/
 *.log
 .DS_Store
-
-# Exclude archival/source slot artwork where an optimized or otherwise
-# referenced public asset already carries the website visual.
-public/assets/games/cake-bonanza/artwork.jpg
-public/assets/games/choco-boom/source.jpg
-public/assets/games/deep-dive/source.jpg
-public/assets/games/dragon-fruits/artwork.jpg
-public/assets/games/dragon-rush/artwork.jpg
-public/assets/games/forest-fortune/artwork.jpg
-public/assets/games/fruit-elixir/source.jpg
-public/assets/games/goblin-gems/artwork.jpg
-public/assets/games/passion-paradise/source.jpg
-public/assets/games/royal-fruits/artwork.jpg
-public/assets/games/sweet-wins/artwork.jpg
