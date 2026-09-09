@@ -12,6 +12,7 @@ const requiredFields = [
 
 const rateWindowMs = 60_000;
 const rateLimit = 5;
+const maxRateBuckets = 1_000;
 const rateBuckets = new Map<string, { count: number; resetAt: number }>();
 
 export async function POST(request: Request) {
@@ -75,8 +76,23 @@ function isRateLimited(request: Request) {
   const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   const ip = forwardedFor || request.headers.get("x-real-ip") || "unknown";
   const now = Date.now();
-  const bucket = rateBuckets.get(ip);
 
+  if (rateBuckets.size >= maxRateBuckets) {
+    for (const [key, value] of rateBuckets) {
+      if (value.resetAt <= now) {
+        rateBuckets.delete(key);
+      }
+    }
+
+    if (rateBuckets.size >= maxRateBuckets) {
+      const oldestKey = rateBuckets.keys().next().value as string | undefined;
+      if (oldestKey) {
+        rateBuckets.delete(oldestKey);
+      }
+    }
+  }
+
+  const bucket = rateBuckets.get(ip);
   if (!bucket || bucket.resetAt <= now) {
     rateBuckets.set(ip, { count: 1, resetAt: now + rateWindowMs });
     return false;
