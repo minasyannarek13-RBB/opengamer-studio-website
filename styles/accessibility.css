@@ -4,6 +4,15 @@
     inset-inline: 0;
     top: 100%;
   }
+
+  .mobile-nav-panel[data-state="closed"] {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .mobile-nav-panel[data-state="open"] {
+    visibility: visible;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
