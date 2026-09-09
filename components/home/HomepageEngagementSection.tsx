@@ -50,8 +50,8 @@ export function HomepageEngagementSection() {
       <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_12%_14%,rgba(46,230,166,0.055),transparent_23rem),radial-gradient(circle_at_88%_78%,rgba(117,103,248,0.04),transparent_25rem)]" />
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald/25 to-transparent" />
       <Container className="relative">
-        <div className="grid gap-12 lg:grid-cols-[0.68fr_1.32fr] lg:gap-16 xl:gap-24">
-          <div className="lg:sticky lg:top-28 lg:self-start">
+        <div className="grid gap-12 xl:grid-cols-[0.68fr_1.32fr] xl:gap-24">
+          <div className="xl:sticky xl:top-28 xl:self-start">
             <p className="premium-kicker text-xs font-semibold uppercase">How we plug in</p>
             <h2 className="mt-4 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.025em] sm:text-5xl xl:text-[3.5rem]">Choose the way OpenGamer fits your roadmap.</h2>
             <p className="mt-5 max-w-lg text-base leading-7 text-slate-400">Start with a complete game, extend an existing team, solve a technical integration gap or develop original IP. The commercial conversation begins from the scope you actually need.</p>
@@ -65,7 +65,7 @@ export function HomepageEngagementSection() {
 
           <div className="border-t border-white/10">
             {capabilities.map((item) => (
-              <Link key={item.number} href={item.href} className="group relative grid gap-5 border-b border-white/10 py-8 transition duration-300 hover:border-emerald/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none sm:grid-cols-[3.2rem_1fr_auto] sm:gap-6 sm:py-10 lg:grid-cols-[3.5rem_1fr_auto]">
+              <Link key={item.number} href={item.href} className="group relative grid gap-5 border-b border-white/10 py-8 transition duration-300 hover:border-emerald/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none sm:grid-cols-[3.2rem_1fr_auto] sm:gap-6 sm:py-10">
                 <div className="flex items-start justify-between sm:block">
                   <span className="text-[0.68rem] font-semibold tracking-[0.2em] text-emerald/90">{item.number}</span>
                   <span aria-hidden="true" className="text-lg text-slate-600 transition duration-300 group-hover:translate-x-1 group-hover:text-emerald motion-reduce:transform-none motion-reduce:transition-none sm:hidden">→</span>
