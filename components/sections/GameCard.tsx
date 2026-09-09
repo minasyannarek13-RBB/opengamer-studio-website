@@ -20,6 +20,7 @@ export function GameCard({ game }: { game: Game }) {
   const primaryCategory = game.category?.[0];
   const artwork = getOptimizedGameArtwork(game);
   const detailHref = `/games/${game.slug}`;
+  const enquiryInterest = status === "portfolio" ? "portfolio" : "game";
   const statusClass =
     status === "playable"
       ? "border border-emerald/25 bg-emerald/10 text-emerald"
@@ -72,14 +73,14 @@ export function GameCard({ game }: { game: Game }) {
 
         <div className="mt-auto grid gap-3 pt-6 sm:flex sm:flex-wrap sm:items-center">
           {demoUrl ? (
-            <Button href={demoUrl} className="min-h-10 w-full px-4 sm:w-auto" target="_blank" rel="noopener noreferrer">
+            <Button href={demoUrl} className="min-h-11 w-full px-4 sm:w-auto" target="_blank" rel="noopener noreferrer">
               {getGamePrimaryActionLabel(game)} <span aria-hidden="true">↗</span>
             </Button>
           ) : (
             <Button
-              href={`/contact?interest=game&game=${game.slug}#project-enquiry`}
+              href={`/contact?interest=${enquiryInterest}&game=${game.slug}#project-enquiry`}
               variant="secondary"
-              className="min-h-10 w-full px-4 sm:w-auto"
+              className="min-h-11 w-full px-4 sm:w-auto"
             >
               {getGamePrimaryActionLabel(game)}
             </Button>
