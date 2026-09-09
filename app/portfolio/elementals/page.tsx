@@ -107,7 +107,7 @@ export default function ElementalsPage() {
           <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_26%,rgba(147,51,234,0.08),transparent_28rem)]" />
           <div className="relative">
             <SectionHeader eyebrow="World direction" title="A Cinematic Identity Around the Game System" description="Selected concept frames and guardian artwork define the intended world and presentation tone without implying that the final studio or production configuration is complete." />
-            <div className="mt-10 grid gap-5 lg:grid-cols-[1.35fr_0.65fr]">
+            <div className="mt-10 grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
               <div className="grid gap-4 sm:grid-cols-2">
                 {elementalsExpositions.filter((item) => !item.featured).slice(0, 4).map((item, index) => (
                   <div key={item.title} className={`relative overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/40 ${index === 0 ? "sm:col-span-2" : ""}`}>
@@ -119,10 +119,10 @@ export default function ElementalsPage() {
                   </div>
                 ))}
               </div>
-              <div className="grid grid-cols-2 gap-4 lg:grid-cols-1">
-                {elementalsRealms.slice(0, 2).map((realm) => (
-                  <div key={realm.guardianImage} className="relative min-h-[250px] overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/40 lg:min-h-[330px]">
-                    <Image src={realm.guardianImage} alt={`${realm.title} elemental guardian concept`} fill className="object-cover" sizes="(min-width:1024px) 28vw,50vw" />
+              <div className="grid grid-cols-2 gap-4">
+                {elementalsRealms.map((realm) => (
+                  <div key={realm.guardianImage} className="relative min-h-[220px] overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/40 sm:min-h-[260px] lg:min-h-[250px]">
+                    <Image src={realm.guardianImage} alt={`${realm.title} elemental guardian concept`} fill className="object-cover" sizes="(min-width:1024px) 16vw,50vw" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
                     <span className="absolute bottom-4 left-4 text-sm font-semibold text-white">{realm.title} Guardian</span>
                   </div>
@@ -135,12 +135,12 @@ export default function ElementalsPage() {
         <Section>
           <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
             <div>
-              <SectionHeader eyebrow="Current public status" title="Concept Direction Is Visible. Production Status Stays Explicit." description="ELEMENTALS is an original Live Casino show-game concept in development. Public materials do not claim launch, certification, live integration or finalized mathematics." />
+              <SectionHeader eyebrow="Development snapshot" title="What Is Defined Today" description="Current public materials define the product world and presentation direction. Final mechanics, mathematics, certification and integration are not presented as complete." />
             </div>
             <div className="border-y border-white/10">
               {[
                 ["01", "Product format", "Live Casino show-game concept"],
-                ["02", "Development status", "In development"],
+                ["02", "Public status", "In development"],
                 ["03", "Mechanics & mathematics", "Not published as final"],
                 ["04", "Certification / integration", "Not confirmed"]
               ].map(([number, label, value]) => (
