@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { games } from "@/content/games";
+import { catalogueGames } from "@/content/games";
 import { siteUrl } from "@/lib/site";
 
 const routes = [
@@ -18,7 +18,7 @@ const routes = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const gameRoutes = games.map((game) => `/games/${game.slug}`);
+  const gameRoutes = catalogueGames.map((game) => `/games/${game.slug}`);
 
   return [...routes, ...gameRoutes].map((route) => ({
     url: `${siteUrl}${route}`,
