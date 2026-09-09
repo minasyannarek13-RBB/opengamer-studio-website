@@ -64,12 +64,18 @@ test("game cards resolve artwork through the optimized delivery helper", async (
   assert.doesNotMatch(cardSource, /src=\{game\.artwork\?\.catalogue \|\| game\.image\}/);
 });
 
-test("homepage game proof derives status and artwork from the catalogue source", async () => {
+test("homepage game proof derives selection, status and artwork from catalogue helpers", async () => {
   const heroSource = await readFile(new URL("../components/home/ManualHero.tsx", import.meta.url), "utf8");
-  assert.match(heroSource, /games\.find/);
+  const selectorSource = await readFile(new URL("../lib/gameShowcase.ts", import.meta.url), "utf8");
+
+  assert.match(heroSource, /getBalancedGameShowcase/);
+  assert.match(heroSource, /getGameStatus/);
   assert.match(heroSource, /getVerifiedDemoUrl/);
-  assert.match(heroSource, /getOptimizedGameArtwork/);
+  assert.match(heroSource, /getOptimizedGameArtwork\(game\)/);
   assert.match(heroSource, /Portfolio title · No public demo/);
+  assert.match(selectorSource, /playableGames/);
+  assert.match(selectorSource, /portfolioGames/);
+  assert.doesNotMatch(heroSource, /selectedGameSlugs/);
   assert.doesNotMatch(heroSource, /status:\s*"Playable"/);
   assert.doesNotMatch(heroSource, /image:\s*"\/assets\/games\//);
 });
