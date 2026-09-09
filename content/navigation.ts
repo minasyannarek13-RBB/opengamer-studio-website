@@ -1,13 +1,3 @@
-export const mainNavigation = [
-  { label: "Home", href: "/" },
-  { label: "Games", href: "/games" },
-  { label: "Solutions", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Technology", href: "/technology" },
-  { label: "Company", href: "/about" },
-  { label: "Contact", href: "/contact" }
-];
-
 export const solutionsNavigation = [
   { label: "Slot Game Development", href: "/services#game-production" },
   { label: "Live Casino Product Design", href: "/services#live-casino" },
