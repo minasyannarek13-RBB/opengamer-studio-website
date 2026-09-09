@@ -8,7 +8,9 @@ const expectedHeaders = [
   ["X-Content-Type-Options", "nosniff"],
   ["X-Frame-Options", "DENY"],
   ["Referrer-Policy", "strict-origin-when-cross-origin"],
-  ["Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()"]
+  ["Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()"],
+  ["Strict-Transport-Security", "max-age=31536000; includeSubDomains"],
+  ["Cross-Origin-Opener-Policy", "same-origin"]
 ];
 
 test("all public routes receive the baseline browser protection headers", () => {
@@ -17,6 +19,10 @@ test("all public routes receive the baseline browser protection headers", () => 
     assert.match(configSource, new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.ok(configSource.includes(value), `${key} must remain ${value}`);
   }
+});
+
+test("framework fingerprint header stays disabled", () => {
+  assert.match(configSource, /poweredByHeader:\s*false/);
 });
 
 test("security policy stays conservative without an un-nonced CSP", () => {
