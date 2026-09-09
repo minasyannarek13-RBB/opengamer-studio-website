@@ -142,3 +142,10 @@ test("internal discovery uses canonical live casino section only", async () => {
   assert.match(navigationSource, /\/services#live-casino/);
   assert.doesNotMatch(sitemapSource, /\/services\/live-casino-development/);
 });
+
+test("sitemap publishes catalogue titles instead of internal variant records", async () => {
+  const sitemapSource = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
+  assert.match(sitemapSource, /import \{ catalogueGames \} from "@\/content\/games"/);
+  assert.match(sitemapSource, /catalogueGames\.map/);
+  assert.doesNotMatch(sitemapSource, /const gameRoutes = games\.map/);
+});
