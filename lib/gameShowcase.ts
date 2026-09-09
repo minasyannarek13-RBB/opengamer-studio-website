@@ -46,3 +46,23 @@ export function getCompactGameProof() {
     inDevelopment: inDevelopmentGames[0] ?? null
   };
 }
+
+export function getHomepageGameProof() {
+  const primaryPlayable = playableGames.find((game) => game.slug === "forest-fortune") ?? playableGames[0] ?? null;
+  const secondaryPlayable = playableGames.find((game) => game.slug !== primaryPlayable?.slug) ?? null;
+  const portfolioTitle = portfolioGames[0] ?? null;
+
+  const used = new Set([primaryPlayable?.slug, secondaryPlayable?.slug, portfolioTitle?.slug].filter(Boolean));
+  const supporting = interleave([
+    portfolioGames.filter((game) => !used.has(game.slug)),
+    playableGames.filter((game) => !used.has(game.slug)),
+    inDevelopmentGames.filter((game) => !used.has(game.slug))
+  ]).slice(0, 3);
+
+  return {
+    primaryPlayable,
+    secondaryPlayable,
+    portfolioTitle,
+    supporting
+  };
+}
