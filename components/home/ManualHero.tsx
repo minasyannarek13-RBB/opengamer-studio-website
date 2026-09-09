@@ -11,12 +11,12 @@ const capabilities = [
 ];
 
 const gameShowcase = [
-  { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp", status: "Playable" },
-  { title: "Deep Dive", slug: "deep-dive", image: "/assets/games/deep-dive/artwork.webp", status: "Playable" },
-  { title: "Dragon Rush", slug: "dragon-rush", image: "/assets/games/dragon-rush/artwork.webp", status: "Playable" },
-  { title: "Sweet Wins", slug: "sweet-wins", image: "/assets/games/sweet-wins/artwork.webp", status: "Playable" },
-  { title: "Fruit Elixir", slug: "fruit-elixir", image: "/assets/games/fruit-elixir/artwork.webp", status: "Playable" },
-  { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp", status: "Portfolio" }
+  { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp", status: "Playable", playable: true },
+  { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp", status: "Portfolio · No public demo", playable: false },
+  { title: "Dragon Fruits", slug: "dragon-fruits", image: "/assets/games/dragon-fruits/artwork.webp", status: "Portfolio · No public demo", playable: false },
+  { title: "Dragon Rush", slug: "dragon-rush", image: "/assets/games/dragon-rush/artwork.webp", status: "Playable", playable: true },
+  { title: "Goblin Gems", slug: "goblin-gems", image: "/assets/games/goblin-gems/artwork.webp", status: "Portfolio · No public demo", playable: false },
+  { title: "Sweet Wins", slug: "sweet-wins", image: "/assets/games/sweet-wins/artwork.webp", status: "Playable", playable: true }
 ];
 
 export function ManualHero() {
@@ -114,7 +114,7 @@ export function ManualHero() {
 
           <div className="mt-5 lg:absolute lg:bottom-[1%] lg:left-0 lg:right-0 lg:mt-0">
             <div className="mb-2.5 flex items-center justify-between gap-4 px-0.5">
-              <span className="text-[0.58rem] font-semibold uppercase tracking-[0.17em] text-slate-500">Selected game work</span>
+              <span className="text-[0.58rem] font-semibold uppercase tracking-[0.17em] text-slate-500">Playable + portfolio game work</span>
               <Link href="/games" className="text-[0.62rem] font-semibold text-emerald/85 transition hover:text-emerald focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                 View all games →
               </Link>
@@ -136,7 +136,7 @@ export function ManualHero() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/12 to-transparent" />
                     <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-3 lg:p-2.5 xl:p-3">
-                      <span className="block text-[0.46rem] font-semibold uppercase tracking-[0.13em] text-emerald/90 sm:text-[0.5rem]">{game.status}</span>
+                      <span className={`block text-[0.46rem] font-semibold uppercase tracking-[0.13em] sm:text-[0.5rem] ${game.playable ? "text-emerald/90" : "text-slate-300"}`}>{game.status}</span>
                       <strong className="mt-0.5 block text-[0.72rem] font-semibold leading-tight text-white sm:text-xs lg:text-[0.68rem] xl:text-xs">{game.title}</strong>
                     </div>
                   </div>
