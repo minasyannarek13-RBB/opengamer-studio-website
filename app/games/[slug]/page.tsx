@@ -8,7 +8,14 @@ import { ProductHeroBackground } from "@/components/visual/ProductHeroBackground
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { games, getGameCommercialStatusLabel, getVerifiedDemoUrl } from "@/content/games";
+import {
+  games,
+  getGameDemoStatusLabel,
+  getGamePrimaryActionLabel,
+  getGameStatus,
+  getGameStatusLabel,
+  getVerifiedDemoUrl
+} from "@/content/games";
 
 type GameDetailProps = {
   params: Promise<{ slug: string }>;
@@ -22,9 +29,7 @@ export async function generateMetadata({ params }: GameDetailProps): Promise<Met
   const { slug } = await params;
   const game = games.find((item) => item.slug === slug);
 
-  if (!game) {
-    return { title: "Game Details | OpenGamer Studio" };
-  }
+  if (!game) return { title: "Game Details | OpenGamer Studio" };
 
   return {
     title: `${game.title} | OpenGamer Studio`,
@@ -42,39 +47,29 @@ export async function generateMetadata({ params }: GameDetailProps): Promise<Met
 export default async function GameDetailPage({ params }: GameDetailProps) {
   const { slug } = await params;
   const game = games.find((item) => item.slug === slug);
-
   if (!game) notFound();
 
+  const status = getGameStatus(game);
+  const statusLabel = getGameStatusLabel(game);
+  const availabilityLabel = getGameDemoStatusLabel(game);
   const demoUrl = getVerifiedDemoUrl(game);
-  const commercialStatus = getGameCommercialStatusLabel(game);
-  const gameEnquiryHref = `/contact?interest=game&game=${game.slug}#project-enquiry`;
+  const enquiryHref = `/contact?interest=game&game=${game.slug}#project-enquiry`;
   const gameIndex = games.findIndex((item) => item.slug === game.slug);
-  const relatedGames = [games[(gameIndex - 1 + games.length) % games.length], games[(gameIndex + 1) % games.length]];
-  const gameDetails = [
-    ["Game type", game.gameType || "Slot Game"],
-    game.keyMechanic ? ["Primary mechanic", game.keyMechanic] : null,
-    commercialStatus ? ["Commercial status", commercialStatus] : null,
-    ["Public demo", demoUrl ? "Available" : "Not available"],
-    game.configurationLabel || game.lineCount ? ["Configuration", game.configurationLabel || game.lineCount] : null,
-    game.variants?.length ? ["Configurations", game.variants.join(", ")] : null,
-    game.supportedDevices?.length ? ["Devices", game.supportedDevices.join(", ")] : null
-  ].filter(Boolean) as [string, string][];
+  const relatedGames = [games[(gameIndex - 1 + games.length) % games.length], games[(gameIndex + 1) % games.length]].filter(
+    (item) => item.slug !== game.slug
+  );
 
-  const proofLabels = [
-    commercialStatus || "Portfolio title",
-    demoUrl ? "Playable" : "No public demo",
-    game.gameType || "Slot Game",
-    game.keyMechanic || null
-  ].filter(Boolean) as string[];
+  const gameDetails: [string, string][] = [
+    ["Status", statusLabel],
+    ["Public demo", status === "playable" ? "Available" : "Not available"],
+    ...(game.lineCount ? [["Configuration", game.lineCount] as [string, string]] : []),
+    ...(game.variants?.length ? [["Confirmed variants", game.variants.join(", ")] as [string, string]] : [])
+  ];
 
   return (
     <SiteShell atmosphere="games">
       <section className="relative overflow-hidden border-b border-white/10 bg-black/15 py-12 sm:py-16 lg:py-20">
-        <ProductHeroBackground
-          image={game.artwork?.hero || game.image}
-          accentPrimary={game.visualAccent || "#2ee6a6"}
-          pattern={game.slug === "deep-dive" ? "particles" : game.slug === "forest-fortune" ? "mist" : game.slug === "dragon-rush" ? "rays" : "grid"}
-        />
+        <ProductHeroBackground image={game.artwork?.hero || game.image} accentPrimary={game.visualAccent || "#2ee6a6"} pattern="grid" />
         <Container className="relative grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14">
           <div className="min-w-0">
             <nav className="mb-7 flex flex-wrap items-center gap-2 text-sm text-slate-500" aria-label="Breadcrumb">
@@ -83,44 +78,35 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
               <span className="text-slate-300">{game.title}</span>
             </nav>
 
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">OpenGamer game portfolio</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">OpenGamer game catalogue</p>
             <h1 className="mt-4 max-w-3xl text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">{game.title}</h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">{game.shortDescription}</p>
 
             <div className="mt-6 flex flex-wrap gap-2" aria-label="Game status">
-              {proofLabels.map((label) => (
-                <span key={label} className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-1.5 text-xs font-medium text-slate-300">{label}</span>
-              ))}
+              <span className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-1.5 text-xs font-medium text-slate-300">{statusLabel}</span>
+              <span className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-1.5 text-xs font-medium text-slate-300">{availabilityLabel}</span>
+              {game.lineCount ? <span className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-1.5 text-xs font-medium text-slate-300">{game.lineCount}</span> : null}
             </div>
 
             <div className="mt-8 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap">
               {demoUrl ? (
                 <Button href={demoUrl} target="_blank" rel="noopener noreferrer" className="w-full min-[480px]:w-auto">Play Demo</Button>
               ) : (
-                <Button href={gameEnquiryHref} className="w-full min-[480px]:w-auto">Discuss This Title</Button>
+                <Button href={enquiryHref} className="w-full min-[480px]:w-auto">{getGamePrimaryActionLabel(game)}</Button>
               )}
               <Button href="/games" variant="secondary" className="w-full min-[480px]:w-auto">View Game Catalogue</Button>
             </div>
           </div>
 
           <div className="relative min-h-[22rem] overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-[#050609] shadow-[0_30px_100px_rgba(0,0,0,0.35)] sm:min-h-[28rem] lg:min-h-[32rem]">
-            <Image
-              src={game.artwork?.hero || game.image}
-              alt={`${game.title} artwork`}
-              fill
-              priority
-              className="object-cover"
-              sizes="(min-width: 1024px) 54vw, 100vw"
-            />
+            <Image src={game.artwork?.hero || game.image} alt={`${game.title} artwork`} fill priority className="object-cover" sizes="(min-width: 1024px) 54vw, 100vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10" />
             <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7">
               <div>
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-emerald">{commercialStatus || "Portfolio title"}</p>
-                <p className="mt-1 text-sm text-slate-300">Artwork shown from the OpenGamer game portfolio.</p>
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-emerald">{statusLabel}</p>
+                <p className="mt-1 text-sm text-slate-300">Artwork from the OpenGamer game catalogue.</p>
               </div>
-              <span className="shrink-0 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-xs font-semibold text-slate-300">
-                {demoUrl ? "Playable" : "No public demo"}
-              </span>
+              <span className="shrink-0 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-xs font-semibold text-slate-300">{availabilityLabel}</span>
             </div>
           </div>
         </Container>
@@ -130,8 +116,8 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Game profile</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white">What is currently confirmed</h2>
-            <p className="mt-4 max-w-xl leading-7 text-slate-400">Only information supported by the current game record is shown here. Commercial terms, certification details and integration scope stay out until confirmed.</p>
+            <h2 className="mt-4 text-3xl font-semibold text-white">Confirmed public information</h2>
+            <p className="mt-4 max-w-xl leading-7 text-slate-400">This page shows only information supported by the current catalogue record. Unconfirmed mechanics, RTP, volatility, certification, integrations and commercial use are not presented.</p>
             <dl className="mt-7 border-t border-white/10">
               {gameDetails.map(([label, value]) => (
                 <div key={label} className="grid grid-cols-[0.42fr_0.58fr] gap-4 border-b border-white/10 py-4 text-sm">
@@ -144,39 +130,27 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
 
           <div className="space-y-10">
             <div className="border-b border-white/10 pb-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Product proposition</p>
-              <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">The game in one view</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Catalogue record</p>
+              <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">{game.title}</h2>
               <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{game.longDescription || game.shortDescription}</p>
-              {(game.mechanics || []).length ? (
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {(game.mechanics || []).map((item) => (
-                    <span key={item} className="rounded-full border border-white/10 bg-black/20 px-3 py-2 text-sm text-slate-300">{item}</span>
-                  ))}
-                </div>
-              ) : null}
             </div>
 
-            {(game.features || []).length ? (
+            {game.variants?.length ? (
               <div className="border-b border-white/10 pb-10">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Feature direction</p>
-                <div className="mt-5 grid gap-x-10 gap-y-4 sm:grid-cols-2">
-                  {(game.features || []).map((item, index) => (
-                    <div key={item} className="flex gap-4 border-t border-white/10 pt-4">
-                      <span className="text-xs font-semibold text-emerald">0{index + 1}</span>
-                      <p className="text-sm leading-6 text-slate-300">{item}</p>
-                    </div>
-                  ))}
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Confirmed configurations</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {game.variants.map((item) => <span key={item} className="rounded-full border border-white/10 bg-black/20 px-3 py-2 text-sm text-slate-300">{item}</span>)}
                 </div>
               </div>
             ) : null}
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Commercial and integration context</p>
-              <h2 className="mt-4 text-3xl font-semibold text-white">Discuss the version that fits your product</h2>
-              <p className="mt-4 max-w-3xl leading-7 text-slate-300">Public demos are linked only where verified. For portfolio-only titles, artwork and confirmed product information remain visible without implying demo availability. Commercial terms, certification details and integration scope are handled only when confirmed for the relevant discussion.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Next action</p>
+              <h2 className="mt-4 text-3xl font-semibold text-white">{status === "playable" ? "Review the public demo or discuss the title" : status === "portfolio" ? "Discuss this portfolio title" : "Discuss the title in development"}</h2>
+              <p className="mt-4 max-w-3xl leading-7 text-slate-300">Public demos are linked only where verified. Other commercial, technical or delivery details are handled separately when confirmed for the relevant discussion.</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button href={gameEnquiryHref}>Discuss This Game</Button>
-                <Button href="/services#game-production" variant="secondary">Game Production Services</Button>
+                {demoUrl ? <Button href={demoUrl} target="_blank" rel="noopener noreferrer">Play Demo</Button> : null}
+                <Button href={enquiryHref} variant={demoUrl ? "secondary" : "primary"}>{demoUrl ? "Discuss This Title" : getGamePrimaryActionLabel(game)}</Button>
               </div>
             </div>
           </div>
@@ -186,44 +160,32 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
       <Section className="bg-black/20">
         <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">More from the portfolio</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">More from the catalogue</p>
             <h2 className="mt-3 text-3xl font-semibold text-white">Explore related titles</h2>
           </div>
           <Button href="/games" variant="link">View All Games</Button>
         </div>
         <nav className="mt-8 grid gap-5 md:grid-cols-2" aria-label="Related games">
-          {relatedGames.map((item) => {
-            const relatedDemo = getVerifiedDemoUrl(item);
-            const relatedStatus = getGameCommercialStatusLabel(item) || "Portfolio title";
-            return (
-              <Link key={item.slug} href={`/games/${item.slug}`} className="group grid min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-white/[0.035] transition hover:-translate-y-0.5 hover:border-emerald/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:grid-cols-[0.42fr_0.58fr]">
-                <div className="relative min-h-48 sm:min-h-full">
-                  <Image src={item.artwork?.hero || item.image} alt={`${item.title} artwork`} fill className="object-cover transition duration-500 group-hover:scale-[1.025]" sizes="(min-width: 768px) 20vw, 100vw" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20" />
+          {relatedGames.map((item) => (
+            <Link key={item.slug} href={`/games/${item.slug}`} className="group grid min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-white/[0.035] transition hover:-translate-y-0.5 hover:border-emerald/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:grid-cols-[0.42fr_0.58fr]">
+              <div className="relative min-h-48 sm:min-h-full">
+                <Image src={item.artwork?.hero || item.image} alt={`${item.title} artwork`} fill className="object-cover transition duration-500 group-hover:scale-[1.025]" sizes="(min-width: 768px) 20vw, 100vw" />
+              </div>
+              <div className="p-5 sm:p-6">
+                <div className="flex flex-wrap gap-2">
+                  <span className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-emerald">{getGameStatusLabel(item)}</span>
+                  <span className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-slate-500">{getGameDemoStatusLabel(item)}</span>
                 </div>
-                <div className="p-5 sm:p-6">
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-emerald">{relatedStatus}</span>
-                    <span className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-slate-500">{relatedDemo ? "Playable" : "No public demo"}</span>
-                  </div>
-                  <h3 className="mt-3 text-2xl font-semibold text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-400">{item.shortDescription}</p>
-                  <span className="mt-5 inline-flex text-sm font-semibold text-emerald transition group-hover:text-white">View Game</span>
-                </div>
-              </Link>
-            );
-          })}
+                <h3 className="mt-3 text-2xl font-semibold text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-400">{item.shortDescription}</p>
+                <span className="mt-5 inline-flex text-sm font-semibold text-emerald transition group-hover:text-white">View Title</span>
+              </div>
+            </Link>
+          ))}
         </nav>
       </Section>
 
-      <CTASection
-        title="Interested in This Game or a Custom Version?"
-        description="Share the target theme, mechanics, platform and integration context. OpenGamer can scope the relevant production route from there."
-        ctaLabel="Discuss a Project"
-        ctaHref={gameEnquiryHref}
-        secondaryLabel="View Portfolio"
-        secondaryHref="/portfolio"
-      />
+      <CTASection title="Interested in This Title or a New Game Brief?" description="Use the catalogue as a reference point, then share the confirmed scope you want OpenGamer to discuss." ctaLabel="Discuss a Project" ctaHref={enquiryHref} secondaryLabel="View Games" secondaryHref="/games" />
     </SiteShell>
   );
 }
