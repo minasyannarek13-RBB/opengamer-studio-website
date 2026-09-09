@@ -6,10 +6,10 @@ import { games } from "@/content/games";
 
 const filters = [
   { label: "All", value: "all" },
-  { label: "Demo Available", value: "demo" },
+  { label: "Playable", value: "demo" },
+  { label: "Portfolio / No Public Demo", value: "portfolio" },
   { label: "Classic Slots", value: "classic" },
-  { label: "Video Slots", value: "video" },
-  { label: "Request Demo", value: "request" }
+  { label: "Video Slots", value: "video" }
 ];
 
 export function GamePortfolio() {
@@ -23,9 +23,9 @@ export function GamePortfolio() {
       const matchesFilter =
         activeFilter === "all" ||
         (activeFilter === "demo" && game.status === "demo") ||
+        (activeFilter === "portfolio" && game.status !== "demo") ||
         (activeFilter === "classic" && game.gameType === "Classic Slot") ||
-        (activeFilter === "video" && game.gameType === "Video Slot") ||
-        (activeFilter === "request" && game.status === "request-access");
+        (activeFilter === "video" && game.gameType === "Video Slot");
 
       if (!matchesFilter) {
         return false;
@@ -41,6 +41,7 @@ export function GamePortfolio() {
         game.longDescription,
         game.gameType,
         game.keyMechanic,
+        game.commercialStatus,
         ...(game.category || []),
         ...(game.variants || []),
         ...(game.mechanics || []),
