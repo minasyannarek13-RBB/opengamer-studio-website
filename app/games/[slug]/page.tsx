@@ -54,7 +54,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
     ["Game type", game.gameType || "Slot Game"],
     game.keyMechanic ? ["Primary mechanic", game.keyMechanic] : null,
     commercialStatus ? ["Commercial status", commercialStatus] : null,
-    ["Demo", demoUrl ? "Public demo available" : "Available on request"],
+    ["Public demo", demoUrl ? "Available" : "Not available"],
     game.configurationLabel || game.lineCount ? ["Configuration", game.configurationLabel || game.lineCount] : null,
     game.variants?.length ? ["Configurations", game.variants.join(", ")] : null,
     game.supportedDevices?.length ? ["Devices", game.supportedDevices.join(", ")] : null
@@ -62,7 +62,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
 
   const proofLabels = [
     commercialStatus || "Portfolio title",
-    demoUrl ? "Playable" : "Demo on request",
+    demoUrl ? "Playable" : "No public demo",
     game.gameType || "Slot Game",
     game.keyMechanic || null
   ].filter(Boolean) as string[];
@@ -97,9 +97,9 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
               {demoUrl ? (
                 <Button href={demoUrl} target="_blank" rel="noopener noreferrer" className="w-full min-[480px]:w-auto">Play Demo</Button>
               ) : (
-                <Button href={gameEnquiryHref} className="w-full min-[480px]:w-auto">Request Demo</Button>
+                <Button href={gameEnquiryHref} className="w-full min-[480px]:w-auto">Discuss This Title</Button>
               )}
-              <Button href={gameEnquiryHref} variant="secondary" className="w-full min-[480px]:w-auto">Discuss This Game</Button>
+              <Button href="/games" variant="secondary" className="w-full min-[480px]:w-auto">View Game Catalogue</Button>
             </div>
           </div>
 
@@ -115,10 +115,12 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10" />
             <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7">
               <div>
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-emerald">Portfolio title</p>
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-emerald">{commercialStatus || "Portfolio title"}</p>
                 <p className="mt-1 text-sm text-slate-300">Artwork shown from the OpenGamer game portfolio.</p>
               </div>
-              {demoUrl ? <span className="shrink-0 rounded-full border border-emerald/30 bg-black/45 px-3 py-1.5 text-xs font-semibold text-emerald">Playable</span> : null}
+              <span className="shrink-0 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-xs font-semibold text-slate-300">
+                {demoUrl ? "Playable" : "No public demo"}
+              </span>
             </div>
           </div>
         </Container>
@@ -127,9 +129,9 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
       <Section>
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
           <aside className="lg:sticky lg:top-28 lg:self-start">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Verified game profile</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white">What is confirmed for this title</h2>
-            <p className="mt-4 max-w-xl leading-7 text-slate-400">Only portfolio information currently supported by the game record is shown here. Commercial terms, certification details and integration scope stay out until confirmed.</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Game profile</p>
+            <h2 className="mt-4 text-3xl font-semibold text-white">What is currently confirmed</h2>
+            <p className="mt-4 max-w-xl leading-7 text-slate-400">Only information supported by the current game record is shown here. Commercial terms, certification details and integration scope stay out until confirmed.</p>
             <dl className="mt-7 border-t border-white/10">
               {gameDetails.map(([label, value]) => (
                 <div key={label} className="grid grid-cols-[0.42fr_0.58fr] gap-4 border-b border-white/10 py-4 text-sm">
@@ -171,7 +173,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Commercial and integration context</p>
               <h2 className="mt-4 text-3xl font-semibold text-white">Discuss the version that fits your product</h2>
-              <p className="mt-4 max-w-3xl leading-7 text-slate-300">Public demos are linked where verified. RTP, volatility, certification details, integration scope and commercial availability are shared only when confirmed for a qualified business discussion.</p>
+              <p className="mt-4 max-w-3xl leading-7 text-slate-300">Public demos are linked only where verified. For portfolio-only titles, artwork and confirmed product information remain visible without implying demo availability. Commercial terms, certification details and integration scope are handled only when confirmed for the relevant discussion.</p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button href={gameEnquiryHref}>Discuss This Game</Button>
                 <Button href="/services#game-production" variant="secondary">Game Production Services</Button>
@@ -192,6 +194,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
         <nav className="mt-8 grid gap-5 md:grid-cols-2" aria-label="Related games">
           {relatedGames.map((item) => {
             const relatedDemo = getVerifiedDemoUrl(item);
+            const relatedStatus = getGameCommercialStatusLabel(item) || "Portfolio title";
             return (
               <Link key={item.slug} href={`/games/${item.slug}`} className="group grid min-w-0 overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-white/[0.035] transition hover:-translate-y-0.5 hover:border-emerald/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:grid-cols-[0.42fr_0.58fr]">
                 <div className="relative min-h-48 sm:min-h-full">
@@ -200,8 +203,8 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
                 </div>
                 <div className="p-5 sm:p-6">
                   <div className="flex flex-wrap gap-2">
-                    <span className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-emerald">Portfolio title</span>
-                    {relatedDemo ? <span className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-slate-500">Playable</span> : null}
+                    <span className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-emerald">{relatedStatus}</span>
+                    <span className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-slate-500">{relatedDemo ? "Playable" : "No public demo"}</span>
                   </div>
                   <h3 className="mt-3 text-2xl font-semibold text-white">{item.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-slate-400">{item.shortDescription}</p>
@@ -215,11 +218,11 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
 
       <CTASection
         title="Interested in This Game or a Custom Version?"
-        description="Share the target theme, mechanics, platform and integration context. OpenGamer will propose the right production model."
+        description="Share the target theme, mechanics, platform and integration context. OpenGamer can scope the relevant production route from there."
         ctaLabel="Discuss a Project"
         ctaHref={gameEnquiryHref}
-        secondaryLabel="Request Portfolio"
-        secondaryHref="/contact?interest=portfolio#project-enquiry"
+        secondaryLabel="View Portfolio"
+        secondaryHref="/portfolio"
       />
     </SiteShell>
   );
