@@ -39,6 +39,14 @@ export function getBalancedGameShowcase({
   ]);
 }
 
+export function getCompactGameProof() {
+  return {
+    playable: playableGames[0] ?? null,
+    portfolio: portfolioGames[0] ?? null,
+    inDevelopment: inDevelopmentGames[0] ?? null
+  };
+}
+
 export function getHomepageGameProof() {
   const primaryPlayable = playableGames.find((game) => game.slug === "forest-fortune") ?? playableGames[0] ?? null;
   const secondaryPlayable = playableGames.find((game) => game.slug !== primaryPlayable?.slug) ?? null;
