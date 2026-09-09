@@ -112,3 +112,12 @@ test("preview robots disallow crawling without advertising production sitemap", 
   assert.match(previewBlock, /disallow:\s*"\/"/);
   assert.doesNotMatch(previewBlock, /sitemap/);
 });
+
+test("internal discovery uses canonical live casino section only", async () => {
+  const navigationSource = await readFile(new URL("../content/navigation.ts", import.meta.url), "utf8");
+  const sitemapSource = await readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8");
+
+  assert.doesNotMatch(navigationSource, /\/services\/live-casino-development/);
+  assert.match(navigationSource, /\/services#live-casino/);
+  assert.doesNotMatch(sitemapSource, /\/services\/live-casino-development/);
+});
