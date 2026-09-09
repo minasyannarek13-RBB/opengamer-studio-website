@@ -7,6 +7,8 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { getGameStatusLabel } from "@/content/games";
+import { getCompactGameProof } from "@/lib/gameShowcase";
 
 export const metadata: Metadata = {
   title: "About | OpenGamer Studio",
@@ -39,12 +41,27 @@ const principles = [
   ["Maintainable delivery", "Build for continued operation and iteration, with a handoff another team can understand and maintain."]
 ];
 
+const compactGameProof = getCompactGameProof();
 const proofReferences = [
-  { title: "Forest Fortune", label: "Playable game", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune" },
-  { title: "Cake Bonanza", label: "Portfolio title · No public demo", image: "/assets/games/cake-bonanza/artwork.webp", href: "/games/cake-bonanza" },
+  compactGameProof.playable
+    ? {
+        title: compactGameProof.playable.title,
+        label: getGameStatusLabel(compactGameProof.playable),
+        image: compactGameProof.playable.artwork?.catalogue || compactGameProof.playable.image,
+        href: `/games/${compactGameProof.playable.slug}`
+      }
+    : null,
+  compactGameProof.portfolio
+    ? {
+        title: compactGameProof.portfolio.title,
+        label: `${getGameStatusLabel(compactGameProof.portfolio)} · No public demo`,
+        image: compactGameProof.portfolio.artwork?.catalogue || compactGameProof.portfolio.image,
+        href: `/games/${compactGameProof.portfolio.slug}`
+      }
+    : null,
   { title: "ELEMENTALS", label: "Original IP · In development", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals" },
-  { title: "LC App", label: "B2B product concept", image: "/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp", href: "/portfolio/lc-app", contain: true }
-];
+  { title: "LC App", label: "B2B product concept · In development", image: "/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp", href: "/portfolio/lc-app", contain: true }
+].filter(Boolean) as Array<{ title: string; label: string; image: string; href: string; contain?: boolean }>;
 
 export default function AboutPage() {
   return (
