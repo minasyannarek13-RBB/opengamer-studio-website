@@ -39,25 +39,31 @@ const principles = [
   ["Maintainable delivery", "Build for continued operation and iteration rather than a one-off handoff that becomes somebody else's archaeology project."]
 ];
 
+const proofReferences = [
+  { title: "Forest Fortune", label: "Playable game", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune" },
+  { title: "ELEMENTALS", label: "Original IP · In development", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals" },
+  { title: "LC App", label: "B2B product concept", image: "/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp", href: "/portfolio/lc-app", contain: true }
+];
+
 export default function AboutPage() {
   return (
     <SiteShell atmosphere="company">
       <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#05070a] py-16 sm:py-24 lg:py-20">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(46,230,166,0.09),transparent_24rem),radial-gradient(circle_at_86%_56%,rgba(93,156,255,0.055),transparent_26rem),linear-gradient(180deg,rgba(255,255,255,0.025),transparent_52%)]" />
-        <div aria-hidden="true" className="absolute right-[-12rem] top-[10%] h-[34rem] w-[34rem] rounded-full border border-white/[0.035]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_0%,rgba(46,230,166,0.085),transparent_24rem),radial-gradient(circle_at_86%_50%,rgba(93,156,255,0.05),transparent_26rem),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_52%)]" />
+        <div aria-hidden="true" className="absolute right-[-12rem] top-[8%] h-[34rem] w-[34rem] rounded-full border border-white/[0.035]" />
 
         <Container className="relative">
-          <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-16 xl:gap-20">
+          <div className="grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-16 xl:gap-20">
             <div className="relative z-10">
               <SectionHeader
                 eyebrow="About OpenGamer"
-                title="Product, Game and Engineering in One iGaming Studio"
-                description="OpenGamer builds casino games, original product concepts and technical delivery scopes for B2B partners. Engagement can cover a complete build or a defined discipline inside an existing roadmap."
+                title="An iGaming Studio Built Around Product Responsibility"
+                description="OpenGamer combines game production, product thinking and technical delivery for B2B partners. The scope can be a complete build, an embedded team or one clearly defined technical responsibility."
                 headingLevel="h1"
               />
               <div className="mt-8 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap">
                 <Button href="/contact#project-enquiry" className="w-full min-[480px]:w-auto">Discuss a Project</Button>
-                <Button href="/games" variant="secondary" className="w-full min-[480px]:w-auto">Explore Games</Button>
+                <Button href="/portfolio" variant="secondary" className="w-full min-[480px]:w-auto">View Portfolio</Button>
               </div>
               <div className="mt-8 flex flex-wrap gap-2" aria-label="OpenGamer company scope">
                 {["Game production", "Dedicated development", "Technology & integration"].map((item) => (
@@ -66,35 +72,42 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-rows-[1.15fr_0.85fr]" aria-label="Selected OpenGamer work">
-              <Link href="/games/forest-fortune" className="group relative min-h-[330px] overflow-hidden rounded-[1.6rem] border border-white/12 bg-black/40 shadow-[0_34px_110px_rgba(0,0,0,0.34)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:col-span-2 lg:min-h-[390px]">
-                <Image src="/assets/games/forest-fortune/artwork.webp" alt="Forest Fortune OpenGamer game artwork" fill priority sizes="(min-width:1280px) 55vw,(min-width:1024px) 53vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.02]" />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0.02)_30%,rgba(4,6,8,0.88)_100%)]" />
-                <div className="absolute left-5 top-5"><span className="rounded-full border border-emerald/25 bg-[#07100d]/80 px-3 py-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-emerald backdrop-blur">Playable portfolio</span></div>
-                <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Game production proof</p>
-                  <h2 className="mt-2 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">Forest Fortune</h2>
-                  <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">A public game reference connected to OpenGamer's production and delivery story.</p>
+            <div className="relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#06090b] p-5 shadow-[0_34px_110px_rgba(0,0,0,0.32)] sm:p-7 lg:p-8">
+              <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(46,230,166,0.07),transparent_20rem)]" />
+              <div className="relative">
+                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-emerald">How OpenGamer fits into a roadmap</p>
+                <div className="mt-6 border-y border-white/10">
+                  {[
+                    ["01", "Product responsibility", "Clarify the commercial goal, player experience, scope and ownership before production starts."],
+                    ["02", "Production responsibility", "Connect game design, art, mathematics, engineering and QA around one delivery path."],
+                    ["03", "Technical responsibility", "Define integration, backend, RGS-related and release boundaries against the actual partner environment."]
+                  ].map(([number, title, text]) => (
+                    <div key={title} className="grid gap-3 border-b border-white/10 py-5 last:border-b-0 sm:grid-cols-[3rem_0.75fr_1.25fr] sm:gap-5 sm:py-6">
+                      <span className="text-[0.58rem] font-semibold tracking-[0.16em] text-emerald/90">{number}</span>
+                      <h2 className="text-base font-semibold text-white sm:text-lg">{title}</h2>
+                      <p className="text-sm leading-6 text-slate-400">{text}</p>
+                    </div>
+                  ))}
                 </div>
-              </Link>
 
-              <Link href="/portfolio/elementals" className="group relative min-h-[245px] overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[270px]">
-                <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="ELEMENTALS original Live Casino IP concept" fill sizes="(min-width:1024px) 27vw,(min-width:640px) 48vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.02]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/15 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <span className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-emerald">Original IP · In development</span>
-                  <h3 className="mt-2 text-xl font-semibold text-white">ELEMENTALS</h3>
+                <div className="mt-6">
+                  <p className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-slate-500">Work you can inspect</p>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                    {proofReferences.map((item) => (
+                      <Link key={item.title} href={item.href} className="group overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.025] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                        <div className="relative aspect-[10/7] overflow-hidden bg-black/40">
+                          <Image src={item.image} alt={`${item.title} OpenGamer work`} fill sizes="(min-width:1024px) 15vw,(min-width:640px) 30vw,100vw" className={`${item.contain ? "object-contain p-2" : "object-cover"} transition duration-500 group-hover:scale-[1.02]`} />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
+                        </div>
+                        <div className="p-3.5">
+                          <span className="text-[0.5rem] font-semibold uppercase tracking-[0.12em] text-emerald">{item.label}</span>
+                          <strong className="mt-1 block text-sm text-white">{item.title}</strong>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </Link>
-
-              <Link href="/portfolio/lc-app" className="group relative min-h-[245px] overflow-hidden rounded-[1.4rem] border border-white/10 bg-[#06090b] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[270px]">
-                <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(46,230,166,0.08),transparent_16rem)]" />
-                <Image src="/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp" alt="LC App B2B product concept" fill sizes="(min-width:1024px) 27vw,(min-width:640px) 48vw,100vw" className="object-contain p-4 transition duration-700 group-hover:scale-[1.018]" />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/55 to-transparent p-5">
-                  <span className="text-[0.52rem] font-semibold uppercase tracking-[0.14em] text-emerald">B2B product direction · In development</span>
-                  <h3 className="mt-1.5 text-xl font-semibold text-white">LC App</h3>
-                </div>
-              </Link>
+              </div>
             </div>
           </div>
 
@@ -113,18 +126,16 @@ export default function AboutPage() {
       </section>
 
       <Section>
-        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-[0.58fr_1.42fr] lg:items-start lg:gap-16 xl:gap-24">
           <div className="lg:sticky lg:top-28">
-            <p className="premium-kicker text-xs font-semibold uppercase">What OpenGamer is</p>
-            <h2 className="mt-4 text-balance text-3xl font-semibold text-white sm:text-4xl">One studio across product, game and technology work.</h2>
-            <p className="mt-5 max-w-xl leading-7 text-slate-300">OpenGamer can take responsibility for a complete casino game build or join an existing roadmap for a defined discipline, integration task or dedicated development stream.</p>
+            <SectionHeader eyebrow="Ways to work" title="Take the Responsibility You Need, Not a Fixed Package" description="The engagement model follows the roadmap and the missing ownership, rather than forcing every partner into the same production package." />
           </div>
           <div className="border-y border-white/10">
             {deliveryModes.map(([title, description], index) => (
-              <div key={title} className="grid gap-3 border-b border-white/10 py-7 last:border-b-0 sm:grid-cols-[4rem_0.72fr_1.28fr] sm:items-start sm:gap-6">
+              <div key={title} className="grid gap-3 border-b border-white/10 py-7 last:border-b-0 sm:grid-cols-[4rem_0.72fr_1.28fr] sm:items-start sm:gap-6 sm:py-8">
                 <span className="text-xs font-semibold tracking-[0.18em] text-emerald">0{index + 1}</span>
                 <h3 className="text-xl font-semibold text-white">{title}</h3>
-                <p className="text-sm leading-6 text-slate-400">{description}</p>
+                <p className="text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{description}</p>
               </div>
             ))}
           </div>
@@ -133,9 +144,9 @@ export default function AboutPage() {
 
       <Section className="relative overflow-hidden bg-black/20">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_30%,rgba(46,230,166,0.04),transparent_24rem)]" />
-        <div className="relative grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16">
-          <div>
-            <SectionHeader eyebrow="Operating principles" title="How the Studio Works" description="Delivery is organized around responsibility, technical visibility and a scope that can survive contact with an actual production environment." />
+        <div className="relative grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-16">
+          <div className="lg:sticky lg:top-28">
+            <SectionHeader eyebrow="Operating principles" title="Built to Survive Contact With Production" description="Delivery is organized around responsibility, technical visibility and decisions that remain understandable after the kickoff meeting is forgotten." />
           </div>
           <div className="border-t border-white/10">
             {principles.map(([title, description], index) => (
@@ -143,6 +154,27 @@ export default function AboutPage() {
                 <span className="text-xs font-semibold tracking-[0.16em] text-emerald/80">0{index + 1}</span>
                 <h3 className="text-lg font-semibold text-white">{title}</h3>
                 <p className="text-sm leading-6 text-slate-400">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="grid gap-8 rounded-[1.4rem] border border-white/10 bg-white/[0.025] p-6 sm:p-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center lg:p-10">
+          <div>
+            <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Before the first conversation</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-[-0.015em] text-white sm:text-3xl">Define the gap, not a forty-page brief.</h2>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {[
+              ["Current stage", "Concept, build, integration or live product."],
+              ["Missing ownership", "What your internal team cannot or should not own."],
+              ["Environment", "Platform, partner, technical or commercial constraints already known."]
+            ].map(([title, text]) => (
+              <div key={title} className="border-t border-white/10 pt-4 sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
+                <h3 className="text-sm font-semibold text-white">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-500">{text}</p>
               </div>
             ))}
           </div>
