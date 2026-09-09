@@ -2,22 +2,29 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { Button } from "@/components/ui/Button";
-import { getGameCommercialStatusLabel, getVerifiedDemoUrl, type Game } from "@/content/games";
+import {
+  getGameDemoStatusLabel,
+  getGamePrimaryActionLabel,
+  getGameStatus,
+  getGameStatusLabel,
+  getVerifiedDemoUrl,
+  type Game
+} from "@/content/games";
 import { getOptimizedGameArtwork } from "@/lib/gameAssets";
 
 export function GameCard({ game }: { game: Game }) {
-  const commercialStatus = getGameCommercialStatusLabel(game);
+  const status = getGameStatus(game);
+  const statusLabel = getGameStatusLabel(game);
+  const availabilityLabel = getGameDemoStatusLabel(game);
   const demoUrl = getVerifiedDemoUrl(game);
   const primaryCategory = game.category?.[0];
   const artwork = getOptimizedGameArtwork(game);
-  const isInDevelopment = !demoUrl && game.commercialStatus === "in-development";
-  const imageStatus = demoUrl ? "Playable" : isInDevelopment ? "In development" : "Portfolio title";
-  const availability = demoUrl ? "Public demo available" : "No public demo";
-  const statusClass = demoUrl
-    ? "border border-emerald/25 bg-emerald/10 text-emerald"
-    : isInDevelopment
-      ? "border border-amber-300/20 bg-amber-300/[0.08] text-amber-200"
-      : "border border-white/15 bg-black/55 text-slate-300";
+  const statusClass =
+    status === "playable"
+      ? "border border-emerald/25 bg-emerald/10 text-emerald"
+      : status === "in-development"
+        ? "border border-amber-300/20 bg-amber-300/[0.08] text-amber-200"
+        : "border border-white/15 bg-black/55 text-slate-300";
 
   return (
     <article
@@ -45,19 +52,14 @@ export function GameCard({ game }: { game: Game }) {
           ) : (
             <span />
           )}
-          <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium backdrop-blur ${statusClass}`}>{imageStatus}</span>
+          <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium backdrop-blur ${statusClass}`}>{statusLabel}</span>
         </div>
       </Link>
 
       <div className="flex min-w-0 flex-1 flex-col p-5 sm:p-6">
-        <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start sm:gap-4">
-          <div className="min-w-0">
-            <h3 className="min-w-0 break-words text-xl font-semibold tracking-[-0.015em] text-white sm:text-2xl">{game.title}</h3>
-            <p className="mt-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{availability}</p>
-          </div>
-          {commercialStatus ? (
-            <span className="max-w-full break-words text-xs leading-5 text-slate-500 sm:max-w-44 sm:text-right">{commercialStatus}</span>
-          ) : null}
+        <div className="min-w-0">
+          <h3 className="min-w-0 break-words text-xl font-semibold tracking-[-0.015em] text-white sm:text-2xl">{game.title}</h3>
+          <p className="mt-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{availabilityLabel}</p>
         </div>
 
         <p className="mt-3 break-words text-sm leading-6 text-slate-400">{game.shortDescription}</p>
@@ -65,7 +67,7 @@ export function GameCard({ game }: { game: Game }) {
         <div className="mt-auto grid gap-3 pt-6 sm:flex sm:flex-wrap sm:items-center">
           {demoUrl ? (
             <Button href={demoUrl} className="min-h-10 w-full px-4 sm:w-auto" target="_blank" rel="noopener noreferrer">
-              Play Demo
+              {getGamePrimaryActionLabel(game)}
             </Button>
           ) : (
             <Button
@@ -73,7 +75,7 @@ export function GameCard({ game }: { game: Game }) {
               variant="secondary"
               className="min-h-10 w-full px-4 sm:w-auto"
             >
-              {isInDevelopment ? "Discuss Development" : "Discuss This Title"}
+              {getGamePrimaryActionLabel(game)}
             </Button>
           )}
           <Button
@@ -82,7 +84,7 @@ export function GameCard({ game }: { game: Game }) {
             className="justify-self-start"
             aria-label={`View details for ${game.title}`}
           >
-            {demoUrl ? "View Game" : "View Title"}
+            View Title
           </Button>
         </div>
       </div>
