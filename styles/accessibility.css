@@ -3,18 +3,20 @@
     scroll-behavior: auto;
   }
 
-  body[data-scroll-reveal-ready] [data-scroll-reveal].is-visible,
-  body[data-scroll-reveal-ready] [data-reveal-group].is-visible > * {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body[data-scroll-reveal-ready] [data-scroll-reveal],
+  body[data-scroll-reveal-ready] [data-reveal-group] > * {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
-  }
-
-  .premium-card::before,
-  .menu-signal__bar,
-  .mobile-nav-panel,
-  .solutions-dropdown__link {
-    transition-duration: 0.01ms !important;
   }
 
   .solutions-dropdown__link:hover,
