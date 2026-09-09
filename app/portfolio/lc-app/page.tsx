@@ -7,7 +7,7 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { lcAppAssets, lcAppDisclaimer, lcAppOverview } from "@/content/portfolio";
+import { lcAppAssets, lcAppOverview } from "@/content/portfolio";
 
 export const metadata: Metadata = {
   title: "LC App | B2B Social Layer for Live Casino — OpenGamer",
@@ -89,7 +89,7 @@ export default function LcAppPage() {
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
                 <ConceptPanel asset={lcAppAssets.creatorProfile} tall label="Creator profile" />
-                <ConceptPanel asset={lcAppAssets.community} label="Community" className="sm:col-span-1" />
+                <ConceptPanel asset={lcAppAssets.community} label="Community" />
               </div>
             </div>
           </div>
@@ -114,21 +114,26 @@ export default function LcAppPage() {
           </div>
         </Section>
 
-        <Section className="bg-black/20">
-          <div className="grid gap-8 lg:grid-cols-[0.76fr_1.24fr] lg:items-start lg:gap-14">
+        <Section className="relative overflow-hidden bg-black/20">
+          <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(46,230,166,0.04),transparent_24rem)]" />
+          <div className="relative grid gap-10 lg:grid-cols-[0.68fr_1.32fr] lg:gap-16">
             <div>
-              <SectionHeader eyebrow="Public status" title="Product Direction, Not Production Claim" description={lcAppDisclaimer} />
+              <SectionHeader eyebrow="Development snapshot" title="What the Current Concept Shows" description="Current public materials show the product and interface direction. Launched production use, pilots, customers and live integrations are not presented as confirmed." />
+              <div className="mt-7 flex flex-wrap gap-2">
+                {["B2B direction", "Concept UI", "In development"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{item}</span>)}
+              </div>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="border-y border-white/10">
               {[
-                ["Confirmed", "Concept interfaces and product direction are available for review."],
-                ["In development", "The product concept continues to evolve."],
-                ["Not claimed", "No public claim of launched production use, pilots, customers or live integrations."],
-                ["Discussion scope", "Product development and strategic collaboration can be discussed separately."]
-              ].map(([title, copy]) => (
-                <div key={title} className="rounded-[1.25rem] border border-white/10 bg-white/[0.035] p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald">{title}</p>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">{copy}</p>
+                ["01", "Product direction", "Concept interfaces and product structure are available for review."],
+                ["02", "Development status", "In development"],
+                ["03", "Live integrations / customers", "Not confirmed"],
+                ["04", "Discussion scope", "Product development and strategic collaboration can be scoped separately."]
+              ].map(([number, title, copy]) => (
+                <div key={title} className="grid gap-3 border-b border-white/10 py-6 last:border-b-0 sm:grid-cols-[3rem_0.8fr_1.2fr] sm:items-start sm:gap-6">
+                  <span className="text-xs font-semibold tracking-[0.16em] text-emerald">{number}</span>
+                  <h3 className="font-semibold text-white">{title}</h3>
+                  <p className="text-sm leading-6 text-slate-400">{copy}</p>
                 </div>
               ))}
             </div>
