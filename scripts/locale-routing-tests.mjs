@@ -22,6 +22,6 @@ test("header and footer links do not manufacture localized redirect URLs", async
   assert.match(headerSource, /getLocalizedHomePath\(locale, "\/"\)/);
   assert.doesNotMatch(headerSource, /getLocalizedPath\(locale, resolvedCtaHref\)/);
   assert.match(headerSource, /getLocalizedHomePath\(locale, resolvedCtaHref\)/);
-  assert.doesNotMatch(footerSource, /getLocalizedPath\(locale, "\/contact"\)/);
-  assert.match(footerSource, /getLocalizedHomePath\(locale, "\/contact"\)/);
+  assert.doesNotMatch(footerSource, /getLocalizedPath\(locale, "\/contact#project-enquiry"\)/);
+  assert.match(footerSource, /getLocalizedHomePath\(locale, "\/contact#project-enquiry"\)/);
 });
