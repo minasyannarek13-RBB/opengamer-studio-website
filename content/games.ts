@@ -49,7 +49,8 @@ export function getVerifiedDemoUrl(game: Game) {
 
   try {
     const url = new URL(game.demoUrl);
-    return url.protocol === "https:" && url.hostname === "open-gamer.com" && url.pathname === "/games/view" && url.searchParams.has("code")
+    const code = url.searchParams.get("code")?.trim();
+    return url.protocol === "https:" && url.hostname === "open-gamer.com" && url.pathname === "/games/view" && Boolean(code)
       ? game.demoUrl
       : null;
   } catch {
@@ -75,6 +76,11 @@ export function getGameDemoStatusLabel(game: Game) {
 
 export function getGamePrimaryActionLabel(game: Game) {
   return gameStatusModel[getGameStatus(game)].primaryAction;
+}
+
+export function getGameEnquiryHref(game: Game) {
+  const interest = getGameStatus(game) === "portfolio" ? "portfolio" : "game";
+  return `/contact?interest=${interest}&game=${game.slug}#project-enquiry`;
 }
 
 function artwork(image: string): Game["artwork"] {
