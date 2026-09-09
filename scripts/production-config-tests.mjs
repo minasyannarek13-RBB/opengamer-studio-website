@@ -93,20 +93,30 @@ test("public company config accepts only validated public values", async () => {
   assert.deepEqual(validConfig.company.social, [{ label: "LinkedIn", href: "https://www.linkedin.com/company/opengamer" }]);
 });
 
-test("game statuses and demo buttons are explicit", async () => {
-  const { games, getGameCommercialStatusLabel, getGameDemoStatusLabel, getVerifiedDemoUrl, hasVerifiedDemo } =
-    await cacheSafeImport("../content/games.ts");
+test("game catalogue uses one explicit public status contract", async () => {
+  const {
+    games,
+    getGameDemoStatusLabel,
+    getGameStatus,
+    getGameStatusLabel,
+    getVerifiedDemoUrl,
+    hasVerifiedDemo
+  } = await cacheSafeImport("../content/games.ts");
   const deepDive = games.find((game) => game.slug === "deep-dive");
   const cakeBonanza = games.find((game) => game.slug === "cake-bonanza");
 
   assert.ok(deepDive);
   assert.ok(cakeBonanza);
-  assert.equal(getGameCommercialStatusLabel(deepDive), "Portfolio Title");
-  assert.equal(getGameDemoStatusLabel(deepDive), "Demo Available");
+  assert.equal(getGameStatus(deepDive), "playable");
+  assert.equal(getGameStatusLabel(deepDive), "Playable");
+  assert.equal(getGameDemoStatusLabel(deepDive), "Public Demo Available");
   assert.equal(hasVerifiedDemo(deepDive), true);
+  assert.equal(getGameStatus(cakeBonanza), "portfolio");
+  assert.equal(getGameStatusLabel(cakeBonanza), "Portfolio Title");
   assert.equal(getVerifiedDemoUrl(cakeBonanza), null);
   assert.equal(getGameDemoStatusLabel(cakeBonanza), "No Public Demo");
   assert.equal(getVerifiedDemoUrl({ ...deepDive, demoUrl: "https://example.com/demo" }), null);
+  assert.equal(games.some((game) => ["demo", "request-access", "coming-soon"].includes(game.status)), false);
 });
 
 test("schema source omits unconfirmed corporate fields", async () => {
