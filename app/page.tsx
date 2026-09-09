@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { ManualHero } from "@/components/home/ManualHero";
 import { StudioHomepage } from "@/components/home/StudioHomepage";
 import { homepageCopy } from "@/content/studioHomepage";
 
@@ -37,7 +38,10 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <SiteShell locale="en">
-      <StudioHomepage locale="en" />
+      <ManualHero />
+      <div className="[&_.studio-static-hero]:hidden">
+        <StudioHomepage locale="en" />
+      </div>
     </SiteShell>
   );
 }
