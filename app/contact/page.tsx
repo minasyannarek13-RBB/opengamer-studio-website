@@ -28,7 +28,7 @@ const enquiryRoutes = [
     title: "Extend Your Team",
     description: "Add focused iGaming capacity around an existing roadmap without rebuilding every discipline internally.",
     scope: "Frontend · Backend · Game art · QA · Product · Technical support",
-    href: "/contact?interest=technology#project-enquiry"
+    href: "/contact?interest=dedicated#project-enquiry"
   },
   {
     index: "03",
@@ -61,12 +61,17 @@ export default function ContactPage() {
       <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#05070a] py-14 sm:py-20 lg:py-20">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_0%,rgba(46,230,166,0.085),transparent_26rem),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_58%)]" />
         <Container className="relative grid gap-8 lg:grid-cols-[0.74fr_0.26fr] lg:items-end lg:gap-14">
-          <SectionHeader
-            eyebrow="Start a commercial conversation"
-            title="Start With the Gap. Define the Scope From There."
-            description="Share what needs to be built, extended or integrated, what already exists and where ownership is missing. A finished specification is not required."
-            headingLevel="h1"
-          />
+          <div>
+            <SectionHeader
+              eyebrow="Start a commercial conversation"
+              title="Start With the Gap. Define the Scope From There."
+              description="Share what needs to be built, extended or integrated, what already exists and where ownership is missing. A finished specification is not required."
+              headingLevel="h1"
+            />
+            <Link href="#project-enquiry" className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald/25 bg-emerald/[0.08] px-4 text-sm font-semibold text-emerald transition hover:border-emerald/45 hover:bg-emerald/[0.12] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">
+              Start enquiry <span aria-hidden="true">↓</span>
+            </Link>
+          </div>
           <div className="border-t border-white/10 pt-5 text-sm text-slate-400 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
             <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-emerald">Enough for a first message</p>
             <p className="mt-3 leading-6">Project type · current stage · missing scope · known dependencies</p>
