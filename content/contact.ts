@@ -10,7 +10,7 @@ export const companyTypes = [
 
 export const serviceInterests = [
   "Slot Game Development",
-  "Live Casino Development",
+  "Live Casino Product Design",
   "Frontend or Backend Engineering",
   "Game or Platform Integration",
   "Portfolio Licensing or Reskin",
