@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
-import { pathToFileURL } from "node:url";
 
 let importCounter = 0;
 
@@ -63,7 +62,7 @@ test("public company config omits unconfirmed corporate fields", async () => {
   resetEnv();
   const { company } = await cacheSafeImport("../content/company.ts");
   assert.equal(company.email, "");
-  assert.equal(company.social.length, 0);
+  assert.deepEqual(company.social, [{ label: "LinkedIn", href: "https://www.linkedin.com/company/opengamer" }]);
   assert.equal("phone" in company, false);
   assert.equal("address" in company, false);
 });
