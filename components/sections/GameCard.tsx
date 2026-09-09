@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { Button } from "@/components/ui/Button";
 import {
   getGameDemoStatusLabel,
+  getGameEnquiryHref,
   getGamePrimaryActionLabel,
   getGameStatus,
   getGameStatusLabel,
@@ -20,7 +21,7 @@ export function GameCard({ game }: { game: Game }) {
   const primaryCategory = game.category?.[0];
   const artwork = getOptimizedGameArtwork(game);
   const detailHref = `/games/${game.slug}`;
-  const enquiryInterest = status === "portfolio" ? "portfolio" : "game";
+  const enquiryHref = getGameEnquiryHref(game);
   const statusClass =
     status === "playable"
       ? "border border-emerald/25 bg-emerald/10 text-emerald"
@@ -78,7 +79,7 @@ export function GameCard({ game }: { game: Game }) {
             </Button>
           ) : (
             <Button
-              href={`/contact?interest=${enquiryInterest}&game=${game.slug}#project-enquiry`}
+              href={enquiryHref}
               variant="secondary"
               className="min-h-11 w-full px-4 sm:w-auto"
             >
