@@ -6,7 +6,7 @@ Current production-relevant state for the OpenGamer website. Git history is the 
 
 - Branch: `build/contact-conversion-handoff-20260908`
 - Baseline lineage: `v2-current`
-- Current code candidate: `7c913fb9303995b7fef5b9978787b85f1541fee4`
+- Current code candidate: `5486ae29c2fbcce687ba2b9d2ff4c4fe7fa35612`
 - Last fully tested code head: `7e06037653d96db3d0a72caf5acc6854f10ea8c9`
 - QA at last fully tested head: `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` PASS; `pnpm build` PASS.
 - Current candidate QA: GitHub Quality queued/pending; do not classify READY until exact-head checks pass.
@@ -44,7 +44,7 @@ Locale routes exist only as compatibility redirects to the canonical non-localiz
 
 ## Current site state
 
-- Homepage: modular sections under the single SiteShell main landmark; buyer-first hero; catalogue-driven game proof; separate ELEMENTALS/LC App directions; delivery flow and commercial CTA.
+- Homepage: buyer-first hero now states the three core buying intents directly: build a game, extend delivery capacity, solve a product/engineering gap. Capability proof is explicit about custom games, frontend/backend/math modules and integration/RGS-related engineering. Visual proof remains catalogue-driven and separates ELEMENTALS, LC App and slot work.
 - Services: one canonical services surface covering game production, technology/integration, portfolio adaptation, Live Casino product scope and dedicated delivery.
 - Technology: engineering stack, frontend/backend roles, architecture boundaries, partner dependencies, workflow and engagement models.
 - Portfolio: separates playable games, original IP and product/interface work; supports playable and portfolio-only titles together.
