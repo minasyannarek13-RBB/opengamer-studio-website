@@ -4,7 +4,6 @@ import Link from "next/link";
 import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
-import { RelatedProductStrip } from "@/components/visual/ProductSignature";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
@@ -297,9 +296,33 @@ export default function ServicesPage() {
         </Section>
       ))}
 
-      <Section><SectionHeader eyebrow="Product proof" title="Real Work Behind the Service List" description="The service model is connected to actual OpenGamer games, original Live Casino IP and product-interface work." /><div className="mt-10"><RelatedProductStrip items={[{ eyebrow: "Playable portfolio", title: "Forest Fortune", description: "A real OpenGamer slot reference for game-production discussions.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" },{ eyebrow: "Original IP · In development", title: "ELEMENTALS", description: "Original Live Casino IP showing show-game product and experience design capability.", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals", actionLabel: "View Concept", accent: "#dca45f" },{ eyebrow: "B2B product concept", title: "LC App", description: "Product-interface work exploring social and creator-led Live Casino engagement.", image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" }]} /></div></Section>
+      <Section className="relative overflow-hidden bg-black/20">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(46,230,166,0.05),transparent_25rem)]" />
+        <div className="relative grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16 xl:gap-24">
+          <div>
+            <SectionHeader eyebrow="Before we scope it" title="A Useful First Conversation Needs Four Things" description="No procurement theatre is required. A short brief is enough when it explains the current situation and the gap that needs to be closed." />
+            <div className="mt-7 flex flex-wrap gap-2" aria-label="OpenGamer project entry points">
+              {["New build", "Existing product", "Technical gap", "Capacity gap"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{item}</span>)}
+            </div>
+          </div>
+          <div className="border-t border-white/10">
+            {[
+              ["01", "What are you building?", "A new game, existing portfolio, product interface, engineering module or another defined iGaming scope."],
+              ["02", "Where is it now?", "Concept, design, existing codebase, integration stage, release preparation or another current state."],
+              ["03", "What does it depend on?", "Platform, APIs, wallet flows, existing architecture, third-party review, internal stakeholders or launch constraints."],
+              ["04", "What is missing internally?", "A complete build, one specialist discipline, several embedded roles, QA, integration support or product and technical guidance."]
+            ].map(([number, title, text]) => (
+              <div key={number} className="grid gap-3 border-b border-white/10 py-7 sm:grid-cols-[3rem_0.8fr_1.2fr] sm:gap-6 sm:py-8">
+                <span className="text-[0.66rem] font-semibold tracking-[0.18em] text-emerald">{number}</span>
+                <h3 className="text-lg font-semibold text-white sm:text-xl">{title}</h3>
+                <p className="text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
 
-      <CTASection title="Need a Defined Scope or an Embedded Team?" description="Share the project type, current stage, technical dependencies and what is missing internally. The first conversation can stay focused on the smallest useful scope." ctaLabel="Discuss a Project" ctaHref="/contact#project-enquiry" secondaryLabel="Explore Games" secondaryHref="/games" />
+      <CTASection title="Bring the Gap. We’ll Define the Smallest Useful Scope." description="Share the project type, current stage, technical dependencies and what is missing internally. The first conversation can stay focused on the work that actually needs to happen." ctaLabel="Discuss a Project" ctaHref="/contact#project-enquiry" secondaryLabel="Explore Games" secondaryHref="/games" />
     </SiteShell>
   );
 }
