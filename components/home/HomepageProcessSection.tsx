@@ -22,18 +22,18 @@ export function HomepageProcessSection() {
           </div>
           <div className="relative">
             <div aria-hidden="true" className="absolute bottom-0 left-[1.3rem] top-0 w-px bg-gradient-to-b from-emerald/50 via-white/10 to-transparent sm:left-[1.55rem]" />
-            <div className="space-y-0">
+            <ol className="space-y-0" aria-label="OpenGamer delivery process">
               {process.map((step) => (
-                <div key={step.number} className="relative grid gap-5 border-b border-white/10 py-8 pl-14 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-8 sm:py-10 sm:pl-20">
+                <li key={step.number} className="relative grid gap-4 border-b border-white/10 py-8 pl-14 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-8 sm:py-10 sm:pl-20">
                   <span className="absolute left-0 top-8 flex h-11 w-11 items-center justify-center rounded-full border border-emerald/25 bg-[#07100d] text-[0.64rem] font-semibold tracking-[0.16em] text-emerald shadow-[0_0_34px_rgba(46,230,166,0.08)] sm:top-10 sm:h-12 sm:w-12">{step.number}</span>
                   <div><h3 className="text-2xl font-semibold tracking-[-0.015em] sm:text-[1.8rem]">{step.title}</h3><p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{step.text}</p></div>
-                  <span className="w-fit rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-slate-400">{step.output}</span>
-                </div>
+                  <span className="w-fit self-start rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-slate-400 sm:mt-1">{step.output}</span>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </div>
-        <div className="mt-10 grid gap-3 border-t border-white/10 pt-7 sm:grid-cols-3">{["Scope before theatre", "Disciplines matched to the project", "Handoff into the target environment"].map((item) => <div key={item} className="flex items-center gap-3 text-sm text-slate-400"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald" /><span>{item}</span></div>)}</div>
+        <div className="mt-10 grid gap-3 border-t border-white/10 pt-7 sm:grid-cols-3">{["Outcome before detail", "Disciplines matched to the project", "Handoff into the target environment"].map((item) => <div key={item} className="flex items-center gap-3 text-sm text-slate-400"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald" /><span>{item}</span></div>)}</div>
       </Container>
     </section>
   );
