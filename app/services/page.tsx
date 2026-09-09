@@ -198,28 +198,59 @@ export default function ServicesPage() {
               )}
 
               {group.id === "portfolio-services" && (
-                <div className="mb-9 overflow-hidden rounded-[1.4rem] border border-white/10 bg-white/[0.02]">
-                  <div className="grid sm:grid-cols-3">
+                <div className="mb-9 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+                  <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                     {[
                       { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp" },
                       { title: "Sweet Wins", slug: "sweet-wins", image: "/assets/games/sweet-wins/artwork.webp" },
                       { title: "Fruit Elixir", slug: "fruit-elixir", image: "/assets/games/fruit-elixir/artwork.webp" }
-                    ].map((game, gameIndex) => (
-                      <Link key={game.slug} href={`/games/${game.slug}`} className={`group/portfolio relative min-h-[190px] overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[220px] ${gameIndex > 0 ? "border-t border-white/10 sm:border-l sm:border-t-0" : ""}`}>
-                        <Image src={game.image} alt={`${game.title} portfolio artwork`} fill sizes="(min-width:1024px) 20vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/portfolio:scale-[1.02]" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
-                        <div className="absolute inset-x-0 bottom-0 p-4"><span className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-emerald">Portfolio title</span><strong className="mt-1 block text-base text-white">{game.title}</strong></div>
+                    ].map((game) => (
+                      <Link key={game.slug} href={`/games/${game.slug}`} className="group/game relative overflow-hidden rounded-[1.1rem] border border-white/10 bg-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                        <div className="relative aspect-[10/7] overflow-hidden"><Image src={game.image} alt={`${game.title} portfolio artwork`} fill sizes="(min-width:1280px) 13vw,(min-width:1024px) 38vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/game:scale-[1.02]" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" /><div className="absolute inset-x-0 bottom-0 p-3.5"><span className="text-[0.52rem] font-semibold uppercase tracking-[0.13em] text-emerald">Portfolio title</span><strong className="mt-1 block text-sm text-white">{game.title}</strong></div></div>
                       </Link>
                     ))}
                   </div>
-                  <div className="grid gap-4 border-t border-white/10 p-5 sm:grid-cols-4 sm:p-6">
+                  <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.025] p-5 sm:p-6">
+                    <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Commercial routes</p>
+                    <div className="mt-5 space-y-4">
+                      {[
+                        ["License", "Evaluate existing OpenGamer content where a licensing model fits."],
+                        ["Reskin", "Rework theme, assets and presentation around a new brief."],
+                        ["Brand", "Develop a branded variant or new game around partner requirements."],
+                        ["Modernise", "Refresh older content for stronger UX, maintainability or integration readiness."]
+                      ].map(([title, text]) => <div key={title} className="border-t border-white/10 pt-4 first:border-t-0 first:pt-0"><h3 className="text-sm font-semibold text-white">{title}</h3><p className="mt-1.5 text-sm leading-6 text-slate-400">{text}</p></div>)}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {group.id === "live-casino" && (
+                <div className="relative mb-9 overflow-hidden rounded-[1.45rem] border border-white/10 bg-black/40 shadow-[0_28px_90px_rgba(0,0,0,0.28)]">
+                  <div className="relative min-h-[390px] sm:min-h-[470px]">
+                    <Image src="/assets/projects/elementals/expositions/nexus-studio-wheel.webp" alt="ELEMENTALS original Live Casino IP concept" fill sizes="(min-width:1024px) 58vw,100vw" className="object-cover" />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,10,0.03)_18%,rgba(5,7,10,0.92)_100%)]" />
+                    <div className="absolute left-5 top-5 flex flex-wrap gap-2 sm:left-7 sm:top-7">
+                      <span className="rounded-full border border-emerald/25 bg-[#07100d]/80 px-3 py-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.15em] text-emerald backdrop-blur">Original Live Casino IP</span>
+                      <span className="rounded-full border border-white/12 bg-black/45 px-3 py-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.15em] text-slate-300 backdrop-blur">In development</span>
+                    </div>
+                    <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+                      <p className="text-[0.62rem] font-semibold uppercase tracking-[0.19em] text-emerald">Product concept · Mechanics · UX · Interface direction</p>
+                      <h3 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">ELEMENTALS</h3>
+                      <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">A concrete OpenGamer reference for Live Casino product thinking: a cinematic show-game concept built around a central wheel, elemental bonus worlds and a host-led player experience.</p>
+                      <Link href="/portfolio/elementals" className="mt-5 inline-flex text-sm font-semibold text-white/85 transition hover:text-emerald">Explore ELEMENTALS →</Link>
+                    </div>
+                  </div>
+                  <div className="grid gap-0 border-t border-white/10 sm:grid-cols-2 lg:grid-cols-4">
                     {[
-                      ["01", "License", "Evaluate existing work for an agreed portfolio model."],
-                      ["02", "Reskin", "Replace theme, symbols, UI and supporting visual assets."],
-                      ["03", "Brand", "Adapt content around a partner brand or campaign direction."],
-                      ["04", "Modernise", "Refresh frontend, mobile UX or integration readiness."]
-                    ].map(([number, title, text]) => (
-                      <div key={number}><span className="text-[0.56rem] font-semibold tracking-[0.16em] text-emerald">{number}</span><h3 className="mt-2 text-sm font-semibold text-white">{title}</h3><p className="mt-2 text-xs leading-5 text-slate-500">{text}</p></div>
+                      ["Game format", "Rules, round flow and bonus structure"],
+                      ["Presenter UX", "Host prompts, states and studio-facing flow"],
+                      ["Player interface", "Betting, live-session and result communication"],
+                      ["Delivery scope", "Product documentation and integration preparation"]
+                    ].map(([title, text], itemIndex) => (
+                      <div key={title} className={`p-4 sm:p-5 ${itemIndex ? "border-t border-white/10 sm:border-l sm:border-t-0" : ""}`}>
+                        <h4 className="text-sm font-semibold text-white">{title}</h4>
+                        <p className="mt-2 text-xs leading-5 text-slate-500 sm:text-sm sm:leading-6">{text}</p>
+                      </div>
                     ))}
                   </div>
                 </div>
