@@ -6,6 +6,8 @@ Current production-relevant state for the OpenGamer website. Git history is the 
 
 - Branch: `build/contact-conversion-handoff-20260908`
 - Baseline lineage: `v2-current`
+- Last fully tested code head: `7e06037653d96db3d0a72caf5acc6854f10ea8c9`
+- QA at that head: `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` PASS; `pnpm build` PASS.
 - Production domain/DNS/aliases/secrets/env: unchanged.
 - Deployment policy: do not deploy intermediate commits. Finish code + QA first, then create one fresh RC preview.
 
@@ -32,6 +34,7 @@ Locale routes exist only as compatibility redirects to the canonical non-localiz
 - Verified public game demo → `Playable` / `Play Demo`.
 - Confirmed title without public demo → `Portfolio Title` / `No Public Demo` / commercial discussion CTA.
 - Confirmed in-development title → `In Development`.
+- Homepage game proof derives artwork and demo status from the typed game catalogue instead of maintaining duplicate status data.
 - ELEMENTALS: original Live Casino IP in development. Do not claim launch, certification, integration, studio operation or licensing unless confirmed.
 - LC App: separate in-development B2B product concept. Do not present as a launched production application.
 - RGS-related engineering does not imply ownership of a proprietary platform/RGS or certification.
@@ -39,7 +42,7 @@ Locale routes exist only as compatibility redirects to the canonical non-localiz
 
 ## Current site state
 
-- Homepage: buyer-first hero, playable proof, separate ELEMENTALS/LC App directions, delivery flow and final commercial CTA.
+- Homepage: buyer-first hero, catalogue-driven game proof, separate ELEMENTALS/LC App directions, delivery flow and commercial CTA; reduced-motion handling added to major hero interactions.
 - Services: one canonical services surface covering game production, technology/integration, portfolio adaptation, Live Casino product scope and dedicated delivery.
 - Technology: engineering stack, frontend/backend roles, architecture boundaries, partner dependencies, workflow and engagement models.
 - Portfolio: separates playable games, original IP and product/interface work; supports playable and portfolio-only titles together.
@@ -59,6 +62,8 @@ Active sources of truth:
 - `README.md`
 - `OPEN_GAMER_BRAND_GUIDELINES.md`
 - this handoff
+
+Test harnesses now execute current TypeScript sources rather than relying on deleted legacy homepage/asset assumptions.
 
 Do not restore removed files because an older commit, preview or document references them.
 
