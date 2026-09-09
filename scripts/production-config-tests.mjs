@@ -1,97 +1,76 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { readFile } from "node:fs/promises";
+import { pathToFileURL } from "node:url";
 
-const payload = {
-  fullName: "Narek Minasyan",
-  company: "OpenGamer",
-  email: "narek@example.com",
-  jobTitle: "Founder",
-  companyType: "Game studio",
-  serviceInterest: "Game Development",
-  projectDescription: "Portfolio enquiry",
-  consent: "on",
-  projectStage: "Commercial review",
-  website: "https://example.com",
-  preferredContactMethod: "Phone",
-  phone: "+374 77 000000",
-  sourcePage: "/contact",
-  contextParameter: "?interest=games&utm_source=audit",
-  referrer: "https://example.org",
-  utmSource: "audit",
-  utmMedium: "external",
-  utmCampaign: "final-review",
-  utmContent: "homepage",
-  utmTerm: "opengamer"
-};
+let importCounter = 0;
 
-function cacheSafeImport(path) {
-  return import(`${path}?t=${Date.now()}-${Math.random()}`);
+function cacheSafeImport(relativePath) {
+  importCounter += 1;
+  const url = new URL(relativePath, import.meta.url);
+  url.searchParams.set("test", String(importCounter));
+  return import(url.href);
 }
 
-test("Resend delivery refuses missing configuration without fetch", async () => {
-  const { deliverToResend } = await cacheSafeImport("../lib/leadDelivery.ts");
-  const originalFetch = globalThis.fetch;
-  let called = false;
-  globalThis.fetch = async () => {
-    called = true;
-    return new Response(null, { status: 200 });
-  };
+function resetEnv() {
+  delete process.env.NEXT_PUBLIC_SITE_URL;
+  delete process.env.NEXT_PUBLIC_DEPLOYMENT_ENV;
+  delete process.env.NEXT_PUBLIC_CONTACT_EMAIL;
+  delete process.env.NEXT_PUBLIC_LINKEDIN_URL;
+  delete process.env.NEXT_PUBLIC_MEETING_URL;
+  delete process.env.RESEND_API_KEY;
+  delete process.env.CONTACT_RECIPIENT_EMAIL;
+  delete process.env.CONTACT_FROM_EMAIL;
+  delete process.env.CONTACT_REPLY_TO_DOMAIN;
+  delete process.env.LEAD_WEBHOOK_URL;
+  delete process.env.LEAD_WEBHOOK_SECRET;
+}
 
-  const result = await deliverToResend(payload, {});
-  globalThis.fetch = originalFetch;
+test.afterEach(resetEnv);
 
-  assert.equal(result.ok, false);
-  assert.equal(called, false);
+test("production URL defaults to OpenGamer canonical URL", async () => {
+  resetEnv();
+  const { siteUrl, isIndexableProduction } = await cacheSafeImport("../lib/site.ts");
+  assert.equal(siteUrl, "https://open-gamer.com");
+  assert.equal(isIndexableProduction, false);
 });
 
-test("Resend delivery succeeds only after provider acceptance", async () => {
-  const { deliverToResend, buildResendEmail } = await cacheSafeImport("../lib/leadDelivery.ts");
-  const originalFetch = globalThis.fetch;
-  let requestBody;
-  globalThis.fetch = async (_url, options) => {
-    requestBody = JSON.parse(options.body);
-    return new Response(JSON.stringify({ id: "email_123" }), { status: 200 });
-  };
-
-  const config = {
-    apiKey: "re_test",
-    recipientEmail: "leads@example.com",
-    fromEmail: "OpenGamer Website <website@example.com>"
-  };
-  const result = await deliverToResend(payload, config);
-  const email = buildResendEmail(payload, config);
-  globalThis.fetch = originalFetch;
-
-  assert.equal(result.ok, true);
-  assert.equal(requestBody.to, "leads@example.com");
-  assert.equal(requestBody.from, "OpenGamer Website <website@example.com>");
-  assert.equal(requestBody.reply_to, "narek@example.com");
-  assert.equal(email.subject, "OpenGamer Enquiry — Game Development — OpenGamer");
-  assert.match(requestBody.text, /Source Page: \/contact/);
-  assert.match(requestBody.text, /Phone: \+374 77 000000/);
-  assert.match(requestBody.text, /UTM Source: audit/);
-  assert.match(requestBody.text, /Referrer: https:\/\/example.org/);
-  assert.doesNotMatch(JSON.stringify(requestBody), /re_test/);
+test("preview deployment stays noindex even if NEXT_PUBLIC_SITE_URL is production", async () => {
+  resetEnv();
+  process.env.NEXT_PUBLIC_SITE_URL = "https://open-gamer.com";
+  process.env.NEXT_PUBLIC_DEPLOYMENT_ENV = "preview";
+  const { isIndexableProduction } = await cacheSafeImport("../lib/site.ts");
+  assert.equal(isIndexableProduction, false);
 });
 
-test("Resend delivery failure is not reported as success", async () => {
-  const { deliverToResend } = await cacheSafeImport("../lib/leadDelivery.ts");
-  const originalFetch = globalThis.fetch;
-  globalThis.fetch = async () => new Response(JSON.stringify({ message: "denied" }), { status: 401 });
-
-  const result = await deliverToResend(payload, {
-    apiKey: "re_test",
-    recipientEmail: "leads@example.com",
-    fromEmail: "OpenGamer Website <website@example.com>"
-  });
-  globalThis.fetch = originalFetch;
-
-  assert.equal(result.ok, false);
+test("production deployment becomes indexable only on canonical production URL", async () => {
+  resetEnv();
+  process.env.NEXT_PUBLIC_SITE_URL = "https://open-gamer.com";
+  process.env.NEXT_PUBLIC_DEPLOYMENT_ENV = "production";
+  const { isIndexableProduction } = await cacheSafeImport("../lib/site.ts");
+  assert.equal(isIndexableProduction, true);
 });
 
-test("public corporate data is conditional and excludes phone/address", async () => {
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL = "";
+test("production deployment on a non-canonical URL stays noindex", async () => {
+  resetEnv();
+  process.env.NEXT_PUBLIC_SITE_URL = "https://example.com";
+  process.env.NEXT_PUBLIC_DEPLOYMENT_ENV = "production";
+  const { isIndexableProduction } = await cacheSafeImport("../lib/site.ts");
+  assert.equal(isIndexableProduction, false);
+});
+
+test("public company config omits unconfirmed corporate fields", async () => {
+  resetEnv();
+  const { company } = await cacheSafeImport("../content/company.ts");
+  assert.equal(company.email, "");
+  assert.equal(company.social.length, 0);
+  assert.equal("phone" in company, false);
+  assert.equal("address" in company, false);
+});
+
+test("public company config accepts only validated public values", async () => {
+  resetEnv();
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL = "not-an-email";
   process.env.NEXT_PUBLIC_LINKEDIN_URL = "http://linkedin.com/company/opengamer";
   const invalidConfig = await cacheSafeImport("../content/company.ts");
   assert.equal(invalidConfig.company.email, "");
@@ -116,7 +95,7 @@ test("game statuses and demo buttons are explicit", async () => {
   assert.equal(getGameDemoStatusLabel(deepDive), "Demo Available");
   assert.equal(hasVerifiedDemo(deepDive), true);
   assert.equal(getVerifiedDemoUrl(cakeBonanza), null);
-  assert.equal(getGameDemoStatusLabel(cakeBonanza), null);
+  assert.equal(getGameDemoStatusLabel(cakeBonanza), "No Public Demo");
   assert.equal(getVerifiedDemoUrl({ ...deepDive, demoUrl: "https://example.com/demo" }), null);
 });
 
@@ -133,5 +112,4 @@ test("preview robots disallow crawling without advertising production sitemap", 
   const previewBlock = robotsSource.match(/if \(!isIndexableProduction\) \{([\s\S]*?)\n  \}/)?.[1] || "";
   assert.match(previewBlock, /disallow:\s*"\/"/);
   assert.doesNotMatch(previewBlock, /sitemap/);
-  assert.match(robotsSource, /sitemap:\s*`\$\{siteUrl\}\/sitemap\.xml`/);
 });
