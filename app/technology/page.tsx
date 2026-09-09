@@ -40,11 +40,11 @@ const backendCapabilities = [
 ];
 
 const engineeringScope = [
-  ["01", "Game client", "HTML5 game clients, responsive interfaces, animation integration and performance-focused rendering."],
-  ["02", "Game services", "Session flows, game logic, configuration, reporting and operational visibility."],
-  ["03", "RGS-related engineering", "Backend modules and delivery support around remote game server environments."],
-  ["04", "Partner connectivity", "Wallet communication, API mapping, operator and aggregator integration workflows."],
-  ["05", "Release support", "QA coordination, acceptance preparation and post-release product support."]
+  ["01", "Game client", "HTML5 game clients, responsive interfaces, animation integration and performance-focused rendering.", "Player-facing entry point"],
+  ["02", "Game services", "Session flows, game logic, configuration, reporting and operational visibility.", "Service-layer entry point"],
+  ["03", "RGS-related engineering", "Backend modules and delivery support around remote game server environments.", "Backend scope"],
+  ["04", "Partner connectivity", "Wallet communication, API mapping, operator and aggregator integration workflows.", "Integration scope"],
+  ["05", "Release support", "QA coordination, acceptance preparation and post-release product support.", "Delivery scope"]
 ];
 
 const engagementModels = ["Project-based delivery", "Dedicated technical team", "Co-development", "Integration support", "Long-term product support"];
@@ -65,20 +65,13 @@ export default function TechnologyPage() {
         <Container className="relative z-10">
           <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-16 xl:gap-20">
             <div>
-              <SectionHeader
-                eyebrow="Technology"
-                title="Engineering the Product Layer Behind Casino Games"
-                description="OpenGamer supports casino game production with front-end engineering, backend services, RGS-related development, integration workflows and delivery support."
-                headingLevel="h1"
-              />
+              <SectionHeader eyebrow="Technology" title="Engineering the Product Layer Behind Casino Games" description="OpenGamer supports casino game production with front-end engineering, backend services, RGS-related development, integration workflows and delivery support." headingLevel="h1" />
               <div className="mt-8 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap">
                 <Button href="/contact?service=technology#project-enquiry" className="w-full min-[480px]:w-auto">Discuss Integration</Button>
                 <Button href="/services#technology-and-integration" variant="secondary" className="w-full min-[480px]:w-auto">View Technical Scope</Button>
               </div>
               <div className="mt-8 flex flex-wrap gap-2" aria-label="OpenGamer technology scope">
-                {["Game clients", "Backend services", "RGS-related engineering", "Integration support"].map((item) => (
-                  <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-400">{item}</span>
-                ))}
+                {["Game clients", "Backend services", "RGS-related engineering", "Integration support"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-400">{item}</span>)}
               </div>
             </div>
 
@@ -112,47 +105,65 @@ export default function TechnologyPage() {
         </Container>
       </section>
 
-      <Section>
-        <div className="grid gap-10 lg:grid-cols-[0.64fr_1.36fr] lg:items-start">
+      <Section className="relative overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_88%_16%,rgba(46,230,166,0.045),transparent_22rem)]" />
+        <div className="relative grid gap-12 lg:grid-cols-[0.58fr_1.42fr] lg:items-start lg:gap-16 xl:gap-24">
           <div className="lg:sticky lg:top-28">
-            <SectionHeader
-              eyebrow="Engineering scope"
-              title="One Product Stack. Multiple Entry Points."
-              description="Partners can use OpenGamer for one technical layer or connect several layers into a coordinated game-production scope."
-            />
+            <SectionHeader eyebrow="Engineering scope" title="One Product Stack. Multiple Entry Points." description="Partners can use OpenGamer for one technical layer or connect several layers into a coordinated game-production scope." />
+            <div className="mt-7 border-t border-white/10 pt-5">
+              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-slate-500">Scope principle</p>
+              <p className="mt-3 text-sm leading-6 text-slate-400">Start at the layer where the delivery gap exists. Add adjacent layers only when the product or integration path requires them.</p>
+            </div>
           </div>
-          <div className="divide-y divide-white/10 border-y border-white/10">
-            {engineeringScope.map(([index, title, description]) => (
-              <div key={title} className="grid gap-4 py-6 sm:grid-cols-[4.5rem_0.75fr_1.25fr] sm:items-start sm:gap-6">
-                <span className="text-xs font-semibold tracking-[0.18em] text-emerald">{index}</span>
-                <h2 className="text-xl font-semibold text-white">{title}</h2>
-                <p className="text-sm leading-6 text-slate-400">{description}</p>
+
+          <div className="relative">
+            <div aria-hidden="true" className="absolute bottom-8 left-[1.1rem] top-8 w-px bg-gradient-to-b from-emerald/55 via-white/12 to-transparent sm:left-[1.45rem]" />
+            {engineeringScope.map(([index, title, description, entryPoint], itemIndex) => (
+              <div key={title} className="group relative grid gap-4 border-b border-white/10 py-7 pl-12 transition duration-300 first:border-t sm:grid-cols-[0.9fr_1.1fr] sm:gap-8 sm:py-8 sm:pl-16">
+                <div className="absolute left-0 top-7 flex h-9 w-9 items-center justify-center rounded-full border border-emerald/30 bg-[#07100d] text-[0.58rem] font-semibold tracking-[0.12em] text-emerald sm:h-12 sm:w-12">{index}</div>
+                <div>
+                  <span className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-slate-500">{entryPoint}</span>
+                  <h2 className="mt-2 text-xl font-semibold text-white transition group-hover:text-emerald sm:text-2xl">{title}</h2>
+                </div>
+                <div className="sm:border-l sm:border-white/10 sm:pl-8">
+                  <p className="text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{description}</p>
+                  {itemIndex < engineeringScope.length - 1 && <p className="mt-3 text-xs font-medium uppercase tracking-[0.11em] text-white/35">Can connect to the next delivery layer ↓</p>}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </Section>
 
-      <Section className="bg-black/20">
-        <div className="grid gap-10 lg:grid-cols-2">
-          <article className="rounded-2xl border border-white/10 bg-white/[0.035] p-6 sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">Front-end game engineering</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white">The Player-Facing Product Layer</h2>
-            <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400">Production-focused client engineering for casino games across desktop and mobile environments.</p>
-            <div className="mt-7 flex flex-wrap gap-2">
-              {frontEndCapabilities.map((item) => <span key={item} className="rounded-full border border-white/10 bg-black/20 px-3 py-2 text-sm text-slate-300">{item}</span>)}
+      <Section className="relative overflow-hidden bg-black/20">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_25%,rgba(93,156,255,0.045),transparent_24rem),radial-gradient(circle_at_86%_72%,rgba(46,230,166,0.035),transparent_22rem)]" />
+        <div className="relative grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-0">
+          <article className="border border-white/10 bg-white/[0.025] p-6 sm:p-8 lg:rounded-l-[1.4rem] lg:border-r-0 lg:p-10">
+            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#5d9cff]">Front-end game engineering</p>
+            <h2 className="mt-4 max-w-lg text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">The Player-Facing Product Layer</h2>
+            <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">Production-focused client engineering for casino games across desktop and mobile environments.</p>
+            <div className="mt-8 border-t border-white/10 pt-6">
+              <p className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-slate-500">What this layer carries</p>
+              <div className="mt-4 grid gap-x-5 gap-y-3 sm:grid-cols-2">
+                {frontEndCapabilities.map((item) => <div key={item} className="flex items-start gap-2.5 text-sm leading-6 text-slate-300"><span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#5d9cff]" />{item}</div>)}
+              </div>
             </div>
           </article>
 
-          <article className="rounded-2xl border border-white/10 bg-white/[0.035] p-6 sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">Backend & RGS-related engineering</p>
-            <h2 className="mt-4 text-3xl font-semibold text-white">The Operational Product Layer</h2>
-            <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400">Backend engineering for game sessions, wallet communication, game logic, reporting and partner connectivity.</p>
-            <div className="mt-7 flex flex-wrap gap-2">
-              {backendCapabilities.map((item) => <span key={item} className="rounded-full border border-white/10 bg-black/20 px-3 py-2 text-sm text-slate-300">{item}</span>)}
+          <article className="relative overflow-hidden border border-white/10 bg-[#06090b] p-6 sm:p-8 lg:rounded-r-[1.4rem] lg:p-10">
+            <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(46,230,166,0.07),transparent_20rem)]" />
+            <div className="relative">
+              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-emerald">Backend & RGS-related engineering</p>
+              <h2 className="mt-4 max-w-xl text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">The Operational Product Layer</h2>
+              <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">Backend engineering for game sessions, wallet communication, game logic, reporting and partner connectivity.</p>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {backendCapabilities.map((item) => <div key={item} className="rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-3 text-sm leading-6 text-slate-300">{item}</div>)}
+              </div>
+              <div className="mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-slate-500">RGS-related engineering describes backend work around remote game server environments. It does not imply ownership of a proprietary platform or certification.</div>
             </div>
           </article>
         </div>
+        <div className="relative mt-5 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500"><span className="h-px w-8 bg-white/10" /><span>Connected through product and integration scope</span><span className="h-px w-8 bg-white/10" /></div>
       </Section>
 
       <Section>
@@ -165,13 +176,11 @@ export default function TechnologyPage() {
       <Section className="bg-black/20">
         <SectionHeader eyebrow="Product references" title="Technology Connected to Real Product Work" description="Real OpenGamer games and product concepts provide the visual proof layer for the engineering story." />
         <div className="mt-10">
-          <RelatedProductStrip
-            items={[
-              { eyebrow: "Playable game", title: "Deep Dive", description: "Public game demo showing the player-facing product layer technology supports.", image: "/assets/games/deep-dive/artwork.webp", href: "/games/deep-dive", actionLabel: "View Game", accent: "#5d9cff" },
-              { eyebrow: "Product interface", title: "LC App", description: "B2B social live casino product-interface reference.", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" },
-              { eyebrow: "Playable game", title: "Forest Fortune", description: "Portfolio game content connected to frontend and backend delivery.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" }
-            ]}
-          />
+          <RelatedProductStrip items={[
+            { eyebrow: "Playable game", title: "Deep Dive", description: "Public game demo showing the player-facing product layer technology supports.", image: "/assets/games/deep-dive/artwork.webp", href: "/games/deep-dive", actionLabel: "View Game", accent: "#5d9cff" },
+            { eyebrow: "Product interface", title: "LC App", description: "B2B social live casino product-interface reference.", image: "/assets/projects/lc-app/optimized/lc-app-desktop-experience.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" },
+            { eyebrow: "Playable game", title: "Forest Fortune", description: "Portfolio game content connected to frontend and backend delivery.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" }
+          ]} />
         </div>
       </Section>
 
