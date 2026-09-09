@@ -18,7 +18,7 @@ export function GameCard({ game }: { game: Game }) {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/88 via-black/25 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-2 p-4">
           {primaryCategory ? <span className="max-w-full break-words rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur">{primaryCategory}</span> : <span />}
-          {demoUrl ? <span className="shrink-0 rounded-full border border-emerald/25 bg-emerald/10 px-3 py-1 text-xs font-medium text-emerald backdrop-blur">Demo</span> : null}
+          {demoUrl ? <span className="shrink-0 rounded-full border border-emerald/25 bg-emerald/10 px-3 py-1 text-xs font-medium text-emerald backdrop-blur">Playable</span> : null}
         </div>
       </Link>
       <div className="flex min-w-0 flex-1 flex-col p-5 sm:p-6">
@@ -27,9 +27,9 @@ export function GameCard({ game }: { game: Game }) {
           {commercialStatus ? <span className="max-w-full break-words text-xs leading-5 text-slate-500 sm:max-w-44 sm:text-right">{commercialStatus}</span> : null}
         </div>
         <p className="mt-3 break-words text-sm leading-6 text-slate-400">{game.shortDescription}</p>
-        <div className="mt-auto flex flex-wrap items-center gap-3 pt-6">
-          {demoUrl ? <Button href={demoUrl} className="min-h-10 px-4" target="_blank" rel="noopener noreferrer">Play Demo</Button> : <Button href={`/contact?interest=game&game=${game.slug}#project-enquiry`} variant="secondary" className="min-h-10 px-4">Request Demo</Button>}
-          <Button href={`/games/${game.slug}`} variant="link" aria-label={`View details for ${game.title}`}>View Game</Button>
+        <div className="mt-auto grid gap-3 pt-6 sm:flex sm:flex-wrap sm:items-center">
+          {demoUrl ? <Button href={demoUrl} className="min-h-10 w-full px-4 sm:w-auto" target="_blank" rel="noopener noreferrer">Play Demo</Button> : <Button href={`/contact?interest=game&game=${game.slug}#project-enquiry`} variant="secondary" className="min-h-10 w-full px-4 sm:w-auto">Request Demo</Button>}
+          <Button href={`/games/${game.slug}`} variant="link" className="justify-self-start" aria-label={`View details for ${game.title}`}>View Game</Button>
         </div>
       </div>
     </article>
