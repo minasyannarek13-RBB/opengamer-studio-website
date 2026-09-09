@@ -31,13 +31,17 @@ export const gameStatusModel = {
 } as const satisfies Record<GameStatus, { label: string; demoLabel: string; primaryAction: string }>;
 
 const officialGamesBaseUrl = "https://open-gamer.com/games/view?code=";
+const officialGameById = (id: number) => `https://www.open-gamer.com/games/view?id=${id}`;
 
 export function getVerifiedDemoUrl(game: Game) {
   if (game.status !== "playable" || !game.demoUrl) return null;
   try {
     const url = new URL(game.demoUrl);
     const code = url.searchParams.get("code")?.trim();
-    return url.protocol === "https:" && url.hostname === "open-gamer.com" && url.pathname === "/games/view" && Boolean(code) ? game.demoUrl : null;
+    const id = url.searchParams.get("id")?.trim();
+    const hostOk = url.hostname === "open-gamer.com" || url.hostname === "www.open-gamer.com";
+    const hasVerifiedKey = Boolean(code) || Boolean(id && /^\d+$/.test(id));
+    return url.protocol === "https:" && hostOk && url.pathname === "/games/view" && hasVerifiedKey ? game.demoUrl : null;
   } catch { return null; }
 }
 
@@ -54,21 +58,22 @@ function artwork(image: string): Game["artwork"] { return { catalogue: image, he
 
 const rawGames: Game[] = [
   { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
-  { title: "Nuclear Blast", slug: "nuclear-blast", image: "/assets/games/nuclear-blast/artwork.svg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
-  { title: "Wars of the Gods", slug: "wars-of-the-gods", image: "/assets/games/wars-of-the-gods/artwork.svg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
+  { title: "Captain Boom", slug: "captain-boom", image: "/assets/games/captain-boom/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed OpenGamer slot title.", category: ["Slot Game"], status: "portfolio" },
+  { title: "Nuclear Blast", slug: "nuclear-blast", image: "/assets/games/nuclear-blast/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
+  { title: "Wars of the Gods", slug: "wars-of-the-gods", image: "/assets/games/wars-of-the-gods/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
   { title: "Deep Dive", slug: "deep-dive", image: "/assets/games/deep-dive/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "playable", demoUrl: `${officialGamesBaseUrl}deep-dive`, visualAccent: "#5d9cff" },
   { title: "Dragon Fruits", slug: "dragon-fruits", image: "/assets/games/dragon-fruits/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
   { title: "Dragon Rush", slug: "dragon-rush", image: "/assets/games/dragon-rush/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "playable", demoUrl: `${officialGamesBaseUrl}dragon-rush`, visualAccent: "#dca45f" },
   { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "playable", demoUrl: `${officialGamesBaseUrl}forest-fortune`, visualAccent: "#2ee6a6" },
-  { title: "Fruit Elixir 40L", slug: "fruit-elixir-40l", image: "/assets/games/fruit-elixir-40l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Fruit Elixir configuration with 40 paylines.", category: ["Slot Game"], status: "playable", lineCount: "40 Lines", seriesSlug: "fruit-elixir", isVariant: true, demoUrl: `${officialGamesBaseUrl}fruit-elixir-40` },
-  { title: "Fruit Elixir 20L", slug: "fruit-elixir-20l", image: "/assets/games/fruit-elixir-20l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Fruit Elixir configuration with 20 paylines.", category: ["Slot Game"], status: "playable", lineCount: "20 Lines", seriesSlug: "fruit-elixir", isVariant: true, demoUrl: `${officialGamesBaseUrl}fruit-elixir-20` },
-  { title: "Fruit Elixir 10L", slug: "fruit-elixir-10l", image: "/assets/games/fruit-elixir-10l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Fruit Elixir configuration with 10 paylines.", category: ["Slot Game"], status: "playable", lineCount: "10 Lines", seriesSlug: "fruit-elixir", isVariant: true, demoUrl: `${officialGamesBaseUrl}fruit-elixir-10` },
-  { title: "Fruit Elixir", slug: "fruit-elixir", image: "/assets/games/fruit-elixir/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot family with 5, 10, 20 and 40-payline configurations.", category: ["Slot Game"], status: "playable", lineCount: "5 Lines", variants: ["5 paylines", "10 paylines", "20 paylines", "40 paylines"], demoUrl: `${officialGamesBaseUrl}fruit-elixir-5` },
+  { title: "Fruit Elixir 40L", slug: "fruit-elixir-40l", image: "/assets/games/fruit-elixir-40l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Fruit Elixir configuration with 40 paylines.", category: ["Slot Game"], status: "playable", lineCount: "40 Lines", seriesSlug: "fruit-elixir", isVariant: true, demoUrl: officialGameById(8) },
+  { title: "Fruit Elixir 20L", slug: "fruit-elixir-20l", image: "/assets/games/fruit-elixir-20l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Fruit Elixir configuration with 20 paylines.", category: ["Slot Game"], status: "playable", lineCount: "20 Lines", seriesSlug: "fruit-elixir", isVariant: true, demoUrl: officialGameById(7) },
+  { title: "Fruit Elixir 10L", slug: "fruit-elixir-10l", image: "/assets/games/fruit-elixir-10l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Fruit Elixir configuration with 10 paylines.", category: ["Slot Game"], status: "playable", lineCount: "10 Lines", seriesSlug: "fruit-elixir", isVariant: true, demoUrl: officialGameById(6) },
+  { title: "Fruit Elixir", slug: "fruit-elixir", image: "/assets/games/fruit-elixir/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot family with 5, 10, 20 and 40-payline configurations.", category: ["Slot Game"], status: "playable", lineCount: "5 Lines", variants: ["5 paylines", "10 paylines", "20 paylines", "40 paylines"], demoUrl: officialGameById(5) },
   { title: "Goblin Gems", slug: "goblin-gems", image: "/assets/games/goblin-gems/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
-  { title: "Passion Paradise 40L", slug: "passion-paradise-40l", image: "/assets/games/passion-paradise-40l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Passion Paradise configuration with 40 paylines.", category: ["Slot Game"], status: "playable", lineCount: "40 Lines", seriesSlug: "passion-paradise", isVariant: true, demoUrl: `${officialGamesBaseUrl}passion-paradise-40` },
-  { title: "Passion Paradise 20L", slug: "passion-paradise-20l", image: "/assets/games/passion-paradise-20l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Passion Paradise configuration with 20 paylines.", category: ["Slot Game"], status: "playable", lineCount: "20 Lines", seriesSlug: "passion-paradise", isVariant: true, demoUrl: `${officialGamesBaseUrl}passion-paradise-20` },
-  { title: "Passion Paradise 10L", slug: "passion-paradise-10l", image: "/assets/games/passion-paradise-10l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Passion Paradise configuration with 10 paylines.", category: ["Slot Game"], status: "playable", lineCount: "10 Lines", seriesSlug: "passion-paradise", isVariant: true, demoUrl: `${officialGamesBaseUrl}passion-paradise-10` },
-  { title: "Passion Paradise", slug: "passion-paradise", image: "/assets/games/passion-paradise/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot family with 5, 10, 20 and 40-payline configurations.", category: ["Slot Game"], status: "playable", lineCount: "5 Lines", variants: ["5 paylines", "10 paylines", "20 paylines", "40 paylines"], demoUrl: `${officialGamesBaseUrl}passion-paradise-5` },
+  { title: "Passion Paradise 40L", slug: "passion-paradise-40l", image: "/assets/games/passion-paradise-40l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Passion Paradise configuration with 40 paylines.", category: ["Slot Game"], status: "playable", lineCount: "40 Lines", seriesSlug: "passion-paradise", isVariant: true, demoUrl: officialGameById(4) },
+  { title: "Passion Paradise 20L", slug: "passion-paradise-20l", image: "/assets/games/passion-paradise-20l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Passion Paradise configuration with 20 paylines.", category: ["Slot Game"], status: "playable", lineCount: "20 Lines", seriesSlug: "passion-paradise", isVariant: true, demoUrl: officialGameById(3) },
+  { title: "Passion Paradise 10L", slug: "passion-paradise-10l", image: "/assets/games/passion-paradise-10l/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed Passion Paradise configuration with 10 paylines.", category: ["Slot Game"], status: "playable", lineCount: "10 Lines", seriesSlug: "passion-paradise", isVariant: true, demoUrl: officialGameById(2) },
+  { title: "Passion Paradise", slug: "passion-paradise", image: "/assets/games/passion-paradise/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot family with 5, 10, 20 and 40-payline configurations.", category: ["Slot Game"], status: "playable", lineCount: "5 Lines", variants: ["5 paylines", "10 paylines", "20 paylines", "40 paylines"], demoUrl: officialGameById(1) },
   { title: "Royal Fruits", slug: "royal-fruits", image: "/assets/games/royal-fruits/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
   { title: "Sweet Wins", slug: "sweet-wins", image: "/assets/games/sweet-wins/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "playable", demoUrl: `${officialGamesBaseUrl}sweet-wins`, visualAccent: "#7567f8" },
   { title: "The Aztecs", slug: "the-aztecs", image: "/assets/games/the-aztecs/artwork.jpg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "playable", demoUrl: `${officialGamesBaseUrl}aztecs` },
@@ -77,7 +82,7 @@ const rawGames: Game[] = [
 ];
 
 export const games: Game[] = rawGames.map((game) => ({ ...game, artwork: game.artwork || artwork(game.image) }));
-export const catalogueGames = games.filter((game) => !game.isVariant);
+export const catalogueGames = games;
 export const playableGames = catalogueGames.filter((game) => getGameStatus(game) === "playable");
 export const portfolioGames = catalogueGames.filter((game) => getGameStatus(game) === "portfolio");
 export const inDevelopmentGames = catalogueGames.filter((game) => getGameStatus(game) === "in-development");
