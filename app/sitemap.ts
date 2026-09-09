@@ -5,7 +5,6 @@ import { siteUrl } from "@/lib/site";
 const routes = [
   "/",
   "/services",
-  "/services/live-casino-development",
   "/games",
   "/portfolio",
   "/portfolio/elementals",
