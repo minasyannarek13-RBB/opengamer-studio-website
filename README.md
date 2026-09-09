@@ -44,7 +44,7 @@ Use current implementation and typed content, not historical branches or old des
 - `public/assets/projects/elementals/` — ELEMENTALS artwork
 - `public/assets/projects/lc-app/optimized/` — LC App concept visuals
 - `OPEN_GAMER_BRAND_GUIDELINES.md` — brand/claims guidance
-- `CTO_PROD_CHANGELOG.md` — production handoff history
+- `CTO_PROD_CHANGELOG.md` — current production handoff
 
 Do not restore deleted prototype components or superseded design/content handoff documents unless a current requirement explicitly needs them.
 
