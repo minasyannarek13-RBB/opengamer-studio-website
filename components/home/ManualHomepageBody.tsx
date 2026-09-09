@@ -178,9 +178,13 @@ export function ManualHomepageBody() {
           <div className="mt-6 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
               <div className="flex -space-x-2" aria-hidden="true">
-                {["sweet-wins", "fruit-elixir", "the-aztecs"].map((slug) => (
-                  <span key={slug} className="relative h-9 w-9 overflow-hidden rounded-lg border border-[#05070a] bg-black">
-                    <Image src={`/assets/games/${slug}/artwork.webp`} alt="" fill sizes="36px" className="object-cover" />
+                {[
+                  { src: "/assets/games/sweet-wins/artwork.webp", key: "sweet-wins" },
+                  { src: "/assets/games/fruit-elixir/artwork.webp", key: "fruit-elixir" },
+                  { src: "/assets/games/the-aztecs/artwork.jpg", key: "the-aztecs" }
+                ].map((asset) => (
+                  <span key={asset.key} className="relative h-9 w-9 overflow-hidden rounded-lg border border-[#05070a] bg-black">
+                    <Image src={asset.src} alt="" fill sizes="36px" className="object-cover" />
                   </span>
                 ))}
               </div>
