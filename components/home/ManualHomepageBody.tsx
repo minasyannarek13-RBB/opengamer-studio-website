@@ -47,30 +47,10 @@ const capabilities = [
 ];
 
 const process = [
-  {
-    number: "01",
-    title: "Define",
-    text: "Align the product goal, audience, scope and technical constraints before production starts.",
-    output: "Clear scope"
-  },
-  {
-    number: "02",
-    title: "Design",
-    text: "Shape mechanics, mathematics, UX, art direction and the architecture the build actually requires.",
-    output: "Build direction"
-  },
-  {
-    number: "03",
-    title: "Build",
-    text: "Coordinate production across the required disciplines, from game client and art through backend engineering.",
-    output: "Working product"
-  },
-  {
-    number: "04",
-    title: "Deliver",
-    text: "Close QA, support integration and hand the product into the target environment with a defined next step.",
-    output: "Handoff & integration"
-  }
+  { number: "01", title: "Define", text: "Align the product goal, audience, scope and technical constraints before production starts.", output: "Clear scope" },
+  { number: "02", title: "Design", text: "Shape mechanics, mathematics, UX, art direction and the architecture the build actually requires.", output: "Build direction" },
+  { number: "03", title: "Build", text: "Coordinate production across the required disciplines, from game client and art through backend engineering.", output: "Working product" },
+  { number: "04", title: "Deliver", text: "Close QA, support integration and hand the product into the target environment with a defined next step.", output: "Handoff & integration" }
 ];
 
 export function ManualHomepageBody() {
@@ -95,11 +75,7 @@ export function ManualHomepageBody() {
 
             <div className="border-t border-white/10">
               {capabilities.map((item) => (
-                <Link
-                  key={item.number}
-                  href={item.href}
-                  className="group relative grid gap-5 border-b border-white/10 py-8 transition duration-300 hover:border-emerald/30 sm:grid-cols-[3.2rem_1fr_auto] sm:gap-6 sm:py-10 lg:grid-cols-[3.5rem_1fr_auto]"
-                >
+                <Link key={item.number} href={item.href} className="group relative grid gap-5 border-b border-white/10 py-8 transition duration-300 hover:border-emerald/30 sm:grid-cols-[3.2rem_1fr_auto] sm:gap-6 sm:py-10 lg:grid-cols-[3.5rem_1fr_auto]">
                   <div className="flex items-start justify-between sm:block">
                     <span className="text-[0.68rem] font-semibold tracking-[0.2em] text-emerald/90">{item.number}</span>
                     <span aria-hidden="true" className="text-lg text-slate-600 transition duration-300 group-hover:translate-x-1 group-hover:text-emerald sm:hidden">→</span>
@@ -109,23 +85,15 @@ export function ManualHomepageBody() {
                     <h3 className="mt-2 max-w-xl text-2xl font-semibold leading-tight tracking-[-0.015em] text-white sm:text-[1.7rem]">{item.title}</h3>
                     <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{item.text}</p>
                     <div className="mt-5 flex flex-wrap items-center gap-2">
-                      {item.tags.map((tag) => (
-                        <span key={tag} className="rounded-full border border-white/[0.08] bg-white/[0.025] px-2.5 py-1 text-[0.62rem] font-medium tracking-[0.04em] text-slate-500">{tag}</span>
-                      ))}
+                      {item.tags.map((tag) => <span key={tag} className="rounded-full border border-white/[0.08] bg-white/[0.025] px-2.5 py-1 text-[0.62rem] font-medium tracking-[0.04em] text-slate-500">{tag}</span>)}
                       {item.proof && (
                         <div className="ml-1 flex items-center -space-x-2" aria-label="Related OpenGamer work">
-                          {item.proof.map((asset) => (
-                            <span key={asset.src} className="relative h-8 w-8 overflow-hidden rounded-lg border border-[#05070a] bg-black shadow-[0_6px_18px_rgba(0,0,0,0.35)]">
-                              <Image src={asset.src} alt={asset.alt} fill sizes="32px" className="object-cover" />
-                            </span>
-                          ))}
+                          {item.proof.map((asset) => <span key={asset.src} className="relative h-8 w-8 overflow-hidden rounded-lg border border-[#05070a] bg-black shadow-[0_6px_18px_rgba(0,0,0,0.35)]"><Image src={asset.src} alt={asset.alt} fill sizes="32px" className="object-cover" /></span>)}
                         </div>
                       )}
                     </div>
                   </div>
-                  <div className="hidden items-center sm:flex">
-                    <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-slate-500 transition duration-300 group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:bg-emerald/[0.06] group-hover:text-emerald">→</span>
-                  </div>
+                  <div className="hidden items-center sm:flex"><span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-slate-500 transition duration-300 group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:bg-emerald/[0.06] group-hover:text-emerald">→</span></div>
                   <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-px origin-top scale-y-0 bg-gradient-to-b from-emerald/0 via-emerald/45 to-emerald/0 transition-transform duration-500 group-hover:scale-y-100" />
                 </Link>
               ))}
@@ -143,26 +111,15 @@ export function ManualHomepageBody() {
               <h2 className="mt-4 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.025em] sm:text-5xl">A portfolio you can actually open.</h2>
               <p className="mt-5 max-w-2xl text-base leading-7 text-slate-400">Selected OpenGamer titles with verified public demos. Use them to inspect visual direction, game presentation and the kind of production work already in the portfolio.</p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Button href="/games" variant="secondary">View All Games</Button>
-              <Button href="/contact?interest=portfolio#project-enquiry" variant="secondary">Request Portfolio</Button>
-            </div>
+            <div className="flex flex-wrap gap-3"><Button href="/games" variant="secondary">View All Games</Button><Button href="/contact?interest=portfolio#project-enquiry" variant="secondary">Request Portfolio</Button></div>
           </div>
 
           <div className="mt-12 grid gap-4 lg:grid-cols-12 lg:grid-rows-2">
             <Link href="/games/forest-fortune" className="group relative min-h-[420px] overflow-hidden rounded-[1.55rem] border border-white/12 bg-black/40 shadow-[0_28px_90px_rgba(0,0,0,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 lg:col-span-6 lg:row-span-2">
               <Image src="/assets/games/forest-fortune/artwork.webp" alt="Forest Fortune slot artwork" fill sizes="(min-width:1024px) 48vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,5,7,0.02)_30%,rgba(3,5,7,0.9)_100%)]" />
-              <div className="absolute left-5 top-5 flex items-center gap-2">
-                <span className="rounded-full border border-emerald/25 bg-[#07100d]/80 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-emerald backdrop-blur">Playable</span>
-                <span className="rounded-full border border-white/10 bg-black/45 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-slate-300 backdrop-blur">Portfolio title</span>
-              </div>
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-                <span className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-emerald">Fantasy slot</span>
-                <h3 className="mt-2 text-3xl font-semibold tracking-[-0.02em] sm:text-4xl">Forest Fortune</h3>
-                <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">Mystical forest direction, scroll-led feature anticipation and a public demo for direct evaluation.</p>
-                <span className="mt-5 inline-flex text-sm font-semibold text-white/85 transition group-hover:text-emerald">View game →</span>
-              </div>
+              <div className="absolute left-5 top-5 flex items-center gap-2"><span className="rounded-full border border-emerald/25 bg-[#07100d]/80 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-emerald backdrop-blur">Playable</span><span className="rounded-full border border-white/10 bg-black/45 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-slate-300 backdrop-blur">Portfolio title</span></div>
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8"><span className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-emerald">Fantasy slot</span><h3 className="mt-2 text-3xl font-semibold tracking-[-0.02em] sm:text-4xl">Forest Fortune</h3><p className="mt-3 max-w-md text-sm leading-6 text-slate-300">Mystical forest direction, scroll-led feature anticipation and a public demo for direct evaluation.</p><span className="mt-5 inline-flex text-sm font-semibold text-white/85 transition group-hover:text-emerald">View game →</span></div>
             </Link>
             <Link href="/games/deep-dive" className="group relative min-h-[250px] overflow-hidden rounded-[1.45rem] border border-white/12 bg-black/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 lg:col-span-6">
               <Image src="/assets/games/deep-dive/artwork.webp" alt="Deep Dive slot artwork" fill sizes="(min-width:1024px) 48vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
@@ -177,18 +134,11 @@ export function ManualHomepageBody() {
           </div>
 
           <div className="mt-6 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-2" aria-hidden="true">
-                {[
-                  { src: "/assets/games/sweet-wins/artwork.webp", key: "sweet-wins" },
-                  { src: "/assets/games/fruit-elixir/artwork.webp", key: "fruit-elixir" },
-                  { src: "/assets/games/the-aztecs/artwork.jpg", key: "the-aztecs" }
-                ].map((asset) => (
-                  <span key={asset.key} className="relative h-9 w-9 overflow-hidden rounded-lg border border-[#05070a] bg-black"><Image src={asset.src} alt="" fill sizes="36px" className="object-cover" /></span>
-                ))}
-              </div>
-              <p className="text-sm text-slate-400">More playable titles continue in the full games catalogue.</p>
-            </div>
+            <div className="flex items-center gap-3"><div className="flex -space-x-2" aria-hidden="true">{[
+              { src: "/assets/games/sweet-wins/artwork.webp", key: "sweet-wins" },
+              { src: "/assets/games/fruit-elixir/artwork.webp", key: "fruit-elixir" },
+              { src: "/assets/games/the-aztecs/artwork.jpg", key: "the-aztecs" }
+            ].map((asset) => <span key={asset.key} className="relative h-9 w-9 overflow-hidden rounded-lg border border-[#05070a] bg-black"><Image src={asset.src} alt="" fill sizes="36px" className="object-cover" /></span>)}</div><p className="text-sm text-slate-400">More playable titles continue in the full games catalogue.</p></div>
             <Button href="/contact?interest=game#project-enquiry" variant="secondary">Discuss Custom Production</Button>
           </div>
         </Container>
@@ -198,11 +148,7 @@ export function ManualHomepageBody() {
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_16%_34%,rgba(190,88,255,0.045),transparent_28rem),radial-gradient(circle_at_76%_46%,rgba(46,230,166,0.07),transparent_30rem)]" />
         <div aria-hidden="true" className="absolute left-[-11rem] top-[16%] h-[30rem] w-[30rem] rounded-full border border-white/[0.035]" />
         <Container className="relative">
-          <div className="max-w-3xl">
-            <p className="premium-kicker text-xs font-semibold uppercase">Beyond the slot catalogue</p>
-            <h2 className="mt-4 text-4xl font-semibold leading-[1.02] tracking-[-0.025em] sm:text-5xl xl:text-[3.5rem]">Original IP and product thinking, built as separate directions.</h2>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-400">OpenGamer also works beyond playable slot titles. ELEMENTALS is an original Live Casino show-game concept in development. LC App is a separate in-development B2B product direction exploring social Live Casino engagement.</p>
-          </div>
+          <div className="max-w-3xl"><p className="premium-kicker text-xs font-semibold uppercase">Beyond the slot catalogue</p><h2 className="mt-4 text-4xl font-semibold leading-[1.02] tracking-[-0.025em] sm:text-5xl xl:text-[3.5rem]">Original IP and product thinking, built as separate directions.</h2><p className="mt-5 max-w-2xl text-base leading-7 text-slate-400">OpenGamer also works beyond playable slot titles. ELEMENTALS is an original Live Casino show-game concept in development. LC App is a separate in-development B2B product direction exploring social Live Casino engagement.</p></div>
 
           <div className="mt-12 grid gap-5 lg:grid-cols-[1.55fr_0.65fr] lg:items-stretch">
             <Link href="/portfolio/elementals" className="group relative min-h-[430px] overflow-hidden rounded-[1.65rem] border border-white/12 bg-black/45 shadow-[0_34px_110px_rgba(0,0,0,0.34)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[520px] lg:min-h-[570px]">
@@ -211,7 +157,6 @@ export function ManualHomepageBody() {
               <div className="absolute left-5 top-5 flex flex-wrap gap-2 sm:left-7 sm:top-7"><span className="rounded-full border border-emerald/25 bg-[#07100d]/75 px-3 py-1.5 text-[0.58rem] font-semibold uppercase tracking-[0.15em] text-emerald backdrop-blur">Original Live Casino IP</span><span className="rounded-full border border-white/12 bg-black/40 px-3 py-1.5 text-[0.58rem] font-semibold uppercase tracking-[0.15em] text-slate-300 backdrop-blur">In development</span></div>
               <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 lg:p-9"><p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-emerald">Original concept · Mechanics · Experience</p><h3 className="mt-3 text-4xl font-semibold tracking-[-0.025em] sm:text-5xl">ELEMENTALS</h3><p className="mt-4 max-w-xl text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">A cinematic Live Casino show-game direction built around a central wheel, four elemental realms and a distinct host-led experience.</p><span className="mt-6 inline-flex text-sm font-semibold text-white/85 transition group-hover:text-emerald">Explore ELEMENTALS →</span></div>
             </Link>
-
             <Link href="/portfolio/lc-app" className="group relative overflow-hidden rounded-[1.65rem] border border-white/12 bg-[#06090b] p-5 shadow-[0_28px_90px_rgba(0,0,0,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:p-7 lg:flex lg:min-h-[570px] lg:flex-col">
               <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_55%_34%,rgba(46,230,166,0.09),transparent_18rem),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_38%)]" />
               <div className="relative flex items-center justify-between gap-3"><span className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-emerald">B2B product direction</span><span className="rounded-full border border-white/10 bg-white/[0.025] px-2.5 py-1 text-[0.55rem] font-semibold uppercase tracking-[0.13em] text-slate-400">In development</span></div>
@@ -228,44 +173,44 @@ export function ManualHomepageBody() {
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_48%_8%,rgba(46,230,166,0.055),transparent_25rem)]" />
         <Container className="relative">
           <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16 xl:gap-24">
-            <div>
-              <p className="premium-kicker text-xs font-semibold uppercase">From brief to delivery</p>
-              <h2 className="mt-4 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.025em] sm:text-5xl">A production path with a clear output at every stage.</h2>
-              <p className="mt-5 max-w-lg text-base leading-7 text-slate-400">The shape changes with the project, but the discipline does not: define what matters, design what needs to exist, build the required scope and close with QA plus integration support.</p>
-              <div className="mt-8"><Button href="/services" variant="secondary">See Delivery Scope</Button></div>
-            </div>
-
+            <div><p className="premium-kicker text-xs font-semibold uppercase">From brief to delivery</p><h2 className="mt-4 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.025em] sm:text-5xl">A production path with a clear output at every stage.</h2><p className="mt-5 max-w-lg text-base leading-7 text-slate-400">The shape changes with the project, but the discipline does not: define what matters, design what needs to exist, build the required scope and close with QA plus integration support.</p><div className="mt-8"><Button href="/services" variant="secondary">See Delivery Scope</Button></div></div>
             <div className="relative">
               <div aria-hidden="true" className="absolute bottom-0 left-[1.3rem] top-0 w-px bg-gradient-to-b from-emerald/50 via-white/10 to-transparent sm:left-[1.55rem]" />
-              <div className="space-y-0">
-                {process.map((step) => (
-                  <div key={step.number} className="relative grid gap-5 border-b border-white/10 py-8 pl-14 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-8 sm:py-10 sm:pl-20">
-                    <span className="absolute left-0 top-8 flex h-11 w-11 items-center justify-center rounded-full border border-emerald/25 bg-[#07100d] text-[0.64rem] font-semibold tracking-[0.16em] text-emerald shadow-[0_0_34px_rgba(46,230,166,0.08)] sm:top-10 sm:h-12 sm:w-12">{step.number}</span>
-                    <div>
-                      <h3 className="text-2xl font-semibold tracking-[-0.015em] sm:text-[1.8rem]">{step.title}</h3>
-                      <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{step.text}</p>
-                    </div>
-                    <span className="w-fit rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-slate-400">{step.output}</span>
-                  </div>
-                ))}
-              </div>
+              <div className="space-y-0">{process.map((step) => (
+                <div key={step.number} className="relative grid gap-5 border-b border-white/10 py-8 pl-14 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-8 sm:py-10 sm:pl-20">
+                  <span className="absolute left-0 top-8 flex h-11 w-11 items-center justify-center rounded-full border border-emerald/25 bg-[#07100d] text-[0.64rem] font-semibold tracking-[0.16em] text-emerald shadow-[0_0_34px_rgba(46,230,166,0.08)] sm:top-10 sm:h-12 sm:w-12">{step.number}</span>
+                  <div><h3 className="text-2xl font-semibold tracking-[-0.015em] sm:text-[1.8rem]">{step.title}</h3><p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{step.text}</p></div>
+                  <span className="w-fit rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-slate-400">{step.output}</span>
+                </div>
+              ))}</div>
             </div>
           </div>
-
-          <div className="mt-10 grid gap-3 border-t border-white/10 pt-7 sm:grid-cols-3">
-            {["Scope before theatre", "Disciplines matched to the project", "Handoff into the target environment"].map((item) => (
-              <div key={item} className="flex items-center gap-3 text-sm text-slate-400"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald" /><span>{item}</span></div>
-            ))}
-          </div>
+          <div className="mt-10 grid gap-3 border-t border-white/10 pt-7 sm:grid-cols-3">{["Scope before theatre", "Disciplines matched to the project", "Handoff into the target environment"].map((item) => <div key={item} className="flex items-center gap-3 text-sm text-slate-400"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald" /><span>{item}</span></div>)}</div>
         </Container>
       </section>
 
-      <section className="relative overflow-hidden py-24 sm:py-32">
-        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(46,230,166,0.09),transparent_30rem)]" />
+      <section className="relative overflow-hidden py-24 sm:py-32 lg:py-36">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_72%_42%,rgba(46,230,166,0.12),transparent_28rem),radial-gradient(circle_at_18%_85%,rgba(93,156,255,0.045),transparent_24rem)]" />
+        <div aria-hidden="true" className="absolute right-[-9rem] top-[-8rem] h-[30rem] w-[30rem] rounded-full border border-emerald/10" />
+        <div aria-hidden="true" className="absolute right-[-2rem] top-[-1rem] h-[19rem] w-[19rem] rounded-full border border-white/[0.04]" />
         <Container className="relative">
-          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div><p className="premium-kicker text-xs font-semibold uppercase">Start a conversation</p><h2 className="mt-4 max-w-4xl text-4xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-6xl">Have a game to build or a technical gap to close?</h2><p className="mt-5 max-w-2xl text-base leading-7 text-slate-400">Send the brief, current stage and what your team needs. The first conversation stays focused on the relevant scope.</p></div>
-            <Button href="/contact#project-enquiry">Discuss a Project</Button>
+          <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.025] px-6 py-8 shadow-[0_30px_100px_rgba(0,0,0,0.24)] backdrop-blur-[2px] sm:px-9 sm:py-10 lg:px-12 lg:py-12">
+            <div className="grid gap-10 lg:grid-cols-[1fr_0.48fr] lg:items-end lg:gap-16">
+              <div>
+                <p className="premium-kicker text-xs font-semibold uppercase">Start a conversation</p>
+                <h2 className="mt-4 max-w-4xl text-4xl font-semibold leading-[1.01] tracking-[-0.025em] sm:text-6xl">Bring the brief. We’ll define the right scope.</h2>
+                <p className="mt-5 max-w-2xl text-base leading-7 text-slate-400">Tell us what you are building, where the project stands and what your team needs next. The first conversation stays focused on the commercial and technical gap worth solving.</p>
+                <div className="mt-7 flex flex-wrap gap-2" aria-label="Typical OpenGamer project conversations">
+                  {["Game production", "Dedicated development", "Technology & integration", "Original IP"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-black/20 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-400">{item}</span>)}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3 lg:items-stretch">
+                <Button href="/contact#project-enquiry" className="w-full">Discuss a Project</Button>
+                <Button href="/games" variant="secondary" className="w-full">Explore Playable Games</Button>
+                <p className="mt-1 text-xs leading-5 text-slate-500">No generic intake funnel. Start from the scope that matters.</p>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
