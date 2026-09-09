@@ -1,0 +1,26 @@
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body[data-scroll-reveal-ready] [data-scroll-reveal].is-visible,
+  body[data-scroll-reveal-ready] [data-reveal-group].is-visible > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .premium-card::before,
+  .menu-signal__bar,
+  .mobile-nav-panel,
+  .solutions-dropdown__link {
+    transition-duration: 0.01ms !important;
+  }
+
+  .solutions-dropdown__link:hover,
+  .solutions-dropdown__link:focus-visible,
+  .game-card:hover,
+  .game-card:focus-within {
+    transform: none !important;
+  }
+}
