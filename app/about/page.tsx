@@ -12,7 +12,7 @@ import { getCompactGameProof } from "@/lib/gameShowcase";
 
 export const metadata: Metadata = {
   title: "About | OpenGamer Studio",
-  description: "OpenGamer is an iGaming development studio creating casino games, product concepts and technology support for B2B partners.",
+  description: "OpenGamer is an iGaming development studio focused on casino game production, dedicated development capacity, product concepts and integration-oriented engineering.",
   alternates: { canonical: "/about" }
 };
 
@@ -111,19 +111,19 @@ export default function AboutPage() {
                 <div className="mt-6">
                   <div className="flex items-end justify-between gap-4">
                     <p className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-slate-500">Selected work you can inspect</p>
-                    <Link href="/portfolio" className="text-xs font-semibold text-emerald/85 transition hover:text-emerald focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">View portfolio →</Link>
+                    <Link href="/portfolio" className="text-xs font-semibold text-emerald/85 transition hover:text-emerald focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">View portfolio →</Link>
                   </div>
                   <div className="mt-4 grid gap-2 sm:grid-cols-2">
                     {proofReferences.map((item) => (
-                      <Link key={item.title} href={item.href} className="group grid grid-cols-[4.4rem_1fr_auto] items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] p-2.5 transition hover:border-emerald/25 hover:bg-white/[0.035] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                      <Link key={item.title} href={item.href} className="group grid grid-cols-[4.4rem_1fr_auto] items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] p-2.5 transition hover:border-emerald/25 hover:bg-white/[0.035] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">
                         <div className="relative aspect-[10/7] overflow-hidden rounded-lg bg-black/40">
-                          <Image src={item.image} alt={`${item.title} OpenGamer work`} fill sizes="72px" className={`${item.contain ? "object-contain p-1" : "object-cover"} transition duration-500 group-hover:scale-[1.025]`} />
+                          <Image src={item.image} alt={`${item.title} OpenGamer work`} fill sizes="72px" className={`${item.contain ? "object-contain p-1" : "object-cover"} transition duration-500 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100`} />
                         </div>
                         <div className="min-w-0">
                           <span className="block text-[0.48rem] font-semibold uppercase tracking-[0.11em] text-emerald">{item.label}</span>
                           <strong className="mt-1 block truncate text-sm text-white">{item.title}</strong>
                         </div>
-                        <span aria-hidden="true" className="pr-1 text-sm text-slate-600 transition group-hover:translate-x-0.5 group-hover:text-emerald">→</span>
+                        <span aria-hidden="true" className="pr-1 text-sm text-slate-600 transition group-hover:translate-x-0.5 group-hover:text-emerald motion-reduce:transform-none motion-reduce:transition-none">→</span>
                       </Link>
                     ))}
                   </div>
