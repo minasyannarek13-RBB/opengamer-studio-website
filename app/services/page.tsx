@@ -119,62 +119,26 @@ export default function ServicesPage() {
         <Container className="relative">
           <div className="grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-14 xl:grid-cols-[0.72fr_1.28fr] xl:gap-20">
             <div className="relative z-10">
-              <SectionHeader
-                eyebrow="Solutions"
-                title="Bring the Problem. Build the Right Scope."
-                description="OpenGamer works across game production, dedicated development, technical integration and portfolio adaptation. Start with the business need, then define only the delivery scope you actually need."
-                headingLevel="h1"
-              />
-              <div className="mt-8 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap">
-                <Button href="/contact#project-enquiry" className="w-full min-[480px]:w-auto">Discuss a Project</Button>
-                <Button href="/games" variant="secondary" className="w-full min-[480px]:w-auto">Explore Games</Button>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-2" aria-label="OpenGamer solution scope">
-                {["Game production", "Dedicated development", "Technology & integration", "Portfolio adaptation"].map((item) => (
-                  <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.63rem] font-semibold uppercase tracking-[0.12em] text-slate-400">{item}</span>
-                ))}
-              </div>
+              <SectionHeader eyebrow="Solutions" title="Bring the Problem. Build the Right Scope." description="OpenGamer works across game production, dedicated development, technical integration and portfolio adaptation. Start with the business need, then define only the delivery scope you actually need." headingLevel="h1" />
+              <div className="mt-8 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap"><Button href="/contact#project-enquiry" className="w-full min-[480px]:w-auto">Discuss a Project</Button><Button href="/games" variant="secondary" className="w-full min-[480px]:w-auto">Explore Games</Button></div>
+              <div className="mt-8 flex flex-wrap gap-2" aria-label="OpenGamer solution scope">{["Game production", "Dedicated development", "Technology & integration", "Portfolio adaptation"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.63rem] font-semibold uppercase tracking-[0.12em] text-slate-400">{item}</span>)}</div>
             </div>
 
             <div className="relative min-h-[520px] sm:min-h-[620px] lg:min-h-[600px]" aria-label="Selected OpenGamer work supporting the service offering">
               <div aria-hidden="true" className="absolute inset-[8%] rounded-[3rem] bg-emerald/[0.045] blur-3xl" />
-
               <Link href="/games/forest-fortune" className="group absolute left-0 top-[3%] h-[62%] w-[72%] overflow-hidden rounded-[1.6rem] border border-white/15 bg-black/45 shadow-[0_34px_110px_rgba(0,0,0,0.42)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                 <Image src="/assets/games/forest-fortune/artwork.webp" alt="Forest Fortune playable OpenGamer slot" fill priority sizes="(min-width:1280px) 43vw,(min-width:1024px) 40vw,75vw" className="object-cover transition duration-700 group-hover:scale-[1.02]" />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0.02)_30%,rgba(4,6,8,0.84)_100%)]" />
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
-                  <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-emerald">Playable portfolio · Game production proof</span>
-                  <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">Forest Fortune</h2>
-                  <p className="mt-2 max-w-md text-sm leading-6 text-slate-300">A real game reference behind the production offer.</p>
-                </div>
+                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7"><span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-emerald">Playable portfolio · Game production proof</span><h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">Forest Fortune</h2><p className="mt-2 max-w-md text-sm leading-6 text-slate-300">A real game reference behind the production offer.</p></div>
               </Link>
-
               <Link href="/portfolio/elementals" className="group absolute right-0 top-[10%] h-[45%] w-[35%] overflow-hidden rounded-[1.45rem] border border-white/15 bg-black/45 shadow-[0_28px_90px_rgba(0,0,0,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
                 <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="ELEMENTALS original Live Casino IP" fill sizes="(min-width:1280px) 20vw,(min-width:1024px) 19vw,38vw" className="object-cover transition duration-700 group-hover:scale-[1.02]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                  <span className="text-[0.52rem] font-semibold uppercase tracking-[0.14em] text-emerald">Original IP</span>
-                  <strong className="mt-1.5 block text-base text-white sm:text-lg">ELEMENTALS</strong>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" /><div className="absolute inset-x-0 bottom-0 p-4 sm:p-5"><span className="text-[0.52rem] font-semibold uppercase tracking-[0.14em] text-emerald">Original IP</span><strong className="mt-1.5 block text-base text-white sm:text-lg">ELEMENTALS</strong></div>
               </Link>
-
               <Link href="/portfolio/lc-app" className="group absolute bottom-[3%] right-[4%] h-[46%] w-[30%] overflow-hidden rounded-[1.55rem] border border-white/15 bg-[#06090b] shadow-[0_30px_95px_rgba(0,0,0,0.42)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
-                <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(46,230,166,0.08),transparent_15rem)]" />
-                <Image src="/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp" alt="LC App B2B product concept" fill sizes="(min-width:1280px) 17vw,(min-width:1024px) 16vw,34vw" className="object-contain object-center p-3 transition duration-700 group-hover:scale-[1.015] sm:p-4" />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 sm:p-5">
-                  <span className="text-[0.5rem] font-semibold uppercase tracking-[0.13em] text-emerald">Product direction</span>
-                  <strong className="mt-1 block text-base text-white">LC App</strong>
-                </div>
+                <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(46,230,166,0.08),transparent_15rem)]" /><Image src="/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp" alt="LC App B2B product concept" fill sizes="(min-width:1280px) 17vw,(min-width:1024px) 16vw,34vw" className="object-contain object-center p-3 transition duration-700 group-hover:scale-[1.015] sm:p-4" /><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 sm:p-5"><span className="text-[0.5rem] font-semibold uppercase tracking-[0.13em] text-emerald">Product direction</span><strong className="mt-1 block text-base text-white">LC App</strong></div>
               </Link>
-
-              <div className="absolute bottom-[4%] left-0 w-[58%] border-t border-white/10 pt-5">
-                <p className="text-[0.61rem] font-semibold uppercase tracking-[0.17em] text-slate-500">Scope around real work</p>
-                <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                  {["Custom game development", "Dedicated capacity", "RGS-related engineering", "Integration support"].map((item) => (
-                    <div key={item} className="flex items-center gap-2 text-xs text-slate-300 sm:text-sm"><span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald" /><span>{item}</span></div>
-                  ))}
-                </div>
-              </div>
+              <div className="absolute bottom-[4%] left-0 w-[58%] border-t border-white/10 pt-5"><p className="text-[0.61rem] font-semibold uppercase tracking-[0.17em] text-slate-500">Scope around real work</p><div className="mt-3 grid gap-2 sm:grid-cols-2">{["Custom game development", "Dedicated capacity", "RGS-related engineering", "Integration support"].map((item) => <div key={item} className="flex items-center gap-2 text-xs text-slate-300 sm:text-sm"><span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald" /><span>{item}</span></div>)}</div></div>
             </div>
           </div>
         </Container>
@@ -183,88 +147,47 @@ export default function ServicesPage() {
       <Section className="relative overflow-hidden">
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_88%_18%,rgba(46,230,166,0.045),transparent_24rem)]" />
         <div className="relative grid gap-12 lg:grid-cols-[0.62fr_1.38fr] lg:gap-16 xl:gap-24">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <SectionHeader eyebrow="Four ways to work with OpenGamer" title="Choose the Outcome Before the Service List" description="Most commercial conversations start with the result you need, not a catalogue of disciplines. Pick the engagement model first; define the detailed scope second." />
-            <div className="mt-7 flex flex-wrap gap-2">
-              {["Full build", "Embedded capacity", "Technical scope", "Portfolio adaptation"].map((item) => (
-                <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{item}</span>
-              ))}
-            </div>
-          </div>
-
-          <div className="border-t border-white/10">
-            {buyerJobs.map((job) => (
-              <Link key={job.title} href={job.href} className="group grid gap-5 border-b border-white/10 py-8 transition duration-300 hover:border-emerald/30 sm:grid-cols-[3.2rem_0.8fr_1.2fr_auto] sm:items-start sm:gap-6 sm:py-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070a]">
-                <span className="text-[0.68rem] font-semibold tracking-[0.2em] text-emerald/90">{job.number}</span>
-                <div>
-                  <h2 className="text-2xl font-semibold tracking-[-0.015em] text-white transition group-hover:text-emerald">{job.title}</h2>
-                  <span className="mt-3 inline-flex text-sm font-semibold text-white/75 transition group-hover:text-white">View relevant scope →</span>
-                </div>
-                <div>
-                  <p className="max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{job.description}</p>
-                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
-                    {job.items.map((item) => (
-                      <span key={item} className="flex items-center gap-2 text-xs text-slate-500 sm:text-sm"><span aria-hidden="true" className="h-1 w-1 rounded-full bg-emerald/80" />{item}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className="hidden items-center sm:flex">
-                  <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-slate-500 transition duration-300 group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:text-emerald">→</span>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <div className="lg:sticky lg:top-28 lg:self-start"><SectionHeader eyebrow="Four ways to work with OpenGamer" title="Choose the Outcome Before the Service List" description="Most commercial conversations start with the result you need, not a catalogue of disciplines. Pick the engagement model first; define the detailed scope second." /><div className="mt-7 flex flex-wrap gap-2">{["Full build", "Embedded capacity", "Technical scope", "Portfolio adaptation"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{item}</span>)}</div></div>
+          <div className="border-t border-white/10">{buyerJobs.map((job) => <Link key={job.title} href={job.href} className="group grid gap-5 border-b border-white/10 py-8 transition duration-300 hover:border-emerald/30 sm:grid-cols-[3.2rem_0.8fr_1.2fr_auto] sm:items-start sm:gap-6 sm:py-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070a]"><span className="text-[0.68rem] font-semibold tracking-[0.2em] text-emerald/90">{job.number}</span><div><h2 className="text-2xl font-semibold tracking-[-0.015em] text-white transition group-hover:text-emerald">{job.title}</h2><span className="mt-3 inline-flex text-sm font-semibold text-white/75 transition group-hover:text-white">View relevant scope →</span></div><div><p className="max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{job.description}</p><div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">{job.items.map((item) => <span key={item} className="flex items-center gap-2 text-xs text-slate-500 sm:text-sm"><span aria-hidden="true" className="h-1 w-1 rounded-full bg-emerald/80" />{item}</span>)}</div></div><div className="hidden items-center sm:flex"><span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-slate-500 transition duration-300 group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:text-emerald">→</span></div></Link>)}</div>
         </div>
       </Section>
 
       {solutionGroups.map((group, index) => (
         <Section key={group.id} id={group.id} className={index % 2 ? "bg-black/20" : ""}>
           <div className="grid gap-10 lg:grid-cols-[0.4fr_1fr] lg:gap-14">
-            <div className="lg:sticky lg:top-28 lg:self-start">
-              <SectionHeader eyebrow={group.eyebrow} title={group.title} description={group.description} />
-              <Button href={`/contact?service=${encodeURIComponent(group.eyebrow)}#project-enquiry`} variant="secondary" className="mt-7">Discuss This Scope</Button>
-            </div>
-            <div className="divide-y divide-white/10 border-y border-white/10">
-              {group.services.map(([title, clientType, deliverables], serviceIndex) => (
-                <article key={title} className="grid gap-4 py-6 sm:grid-cols-[3rem_0.9fr_1.1fr] sm:gap-6 sm:py-7">
-                  <span className="text-xs font-semibold tracking-[0.16em] text-emerald/80">{String(serviceIndex + 1).padStart(2, "0")}</span>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">{title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-300">{clientType}</p>
-                  </div>
-                  <div className="sm:border-l sm:border-white/10 sm:pl-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Typical scope</p>
-                    <p className="mt-2 text-sm leading-6 text-slate-400">{deliverables}</p>
-                    <Link href={`/contact?service=${encodeURIComponent(title)}#project-enquiry`} className="mt-4 inline-flex text-sm font-semibold text-emerald transition hover:text-white">Discuss service →</Link>
-                  </div>
-                </article>
-              ))}
+            <div className="lg:sticky lg:top-28 lg:self-start"><SectionHeader eyebrow={group.eyebrow} title={group.title} description={group.description} /><Button href={`/contact?service=${encodeURIComponent(group.eyebrow)}#project-enquiry`} variant="secondary" className="mt-7">Discuss This Scope</Button></div>
+            <div>
+              {group.id === "game-production" && (
+                <div className="mb-8 grid gap-3 sm:grid-cols-3">
+                  {[
+                    { title: "Forest Fortune", slug: "forest-fortune", image: "/assets/games/forest-fortune/artwork.webp" },
+                    { title: "Deep Dive", slug: "deep-dive", image: "/assets/games/deep-dive/artwork.webp" },
+                    { title: "Dragon Rush", slug: "dragon-rush", image: "/assets/games/dragon-rush/artwork.webp" }
+                  ].map((game) => (
+                    <Link key={game.slug} href={`/games/${game.slug}`} className="group/game relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                      <div className="relative aspect-[10/7] overflow-hidden"><Image src={game.image} alt={`${game.title} artwork`} fill sizes="(min-width:1024px) 20vw,(min-width:640px) 31vw,100vw" className="object-cover transition duration-500 group-hover/game:scale-[1.025]" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" /><div className="absolute inset-x-0 bottom-0 p-4"><span className="text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-emerald">Playable portfolio</span><strong className="mt-1 block text-sm text-white sm:text-base">{game.title}</strong></div></div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              <div className="divide-y divide-white/10 border-y border-white/10">
+                {group.services.map(([title, clientType, deliverables], serviceIndex) => (
+                  <article key={title} className="grid gap-4 py-6 sm:grid-cols-[3rem_0.9fr_1.1fr] sm:gap-6 sm:py-7">
+                    <span className="text-xs font-semibold tracking-[0.16em] text-emerald/80">{String(serviceIndex + 1).padStart(2, "0")}</span>
+                    <div><h3 className="text-lg font-semibold text-white">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-300">{clientType}</p></div>
+                    <div className="sm:border-l sm:border-white/10 sm:pl-6"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Typical scope</p><p className="mt-2 text-sm leading-6 text-slate-400">{deliverables}</p><Link href={`/contact?service=${encodeURIComponent(title)}#project-enquiry`} className="mt-4 inline-flex text-sm font-semibold text-emerald transition hover:text-white">Discuss service →</Link></div>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </Section>
       ))}
 
-      <Section>
-        <SectionHeader eyebrow="Product proof" title="Real Work Behind the Service List" description="The service model is connected to actual OpenGamer games, original Live Casino IP and product-interface work." />
-        <div className="mt-10">
-          <RelatedProductStrip
-            items={[
-              { eyebrow: "Playable portfolio", title: "Forest Fortune", description: "A real OpenGamer slot reference for game-production discussions.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" },
-              { eyebrow: "Original IP · In development", title: "ELEMENTALS", description: "Original Live Casino IP showing show-game product and experience design capability.", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals", actionLabel: "View Concept", accent: "#dca45f" },
-              { eyebrow: "B2B product concept", title: "LC App", description: "Product-interface work exploring social and creator-led Live Casino engagement.", image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" }
-            ]}
-          />
-        </div>
-      </Section>
+      <Section><SectionHeader eyebrow="Product proof" title="Real Work Behind the Service List" description="The service model is connected to actual OpenGamer games, original Live Casino IP and product-interface work." /><div className="mt-10"><RelatedProductStrip items={[{ eyebrow: "Playable portfolio", title: "Forest Fortune", description: "A real OpenGamer slot reference for game-production discussions.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" },{ eyebrow: "Original IP · In development", title: "ELEMENTALS", description: "Original Live Casino IP showing show-game product and experience design capability.", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals", actionLabel: "View Concept", accent: "#dca45f" },{ eyebrow: "B2B product concept", title: "LC App", description: "Product-interface work exploring social and creator-led Live Casino engagement.", image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" }]} /></div></Section>
 
-      <CTASection
-        title="Need a Defined Scope or an Embedded Team?"
-        description="Share the project type, current stage, technical dependencies and what is missing internally. The first conversation can stay focused on the smallest useful scope."
-        ctaLabel="Discuss a Project"
-        ctaHref="/contact#project-enquiry"
-        secondaryLabel="Explore Games"
-        secondaryHref="/games"
-      />
+      <CTASection title="Need a Defined Scope or an Embedded Team?" description="Share the project type, current stage, technical dependencies and what is missing internally. The first conversation can stay focused on the smallest useful scope." ctaLabel="Discuss a Project" ctaHref="/contact#project-enquiry" secondaryLabel="Explore Games" secondaryHref="/games" />
     </SiteShell>
   );
 }
