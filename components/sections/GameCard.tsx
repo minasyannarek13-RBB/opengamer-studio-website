@@ -49,13 +49,18 @@ export function GameCard({ game }: { game: Game }) {
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/88 via-black/25 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-2 p-4">
-          {primaryCategory ? (
-            <span className="max-w-full break-words rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur">
-              {primaryCategory}
-            </span>
-          ) : (
-            <span />
-          )}
+          <div className="flex flex-wrap gap-2">
+            {primaryCategory ? (
+              <span className="max-w-full break-words rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur">
+                {primaryCategory}
+              </span>
+            ) : null}
+            {game.lineCount ? (
+              <span className="rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-medium text-slate-200 backdrop-blur">
+                {game.lineCount}
+              </span>
+            ) : null}
+          </div>
           <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium backdrop-blur ${statusClass}`}>{statusLabel}</span>
         </div>
       </Link>
