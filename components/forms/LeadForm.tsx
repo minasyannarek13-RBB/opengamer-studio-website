@@ -90,6 +90,7 @@ export function LeadForm() {
       setState("error");
       setErrors({ phone: "Enter a valid international phone number." });
       setMessage("Please check the form and try again.");
+      window.requestAnimationFrame(() => focusFormField(form, "phone"));
       return;
     }
 
@@ -121,9 +122,15 @@ export function LeadForm() {
       return;
     }
 
+    const nextErrors = result.errors || {};
     setState("error");
-    setErrors(result.errors || {});
+    setErrors(nextErrors);
     setMessage(result.message || "Please check the form and try again.");
+
+    const firstInvalidField = Object.keys(nextErrors)[0];
+    if (firstInvalidField) {
+      window.requestAnimationFrame(() => focusFormField(form, firstInvalidField));
+    }
   }
 
   const errorEntries = Object.entries(errors);
@@ -186,7 +193,7 @@ export function LeadForm() {
             aria-invalid={Boolean(errors.projectDescription)}
             aria-describedby={errors.projectDescription ? "projectDescription-error" : "projectDescription-hint"}
             rows={5}
-            className="min-h-36 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
+            className="min-h-36 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70 motion-reduce:transition-none"
           />
           <span id="projectDescription-hint" className="text-xs leading-5 text-slate-500">Describe what needs to be built, extended or integrated. Up to 5,000 characters.</span>
           {errors.projectDescription ? (
@@ -300,7 +307,7 @@ function Field({
         autoComplete={fieldAutoComplete[name] || "off"}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
+        className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70 motion-reduce:transition-none"
       />
       {error ? (
         <span id={errorId} className="text-xs text-red-300">
@@ -331,21 +338,22 @@ function Select({
   onChange?: (value: string) => void;
 }) {
   const errorId = `${name}-error`;
+  const controlledProps = onChange
+    ? { value: value ?? "", onChange: (event: React.ChangeEvent<HTMLSelectElement>) => onChange(event.target.value) }
+    : { defaultValue };
 
   return (
     <label className="grid gap-2 text-sm font-medium text-slate-200">
       <LabelText label={label} required={required} />
       <select
         id={name}
-        key={defaultValue || "empty"}
+        key={onChange ? "controlled" : defaultValue || "empty"}
         name={name}
-        defaultValue={defaultValue}
-        value={value}
-        onChange={onChange ? (event) => onChange(event.target.value) : undefined}
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70"
+        className="min-h-12 rounded-xl border border-white/10 bg-black/35 px-4 py-3 text-white outline-none transition-colors hover:border-white/20 focus:border-emerald focus:ring-2 focus:ring-emerald/20 aria-[invalid=true]:border-red-400/70 motion-reduce:transition-none"
+        {...controlledProps}
       >
         <option value="">Select</option>
         {options.map((option) => (
@@ -372,10 +380,12 @@ function mapInterestToService(value: string | null) {
     case "slot-development":
     case "game":
       return "Slot Game Development";
+    case "dedicated":
+      return "Dedicated Development Team";
     case "technology":
       return "Frontend or Backend Engineering";
     case "live-casino":
-      return "Live Casino Development";
+      return "Live Casino Product Design";
     case "integration":
       return "Game or Platform Integration";
     case "portfolio":
@@ -387,6 +397,14 @@ function mapInterestToService(value: string | null) {
 
 function isValidPhone(value: string) {
   return /^\+?[0-9][0-9\s().-]{6,24}$/.test(value);
+}
+
+function focusFormField(form: HTMLFormElement, fieldName: string) {
+  const field = Array.from(form.elements).find((element) => element instanceof HTMLElement && "name" in element && element.name === fieldName);
+  if (field instanceof HTMLElement) {
+    field.focus({ preventScroll: true });
+    field.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
 }
 
 function LabelText({ label, required }: { label: string; required: boolean }) {
