@@ -22,12 +22,6 @@ const forbiddenLegacyAssetPaths = [
   "/assets/games/sweet-wins/artwork.jpg"
 ];
 
-const homepageLegacyArtwork = [
-  "/assets/games/forest-fortune/source.jpg",
-  "/assets/games/deep-dive/artwork.jpg",
-  "/assets/games/choco-boom/artwork.jpg"
-];
-
 async function collectSourceFiles(directoryUrl) {
   const entries = await readdir(directoryUrl, { withFileTypes: true });
   const files = [];
@@ -70,15 +64,12 @@ test("game cards resolve artwork through the optimized delivery helper", async (
   assert.doesNotMatch(cardSource, /src=\{game\.artwork\?\.catalogue \|\| game\.image\}/);
 });
 
-test("current homepage uses optimized artwork variants where available", async () => {
+test("homepage game proof derives status and artwork from the catalogue source", async () => {
   const heroSource = await readFile(new URL("../components/home/ManualHero.tsx", import.meta.url), "utf8");
-  const bodySource = await readFile(new URL("../components/home/ManualHomepageBody.tsx", import.meta.url), "utf8");
-  const homepageSource = `${heroSource}\n${bodySource}`;
-
-  for (const assetPath of homepageLegacyArtwork) {
-    assert.equal(homepageSource.includes(assetPath), false, `homepage references legacy artwork ${assetPath}`);
-  }
-  assert.match(homepageSource, /\/assets\/games\/forest-fortune\/artwork\.webp/);
-  assert.match(homepageSource, /\/assets\/games\/cake-bonanza\/artwork\.webp/);
-  assert.match(homepageSource, /\/assets\/games\/dragon-rush\/artwork\.webp/);
+  assert.match(heroSource, /games\.find/);
+  assert.match(heroSource, /getVerifiedDemoUrl/);
+  assert.match(heroSource, /getOptimizedGameArtwork/);
+  assert.match(heroSource, /Portfolio title · No public demo/);
+  assert.doesNotMatch(heroSource, /status:\s*"Playable"/);
+  assert.doesNotMatch(heroSource, /image:\s*"\/assets\/games\//);
 });
