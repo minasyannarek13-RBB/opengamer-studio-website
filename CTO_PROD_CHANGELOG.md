@@ -7,6 +7,7 @@ Current production-relevant state for the OpenGamer website. Git history is the 
 - Branch: `build/contact-conversion-handoff-20260908`
 - Baseline lineage: `v2-current`
 - Approved founder-review baseline: `2377d18231c1cbce379358972e9bc8d6bea25f2d`
+- Current verified forward candidate: `df1da0e0c2ab352608988f4ee4f2af773f4688b0`
 - Baseline status: reviewed locally by Narek and accepted as the primary version for production preparation.
 - Forward rule: later commits may improve defects and polish, but must not regress the approved baseline. Any regression versus this baseline blocks release.
 - Production domain/DNS/aliases/secrets/env: unchanged.
@@ -54,6 +55,7 @@ Locale routes exist only as compatibility redirects to the canonical non-localiz
 - Contact: routing + brief + enquiry form, without redundant portfolio showcase.
 - ELEMENTALS and LC App detail pages: public-product narratives with explicit development status.
 - Accessibility: reduced-motion protection plus forced-colors focus/current/pressed visibility.
+- Search indexing is fail-closed outside production. Vercel uses `VERCEL_ENV`; non-Vercel production may use `NEXT_PUBLIC_DEPLOYMENT_ENV=production`. Vercel environment takes precedence so preview deployments stay noindex even if public env is mis-set.
 
 ## Repository cleanup
 
