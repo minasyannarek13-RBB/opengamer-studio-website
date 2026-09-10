@@ -39,6 +39,7 @@ const routes = [
 
 const viewports = [
   { group: "desktop", name: "1920x1080", width: 1920, height: 1080 },
+  { group: "desktop", name: "1512x982", width: 1512, height: 982 },
   { group: "desktop", name: "1440x1000", width: 1440, height: 1000 },
   { group: "desktop", name: "1280x900", width: 1280, height: 900 },
   { group: "tablet", name: "1024x900", width: 1024, height: 900 },
