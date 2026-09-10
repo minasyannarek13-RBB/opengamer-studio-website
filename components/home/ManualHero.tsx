@@ -32,14 +32,14 @@ export function ManualHero() {
       <div aria-hidden="true" className="absolute right-[-5rem] top-[14%] h-[31rem] w-[31rem] rounded-full border border-emerald/[0.08]" />
       <div aria-hidden="true" className="absolute bottom-[-11rem] right-[13%] h-[24rem] w-[52rem] rounded-[50%] bg-emerald/[0.035] blur-3xl" />
 
-      <Container className="grid gap-10 py-12 sm:py-16 xl:min-h-[700px] xl:grid-cols-[0.86fr_1.14fr] xl:items-center xl:gap-10 xl:py-10 2xl:min-h-[760px] 2xl:grid-cols-[0.82fr_1.18fr] 2xl:gap-14">
+      <Container className="grid gap-10 py-10 sm:py-16 xl:min-h-[700px] xl:grid-cols-[0.86fr_1.14fr] xl:items-center xl:gap-10 xl:py-10 2xl:min-h-[760px] 2xl:grid-cols-[0.82fr_1.18fr] 2xl:gap-14">
         <div className="relative z-20 max-w-[46rem] xl:pr-2">
           <p className="premium-kicker text-xs font-semibold uppercase">iGaming development studio</p>
-          <h1 className="mt-5 max-w-[13.5ch] text-balance text-[2.9rem] font-semibold leading-[0.95] tracking-[-0.03em] text-white sm:text-[3.55rem] lg:text-[3.8rem] xl:text-[3.85rem] 2xl:text-[4.45rem]">Build casino games. Extend delivery. <span className="text-emerald">Solve the product gap.</span></h1>
-          <p className="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8 xl:text-[1.05rem]">OpenGamer builds casino games and original iGaming products, and provides specialist development capacity across game, frontend, backend, mathematics and integration-oriented work.</p>
-          <div className="mt-8 flex flex-col gap-3 min-[460px]:flex-row min-[460px]:flex-wrap"><Button href="/contact#project-enquiry" className="w-full min-[460px]:w-auto">Discuss a Project</Button><Button href="/games" variant="secondary" className="w-full min-[460px]:w-auto">Explore Games</Button></div>
+          <h1 className="mt-4 max-w-[14.5ch] text-balance text-[2.55rem] font-semibold leading-[0.98] tracking-[-0.03em] text-white min-[430px]:text-[2.75rem] sm:mt-5 sm:max-w-[13.5ch] sm:text-[3.55rem] sm:leading-[0.95] lg:text-[3.8rem] xl:text-[3.85rem] 2xl:text-[4.45rem]">Build casino games. Extend delivery. <span className="text-emerald">Solve the product gap.</span></h1>
+          <p className="mt-5 max-w-xl text-base leading-7 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8 xl:text-[1.05rem]">OpenGamer builds casino games and original iGaming products, and provides specialist development capacity across game, frontend, backend, mathematics and integration-oriented work.</p>
+          <div className="mt-7 flex flex-col gap-3 min-[460px]:flex-row min-[460px]:flex-wrap sm:mt-8"><Button href="/contact#project-enquiry" className="w-full min-[460px]:w-auto">Discuss a Project</Button><Button href="/games" variant="secondary" className="w-full min-[460px]:w-auto">Explore Games</Button></div>
 
-          <div className="mt-8 border-t border-white/10 pt-5">
+          <div className="mt-7 border-t border-white/10 pt-5 sm:mt-8">
             <p className="text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-slate-500">Ways to work with OpenGamer</p>
             <div className="mt-3 flex flex-wrap gap-2.5">
               {engagementSignals.map((item) => (
