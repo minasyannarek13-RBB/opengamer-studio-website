@@ -24,6 +24,7 @@ const routes = [
   ["/", "home"],
   ["/services", "services"],
   ["/services/live-casino-development", "live-casino-development"],
+  ["/studios/capabilities", "studios-capabilities"],
   ["/games", "games"],
   ...readGameRoutes(),
   ["/portfolio", "portfolio"],
@@ -34,8 +35,15 @@ const routes = [
   ["/contact", "contact"],
   ["/privacy-policy", "privacy-policy"],
   ["/terms-of-use", "terms-of-use"],
-  ["/cookie-policy", "cookie-policy"]
+  ["/cookie-policy", "cookie-policy"],
+  ["/__founder-review-404__", "not-found"]
 ];
+
+const expectedStatus = new Map([["/__founder-review-404__", 404]]);
+const expectedFinalPath = new Map([
+  ["/services/live-casino-development", "/services"],
+  ["/studios/capabilities", "/services"]
+]);
 
 const viewports = [
   { group: "desktop", name: "1920x1080", width: 1920, height: 1080 },
@@ -82,7 +90,7 @@ async function capture(baseUrl, label) {
     const page = await browser.newPage({ viewport });
     for (const [route, slug] of routes) {
       const url = `${baseUrl}${route}`;
-      await page.goto(url, { waitUntil: "networkidle" });
+      const response = await page.goto(url, { waitUntil: "networkidle" });
       await page.evaluate(async () => {
         const step = Math.max(window.innerHeight * 0.8, 400);
         for (let position = 0; position < document.body.scrollHeight; position += step) {
@@ -133,7 +141,16 @@ async function capture(baseUrl, label) {
         };
       });
 
-      results.push({ target: label, viewport: viewport.name, group: viewport.group, route, url, ...metrics });
+      results.push({
+        target: label,
+        viewport: viewport.name,
+        group: viewport.group,
+        route,
+        url,
+        status: response?.status() || 0,
+        finalPathname: new URL(page.url()).pathname,
+        ...metrics
+      });
     }
     await page.close();
   }
@@ -162,9 +179,19 @@ try {
   if (target === "local" || target === "both") allResults.push(...(await capture(localBaseUrl, "local")));
   if (target === "deployed" || target === "both") allResults.push(...(await capture(deployedBaseUrl, "deployed")));
 
-  const failures = allResults.filter(
-    (item) => item.h1Count !== 1 || item.horizontalOverflow || item.brokenImages || item.missingAltImages || item.clippedText.length
-  );
+  const failures = allResults.filter((item) => {
+    const requiredStatus = expectedStatus.get(item.route) || 200;
+    const requiredFinalPath = expectedFinalPath.get(item.route);
+    return (
+      item.status !== requiredStatus ||
+      (requiredFinalPath && item.finalPathname !== requiredFinalPath) ||
+      item.h1Count !== 1 ||
+      item.horizontalOverflow ||
+      item.brokenImages ||
+      item.missingAltImages ||
+      item.clippedText.length
+    );
+  });
   const summary = {
     createdAt: new Date().toISOString(),
     targets: target,
