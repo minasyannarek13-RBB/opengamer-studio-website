@@ -149,3 +149,10 @@ test("sitemap publishes primary catalogue titles and excludes internal variant r
   assert.match(sitemapSource, /catalogueGames[\s\S]*\.filter\(\(game\) => !game\.isVariant\)[\s\S]*\.map/);
   assert.doesNotMatch(sitemapSource, /const gameRoutes = games\.map/);
 });
+
+test("visual QA covers approved founder-review breakpoints", async () => {
+  const visualQaSource = await readFile(new URL("./visual-qa.mjs", import.meta.url), "utf8");
+  for (const width of [390, 430, 1024, 1280, 1440, 1512, 1920]) {
+    assert.match(visualQaSource, new RegExp(`width:\\s*${width}\\b`));
+  }
+});
