@@ -156,3 +156,12 @@ test("visual QA covers approved founder-review breakpoints", async () => {
     assert.match(visualQaSource, new RegExp(`width:\\s*${width}\\b`));
   }
 });
+
+test("visual QA includes 404 and legacy redirect regression surfaces", async () => {
+  const visualQaSource = await readFile(new URL("./visual-qa.mjs", import.meta.url), "utf8");
+  assert.match(visualQaSource, /\/__founder-review-404__/);
+  assert.match(visualQaSource, /expectedStatus[\s\S]*404/);
+  assert.match(visualQaSource, /\/services\/live-casino-development/);
+  assert.match(visualQaSource, /\/studios\/capabilities/);
+  assert.match(visualQaSource, /expectedFinalPath[\s\S]*\/services/);
+});
