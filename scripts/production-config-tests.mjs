@@ -51,7 +51,7 @@ test("preview deployment stays noindex even if NEXT_PUBLIC_SITE_URL is productio
   assert.equal(isIndexableProduction, false);
 });
 
-test("production deployment becomes indexable only on canonical production URL", async () => {
+test("Vercel production deployment becomes indexable only on canonical production URL", async () => {
   resetEnv();
   process.env.NEXT_PUBLIC_SITE_URL = "https://open-gamer.com";
   process.env.VERCEL_ENV = "production";
@@ -59,10 +59,27 @@ test("production deployment becomes indexable only on canonical production URL",
   assert.equal(isIndexableProduction, true);
 });
 
+test("explicit non-Vercel production deployment becomes indexable on canonical URL", async () => {
+  resetEnv();
+  process.env.NEXT_PUBLIC_SITE_URL = "https://open-gamer.com";
+  process.env.NEXT_PUBLIC_DEPLOYMENT_ENV = "production";
+  const { isIndexableProduction } = await cacheSafeImport("../lib/site.ts");
+  assert.equal(isIndexableProduction, true);
+});
+
+test("Vercel environment takes precedence over public deployment environment", async () => {
+  resetEnv();
+  process.env.NEXT_PUBLIC_SITE_URL = "https://open-gamer.com";
+  process.env.NEXT_PUBLIC_DEPLOYMENT_ENV = "production";
+  process.env.VERCEL_ENV = "preview";
+  const { isIndexableProduction } = await cacheSafeImport("../lib/site.ts");
+  assert.equal(isIndexableProduction, false);
+});
+
 test("production deployment on a non-canonical URL stays noindex", async () => {
   resetEnv();
   process.env.NEXT_PUBLIC_SITE_URL = "https://example.com";
-  process.env.VERCEL_ENV = "production";
+  process.env.NEXT_PUBLIC_DEPLOYMENT_ENV = "production";
   const { isIndexableProduction } = await cacheSafeImport("../lib/site.ts");
   assert.equal(isIndexableProduction, false);
 });
