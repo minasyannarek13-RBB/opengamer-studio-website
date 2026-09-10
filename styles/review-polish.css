@@ -47,6 +47,36 @@
   display: none;
 }
 
+/* Mobile navigation must behave as a true opaque navigation surface, not a translucent layer over page copy. */
+@media (max-width: 1023px) {
+  .mobile-nav-panel {
+    position: fixed;
+    inset: 5rem 0 0;
+    z-index: 60;
+    width: 100%;
+    max-height: none !important;
+    height: calc(100dvh - 5rem);
+    background: #050807 !important;
+    background-image:
+      radial-gradient(circle at 82% 0%, rgba(46, 230, 166, 0.07), transparent 18rem),
+      linear-gradient(180deg, #07100c 0%, #050807 28%, #050608 100%) !important;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.72);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .mobile-nav-panel > div {
+    min-height: 100%;
+    align-content: start;
+  }
+
+  .mobile-nav-panel a,
+  .mobile-nav-panel button {
+    position: relative;
+    z-index: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   header a[href*="/contact#project-enquiry"][aria-label]:hover {
     transform: none;
