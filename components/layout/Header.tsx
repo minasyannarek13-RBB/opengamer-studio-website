@@ -40,7 +40,7 @@ export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
-  const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(true);
+  const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(false);
   const [isMenuMounted, setIsMenuMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const solutionsButtonRef = useRef<HTMLButtonElement>(null);
@@ -55,7 +55,7 @@ export function Header({ locale }: { locale: Locale }) {
   useEffect(() => {
     setIsOpen(false);
     setIsSolutionsOpen(false);
-    setIsMobileSolutionsOpen(true);
+    setIsMobileSolutionsOpen(false);
   }, [pathname]);
 
   useEffect(() => {
