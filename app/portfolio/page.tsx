@@ -62,9 +62,9 @@ export default function PortfolioPage() {
                 </div>
               </Link>
 
-              <Link href="/portfolio/lc-app" className="group relative min-h-[330px] overflow-hidden rounded-[1.5rem] border border-white/15 bg-[#06090b] shadow-[0_30px_95px_rgba(0,0,0,0.42)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[390px] xl:min-h-[342px]">
+              <Link href="/portfolio/lc-app" className="group relative min-h-[290px] overflow-hidden rounded-[1.5rem] border border-white/15 bg-[#06090b] shadow-[0_30px_95px_rgba(0,0,0,0.42)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[360px] xl:min-h-[342px]">
                 <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_32%,rgba(46,230,166,0.09),transparent_16rem)]" />
-                <Image src="/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp" alt="LC App B2B product concept interface" fill sizes="(min-width:1280px) 24vw,50vw" className="object-contain object-center p-4 transition duration-700 group-hover:scale-[1.015] motion-reduce:transition-none motion-reduce:group-hover:scale-100 sm:p-5" />
+                <Image src="/assets/projects/lc-app/optimized/lc-app-mobile-discover.webp" alt="LC App B2B product concept interface" fill sizes="(min-width:1280px) 24vw,50vw" className="object-contain object-center p-3 pb-16 transition duration-700 group-hover:scale-[1.015] motion-reduce:transition-none motion-reduce:group-hover:scale-100 sm:p-5 sm:pb-20" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/94 via-black/68 to-transparent p-4 sm:p-5">
                   <span className="text-[0.53rem] font-semibold uppercase tracking-[0.14em] text-emerald">B2B product concept · In development</span>
                   <strong className="mt-1.5 block text-lg text-white">LC App</strong>
@@ -122,21 +122,21 @@ export default function PortfolioPage() {
         <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(220,164,95,0.045),transparent_23rem),radial-gradient(circle_at_88%_76%,rgba(108,207,222,0.04),transparent_22rem)]" />
         <div className="relative">
           <SectionHeader eyebrow="Original product work" title="Two Directions Beyond Conventional Slot Production" description="ELEMENTALS and LC App are shown separately because they represent different kinds of product work." />
-          <div className="mt-10 grid gap-5 xl:grid-cols-[1.28fr_0.72fr] xl:items-stretch">
-            <Link href="/portfolio/elementals" className="group relative min-h-[430px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/40 shadow-[0_28px_90px_rgba(0,0,0,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[520px]">
+          <div className="mt-8 grid gap-4 sm:mt-10 sm:gap-5 xl:grid-cols-[1.28fr_0.72fr] xl:items-stretch">
+            <Link href="/portfolio/elementals" className="group relative min-h-[390px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/40 shadow-[0_28px_90px_rgba(0,0,0,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[520px]">
               <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="ELEMENTALS Nexus stage" fill sizes="(min-width:1280px) 62vw,100vw" className="object-cover transition duration-700 group-hover:scale-[1.018] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/94 via-black/14 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
                 <span className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-emerald">Original Live Casino IP · In development</span>
                 <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">ELEMENTALS</h2>
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">A premium show-game concept built around a Great Wheel, four elemental bonus realms and a dealer-host presentation.</p>
                 <span className="mt-5 inline-flex text-sm font-semibold text-white/85 transition group-hover:text-emerald motion-reduce:transition-none">Explore the concept →</span>
               </div>
             </Link>
-            <Link href="/portfolio/lc-app" className="group relative min-h-[430px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#06090b] shadow-[0_28px_90px_rgba(0,0,0,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[520px]">
+            <Link href="/portfolio/lc-app" className="group relative min-h-[360px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#06090b] shadow-[0_28px_90px_rgba(0,0,0,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 sm:min-h-[500px] xl:min-h-[520px]">
               <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_24%,rgba(108,207,222,0.08),transparent_18rem)]" />
-              <Image src="/assets/projects/lc-app/optimized/lc-app-mobile-creator-profile.webp" alt="LC App creator profile concept interface" fill sizes="(min-width:1280px) 35vw,100vw" className="object-contain object-center p-5 transition duration-700 group-hover:scale-[1.015] motion-reduce:transition-none motion-reduce:group-hover:scale-100 sm:p-7" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent p-6 sm:p-7">
+              <Image src="/assets/projects/lc-app/optimized/lc-app-mobile-creator-profile.webp" alt="LC App creator profile concept interface" fill sizes="(min-width:1280px) 35vw,100vw" className="object-contain object-top p-3 pb-28 transition duration-700 group-hover:scale-[1.015] motion-reduce:transition-none motion-reduce:group-hover:scale-100 sm:p-7 sm:pb-36" />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/88 to-transparent p-5 sm:p-7">
                 <span className="text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-emerald">B2B product concept · In development</span>
                 <h2 className="mt-3 text-2xl font-semibold text-white sm:text-3xl">LC App</h2>
                 <p className="mt-3 text-sm leading-6 text-slate-300">A separate product concept exploring social Live Casino engagement and creator-oriented product flows.</p>
