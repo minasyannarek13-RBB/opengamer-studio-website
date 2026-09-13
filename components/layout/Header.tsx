@@ -69,7 +69,7 @@ export function Header({ locale }: { locale: Locale }) {
   }, [isOpen]);
 
   useEffect(() => {
-    if (!isOpen) {
+    if (!isOpen || !isMenuMounted) {
       return;
     }
 
@@ -115,7 +115,7 @@ export function Header({ locale }: { locale: Locale }) {
       document.body.style.overflow = originalOverflow;
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, isMenuMounted]);
 
   useEffect(() => {
     if (!isSolutionsOpen) {
