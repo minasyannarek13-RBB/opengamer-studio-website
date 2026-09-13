@@ -3,12 +3,10 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
-const pnpm = process.env.PNPM_BIN || "/Users/macbook/Library/pnpm/bin/pnpm";
-const nodeBin = "/Users/macbook/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin";
-process.env.PATH = `${nodeBin}:${process.env.PATH || ""}`;
+const pnpm = process.env.PNPM_BIN || "pnpm";
 process.env.PLAYWRIGHT_BROWSERS_PATH ||= join(root, ".playwright-browsers");
 
-const deployedBaseUrl = "https://opengamer-studio-prototype.vercel.app";
+const deployedBaseUrl = process.env.QA_DEPLOYED_BASE_URL || "https://opengamer-studio-prototype.vercel.app";
 const localBaseUrl = process.env.QA_LOCAL_BASE_URL || "http://127.0.0.1:3100";
 const args = new Set(process.argv.slice(2));
 const targetArg = [...args].find((arg) => arg.startsWith("--target="));
@@ -25,22 +23,37 @@ function readGameRoutes() {
 const routes = [
   ["/", "home"],
   ["/services", "services"],
+  ["/services/live-casino-development", "live-casino-development"],
+  ["/studios/capabilities", "studios-capabilities"],
   ["/games", "games"],
   ...readGameRoutes(),
+  ["/portfolio", "portfolio"],
+  ["/portfolio/elementals", "elementals"],
+  ["/portfolio/lc-app", "lc-app"],
   ["/technology", "technology"],
   ["/about", "about"],
   ["/contact", "contact"],
   ["/privacy-policy", "privacy-policy"],
   ["/terms-of-use", "terms-of-use"],
-  ["/cookie-policy", "cookie-policy"]
+  ["/cookie-policy", "cookie-policy"],
+  ["/__founder-review-404__", "not-found"]
 ];
 
+const expectedStatus = new Map([["/__founder-review-404__", 404]]);
+const expectedFinalPath = new Map([
+  ["/services/live-casino-development", "/services"],
+  ["/studios/capabilities", "/services"]
+]);
+
 const viewports = [
+  { group: "desktop", name: "1920x1080", width: 1920, height: 1080 },
+  { group: "desktop", name: "1512x982", width: 1512, height: 982 },
   { group: "desktop", name: "1440x1000", width: 1440, height: 1000 },
+  { group: "desktop", name: "1280x900", width: 1280, height: 900 },
   { group: "tablet", name: "1024x900", width: 1024, height: 900 },
   { group: "tablet", name: "768x1024", width: 768, height: 1024 },
-  { group: "mobile", name: "390x844", width: 390, height: 844 },
-  { group: "mobile", name: "375x812", width: 375, height: 812 }
+  { group: "mobile", name: "430x932", width: 430, height: 932 },
+  { group: "mobile", name: "390x844", width: 390, height: 844 }
 ];
 
 function run(command, commandArgs) {
@@ -60,9 +73,7 @@ async function waitForServer(url) {
   while (Date.now() < deadline) {
     try {
       const response = await fetch(url);
-      if (response.ok) {
-        return;
-      }
+      if (response.ok) return;
     } catch {
       await new Promise((resolve) => setTimeout(resolve, 500));
     }
@@ -79,18 +90,19 @@ async function capture(baseUrl, label) {
     const page = await browser.newPage({ viewport });
     for (const [route, slug] of routes) {
       const url = `${baseUrl}${route}`;
-      await page.goto(url, { waitUntil: "networkidle" });
+      const response = await page.goto(url, { waitUntil: "networkidle" });
       await page.evaluate(async () => {
         const step = Math.max(window.innerHeight * 0.8, 400);
         for (let position = 0; position < document.body.scrollHeight; position += step) {
           window.scrollTo(0, position);
-          await new Promise((resolve) => setTimeout(resolve, 180));
+          await new Promise((resolve) => setTimeout(resolve, 160));
         }
         window.scrollTo(0, document.body.scrollHeight);
         await Promise.allSettled(Array.from(document.images).map((img) => img.decode()));
         window.scrollTo(0, 0);
-        await new Promise((resolve) => setTimeout(resolve, 400));
+        await new Promise((resolve) => setTimeout(resolve, 300));
       });
+
       await page.screenshot({
         path: join(root, "qa", "screenshots", viewport.group, `${label}-${viewport.name}-${slug}.png`),
         fullPage: true
@@ -99,19 +111,46 @@ async function capture(baseUrl, label) {
       const metrics = await page.evaluate(() => {
         const doc = document.documentElement;
         const images = Array.from(document.images);
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const clippedText = Array.from(document.querySelectorAll("h1,h2,h3,p,a,button,span,strong"))
+          .filter((element) => {
+            const node = element;
+            const style = getComputedStyle(node);
+            if (style.overflow === "visible") return false;
+            return node.scrollWidth > node.clientWidth + 2 || node.scrollHeight > node.clientHeight + 2;
+          })
+          .slice(0, 12)
+          .map((element) => ({
+            tag: element.tagName,
+            text: (element.textContent || "").trim().slice(0, 100)
+          }));
+
         return {
           title: document.title,
           h1Count: document.querySelectorAll("h1").length,
           horizontalOverflow: doc.scrollWidth > doc.clientWidth + 1,
           scrollWidth: doc.scrollWidth,
           clientWidth: doc.clientWidth,
+          viewportWidth,
+          viewportHeight,
           imageCount: images.length,
           brokenImages: images.filter((img) => !img.complete || img.naturalWidth === 0).length,
-          missingAltImages: images.filter((img) => !img.hasAttribute("alt")).length
+          missingAltImages: images.filter((img) => !img.hasAttribute("alt")).length,
+          clippedText
         };
       });
 
-      results.push({ target: label, viewport: viewport.name, group: viewport.group, route, url, ...metrics });
+      results.push({
+        target: label,
+        viewport: viewport.name,
+        group: viewport.group,
+        route,
+        url,
+        status: response?.status() || 0,
+        finalPathname: new URL(page.url()).pathname,
+        ...metrics
+      });
     }
     await page.close();
   }
@@ -127,9 +166,7 @@ for (const group of ["desktop", "tablet", "mobile"]) {
 let server;
 try {
   if ((target === "local" || target === "both") && !noServer) {
-    if (!skipBuild) {
-      run(pnpm, ["build"]);
-    }
+    if (!skipBuild) run(pnpm, ["build"]);
     server = spawn(pnpm, ["exec", "next", "start", "-H", "127.0.0.1", "-p", "3100"], {
       cwd: root,
       env: process.env,
@@ -139,17 +176,26 @@ try {
   }
 
   const allResults = [];
-  if (target === "local" || target === "both") {
-    allResults.push(...(await capture(localBaseUrl, "local")));
-  }
-  if (target === "deployed" || target === "both") {
-    allResults.push(...(await capture(deployedBaseUrl, "deployed")));
-  }
+  if (target === "local" || target === "both") allResults.push(...(await capture(localBaseUrl, "local")));
+  if (target === "deployed" || target === "both") allResults.push(...(await capture(deployedBaseUrl, "deployed")));
 
-  const failures = allResults.filter((item) => item.h1Count !== 1 || item.horizontalOverflow || item.brokenImages || item.missingAltImages);
+  const failures = allResults.filter((item) => {
+    const requiredStatus = expectedStatus.get(item.route) || 200;
+    const requiredFinalPath = expectedFinalPath.get(item.route);
+    return (
+      item.status !== requiredStatus ||
+      (requiredFinalPath && item.finalPathname !== requiredFinalPath) ||
+      item.h1Count !== 1 ||
+      item.horizontalOverflow ||
+      item.brokenImages ||
+      item.missingAltImages ||
+      item.clippedText.length
+    );
+  });
   const summary = {
     createdAt: new Date().toISOString(),
     targets: target,
+    deployedBaseUrl: target === "deployed" || target === "both" ? deployedBaseUrl : undefined,
     viewports,
     routes: routes.map(([route]) => route),
     results: allResults,
@@ -159,11 +205,7 @@ try {
   writeFileSync(join(root, "qa", "screenshots", "summary.json"), `${JSON.stringify(summary, null, 2)}\n`);
   console.log(JSON.stringify({ screenshots: allResults.length, failures }, null, 2));
 
-  if (failures.length) {
-    process.exitCode = 1;
-  }
+  if (failures.length) process.exitCode = 1;
 } finally {
-  if (server) {
-    server.kill("SIGTERM");
-  }
+  if (server) server.kill("SIGTERM");
 }

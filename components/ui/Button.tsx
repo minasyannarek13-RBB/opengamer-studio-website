@@ -29,7 +29,7 @@ export function Button(props: ButtonProps) {
 
 function getButtonClasses(variant: ButtonBaseProps["variant"] = "primary", className = "") {
   const base =
-    "inline-flex min-h-11 items-center justify-center rounded-full px-5 text-sm font-semibold transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink disabled:pointer-events-none disabled:opacity-55 active:translate-y-0 active:scale-[0.99]";
+    "inline-flex min-h-11 items-center justify-center rounded-full px-5 text-center text-sm font-semibold leading-5 transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink disabled:pointer-events-none disabled:opacity-55 active:translate-y-0 active:scale-[0.99] motion-reduce:transform-none motion-reduce:transition-none";
   const styles = {
     primary: "bg-emerald text-ink shadow-[0_14px_34px_rgba(46,230,166,0.2)] hover:-translate-y-0.5 hover:bg-emerald/90 hover:shadow-[0_18px_42px_rgba(46,230,166,0.24)]",
     secondary: "border border-white/15 bg-white/[0.06] text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] hover:-translate-y-0.5 hover:border-emerald/50 hover:bg-white/[0.1] hover:text-white",

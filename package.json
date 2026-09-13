@@ -1,15 +1,15 @@
 {
-  "name": "opengamer-studio-prototype",
+  "name": "opengamer-studio-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm test:production-config && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "pnpm test:production-config",
-    "test:production-config": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/production-config-tests.mjs",
+    "test:production-config": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/production-config-tests.mjs && node scripts/contact-routing-tests.mjs && node scripts/asset-delivery-tests.mjs && node scripts/locale-accessibility-tests.mjs && node scripts/locale-routing-tests.mjs && node scripts/security-header-tests.mjs",
     "qa:visual": "node scripts/visual-qa.mjs"
   },
   "dependencies": {

@@ -12,14 +12,15 @@ import { Section } from "@/components/ui/Section";
 import { elementalsExpositions, elementalsRealms, elementalsWheelImage, portfolioProjects } from "@/content/portfolio";
 
 const elementals = portfolioProjects[0];
+const featuredExposition = elementalsExpositions.find((item) => item.featured) ?? elementalsExpositions[0];
 
 export const metadata: Metadata = {
   title: "ELEMENTALS | Premium Live Casino Show Game — OpenGamer",
-  description: "ELEMENTALS is a premium Live Casino show game concept built around four elemental realms and the Great Wheel. In development.",
+  description: "ELEMENTALS is an original Live Casino show-game concept built around the Great Wheel and four elemental realms. In development.",
   alternates: { canonical: "/portfolio/elementals" },
   openGraph: {
-    title: "ELEMENTALS — A New Kind of Live Casino Show Game",
-    description: "Four realms. One Wheel. A cinematic live casino show game concept from OpenGamer Studio.",
+    title: "ELEMENTALS — Original Live Casino Show-Game Concept",
+    description: "The Great Wheel, four elemental realms and a cinematic dealer-host direction. In development.",
     images: elementals.image ? [{ url: elementals.image, width: 800, height: 600, alt: elementals.imageAlt }] : undefined
   }
 };
@@ -28,182 +29,136 @@ export default function ElementalsPage() {
   return (
     <SiteShell atmosphere="elementals">
       <div className="elementals-page">
-      <section className="elementals-hero relative overflow-hidden border-b border-white/10 py-16 sm:py-24">
-        <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.024)_1px,transparent_1px)] [background-size:80px_80px] [mask-image:radial-gradient(circle_at_68%_44%,black,transparent_72%)]" />
-        <Container className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
-          <div className="reveal">
-            <span className="premium-status rounded-full px-3 py-1 text-xs">{elementals.status}</span>
-            <h1 className="mt-5 text-5xl font-semibold tracking-normal text-white sm:text-6xl">ELEMENTALS</h1>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
-              A premium Live Casino show game built around four elemental realms and the Great Wheel.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/contact?interest=elementals">Discuss the Project</Button>
-              <Button href="/services/live-casino-development" variant="secondary">
-                View Live Casino Development
-              </Button>
-            </div>
-          </div>
-          {elementals.image ? (
-            <div className="elementals-stage-frame premium-card surface-hairline image-frame reveal overflow-hidden rounded-lg border border-white/12 bg-white/[0.04] p-2 shadow-[0_34px_120px_rgba(0,0,0,0.48)]">
-              <div className="relative aspect-[16/11] overflow-hidden rounded-md bg-black/50">
-                <Image src={elementals.image} alt={elementals.imageAlt} width={1536} height={1024} priority className="h-full w-full object-cover" sizes="(min-width: 1024px) 56vw, 100vw" />
+        <section className="elementals-hero relative isolate overflow-hidden border-b border-white/10 bg-[#05070a] py-16 sm:py-24 xl:py-20">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_32%,rgba(147,51,234,0.13),transparent_26rem),radial-gradient(circle_at_84%_72%,rgba(46,230,166,0.07),transparent_28rem)]" />
+          <div aria-hidden="true" className="absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:80px_80px] [mask-image:radial-gradient(circle_at_70%_44%,black,transparent_72%)]" />
+          <Container className="relative grid gap-10 xl:grid-cols-[0.78fr_1.22fr] xl:items-center xl:gap-14">
+            <div>
+              <span className="premium-status rounded-full px-3 py-1 text-xs">Original Live Casino IP · In development</span>
+              <p className="mt-7 text-xs font-semibold uppercase tracking-[0.22em] text-emerald">OpenGamer original concept</p>
+              <h1 className="mt-4 text-5xl font-semibold tracking-[-0.03em] text-white sm:text-6xl xl:text-7xl">ELEMENTALS</h1>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">A cinematic Live Casino show-game direction built around the Great Wheel, four elemental realms and a dealer-host presentation.</p>
+              <div className="mt-8 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap">
+                <Button href="/contact?interest=elementals#project-enquiry" className="w-full min-[480px]:w-auto">Discuss ELEMENTALS</Button>
+                <Button href="/services#live-casino" variant="secondary" className="w-full min-[480px]:w-auto">View Live Casino Scope</Button>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-2" aria-label="ELEMENTALS public status">
+                {["Show-game concept", "Great Wheel", "Four realms", "Dealer-host direction"].map((item) => (
+                  <span key={item} className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-400">{item}</span>
+                ))}
               </div>
             </div>
-          ) : null}
-        </Container>
-      </section>
-      <Section>
-        <SectionHeader
-          eyebrow="Product Overview"
-          title="The Great Wheel at the Center"
-          description="The Great Wheel anchors the product concept and connects the four elemental realms into one show-game structure."
-        />
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch" data-reveal-group="cards">
-          <Card tone="strong" className="elementals-stage-frame overflow-hidden p-0">
-            <div className="image-frame relative aspect-[16/10] bg-black/38 lg:aspect-auto lg:h-full lg:min-h-[520px]">
-              <Image src={elementalsWheelImage} alt="ELEMENTALS Great Wheel artwork" width={1024} height={1024} className="h-full w-full object-cover" sizes="(min-width: 1024px) 52vw, 100vw" />
-            </div>
-          </Card>
-          <Card className="h-full lg:flex lg:flex-col lg:justify-center">
-            <h2 className="text-2xl font-semibold text-white">One Wheel. Four Realms.</h2>
-            <p className="mt-4 leading-7 text-slate-300">
-              ELEMENTALS combines a central Great Wheel with four elemental bonus realms, presented through a dealer-host format and a cinematic, ritual-inspired world.
-            </p>
-            <p className="mt-4 leading-7 text-slate-300">
-              The Nexus is the central world connecting all four realms — the setting for the base game and the point every bonus round returns to.
-            </p>
-          </Card>
-        </div>
-      </Section>
-      <Section className="bg-black/20">
-        <SectionHeader eyebrow="Visual Expositions" title="ELEMENTALS World Presentation" description="Selected concept frames showing the Nexus, the studio wheel and the four realm directions." />
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]" data-reveal-group="cards">
-          {elementalsExpositions
-            .filter((item) => item.featured)
-            .map((item) => (
-              <Card key={item.title} tone="strong" className="elementals-stage-frame overflow-hidden p-0">
-                <div className="image-frame relative aspect-[3/2] bg-black/42 lg:h-full lg:min-h-[520px]">
-                  <Image src={item.image} alt={item.alt} width={item.width} height={item.height} className="h-full w-full object-cover" sizes="(min-width: 1024px) 54vw, 100vw" />
+
+            <div className="elementals-stage-frame relative overflow-hidden rounded-[1.8rem] border border-white/12 bg-black/45 shadow-[0_34px_120px_rgba(0,0,0,0.48)]">
+              <div className="relative aspect-[16/10] min-h-[360px] sm:min-h-[470px] xl:min-h-[560px]">
+                <Image src={featuredExposition.image} alt={featuredExposition.alt} fill priority className="object-cover" sizes="(min-width:1280px) 58vw,100vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/5 to-black/10" />
+                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
+                  <p className="text-[0.62rem] font-semibold uppercase tracking-[0.17em] text-emerald">Product world</p>
+                  <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">The Nexus and the Great Wheel</h2>
+                  <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">The central presentation frame connects the host position, wheel and elemental realm gateways into one show-game world.</p>
                 </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">{item.description}</p>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        <Section>
+          <div className="grid gap-10 xl:grid-cols-[0.62fr_1.38fr] xl:items-start xl:gap-16">
+            <div className="xl:sticky xl:top-28">
+              <SectionHeader eyebrow="Product system" title="One Core World. Four Distinct Directions." description="The public concept is organized around a central wheel and four elemental realms. Final mechanics, mathematics and launch configuration remain in development." />
+              <div className="mt-7 grid gap-3 border-t border-white/10 pt-5 text-sm text-slate-300">
+                {[
+                  ["Core", "Great Wheel + Nexus"],
+                  ["Presentation", "Dealer-host show format"],
+                  ["World structure", "Fire · Water · Earth · Air"],
+                  ["Status", "In development"]
+                ].map(([label, value]) => (
+                  <div key={label} className="flex items-start justify-between gap-5 border-b border-white/10 pb-3"><span className="text-slate-500">{label}</span><span className="text-right text-slate-200">{value}</span></div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-6">
+              <Card tone="strong" className="elementals-stage-frame overflow-hidden p-0">
+                <div className="relative mx-auto aspect-[16/9] w-full max-w-[58rem] bg-[radial-gradient(circle_at_50%_48%,rgba(46,230,166,0.055),transparent_45%),#05070a] sm:aspect-[16/8] xl:max-h-[430px]">
+                  <Image src={elementalsWheelImage} alt="ELEMENTALS Great Wheel artwork" fill className="object-contain object-center p-3 sm:p-5 xl:p-6" sizes="(min-width:1280px) 56vw,100vw" />
+                  <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/[0.035]" />
                 </div>
               </Card>
-            ))}
-          <div className="grid gap-4 sm:grid-cols-2">
-            {elementalsExpositions
-              .filter((item) => !item.featured)
-              .map((item) => (
-                <Card key={item.title} className="overflow-hidden p-0">
-                  <div className="image-frame relative aspect-[16/10] bg-black/42">
-                    <Image src={item.image} alt={item.alt} width={item.width} height={item.height} className="h-full w-full object-cover transition duration-500 hover:scale-[1.025]" sizes="(min-width: 1024px) 20vw, 50vw" />
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                {elementalsRealms.map((realm) => (
+                  <Card key={realm.title} className={`elementals-realm-card overflow-hidden bg-gradient-to-br ${realm.tone} p-0`} style={{ "--realm-accent": realm.title === "Fire" ? "var(--realm-fire)" : realm.title === "Water" ? "var(--realm-water)" : realm.title === "Earth" ? "var(--realm-earth)" : "var(--realm-air)" } as CSSProperties}>
+                    <div className="relative aspect-[4/5] overflow-hidden bg-black/40">
+                      <Image src={realm.portalImage} alt={`${realm.title} elemental portal`} fill className="object-cover" sizes="(min-width:1280px) 17vw,(min-width:768px) 45vw,100vw" />
+                    </div>
+                    <div className="p-4">
+                      <div className="flex items-center gap-3">
+                        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-white/12 bg-black/35 shadow-[0_8px_24px_rgba(0,0,0,0.2)]">
+                          <Image src={realm.iconImage} alt="" fill className="object-cover" sizes="40px" />
+                        </div>
+                        <h3 className="text-lg font-semibold text-white">{realm.title}</h3>
+                      </div>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">{realm.description}</p>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        <Section className="relative overflow-hidden bg-black/20">
+          <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_26%,rgba(147,51,234,0.08),transparent_28rem)]" />
+          <div className="relative">
+            <SectionHeader eyebrow="World direction" title="A Cinematic Identity Around the Game System" description="Selected concept frames and guardian artwork define the intended world and presentation tone without implying that the final studio or production configuration is complete." />
+            <div className="mt-10 grid gap-5 xl:grid-cols-[1.25fr_0.75fr]">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {elementalsExpositions.filter((item) => !item.featured).slice(0, 4).map((item, index) => (
+                  <div key={item.title} className={`relative overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/40 ${index === 0 ? "sm:col-span-2" : ""}`}>
+                    <div className={`relative ${index === 0 ? "aspect-[16/8]" : "aspect-[16/10]"}`}>
+                      <Image src={item.image} alt={item.alt} fill className="object-cover" sizes={index === 0 ? "(min-width:1280px) 62vw,100vw" : "(min-width:1280px) 30vw,(min-width:640px) 50vw,100vw"} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                      <p className="absolute bottom-4 left-4 text-sm font-semibold text-white">{item.title}</p>
+                    </div>
                   </div>
-                  <div className="p-4">
-                    <h3 className="text-base font-semibold text-white">{item.title}</h3>
+                ))}
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {elementalsRealms.map((realm) => (
+                  <div key={realm.guardianImage} className="relative min-h-[220px] overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/40 sm:min-h-[260px] xl:min-h-[250px]">
+                    <Image src={realm.guardianImage} alt={`${realm.title} elemental guardian concept`} fill className="object-cover" sizes="(min-width:1280px) 16vw,50vw" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
+                    <span className="absolute bottom-4 left-4 text-sm font-semibold text-white">{realm.title} Guardian</span>
                   </div>
-                </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        <Section>
+          <div className="grid gap-10 xl:grid-cols-[0.72fr_1.28fr] xl:gap-16">
+            <div>
+              <SectionHeader eyebrow="Development snapshot" title="What Is Defined Today" description="Current public materials define the product world and presentation direction. Final mechanics, mathematics, certification and integration are not presented as complete." />
+            </div>
+            <div className="border-y border-white/10">
+              {[
+                ["01", "Product format", "Live Casino show-game concept"],
+                ["02", "Public status", "In development"],
+                ["03", "Mechanics & mathematics", "Not published as final"],
+                ["04", "Certification / integration", "Not confirmed"]
+              ].map(([number, label, value]) => (
+                <div key={label} className="grid gap-3 border-b border-white/10 py-5 last:border-b-0 md:grid-cols-[3rem_0.8fr_1.2fr] md:items-center">
+                  <span className="text-xs font-semibold tracking-[0.16em] text-emerald">{number}</span><h3 className="font-semibold text-white">{label}</h3><p className="text-sm text-slate-400">{value}</p>
+                </div>
               ))}
+            </div>
           </div>
-        </div>
-      </Section>
-      <Section className="bg-black/20">
-        <SectionHeader eyebrow="Four Realms" title="Realm Gateways" description="Each realm has a distinct visual identity. Final mechanics are in development and not yet published." />
-        <div className="relative mt-10">
-          <div aria-hidden="true" className="elementals-system-line absolute left-8 right-8 top-1/2 hidden h-px lg:block" />
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4" data-reveal-group="cards">
-          {elementalsRealms.map((realm) => (
-            <Card key={realm.title} className={`elementals-realm-card bg-gradient-to-br ${realm.tone} p-0`} style={{ "--realm-accent": realm.title === "Fire" ? "var(--realm-fire)" : realm.title === "Water" ? "var(--realm-water)" : realm.title === "Earth" ? "var(--realm-earth)" : "var(--realm-air)" } as CSSProperties}>
-              <div className="image-frame relative aspect-[4/5] overflow-hidden bg-black/42">
-                <Image src={realm.portalImage} alt={`${realm.title} elemental portal`} width={1024} height={1024} className="h-full w-full object-cover" sizes="(min-width: 1024px) 22vw, 50vw" />
-                <div className="image-frame absolute left-4 top-4 h-16 w-16 overflow-hidden rounded-lg border border-white/15 bg-black/60 shadow-[0_16px_50px_rgba(0,0,0,0.42)]">
-                  <Image src={realm.iconImage} alt={`${realm.title} elemental icon`} width={1024} height={1024} className="h-full w-full object-cover" sizes="64px" />
-                </div>
-              </div>
-              <div className="p-5">
-                <h3 className="text-xl font-semibold text-white">{realm.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">{realm.description}</p>
-              </div>
-            </Card>
-          ))}
-          </div>
-        </div>
-      </Section>
-      <Section>
-        <SectionHeader eyebrow="Four Guardians" title="Guardian Presentation" description="The guardian direction supports the premium ritual tone without presenting the concept as launched or finalized." />
-        <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr] lg:items-stretch" data-reveal-group="cards">
-          {elementalsRealms.slice(0, 1).map((realm) => (
-            <Card key={realm.guardianImage} className="elementals-stage-frame overflow-hidden p-0">
-              <div className="image-frame relative aspect-[16/11] bg-black/42 lg:h-full">
-                <Image src={realm.guardianImage} alt={`${realm.title} elemental guardian`} width={1024} height={1024} className="h-full w-full object-cover" sizes="(min-width: 1024px) 28vw, 100vw" />
-              </div>
-            </Card>
-          ))}
-          <div className="grid gap-4 sm:grid-cols-2">
-            {elementalsRealms.map((realm) => (
-              <Card key={realm.guardianImage} className="overflow-hidden p-0">
-                <div className="image-frame relative aspect-square bg-black/42">
-                  <Image src={realm.guardianImage} alt={`${realm.title} elemental guardian`} width={1024} height={1024} className="h-full w-full object-cover" sizes="(min-width: 1024px) 18vw, 50vw" />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-base font-semibold text-white">{realm.title} Guardian</h3>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </Section>
-      <Section className="bg-black/20">
-        <div className="grid gap-6 lg:grid-cols-3" data-reveal-group="cards">
-          <Card>
-            <h2 className="text-xl font-semibold text-white">Built to Differentiate, Not Clone</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Each realm&apos;s bonus round is designed as original mechanics rather than a reskin of an existing market format.
-            </p>
-          </Card>
-          <Card>
-            <h2 className="text-xl font-semibold text-white">A Guardian, Not a Generic Dealer</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              ELEMENTALS is presented through a dealer-host character, reinforcing the ritual and cinematic fantasy tone.
-            </p>
-          </Card>
-          <Card>
-            <h2 className="text-xl font-semibold text-white">Product Status</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">In development. Mechanics, mathematics, launch timing and certification are not yet finalized.</p>
-          </Card>
-        </div>
-      </Section>
-      <Section>
-        <SectionHeader eyebrow="Development Status" title="Current Public Status" description="ELEMENTALS is presented as an original Live Casino show-game concept in development." />
-        <div className="mt-10 grid gap-4 md:grid-cols-2" data-reveal-group="cards">
-          {[
-            ["Product format", "Live Casino show-game concept"],
-            ["Development status", "In development"],
-            ["Commercial status", "Open for project discussion"],
-            ["Certification status", "Not published"]
-          ].map(([label, value]) => (
-            <Card key={label}>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald">{label}</p>
-              <p className="mt-3 text-base text-slate-200">{value}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
-      <Section className="bg-black/20">
-        <SectionHeader
-          eyebrow="Partnership Direction"
-          title="Built for Provider or Operator-Led Development"
-          description="The concept can support discussions around show-game product development, studio production planning, provider collaboration or co-development."
-        />
-        <StudioGameSignature context="elementals" variant="related-game" className="mt-8 max-w-3xl" />
-      </Section>
-      <CTASection
-        title="Discuss the Project"
-        description="Discuss studio production, provider collaboration or a co-development partnership for ELEMENTALS."
-        ctaLabel="Discuss the Project"
-        ctaHref="/contact?interest=elementals"
-      />
+          <StudioGameSignature context="elementals" variant="related-game" className="mt-10 max-w-3xl" />
+        </Section>
+
+        <CTASection title="Discuss ELEMENTALS as a Product Development Opportunity" description="Use the current concept as a starting point for a show-game development, provider collaboration or co-development discussion. Final technical, studio and commercial scope is defined separately." ctaLabel="Discuss ELEMENTALS" ctaHref="/contact?interest=elementals#project-enquiry" secondaryLabel="View Live Casino Scope" secondaryHref="/services#live-casino" />
       </div>
     </SiteShell>
   );

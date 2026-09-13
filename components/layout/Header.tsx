@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { logoAsset } from "@/content/company";
 import { solutionsMegaMenu, solutionsNavigation } from "@/content/navigation";
-import { getLocalizedHomePath, getLocalizedPath, navRoutes, stripLocaleFromPath } from "@/lib/routes";
+import { getLocalizedHomePath, navRoutes, stripLocaleFromPath } from "@/lib/routes";
 
 const ctaLabel: Record<Locale, string> = {
   en: "Discuss a Project",
@@ -19,11 +19,28 @@ const ctaLabel: Record<Locale, string> = {
   pt: "Discutir um projeto"
 };
 
+const exploreGamesLabel: Record<Locale, string> = {
+  en: "Explore Games",
+  ru: "Посмотреть игры",
+  hy: "Դիտել խաղերը",
+  es: "Explorar juegos",
+  pt: "Explorar jogos"
+};
+
+const focusableSelector = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  "[tabindex]:not([tabindex='-1'])"
+].join(",");
+
 export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
-  const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(true);
+  const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(false);
   const [isMenuMounted, setIsMenuMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const solutionsButtonRef = useRef<HTMLButtonElement>(null);
@@ -32,12 +49,13 @@ export function Header({ locale }: { locale: Locale }) {
   const activePath = stripLocaleFromPath(pathname || "/");
   const isActiveRoute = (href: string) => (href === "/" ? activePath === "/" : activePath === href || activePath.startsWith(`${href}/`));
   const isSolutionsActive = activePath === "/services" || activePath.startsWith("/services/");
-  const resolvedCtaLabel = activePath === "/contact" ? "Explore Games" : ctaLabel[locale];
-  const resolvedCtaHref = activePath === "/contact" ? "/games" : "/contact";
+  const resolvedCtaLabel = activePath === "/contact" ? exploreGamesLabel[locale] : ctaLabel[locale];
+  const resolvedCtaHref = activePath === "/contact" ? "/games" : "/contact#project-enquiry";
 
   useEffect(() => {
     setIsOpen(false);
     setIsSolutionsOpen(false);
+    setIsMobileSolutionsOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -57,16 +75,38 @@ export function Header({ locale }: { locale: Locale }) {
 
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const firstInteractive = mobileNavRef.current?.querySelector<HTMLElement>("a, button");
+    const firstInteractive = mobileNavRef.current?.querySelector<HTMLElement>(focusableSelector);
     firstInteractive?.focus();
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key !== "Escape") {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        menuButtonRef.current?.focus();
         return;
       }
 
-      setIsOpen(false);
-      menuButtonRef.current?.focus();
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusable = Array.from(mobileNavRef.current?.querySelectorAll<HTMLElement>(focusableSelector) ?? []).filter(
+        (element) => element.offsetParent !== null
+      );
+      if (!focusable.length) {
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const activeElement = document.activeElement;
+
+      if (event.shiftKey && activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
 
     document.addEventListener("keydown", onKeyDown);
@@ -109,7 +149,7 @@ export function Header({ locale }: { locale: Locale }) {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/86 shadow-[0_14px_48px_rgba(0,0,0,0.28)] backdrop-blur-xl">
       <Container className="flex min-h-20 items-center justify-between gap-4">
-        <Link href={getLocalizedPath(locale, "/")} className="flex items-center gap-3 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+        <Link href={getLocalizedHomePath(locale, "/")} className="flex items-center gap-3 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
           <Image
             src={logoAsset.src}
             alt={logoAsset.alt}
@@ -154,7 +194,7 @@ export function Header({ locale }: { locale: Locale }) {
                           <p className="solutions-dropdown__heading">{group.title}</p>
                           <div className="mt-3 grid gap-1.5">
                             {group.items.map((item) => (
-                              <Link key={item.label} href={item.href} role="menuitem" className="solutions-dropdown__link">
+                              <Link key={item.label} href={getLocalizedHomePath(locale, item.href)} role="menuitem" className="solutions-dropdown__link">
                                 <span>{item.label}</span>
                                 <small>{item.description}</small>
                               </Link>
@@ -162,7 +202,7 @@ export function Header({ locale }: { locale: Locale }) {
                           </div>
                         </div>
                       ))}
-                      <Link href="/portfolio/elementals" role="menuitem" className="solutions-dropdown__feature">
+                      <Link href={getLocalizedHomePath(locale, "/portfolio/elementals")} role="menuitem" className="solutions-dropdown__feature">
                         <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="" width={600} height={420} sizes="220px" className="solutions-dropdown__feature-image" />
                         <span>Featured work</span>
                         <strong>ELEMENTALS</strong>
@@ -186,9 +226,24 @@ export function Header({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button href={getLocalizedPath(locale, resolvedCtaHref)} className="hidden sm:inline-flex">
-            {resolvedCtaLabel}
-          </Button>
+          {activePath === "/contact" ? (
+            <Button href={getLocalizedHomePath(locale, resolvedCtaHref)} className="hidden sm:inline-flex">
+              {resolvedCtaLabel}
+            </Button>
+          ) : (
+            <Link
+              href={getLocalizedHomePath(locale, resolvedCtaHref)}
+              className="group relative hidden h-12 min-w-[12rem] items-center justify-center px-7 sm:inline-flex focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+              aria-label={resolvedCtaLabel}
+            >
+              <span aria-hidden="true" className="absolute left-1 top-[7px] h-[15px] w-6 [clip-path:polygon(100%_100%,0_100%,72%_0)] bg-emerald/75 transition duration-200 group-hover:bg-emerald" />
+              <span aria-hidden="true" className="absolute bottom-[7px] left-1 h-[15px] w-6 [clip-path:polygon(100%_0,0_0,72%_100%)] bg-emerald/75 transition duration-200 group-hover:bg-emerald" />
+              <span aria-hidden="true" className="absolute left-3 right-3 top-1/2 h-10 -translate-y-1/2 rounded-[46%_43%_43%_46%/52%_48%_48%_52%] border border-emerald/45 bg-[linear-gradient(90deg,#19c98f_0%,#2ee6a6_42%,#29d79e_72%,#20bd8a_100%)] shadow-[0_10px_34px_rgba(46,230,166,0.2)] transition duration-200 group-hover:shadow-[0_12px_42px_rgba(46,230,166,0.3)]" />
+              <span aria-hidden="true" className="absolute right-0 top-1/2 h-7 w-7 -translate-y-1/2 rounded-[45%_70%_70%_45%] border border-emerald/45 bg-emerald shadow-[6px_0_24px_rgba(46,230,166,0.18)]" />
+              <span aria-hidden="true" className="absolute left-[2.7rem] top-1/2 h-9 w-px -translate-y-1/2 bg-black/20" />
+              <span className="relative z-10 whitespace-nowrap pl-1 text-[0.78rem] font-bold tracking-[-0.01em] text-[#03120d]">{resolvedCtaLabel}</span>
+            </Link>
+          )}
           <button
             ref={menuButtonRef}
             type="button"
@@ -210,12 +265,12 @@ export function Header({ locale }: { locale: Locale }) {
         <nav
           id="mobile-navigation"
           ref={mobileNavRef}
-          className="mobile-nav-panel border-t border-white/10 bg-ink/96 shadow-[0_22px_60px_rgba(0,0,0,0.36)] lg:hidden"
+          className="mobile-nav-panel max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain border-t border-white/10 bg-ink/96 shadow-[0_22px_60px_rgba(0,0,0,0.36)] lg:hidden"
           data-state={isOpen ? "open" : "closed"}
           aria-label="Mobile navigation"
           aria-hidden={!isOpen}
         >
-          <Container className="grid gap-2 py-4">
+          <Container className="grid gap-2 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
             {navRoutes.map((route) =>
               route.path === "/services" ? (
                 <div key={route.path} className="rounded-xl border border-white/10 bg-white/[0.035] p-2">
@@ -236,7 +291,7 @@ export function Header({ locale }: { locale: Locale }) {
                       {solutionsNavigation.map((item) => (
                         <Link
                           key={item.label}
-                          href={item.href}
+                          href={getLocalizedHomePath(locale, item.href)}
                           className="rounded-lg px-3 py-2.5 text-sm text-slate-300 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
                           onClick={() => setIsOpen(false)}
                         >
@@ -258,7 +313,7 @@ export function Header({ locale }: { locale: Locale }) {
                 </Link>
               )
             )}
-            <Button href={getLocalizedPath(locale, resolvedCtaHref)} className="mt-2 w-full" onClick={() => setIsOpen(false)}>
+            <Button href={getLocalizedHomePath(locale, resolvedCtaHref)} className="mt-2 w-full" onClick={() => setIsOpen(false)}>
               {resolvedCtaLabel}
             </Button>
           </Container>

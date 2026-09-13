@@ -7,146 +7,153 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { lcAppAssets } from "@/content/portfolio";
+import { lcAppAssets, lcAppOverview } from "@/content/portfolio";
 
 export const metadata: Metadata = {
   title: "LC App | B2B Social Layer for Live Casino — OpenGamer",
-  description: "LC App is a product concept exploring a social product layer for existing Live Casino ecosystems.",
+  description: "LC App is an in-development B2B product concept exploring social Live Casino discovery, communities and creator-oriented engagement.",
   alternates: { canonical: "/portfolio/lc-app" },
   openGraph: {
-    title: "LC App — Social Layer for Live Casino",
-    description: "A product concept exploring Live Casino discovery, communities, creator-led experiences and communication.",
+    title: "LC App — Social Product Direction for Live Casino",
+    description: "An in-development B2B concept connecting live tables, communities, creator-oriented experiences and communication.",
     images: [{ url: lcAppAssets.deviceEcosystem.src, width: lcAppAssets.deviceEcosystem.width, height: lcAppAssets.deviceEcosystem.height, alt: lcAppAssets.deviceEcosystem.alt }]
   }
 };
 
-const conceptSections = [
-  {
-    eyebrow: "Discovery",
-    title: "Discover Live Tables and Communities",
-    copy: "A discovery layer concept for exploring live tables, hosts, friends and relevant player communities from one interface.",
-    asset: lcAppAssets.discover
-  },
-  {
-    eyebrow: "Social Feed",
-    title: "Live Content and Social Participation",
-    copy: "A social-feed concept connecting live sessions, scheduled rooms, creator content and community interaction without separating engagement from gameplay discovery.",
-    asset: lcAppAssets.socialFeed
-  },
-  {
-    eyebrow: "Creator Profile",
-    title: "Creator-Led Live Experiences",
-    copy: "A profile concept for hosts and creators, bringing live rooms, content, schedules and communities into one visible destination.",
-    asset: lcAppAssets.creatorProfile
-  },
-  {
-    eyebrow: "Community",
-    title: "Communities Around Live Play",
-    copy: "A community-space concept for discussions, scheduled rooms, shared content and participation around Live Casino experiences.",
-    asset: lcAppAssets.community
-  }
+const productLayers = [
+  ["01", "Discovery", "Explore live tables, hosts and relevant community activity from one product surface."],
+  ["02", "Social participation", "Bring content, live-session context and community interaction closer to gameplay discovery."],
+  ["03", "Creator profiles", "Give hosts and creators a visible destination for content, schedules, live rooms and communities."],
+  ["04", "Community", "Support shared spaces around Live Casino experiences without positioning the concept as a standalone operator."]
 ];
 
 export default function LcAppPage() {
   return (
     <SiteShell atmosphere="lc-app">
       <div className="lc-app-page">
-      <section className="lc-app-hero relative overflow-hidden border-b border-white/10 py-16 sm:py-24">
-        <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(255,255,255,0.034)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.024)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
-        <Container className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
-          <div className="reveal">
-            <h1 className="mt-5 text-5xl font-semibold tracking-normal text-white sm:text-6xl">A Social Layer for Live Casino</h1>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
-              LC App is a product concept exploring how live tables, player communities, creator-led experiences and communication could exist within one connected B2B product layer.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <span className="premium-status rounded-full px-3 py-1 text-xs">Product Concept · In Development</span>
-              <span className="rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">Concept UI</span>
+        <section className="lc-app-hero relative isolate overflow-hidden border-b border-white/10 bg-[#05070a] py-16 sm:py-24 xl:py-20">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_74%_28%,rgba(46,230,166,0.12),transparent_25rem),radial-gradient(circle_at_88%_72%,rgba(93,156,255,0.07),transparent_28rem)]" />
+          <div aria-hidden="true" className="absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
+          <Container className="relative grid gap-10 xl:grid-cols-[0.76fr_1.24fr] xl:items-center xl:gap-14">
+            <div>
+              <span className="premium-status rounded-full px-3 py-1 text-xs">B2B product direction · In development</span>
+              <p className="mt-7 text-xs font-semibold uppercase tracking-[0.22em] text-emerald">LC App</p>
+              <h1 className="mt-4 text-balance text-5xl font-semibold tracking-[-0.035em] text-white sm:text-6xl xl:text-7xl">A Social Layer for Live Casino</h1>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">{lcAppOverview}</p>
+              <div className="mt-8 flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap">
+                <Button href="/contact?interest=lc-app#project-enquiry" className="w-full min-[480px]:w-auto">Discuss LC App</Button>
+                <Button href="/portfolio" variant="secondary" className="w-full min-[480px]:w-auto">View Portfolio</Button>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-2" aria-label="LC App concept scope">
+                {["Live discovery", "Creator profiles", "Communities", "Cross-device concept"].map((item) => (
+                  <span key={item} className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-400">{item}</span>
+                ))}
+              </div>
             </div>
-            <Button href="/contact?interest=lc-app" className="mt-8">
-              Discuss the Project
-            </Button>
-          </div>
-          <div className="lc-device-stage premium-card surface-hairline image-frame reveal overflow-hidden rounded-lg border border-line p-2 shadow-[0_34px_118px_rgba(0,0,0,0.44)]">
-            <Image
-              src={lcAppAssets.deviceEcosystem.src}
-              alt={lcAppAssets.deviceEcosystem.alt}
-              width={lcAppAssets.deviceEcosystem.width}
-              height={lcAppAssets.deviceEcosystem.height}
-              priority
-              className="h-full w-full rounded-md object-contain"
-              sizes="(min-width: 1024px) 55vw, 100vw"
-            />
-          </div>
-        </Container>
-      </section>
 
-      <Section>
-        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center" data-reveal-group="cards">
-          <div>
-            <SectionHeader
-              eyebrow="Product Direction"
-              title="One Connected Live Casino Experience"
-              description="The concept brings discovery, live gameplay, social feeds, creator profiles and communities into a consistent product experience designed around existing Live Casino ecosystems."
-            />
-            <span className="mt-6 inline-flex rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">Concept UI</span>
-          </div>
-          <ConceptImage asset={lcAppAssets.productLineup} priority={false} wide />
-        </div>
-      </Section>
-
-      {conceptSections.map((section, index) => (
-        <Section key={section.title} className={index % 2 === 0 ? "bg-black/20" : undefined}>
-          <div className={`grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center ${index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`} data-reveal-group="cards">
-            <div className="lg:max-w-xl">
-              <SectionHeader eyebrow={section.eyebrow} title={section.title} description={section.copy} />
-              <span className="mt-6 inline-flex rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">Concept UI</span>
+            <div className="lc-device-stage relative overflow-hidden rounded-[1.8rem] border border-white/12 bg-[#06090b] p-3 shadow-[0_34px_118px_rgba(0,0,0,0.44)] sm:p-4">
+              <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(46,230,166,0.08),transparent_24rem)]" />
+              <Image src={lcAppAssets.deviceEcosystem.src} alt={lcAppAssets.deviceEcosystem.alt} width={lcAppAssets.deviceEcosystem.width} height={lcAppAssets.deviceEcosystem.height} priority className="relative h-full w-full rounded-[1.35rem] object-contain" sizes="(min-width:1280px) 58vw,100vw" />
             </div>
-            <ConceptImage asset={section.asset} tall={section.asset.height > section.asset.width} priority={false} />
+          </Container>
+        </section>
+
+        <Section>
+          <div className="grid gap-10 xl:grid-cols-[0.62fr_1.38fr] xl:items-start xl:gap-16">
+            <div className="xl:sticky xl:top-28">
+              <SectionHeader eyebrow="Product thesis" title="Keep Engagement Closer to the Live Experience" description="The concept explores whether discovery, creator identity, community and communication can sit around existing Live Casino ecosystems instead of living in disconnected channels." />
+              <p className="mt-6 border-l border-emerald/35 pl-4 text-sm leading-7 text-slate-400">LC App is presented as a B2B product direction. It is not positioned here as a licensed casino, launched operator product or confirmed provider integration.</p>
+            </div>
+
+            <div className="border-y border-white/10">
+              {productLayers.map(([number, title, description]) => (
+                <div key={title} className="grid gap-3 border-b border-white/10 py-6 last:border-b-0 md:grid-cols-[3.5rem_0.72fr_1.28fr] md:items-start md:gap-6">
+                  <span className="text-xs font-semibold tracking-[0.18em] text-emerald">{number}</span>
+                  <h2 className="text-xl font-semibold text-white">{title}</h2>
+                  <p className="text-sm leading-6 text-slate-400">{description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </Section>
-      ))}
 
-      <Section className="bg-black/20">
-        <div className="grid gap-8 lg:grid-cols-[1.14fr_0.86fr] lg:items-center" data-reveal-group="cards">
-          <ConceptImage asset={lcAppAssets.desktopExperience} priority={false} />
-          <div className="lg:max-w-xl">
-            <SectionHeader
-              eyebrow="Cross-Device Experience"
-              title="Designed Beyond a Single Screen"
-              description="The concept explores a consistent experience across desktop, laptop and mobile environments while keeping live play and communication connected."
-            />
-            <span className="mt-6 inline-flex rounded-full border border-white/15 px-3 py-1 text-xs text-slate-300">Concept UI</span>
+        <Section className="relative overflow-hidden bg-black/20">
+          <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_86%_30%,rgba(46,230,166,0.055),transparent_28rem)]" />
+          <div className="relative">
+            <SectionHeader eyebrow="Core experience" title="Discovery, Social Participation and Creator Identity in One Product Direction" description="The concept screens are shown as product-design evidence, not as a claim of a currently launched application." />
+            <div className="mt-10 grid gap-5 xl:grid-cols-[0.92fr_1.08fr]">
+              <ConceptPanel asset={lcAppAssets.productLineup} className="xl:col-span-2" />
+              <div className="grid gap-5 sm:grid-cols-2">
+                <ConceptPanel asset={lcAppAssets.discover} tall label="Discovery" />
+                <ConceptPanel asset={lcAppAssets.socialFeed} tall label="Social feed" />
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <ConceptPanel asset={lcAppAssets.creatorProfile} tall label="Creator profile" />
+                <ConceptPanel asset={lcAppAssets.community} label="Community" />
+              </div>
+            </div>
           </div>
-        </div>
-        <StudioGameSignature context="lcApp" variant="related-game" className="mt-10 max-w-3xl" />
-      </Section>
+        </Section>
 
-      <CTASection
-        title="A Product Concept in Development"
-        description="LC App is currently presented as a product direction rather than a launched application. OpenGamer is open to discussing product development, operator collaboration and strategic technology partnerships around the concept."
-        ctaLabel="Discuss the Project"
-        ctaHref="/contact?interest=lc-app"
-      />
+        <Section>
+          <div className="grid gap-10 xl:grid-cols-[1.18fr_0.82fr] xl:items-center xl:gap-14">
+            <ConceptPanel asset={lcAppAssets.desktopExperience} />
+            <div>
+              <SectionHeader eyebrow="Cross-device direction" title="The Product Concept Extends Beyond a Single Mobile Screen" description="The visual direction explores a consistent experience across desktop and mobile while keeping live play, discovery and communication connected." />
+              <div className="mt-7 grid gap-3 border-t border-white/10 pt-5 text-sm">
+                {[
+                  ["Product status", "In development"],
+                  ["Interface status", "Concept UI"],
+                  ["Operator/provider integrations", "Not confirmed"],
+                  ["Production launch", "Not claimed"]
+                ].map(([label, value]) => (
+                  <div key={label} className="flex items-start justify-between gap-5 border-b border-white/10 pb-3"><span className="text-slate-500">{label}</span><span className="text-right text-slate-200">{value}</span></div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        <Section className="relative overflow-hidden bg-black/20">
+          <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(46,230,166,0.04),transparent_24rem)]" />
+          <div className="relative grid gap-10 xl:grid-cols-[0.68fr_1.32fr] xl:gap-16">
+            <div>
+              <SectionHeader eyebrow="Development snapshot" title="What the Current Concept Shows" description="Current public materials show the product and interface direction. Launched production use, pilots, customers and live integrations are not presented as confirmed." />
+              <div className="mt-7 flex flex-wrap gap-2">
+                {["B2B direction", "Concept UI", "In development"].map((item) => <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{item}</span>)}
+              </div>
+            </div>
+            <div className="border-y border-white/10">
+              {[
+                ["01", "Product direction", "Concept interfaces and product structure are available for review."],
+                ["02", "Development status", "In development"],
+                ["03", "Live integrations / customers", "Not confirmed"],
+                ["04", "Discussion scope", "Product development and strategic collaboration can be scoped separately."]
+              ].map(([number, title, copy]) => (
+                <div key={title} className="grid gap-3 border-b border-white/10 py-6 last:border-b-0 md:grid-cols-[3rem_0.8fr_1.2fr] md:items-start md:gap-6">
+                  <span className="text-xs font-semibold tracking-[0.16em] text-emerald">{number}</span>
+                  <h3 className="font-semibold text-white">{title}</h3>
+                  <p className="text-sm leading-6 text-slate-400">{copy}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <StudioGameSignature context="lcApp" variant="related-game" className="mt-10 max-w-3xl" />
+        </Section>
+
+        <CTASection title="Discuss LC App as a Product Development Direction" description="Use the current concept and interface work as a starting point for a product-development or strategic collaboration discussion. Commercial, legal and integration scope remains separate until agreed." ctaLabel="Discuss LC App" ctaHref="/contact?interest=lc-app#project-enquiry" secondaryLabel="View Portfolio" secondaryHref="/portfolio" />
       </div>
     </SiteShell>
   );
 }
 
-function ConceptImage({ asset, tall = false, wide = false, priority = false }: { asset: { src: string; width: number; height: number; alt: string }; tall?: boolean; wide?: boolean; priority?: boolean }) {
+function ConceptPanel({ asset, tall = false, label, className = "" }: { asset: { src: string; width: number; height: number; alt: string }; tall?: boolean; label?: string; className?: string }) {
   return (
-    <div className={`lc-device-stage premium-card surface-hairline image-frame overflow-hidden rounded-lg border border-line p-2 shadow-[0_22px_80px_rgba(0,0,0,0.3)] ${wide ? "lg:shadow-[0_30px_110px_rgba(0,0,0,0.38)]" : ""}`}>
-      <div className={`relative overflow-hidden rounded-md bg-black/38 ${tall ? "lc-phone-frame max-h-[760px]" : ""}`}>
-        <Image
-          src={asset.src}
-          alt={asset.alt}
-          width={asset.width}
-          height={asset.height}
-          priority={priority}
-          className="h-full w-full object-contain"
-          sizes={tall ? "(min-width: 1024px) 28vw, 100vw" : "(min-width: 1024px) 54vw, 100vw"}
-        />
+    <div className={`lc-device-stage relative overflow-hidden rounded-[1.4rem] border border-white/10 bg-[#06090b] p-2 shadow-[0_22px_80px_rgba(0,0,0,0.3)] ${className}`}>
+      <div className={`relative overflow-hidden rounded-[1.05rem] bg-black/38 ${tall ? "mx-auto max-h-[720px] max-w-[360px]" : ""}`}>
+        <Image src={asset.src} alt={asset.alt} width={asset.width} height={asset.height} className="h-full w-full object-contain" sizes={tall ? "(min-width:1280px) 22vw,(min-width:640px) 45vw,90vw" : "(min-width:1280px) 58vw,100vw"} />
       </div>
+      {label ? <span className="absolute bottom-4 left-4 rounded-full border border-white/10 bg-black/65 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-emerald backdrop-blur">{label}</span> : null}
     </div>
   );
 }

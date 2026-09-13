@@ -1,6 +1,10 @@
 const configuredPublicEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "";
 const configuredLinkedInUrl = process.env.NEXT_PUBLIC_LINKEDIN_URL?.trim() || "https://www.linkedin.com/company/opengamer";
 
+function isValidPublicEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 function isValidLinkedInUrl(url: string) {
   try {
     const parsed = new URL(url);
@@ -10,13 +14,15 @@ function isValidLinkedInUrl(url: string) {
   }
 }
 
+const publicEmail = isValidPublicEmail(configuredPublicEmail) ? configuredPublicEmail : "";
+
 export const company = {
   name: "OpenGamer Studio",
   shortName: "OpenGamer",
   website: "https://open-gamer.com",
-  email: configuredPublicEmail,
+  email: publicEmail,
   description:
-    "OpenGamer is a full-cycle iGaming game and product development studio. We create original casino games, custom game content, live casino products and integration-ready technology for operators, platforms, aggregators and game providers.",
+    "OpenGamer is an iGaming game and product development studio creating original casino games, custom content, Live Casino product concepts and integration-oriented engineering for B2B gaming teams.",
   social: isValidLinkedInUrl(configuredLinkedInUrl) ? [{ label: "LinkedIn", href: configuredLinkedInUrl }] : [],
   leadership: [
     { name: "Hayk", role: "CEO" },
@@ -33,7 +39,7 @@ export const companyFacts = {
   registrationNumber: null,
   verifiedPartners: [],
   certifications: [],
-  approvedPublicEmail: Boolean(configuredPublicEmail),
+  approvedPublicEmail: Boolean(publicEmail),
   contentStatus: "business-review-required"
 } as const;
 

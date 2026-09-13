@@ -118,7 +118,7 @@ export const lcAppAssets = {
     alt: "LC App concept interface shown across laptop, tablet and mobile devices."
   },
   productLineup: {
-    src: "/assets/projects/lc-app/optimized/lc-app-mobile-product-lineup.webp",
+    src: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp",
     width: 1672,
     height: 941,
     alt: "LC App concept interface showing five mobile product screens on dark podiums."
