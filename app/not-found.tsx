@@ -9,10 +9,10 @@ export default function NotFound() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">404</p>
           <h1 className="mt-4 text-balance text-4xl font-semibold text-white sm:text-5xl">Page not found</h1>
           <p className="mx-auto mt-4 max-w-md text-base leading-7 text-slate-400">The requested OpenGamer page is not available. You can return to the studio homepage, continue with the game catalogue or contact the team about a project.</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button href="/">Back to Home</Button>
-            <Button href="/games" variant="secondary">Explore Games</Button>
-            <Button href="/contact#project-enquiry" variant="secondary">Discuss a Project</Button>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
+            <Button href="/" className="w-full sm:w-auto">Back to Home</Button>
+            <Button href="/games" variant="secondary" className="w-full sm:w-auto">Explore Games</Button>
+            <Button href="/contact#project-enquiry" variant="secondary" className="w-full sm:w-auto">Discuss a Project</Button>
           </div>
         </div>
       </section>
