@@ -3,6 +3,7 @@ import test from "node:test";
 import { readFile } from "node:fs/promises";
 
 const leadFormSource = await readFile(new URL("../components/forms/LeadForm.tsx", import.meta.url), "utf8");
+const leadRouteSource = await readFile(new URL("../app/api/lead/route.ts", import.meta.url), "utf8");
 const contactSource = await readFile(new URL("../app/contact/page.tsx", import.meta.url), "utf8");
 const servicesSource = await readFile(new URL("../app/services/page.tsx", import.meta.url), "utf8");
 
@@ -39,4 +40,25 @@ test("service labels remain normalizable while Services uses canonical interest 
 
   assert.match(servicesSource, /contact\?interest=\$\{group\.interest\}/);
   assert.doesNotMatch(servicesSource, /contact\?service=/);
+});
+
+test("lead endpoint validates consent and enumerated form values server-side", () => {
+  assert.match(leadRouteSource, /payload\.consent\s*!==\s*"on"/);
+  assert.match(leadRouteSource, /const allowedOptions:/);
+
+  const expectedOptionSources = [
+    "companyTypes",
+    "serviceInterests",
+    "projectStages",
+    "expectedLaunchOptions",
+    "numberOfGamesOptions",
+    "budgetRangeOptions",
+    "contactMethods"
+  ];
+
+  for (const optionSource of expectedOptionSources) {
+    assert.match(leadRouteSource, new RegExp(`\\b${optionSource}\\b`));
+  }
+
+  assert.match(leadRouteSource, /!options\.includes\(payload\[field\]\)/);
 });
