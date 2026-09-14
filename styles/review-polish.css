@@ -86,7 +86,25 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  header a[href*="/contact#project-enquiry"][aria-label]:hover {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .mobile-nav-panel,
+  .menu-signal__bar,
+  .solutions-dropdown__link,
+  header a[href*="/contact#project-enquiry"][aria-label] {
+    transition: none !important;
+  }
+
+  body[data-scroll-reveal-ready] [data-scroll-reveal].is-visible,
+  body[data-scroll-reveal-ready] [data-reveal-group].is-visible > * {
+    animation: none !important;
+  }
+
+  header a[href*="/contact#project-enquiry"][aria-label]:hover,
+  .solutions-dropdown__link:hover,
+  .solutions-dropdown__link:focus-visible {
     transform: none;
   }
 }
