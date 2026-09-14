@@ -48,9 +48,9 @@ function LinkButton({ children, href, variant, className, ...anchorProps }: Link
   );
 }
 
-function NativeButton({ children, variant, className, ...buttonProps }: NativeButtonProps) {
+function NativeButton({ children, variant, className, type = "button", ...buttonProps }: NativeButtonProps) {
   return (
-    <button className={getButtonClasses(variant, className)} {...buttonProps}>
+    <button type={type} className={getButtonClasses(variant, className)} {...buttonProps}>
       {children}
     </button>
   );
