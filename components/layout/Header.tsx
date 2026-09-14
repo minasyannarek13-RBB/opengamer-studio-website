@@ -269,6 +269,7 @@ export function Header({ locale }: { locale: Locale }) {
           data-state={isOpen ? "open" : "closed"}
           aria-label="Mobile navigation"
           aria-hidden={!isOpen}
+          inert={!isOpen}
         >
           <Container className="grid gap-2 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
             {navRoutes.map((route) =>
