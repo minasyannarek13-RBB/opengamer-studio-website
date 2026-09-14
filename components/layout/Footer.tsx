@@ -163,7 +163,14 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
             {company.social.length ? (
               <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-400">
                 {company.social.map((item) => (
-                  <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${item.label} (opens in a new tab)`}
+                    className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+                  >
                     {item.label}
                   </a>
                 ))}
