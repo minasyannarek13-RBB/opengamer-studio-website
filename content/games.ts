@@ -57,7 +57,7 @@ export function getGameEnquiryHref(game: Game) {
 function artwork(image: string): Game["artwork"] { return { catalogue: image, hero: image, thumbnail: image, screenshots: [] }; }
 
 const rawGames: Game[] = [
-  { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
+  { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "playable", demoUrl: `${officialGamesBaseUrl}cake-bonanza` },
   { title: "Captain Boom", slug: "captain-boom", image: "/assets/games/captain-boom/artwork-inline-small.svg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed OpenGamer slot title.", category: ["Slot Game"], status: "portfolio" },
   { title: "Nuclear Blast", slug: "nuclear-blast", image: "/assets/games/nuclear-blast/artwork.svg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
   { title: "Wars of the Gods", slug: "wars-of-the-gods", image: "/assets/games/wars-of-the-gods/artwork.svg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
