@@ -21,7 +21,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ELEMENTALS — Original Live Casino Show-Game Concept",
     description: "The Great Wheel, four elemental realms and a cinematic dealer-host direction. In development.",
+    url: "/portfolio/elementals",
+    type: "website",
     images: elementals.image ? [{ url: elementals.image, width: 800, height: 600, alt: elementals.imageAlt }] : undefined
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ELEMENTALS — Original Live Casino Show-Game Concept",
+    description: "The Great Wheel, four elemental realms and a cinematic dealer-host direction. In development.",
+    images: elementals.image ? [elementals.image] : undefined
   }
 };
 
