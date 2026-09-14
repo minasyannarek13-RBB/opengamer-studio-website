@@ -56,4 +56,6 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Rendered visual QA
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.playwright-browsers
         run: pnpm qa:visual -- --skip-build
