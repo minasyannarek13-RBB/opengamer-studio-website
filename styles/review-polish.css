@@ -65,6 +65,14 @@
     backdrop-filter: none;
   }
 
+  .mobile-nav-panel[data-state="closed"] {
+    visibility: hidden;
+  }
+
+  .mobile-nav-panel[data-state="open"] {
+    visibility: visible;
+  }
+
   .mobile-nav-panel > div {
     min-height: 100%;
     align-content: start;
