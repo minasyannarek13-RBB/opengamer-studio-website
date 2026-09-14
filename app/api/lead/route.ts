@@ -44,13 +44,21 @@ const maxRateBuckets = 1_000;
 const rateBuckets = new Map<string, { count: number; resetAt: number }>();
 
 export async function POST(request: Request) {
-  let payload: Record<string, string>;
+  let rawPayload: unknown;
 
   try {
-    payload = (await request.json()) as Record<string, string>;
+    rawPayload = await request.json();
   } catch {
     return NextResponse.json({ message: "Invalid request body." }, { status: 400 });
   }
+
+  if (!rawPayload || typeof rawPayload !== "object" || Array.isArray(rawPayload)) {
+    return NextResponse.json({ message: "Invalid request body." }, { status: 400 });
+  }
+
+  const payload: Record<string, string> = Object.fromEntries(
+    Object.entries(rawPayload).map(([key, value]) => [key, typeof value === "string" ? value.trim() : ""])
+  );
 
   if (payload.website_url) {
     return NextResponse.json({ message: "Request received." });
@@ -59,8 +67,6 @@ export async function POST(request: Request) {
   if (isRateLimited(request)) {
     return NextResponse.json({ message: "Too many requests. Please wait and try again." }, { status: 429 });
   }
-
-  payload = Object.fromEntries(Object.entries(payload).map(([key, value]) => [key, typeof value === "string" ? value.trim() : value]));
 
   const missing = requiredFields.filter((field) => !payload[field]);
   if (missing.length) {
