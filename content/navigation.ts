@@ -37,12 +37,11 @@ export const solutionsMegaMenu = [
 ];
 
 export const footerSolutionsNavigation = [
-  { label: "Slot Game Development", href: "/services#game-production" },
+  { label: "Game Production", href: "/services#game-production" },
   { label: "Live Casino Product Design", href: "/services#live-casino" },
-  { label: "Frontend Development", href: "/services#game-production" },
-  { label: "Backend and RGS Engineering", href: "/services#technology-and-integration" },
-  { label: "Integrations", href: "/services#technology-and-integration" },
-  { label: "Dedicated Teams", href: "/services#delivery-and-support" }
+  { label: "Technology and Integrations", href: "/services#technology-and-integration" },
+  { label: "Portfolio Licensing and Reskins", href: "/services#portfolio-services" },
+  { label: "Dedicated Teams and QA", href: "/services#delivery-and-support" }
 ];
 
 export const footerCompanyNavigation = [
