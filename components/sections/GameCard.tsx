@@ -80,7 +80,13 @@ export function GameCard({ game }: { game: Game }) {
 
         <div className="mt-auto grid gap-3 pt-6 sm:flex sm:flex-wrap sm:items-center">
           {demoUrl ? (
-            <Button href={demoUrl} className="min-h-11 w-full px-4 sm:w-auto" target="_blank" rel="noopener noreferrer">
+            <Button
+              href={demoUrl}
+              className="min-h-11 w-full px-4 sm:w-auto"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${getGamePrimaryActionLabel(game)} for ${game.title} (opens in a new tab)`}
+            >
               {getGamePrimaryActionLabel(game)} <span aria-hidden="true">↗</span>
             </Button>
           ) : (
