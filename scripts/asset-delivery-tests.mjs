@@ -114,3 +114,12 @@ test("homepage game proof derives selection, status and artwork from catalogue h
   assert.doesNotMatch(heroSource, /status:\s*"Playable"/);
   assert.doesNotMatch(heroSource, /image:\s*"\/assets\/games\//);
 });
+
+test("SVG game artwork uses a raster social-preview fallback", async () => {
+  const detailSource = await readFile(new URL("../app/games/[slug]/page.tsx", import.meta.url), "utf8");
+
+  assert.match(detailSource, /artworkImage\.toLowerCase\(\)\.endsWith\("\.svg"\)/);
+  assert.match(detailSource, /\/assets\/brand\/opengamer-og\.png/);
+  assert.match(detailSource, /socialImageWidth/);
+  assert.match(detailSource, /socialImageHeight/);
+});
