@@ -32,7 +32,11 @@ export async function generateMetadata({ params }: GameDetailProps): Promise<Met
 
   if (!game) return { title: "Game Details | OpenGamer Studio" };
 
-  const socialImage = game.artwork?.hero || game.image;
+  const artworkImage = game.artwork?.hero || game.image;
+  const socialImage = artworkImage.toLowerCase().endsWith(".svg") ? "/assets/brand/opengamer-og.png" : artworkImage;
+  const socialImageWidth = socialImage === artworkImage ? game.imageWidth : 1200;
+  const socialImageHeight = socialImage === artworkImage ? game.imageHeight : 630;
+  const socialImageAlt = socialImage === artworkImage ? `${game.title} artwork` : "OpenGamer Studio";
   const socialTitle = `${game.title} | OpenGamer Studio`;
 
   return {
@@ -43,7 +47,7 @@ export async function generateMetadata({ params }: GameDetailProps): Promise<Met
       title: socialTitle,
       description: game.shortDescription,
       url: `/games/${game.slug}`,
-      images: [{ url: socialImage, width: game.imageWidth, height: game.imageHeight, alt: `${game.title} artwork` }]
+      images: [{ url: socialImage, width: socialImageWidth, height: socialImageHeight, alt: socialImageAlt }]
     },
     twitter: {
       card: "summary_large_image",
