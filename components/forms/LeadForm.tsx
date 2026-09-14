@@ -351,8 +351,9 @@ function isValidPhone(value: string) {
 function focusFormField(form: HTMLFormElement, fieldName: string) {
   const field = Array.from(form.elements).find((element) => element instanceof HTMLElement && "name" in element && element.name === fieldName);
   if (field instanceof HTMLElement) {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     field.focus({ preventScroll: true });
-    field.scrollIntoView({ behavior: "smooth", block: "center" });
+    field.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "center" });
   }
 }
 
