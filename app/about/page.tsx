@@ -121,7 +121,7 @@ export default function AboutPage() {
                         </div>
                         <div className="min-w-0">
                           <span className="block text-[0.48rem] font-semibold uppercase tracking-[0.11em] text-emerald">{item.label}</span>
-                          <strong className="mt-1 block truncate text-sm text-white">{item.title}</strong>
+                          <strong className="mt-1 block break-words text-sm leading-5 text-white">{item.title}</strong>
                         </div>
                         <span aria-hidden="true" className="pr-1 text-sm text-slate-600 transition group-hover:translate-x-0.5 group-hover:text-emerald motion-reduce:transform-none motion-reduce:transition-none">→</span>
                       </Link>
