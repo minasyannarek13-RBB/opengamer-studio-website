@@ -26,12 +26,15 @@ const routes = [
 const expectedStatus = new Map([["/__founder-review-404__", 404]]);
 
 // Chromium performs the exhaustive route/responsive matrix. WebKit is intentionally
-// a focused Safari-engine smoke across release-critical routes so the CI release gate
-// stays deterministic instead of exhausting the job timeout.
+// a focused Safari-engine smoke across release-critical routes. Avoid `networkidle` here:
+// WebKit can keep background requests open long enough to exhaust the CI job timeout.
 const viewports = [
   { name: "1440x1000", width: 1440, height: 1000 },
   { name: "430x932", width: 430, height: 932 }
 ];
+
+const navigationTimeoutMs = 15000;
+const imageSettleTimeoutMs = 4000;
 
 async function waitForServer(url) {
   const deadline = Date.now() + 30000;
@@ -56,20 +59,48 @@ async function capture() {
   try {
     for (const viewport of viewports) {
       const page = await browser.newPage({ viewport });
+      page.setDefaultTimeout(5000);
+      page.setDefaultNavigationTimeout(navigationTimeoutMs);
+
       for (const [route, slug] of routes) {
         const url = `${baseUrl}${route}`;
-        const response = await page.goto(url, { waitUntil: "networkidle" });
-        await page.evaluate(async () => {
+        const response = await page.goto(url, {
+          waitUntil: "domcontentloaded",
+          timeout: navigationTimeoutMs
+        });
+
+        // Give normal load a short grace period without letting third-party/background
+        // traffic turn a smoke test into a multi-minute wait.
+        await page.waitForLoadState("load", { timeout: 5000 }).catch(() => {});
+
+        await page.evaluate(async ({ imageSettleTimeoutMs }) => {
           const step = Math.max(window.innerHeight * 0.8, 400);
           for (let position = 0; position < document.body.scrollHeight; position += step) {
             window.scrollTo(0, position);
-            await new Promise((resolve) => setTimeout(resolve, 140));
+            await new Promise((resolve) => setTimeout(resolve, 60));
           }
+
           window.scrollTo(0, document.body.scrollHeight);
-          await Promise.allSettled(Array.from(document.images).map((img) => img.decode()));
+
+          const decodeAll = Promise.allSettled(
+            Array.from(document.images).map(async (img) => {
+              if (img.complete) return;
+              try {
+                await img.decode();
+              } catch {
+                // Broken images are reported by the metrics below; decode itself is not the assertion.
+              }
+            })
+          );
+
+          await Promise.race([
+            decodeAll,
+            new Promise((resolve) => setTimeout(resolve, imageSettleTimeoutMs))
+          ]);
+
           window.scrollTo(0, 0);
-          await new Promise((resolve) => setTimeout(resolve, 200));
-        });
+          await new Promise((resolve) => setTimeout(resolve, 120));
+        }, { imageSettleTimeoutMs });
 
         const metrics = await page.evaluate(() => {
           const doc = document.documentElement;
