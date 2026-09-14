@@ -117,7 +117,14 @@ async function capture(baseUrl, label) {
           .filter((element) => {
             const node = element;
             const style = getComputedStyle(node);
-            if (style.overflow === "visible") return false;
+            const rect = node.getBoundingClientRect();
+            const intentionallyHidden =
+              style.display === "none" ||
+              style.visibility === "hidden" ||
+              style.clip !== "auto" ||
+              style.clipPath !== "none" ||
+              ((rect.width <= 2 || rect.height <= 2) && style.position === "absolute");
+            if (intentionallyHidden || style.overflow === "visible") return false;
             return node.scrollWidth > node.clientWidth + 2 || node.scrollHeight > node.clientHeight + 2;
           })
           .slice(0, 12)
