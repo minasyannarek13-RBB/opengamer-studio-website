@@ -30,7 +30,7 @@ export function ProductSignature({ eyebrow, title, description, image, href, act
         <div className="min-w-0">
           <p className="text-[0.5rem] font-semibold uppercase tracking-[0.14em] text-[var(--product-accent)]">{eyebrow}</p>
           <h2 className={`mt-1.5 font-semibold leading-tight tracking-[-0.015em] text-white ${compact ? "text-base" : "text-lg sm:text-xl"}`}>{title}</h2>
-          {description ? <p className={`mt-2 leading-5 text-slate-500 ${compact ? "line-clamp-2 text-xs" : "text-sm sm:leading-6"}`}>{description}</p> : null}
+          {description ? <p className={`mt-2 leading-5 text-slate-500 ${compact ? "text-xs" : "text-sm sm:leading-6"}`}>{description}</p> : null}
           <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-white/80 transition group-hover:text-[var(--product-accent)] motion-reduce:transition-none">
             {actionLabel} <span aria-hidden="true" className="transition group-hover:translate-x-0.5 motion-reduce:transform-none motion-reduce:transition-none">→</span>
           </span>
