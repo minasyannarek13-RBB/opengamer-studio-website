@@ -34,7 +34,7 @@ const viewports = [
 ];
 
 const navigationTimeoutMs = 15000;
-const imageSettleTimeoutMs = 4000;
+const imageSettleTimeoutMs = 8000;
 
 async function waitForServer(url) {
   const deadline = Date.now() + 30000;
@@ -74,37 +74,58 @@ async function capture() {
         await page.waitForLoadState("load", { timeout: 5000 }).catch(() => {});
 
         await page.evaluate(async ({ imageSettleTimeoutMs }) => {
-          const step = Math.max(window.innerHeight * 0.8, 400);
+          const images = Array.from(document.images);
+
+          // Chromium already exercises the site's native lazy-loading behaviour across the
+          // exhaustive matrix. For this focused Safari/WebKit smoke, force catalogue images
+          // to start loading so a fast synthetic scroll does not create false "broken image"
+          // failures before WebKit has promoted lazy requests from the deferred queue.
+          for (const image of images) image.loading = "eager";
+
+          const step = Math.max(window.innerHeight * 0.65, 320);
           for (let position = 0; position < document.body.scrollHeight; position += step) {
             window.scrollTo(0, position);
-            await new Promise((resolve) => setTimeout(resolve, 60));
+            await new Promise((resolve) => setTimeout(resolve, 100));
           }
-
           window.scrollTo(0, document.body.scrollHeight);
 
-          const decodeAll = Promise.allSettled(
-            Array.from(document.images).map(async (img) => {
-              if (img.complete) return;
-              try {
-                await img.decode();
-              } catch {
-                // Broken images are reported by the metrics below; decode itself is not the assertion.
+          const waitForImages = Promise.allSettled(
+            images.map(async (img) => {
+              if (!img.complete) {
+                await new Promise((resolve) => {
+                  const finish = () => {
+                    img.removeEventListener("load", finish);
+                    img.removeEventListener("error", finish);
+                    resolve();
+                  };
+                  img.addEventListener("load", finish, { once: true });
+                  img.addEventListener("error", finish, { once: true });
+                });
+              }
+
+              if (img.naturalWidth > 0) {
+                try {
+                  await img.decode();
+                } catch {
+                  // A decode failure is reported by the image metrics below.
+                }
               }
             })
           );
 
           await Promise.race([
-            decodeAll,
+            waitForImages,
             new Promise((resolve) => setTimeout(resolve, imageSettleTimeoutMs))
           ]);
 
           window.scrollTo(0, 0);
-          await new Promise((resolve) => setTimeout(resolve, 120));
+          await new Promise((resolve) => setTimeout(resolve, 160));
         }, { imageSettleTimeoutMs });
 
         const metrics = await page.evaluate(() => {
           const doc = document.documentElement;
           const images = Array.from(document.images);
+          const brokenImageElements = images.filter((img) => !img.complete || img.naturalWidth === 0);
           const clippedText = Array.from(document.querySelectorAll("h1,h2,h3,p,a,button,span,strong"))
             .filter((element) => {
               const style = getComputedStyle(element);
@@ -131,7 +152,8 @@ async function capture() {
             scrollWidth: doc.scrollWidth,
             clientWidth: doc.clientWidth,
             imageCount: images.length,
-            brokenImages: images.filter((img) => !img.complete || img.naturalWidth === 0).length,
+            brokenImages: brokenImageElements.length,
+            brokenImageSources: brokenImageElements.map((img) => img.currentSrc || img.src || "").filter(Boolean).slice(0, 12),
             missingAltImages: images.filter((img) => !img.hasAttribute("alt")).length,
             clippedText
           };
