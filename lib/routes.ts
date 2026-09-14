@@ -9,8 +9,8 @@ export type RouteItem = {
 export const routes: RouteItem[] = [
   { path: "/", nav: true, label: { en: "Home", ru: "Главная", hy: "Գլխավոր", es: "Inicio", pt: "Inicio" } },
   { path: "/games", nav: true, label: { en: "Games", ru: "Игры", hy: "Խաղեր", es: "Juegos", pt: "Jogos" } },
-  { path: "/services", nav: true, label: { en: "Solutions", ru: "Решения", hy: "Լուծումներ", es: "Soluciones", pt: "Soluções" } },
-  { path: "/portfolio", nav: true, label: { en: "Projects", ru: "Проекты", hy: "Նախագծեր", es: "Proyectos", pt: "Projetos" } },
+  { path: "/services", nav: true, label: { en: "Services", ru: "Услуги", hy: "Ծառայություններ", es: "Servicios", pt: "Serviços" } },
+  { path: "/portfolio", nav: true, label: { en: "Portfolio", ru: "Портфолио", hy: "Պորտֆոլիո", es: "Portafolio", pt: "Portfólio" } },
   { path: "/technology", nav: true, label: { en: "Technology", ru: "Технологии", hy: "Տեխնոլոգիա", es: "Tecnología", pt: "Tecnologia" } },
   { path: "/about", nav: true, label: { en: "Company", ru: "Компания", hy: "Ընկերություն", es: "Empresa", pt: "Empresa" } },
   { path: "/contact", nav: true, label: { en: "Contact", ru: "Контакты", hy: "Կապ", es: "Contacto", pt: "Contato" } }
@@ -18,23 +18,13 @@ export const routes: RouteItem[] = [
 
 export const navRoutes = routes.filter((route) => route.nav);
 
-export function getLocalizedPath(locale: Locale, path: string): string {
-  if (locale === "en") {
-    return path;
-  }
-  return path === "/" ? `/${locale}` : `/${locale}${path}`;
-}
-
-export function getLocalizedHomePath(locale: Locale, path: string): string {
-  if (path === "/") {
-    return getLocalizedPath(locale, path);
-  }
-
-  const localeReadyPaths = ["/about", "/portfolio", "/technology", "/contact"];
-  if (localeReadyPaths.includes(path)) {
-    return getLocalizedPath(locale, path);
-  }
-
+/**
+ * Localized route files currently exist as compatibility redirects to the
+ * canonical English launch pages, including locale-prefixed home routes.
+ * Navigation should therefore link directly to canonical destinations instead
+ * of manufacturing a needless /:locale redirect hop.
+ */
+export function getLocalizedHomePath(_locale: Locale, path: string): string {
   return path;
 }
 

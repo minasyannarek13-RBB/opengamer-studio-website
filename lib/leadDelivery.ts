@@ -2,8 +2,8 @@ export type LeadPayload = {
   fullName: string;
   company: string;
   email: string;
-  jobTitle: string;
-  companyType: string;
+  jobTitle?: string;
+  companyType?: string;
   serviceInterest: string;
   projectDescription: string;
   consent: string;
@@ -121,8 +121,8 @@ function formatLead(payload: LeadPayload, timestamp: string) {
     `UTM Term: ${payload.utmTerm || "Not provided"}`,
     `Timestamp: ${timestamp}`,
     "",
-    `Job Title: ${payload.jobTitle}`,
-    `Company Type: ${payload.companyType}`,
+    `Job Title: ${payload.jobTitle || "Not provided"}`,
+    `Company Type: ${payload.companyType || "Not provided"}`,
     `Preferred Contact Method: ${payload.preferredContactMethod || "Not provided"}`,
     `Phone: ${payload.phone || "Not provided"}`,
     `Expected Launch: ${payload.expectedLaunch || "Not provided"}`,
