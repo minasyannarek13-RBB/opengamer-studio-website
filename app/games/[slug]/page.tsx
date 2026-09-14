@@ -32,15 +32,24 @@ export async function generateMetadata({ params }: GameDetailProps): Promise<Met
 
   if (!game) return { title: "Game Details | OpenGamer Studio" };
 
+  const socialImage = game.artwork?.hero || game.image;
+  const socialTitle = `${game.title} | OpenGamer Studio`;
+
   return {
-    title: `${game.title} | OpenGamer Studio`,
+    title: socialTitle,
     description: game.shortDescription,
     alternates: { canonical: `/games/${game.slug}` },
     openGraph: {
-      title: `${game.title} | OpenGamer Studio`,
+      title: socialTitle,
       description: game.shortDescription,
       url: `/games/${game.slug}`,
-      images: [{ url: game.artwork?.hero || game.image, width: game.imageWidth, height: game.imageHeight, alt: `${game.title} artwork` }]
+      images: [{ url: socialImage, width: game.imageWidth, height: game.imageHeight, alt: `${game.title} artwork` }]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: socialTitle,
+      description: game.shortDescription,
+      images: [socialImage]
     }
   };
 }
