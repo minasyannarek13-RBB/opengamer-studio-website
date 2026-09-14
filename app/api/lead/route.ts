@@ -1,4 +1,13 @@
 import { NextResponse } from "next/server";
+import {
+  budgetRangeOptions,
+  companyTypes,
+  contactMethods,
+  expectedLaunchOptions,
+  numberOfGamesOptions,
+  projectStages,
+  serviceInterests
+} from "@/content/contact";
 import { deliverLead, type LeadPayload } from "@/lib/leadDelivery";
 
 const requiredFields = [
@@ -36,6 +45,16 @@ const fieldLimits: Record<string, number> = {
   utmCampaign: 200,
   utmContent: 200,
   utmTerm: 200
+};
+
+const allowedOptions: Record<string, readonly string[]> = {
+  companyType: companyTypes,
+  serviceInterest: serviceInterests,
+  projectStage: projectStages,
+  expectedLaunch: expectedLaunchOptions,
+  numberOfGames: numberOfGamesOptions,
+  budgetRange: budgetRangeOptions,
+  preferredContactMethod: contactMethods
 };
 
 const rateWindowMs = 60_000;
@@ -79,6 +98,13 @@ export async function POST(request: Request) {
     );
   }
 
+  if (payload.consent !== "on") {
+    return NextResponse.json(
+      { message: "Please confirm consent before submitting.", errors: { consent: "Consent is required." } },
+      { status: 400 }
+    );
+  }
+
   const tooLong = Object.entries(fieldLimits)
     .filter(([field, limit]) => (payload[field] || "").length > limit)
     .map(([field]) => field);
@@ -88,6 +114,20 @@ export async function POST(request: Request) {
       {
         message: "Please shorten the highlighted fields and try again.",
         errors: Object.fromEntries(tooLong.map((field) => [field, "This field is too long."]))
+      },
+      { status: 400 }
+    );
+  }
+
+  const invalidOptions = Object.entries(allowedOptions)
+    .filter(([field, options]) => payload[field] && !options.includes(payload[field]))
+    .map(([field]) => field);
+
+  if (invalidOptions.length) {
+    return NextResponse.json(
+      {
+        message: "Please select valid form options and try again.",
+        errors: Object.fromEntries(invalidOptions.map((field) => [field, "Select a valid option."]))
       },
       { status: 400 }
     );
