@@ -16,7 +16,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LC App — Social Product Direction for Live Casino",
     description: "An in-development B2B concept connecting live tables, communities, creator-oriented experiences and communication.",
+    url: "/portfolio/lc-app",
+    type: "website",
     images: [{ url: lcAppAssets.deviceEcosystem.src, width: lcAppAssets.deviceEcosystem.width, height: lcAppAssets.deviceEcosystem.height, alt: lcAppAssets.deviceEcosystem.alt }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LC App — Social Product Direction for Live Casino",
+    description: "An in-development B2B concept connecting live tables, communities, creator-oriented experiences and communication.",
+    images: [lcAppAssets.deviceEcosystem.src]
   }
 };
 
