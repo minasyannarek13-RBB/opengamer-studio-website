@@ -128,10 +128,10 @@ test("game catalogue uses one explicit public status contract", async () => {
   assert.equal(getGameStatusLabel(deepDive), "Playable");
   assert.equal(getGameDemoStatusLabel(deepDive), "Public Demo Available");
   assert.equal(hasVerifiedDemo(deepDive), true);
-  assert.equal(getGameStatus(cakeBonanza), "portfolio");
-  assert.equal(getGameStatusLabel(cakeBonanza), "Portfolio Title");
-  assert.equal(getVerifiedDemoUrl(cakeBonanza), null);
-  assert.equal(getGameDemoStatusLabel(cakeBonanza), "No Public Demo");
+  assert.equal(getGameStatus(cakeBonanza), "playable");
+  assert.equal(getGameStatusLabel(cakeBonanza), "Playable");
+  assert.equal(getVerifiedDemoUrl(cakeBonanza), "https://open-gamer.com/games/view?code=cake-bonanza");
+  assert.equal(getGameDemoStatusLabel(cakeBonanza), "Public Demo Available");
   assert.equal(getVerifiedDemoUrl({ ...deepDive, demoUrl: "https://example.com/demo" }), null);
   assert.equal(games.some((game) => ["demo", "request-access", "coming-soon"].includes(game.status)), false);
 });
