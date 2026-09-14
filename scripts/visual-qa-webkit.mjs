@@ -67,10 +67,15 @@ async function capture() {
         const url = `${baseUrl}${route}`;
         const response = await page.goto(url, { waitUntil: "networkidle" });
         await page.evaluate(async () => {
+          const step = Math.max(window.innerHeight * 0.8, 400);
+          for (let position = 0; position < document.body.scrollHeight; position += step) {
+            window.scrollTo(0, position);
+            await new Promise((resolve) => setTimeout(resolve, 140));
+          }
           window.scrollTo(0, document.body.scrollHeight);
           await Promise.allSettled(Array.from(document.images).map((img) => img.decode()));
           window.scrollTo(0, 0);
-          await new Promise((resolve) => setTimeout(resolve, 160));
+          await new Promise((resolve) => setTimeout(resolve, 200));
         });
 
         const metrics = await page.evaluate(() => {
