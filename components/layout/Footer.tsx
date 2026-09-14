@@ -8,7 +8,7 @@ import { getCompactGameProof } from "@/lib/gameShowcase";
 import type { Locale } from "@/lib/i18n";
 import { getLocalizedHomePath } from "@/lib/routes";
 
-const footerCopy: Record<Locale, { solutions: string; company: string; legalContact: string; enquiry: string; rights: string; scope: string; proof: string; contact: string }> = {
+const footerCopy: Record<Locale, { solutions: string; company: string; legalContact: string; enquiry: string; rights: string; scope: string; proof: string; contact: string; externalNewTab: string }> = {
   en: {
     solutions: "Solutions",
     company: "Company",
@@ -17,7 +17,8 @@ const footerCopy: Record<Locale, { solutions: string; company: string; legalCont
     rights: "All rights reserved.",
     scope: "Casino games, original IP, product engineering and integration-oriented development.",
     proof: "Selected work",
-    contact: "Discuss a project"
+    contact: "Discuss a project",
+    externalNewTab: "opens in a new tab"
   },
   ru: {
     solutions: "Решения",
@@ -27,7 +28,8 @@ const footerCopy: Record<Locale, { solutions: string; company: string; legalCont
     rights: "Все права защищены.",
     scope: "Казино-игры, оригинальные IP, продуктовая разработка и интеграционные решения.",
     proof: "Избранные работы",
-    contact: "Обсудить проект"
+    contact: "Обсудить проект",
+    externalNewTab: "откроется в новой вкладке"
   },
   hy: {
     solutions: "Լուծումներ",
@@ -37,7 +39,8 @@ const footerCopy: Record<Locale, { solutions: string; company: string; legalCont
     rights: "Բոլոր իրավունքները պաշտպանված են:",
     scope: "Կազինո խաղեր, օրիգինալ IP, արտադրանքի ինժեներիա և ինտեգրման զարգացում:",
     proof: "Ընտրված աշխատանքներ",
-    contact: "Քննարկել նախագիծը"
+    contact: "Քննարկել նախագիծը",
+    externalNewTab: "կբացվի նոր ներդիրում"
   },
   es: {
     solutions: "Soluciones",
@@ -47,7 +50,8 @@ const footerCopy: Record<Locale, { solutions: string; company: string; legalCont
     rights: "Todos los derechos reservados.",
     scope: "Juegos de casino, IP original, ingeniería de producto y desarrollo orientado a integraciones.",
     proof: "Trabajo seleccionado",
-    contact: "Hablar de un proyecto"
+    contact: "Hablar de un proyecto",
+    externalNewTab: "se abre en una pestaña nueva"
   },
   pt: {
     solutions: "Soluções",
@@ -57,7 +61,8 @@ const footerCopy: Record<Locale, { solutions: string; company: string; legalCont
     rights: "Todos os direitos reservados.",
     scope: "Jogos de cassino, IP original, engenharia de produto e desenvolvimento orientado a integrações.",
     proof: "Trabalho selecionado",
-    contact: "Discutir um projeto"
+    contact: "Discutir um projeto",
+    externalNewTab: "abre em uma nova aba"
   }
 };
 
@@ -168,7 +173,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`${item.label} (opens in a new tab)`}
+                    aria-label={`${item.label} (${copy.externalNewTab})`}
                     className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
                   >
                     {item.label}
