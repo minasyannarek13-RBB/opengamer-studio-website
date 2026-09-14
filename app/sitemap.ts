@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { catalogueGames } from "@/content/games";
-import { siteUrl } from "@/lib/site";
+import { isIndexableProduction, siteUrl } from "@/lib/site";
 
 const routes = [
   "/",
@@ -18,6 +18,10 @@ const routes = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (!isIndexableProduction) {
+    return [];
+  }
+
   const gameRoutes = catalogueGames
     .filter((game) => !game.isVariant)
     .map((game) => `/games/${game.slug}`);
