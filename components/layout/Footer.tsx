@@ -83,7 +83,7 @@ const proofLinks = [
       }
     : null,
   { label: "ELEMENTALS", meta: "Original Live Casino IP · In development", href: "/portfolio/elementals" },
-  { label: "LC App", meta: "B2B product concept · In development", href: "/portfolio/lc-app" }
+  { label: "LC App", meta: "B2B product concept · Product direction", href: "/portfolio/lc-app" }
 ].filter(Boolean) as Array<{ label: string; meta: string; href: string }>;
 
 export function Footer({ locale = "en" }: { locale?: Locale }) {
