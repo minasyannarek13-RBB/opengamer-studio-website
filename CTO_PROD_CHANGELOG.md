@@ -7,7 +7,7 @@ Current production-relevant state for the OpenGamer website. Git history is the 
 - Branch: `build/contact-conversion-handoff-20260908`
 - Baseline lineage: `v2-current`
 - Approved founder-review baseline: `2377d18231c1cbce379358972e9bc8d6bea25f2d`
-- Current CI-verified forward head: `30b32bfe2d9396868f8ce0f55aafa596469b332e`; final responsive/founder review remains required before production.
+- Current CI-verified forward head: `4b7defe0b1dbcc747fd7638da8122a85b960c841`; final responsive/founder review remains required before production.
 - Baseline status: reviewed locally by Narek and accepted as the primary version for production preparation.
 - Forward rule: later commits may improve defects and polish, but must not regress the approved baseline. Any regression versus this baseline blocks release.
 - Production domain/DNS/aliases/secrets/env: unchanged.
