@@ -1,151 +1,365 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SiteShell } from "@/components/layout/SiteShell";
-import { RelatedProductStrip } from "@/components/visual/ProductSignature";
+import { ServicesHero } from "@/components/services/ServicesHero";
+import { ServicesTechnologyFlow } from "@/components/services/ServicesTechnologyFlow";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { getGameDemoStatusLabel, getGameStatusLabel, playableGames, portfolioGames, type Game } from "@/content/games";
+import { getOptimizedGameArtwork } from "@/lib/gameAssets";
 
 export const metadata: Metadata = {
-  title: "Solutions | OpenGamer Studio",
-  description: "Modular and full-cycle iGaming development solutions for slot games, live products, integrations, reskins, QA and dedicated development teams.",
+  title: "Services | OpenGamer Studio",
+  description: "iGaming development services for casino games, dedicated teams, integrations, portfolio adaptation and Live Casino product design.",
   alternates: { canonical: "/services" }
 };
+
+const buyerJobs = [
+  {
+    number: "01",
+    title: "Build a Game",
+    description: "Create an original, branded or custom casino game with one coordinated production scope.",
+    items: ["Game concept", "Mathematics", "Art & animation", "Frontend", "Backend coordination", "QA"],
+    href: "#game-production"
+  },
+  {
+    number: "02",
+    title: "Extend Your Team",
+    description: "Add specialist iGaming capacity without rebuilding every discipline internally.",
+    items: ["Dedicated teams", "Frontend", "Backend", "Game art", "QA", "Product & technical support"],
+    href: "#delivery-and-support"
+  },
+  {
+    number: "03",
+    title: "Build or Integrate Technology",
+    description: "Connect game clients, backend services and partner environments around a defined technical scope.",
+    items: ["RGS-related engineering", "Wallet flows", "Game integration", "Platform integration", "APIs", "Release support"],
+    href: "#technology-and-integration"
+  },
+  {
+    number: "04",
+    title: "Transform Existing Content",
+    description: "Adapt an existing game, portfolio or supplied concept for a new brand, market or technical requirement.",
+    items: ["Reskins", "Branded games", "Portfolio licensing", "Modernisation", "Live product design", "Product UX"],
+    href: "#portfolio-services"
+  }
+];
 
 const solutionGroups = [
   {
     id: "game-production",
+    interest: "game",
     eyebrow: "Game production",
-    title: "Original and Custom Casino Games Built Around Your Commercial Model",
-    description: "Original and custom casino game production shaped around a partner's commercial model, market and content strategy.",
-    items: [
-      ["Custom Slot Development", "For operators, platforms and providers needing original or branded slot content.", "Concept, game design, art, frontend build and integration preparation."],
-      ["Turnkey Slot Development", "For partners that need a complete game build managed through one delivery structure.", "Product design, math support, art, animation, frontend, backend coordination and QA."],
-      ["Game Art and Animation", "For teams with existing mechanics or code that need stronger production assets.", "Visual direction, symbols, UI, animation, effects and promotional asset support."],
-      ["Mathematics and Game Design", "For partners defining a new game model or adapting an existing concept.", "Paytable support, feature logic, balancing preparation and documentation."],
-      ["Frontend Development", "For providers needing production HTML5 game clients.", "Responsive game UI, animation integration, state rendering, performance and device QA."]
-    ]
-  },
-  {
-    id: "live-casino",
-    eyebrow: "Live casino",
-    title: "Live Casino Product Design for Players, Presenters and Operations",
-    description: "Specialist live casino product support without claiming studio operation, licensing or broadcast ownership.",
-    items: [
-      ["Live Casino Game Design", "For operators and providers exploring new table, game-show or hybrid live formats.", "Market concept, rules, player journey, round flow and product documentation."],
-      ["Live Show-Game Development", "For teams developing original show formats around a differentiated mechanic.", "Format logic, bonus structure, visual identity, player UX and delivery scope."],
-      ["Presenter and Studio Product UX", "For live products where the dealer, presenter and operational team are part of the experience.", "Presenter prompts, round states, studio-facing flows, display logic and error-state planning."],
-      ["Frontend Product Interfaces", "For partners needing player-facing or operator-facing live casino product UI.", "Betting interfaces, live-session states, result communication, mobile UX and integration preparation."]
+    title: "From Concept to Playable Game",
+    description: "Original and custom casino game production can be scoped as a complete build or around the disciplines your team actually needs.",
+    services: [
+      ["Custom Slot Development", "Original or branded slot content for operators, platforms and providers.", "Concept, game design, art, frontend build and integration preparation."],
+      ["Turnkey Slot Development", "A complete game build managed through one delivery structure.", "Product design, math support, art, animation, frontend, backend coordination and QA."],
+      ["Game Art & Animation", "Production assets for new mechanics or existing codebases.", "Visual direction, symbols, UI, animation, effects and promotional asset support."],
+      ["Mathematics & Game Design", "Mechanics, feature logic and balancing preparation for new or adapted games.", "Paytable support, feature logic, balancing preparation and documentation."],
+      ["Frontend Development", "Production HTML5 game clients across desktop and mobile.", "Responsive UI, animation integration, state rendering, performance and device QA."]
     ]
   },
   {
     id: "technology-and-integration",
-    eyebrow: "Technology and integration",
-    title: "Backend Systems and Integrations Prepared for Casino Operations",
-    description: "Engineering support for game sessions, backend modules, APIs, wallet communication and launch preparation.",
-    items: [
-      ["Backend and RGS Engineering", "For partners building, extending or modernising game technology layers.", "Session logic, round management, game configuration, reporting and administrative tooling."],
-      ["Game Integration", "For content that needs structured partner onboarding.", "API mapping, sandbox setup, wallet flows, error handling, QA and acceptance support."],
-      ["Platform Integration", "For operators, aggregators or platforms connecting game content.", "Launch flows, authentication, wallet communication, reporting and monitoring alignment."],
-      ["Technical Modernisation", "For portfolios that need code, asset or device-performance improvements.", "Refactoring, mobile optimisation, UI updates and maintainability improvements."]
+    interest: "technology",
+    eyebrow: "Technology & integration",
+    title: "Engineering Around the Game",
+    description: "Backend modules, RGS-related engineering and partner integration work can be added around the game client when the project requires it.",
+    services: [
+      ["Backend & RGS Engineering", "Game technology layers for teams building, extending or modernising their stack.", "Session logic, round management, game configuration, reporting and administrative tooling."],
+      ["Game Integration", "Structured onboarding for casino content into a partner environment.", "API mapping, sandbox setup, wallet flows, error handling, QA and acceptance support."],
+      ["Platform Integration", "Connectivity for operators, aggregators and platforms.", "Launch flows, authentication, wallet communication, reporting and monitoring alignment."],
+      ["Technical Modernisation", "Improve older portfolios for maintainability, mobile UX or integration readiness.", "Refactoring, mobile optimisation, UI updates and maintainability improvements."]
     ]
   },
   {
     id: "portfolio-services",
-    eyebrow: "Portfolio services",
-    title: "Expand or Reposition Your Casino Game Portfolio",
-    description: "Existing OpenGamer titles can be evaluated for licensing, branded adaptation, reskin or other commercially agreed delivery models.",
-    items: [
-      ["White-Label Games", "For partners evaluating existing OpenGamer content or custom variants.", "Portfolio review, demo access where available, scope definition and commercial discussion."],
-      ["Reskins", "For existing games that need a new theme, brand or market fit.", "Theme replacement, symbol sets, UI refresh, animation updates and launch preparation."],
-      ["Branded Games", "For operators and brands needing custom game content around a campaign or audience.", "Brand adaptation, game concept, asset direction and production scope."],
-      ["Legacy Game Modernisation", "For older titles needing better mobile UX, assets or integration readiness.", "Visual refresh, frontend improvements, QA and delivery planning."]
+    interest: "portfolio",
+    eyebrow: "Portfolio & product",
+    title: "Adapt, Brand or Reposition Existing Work",
+    description: "Existing OpenGamer titles can be evaluated for licensing or adaptation, while supplied content can be scoped for reskin, branding or modernisation.",
+    services: [
+      ["White-Label Games", "Evaluate existing OpenGamer content or custom variants.", "Portfolio review, public demo access where available, scope definition and commercial discussion."],
+      ["Reskins", "Reposition an existing game around a new theme, brand or market fit.", "Theme replacement, symbol sets, UI refresh, animation updates and launch preparation."],
+      ["Branded Games", "Custom content built around a supplied brand, campaign or audience brief.", "Brand adaptation, game concept, asset direction and production scope."],
+      ["Legacy Game Modernisation", "Refresh older titles that need stronger mobile UX, assets or integration readiness.", "Visual refresh, frontend improvements, QA and delivery planning."]
+    ]
+  },
+  {
+    id: "live-casino",
+    interest: "live-casino",
+    eyebrow: "Live Casino product",
+    title: "Design the Live Product, Interface and Show-Game Experience",
+    description: "OpenGamer can support Live Casino product design, player and presenter interfaces, and show-game concepts. Studio operation, licensing and broadcast ownership are outside the scope represented here.",
+    services: [
+      ["Live Casino Game Design", "Table, game-show and hybrid live product concepts.", "Product concept, rules, player journey, round flow and product documentation."],
+      ["Live Show-Game Development", "Original show formats scoped around differentiated mechanics and player experience.", "Format logic, bonus structure, visual identity, player UX and delivery scope."],
+      ["Presenter & Studio Product UX", "Product flows where the dealer, presenter and operating team are part of the experience.", "Presenter prompts, round states, studio-facing flows, display logic and error-state planning."],
+      ["Frontend Product Interfaces", "Player-facing and operator-facing interfaces for Live Casino products.", "Betting interfaces, live-session states, result communication, mobile UX and integration preparation."]
     ]
   },
   {
     id: "delivery-and-support",
-    eyebrow: "Delivery and support",
-    title: "Add Specialist iGaming Capacity Without Building Every Team Internally",
-    description: "Specialist capacity and production governance for partners scaling iGaming development programmes.",
-    items: [
-      ["Dedicated Teams", "For providers, platforms and startups that need embedded iGaming development capacity.", "Frontend, backend, game art, QA, product and technical leadership support."],
-      ["QA", "For games and product builds that need structured release confidence.", "Functional testing, regression, device checks, integration scenarios and acceptance support."],
-      ["Certification Preparation Support", "For partners preparing materials for independent review.", "Documentation, QA evidence and implementation support without claiming certification ownership."],
-      ["Product and Technical Advisory", "For teams defining what to build before committing to production.", "Scope definition, architecture review, delivery planning and product risk review."]
+    interest: "dedicated",
+    eyebrow: "Dedicated delivery",
+    title: "Add iGaming Capacity Without Building Every Team Internally",
+    description: "Specialist production capacity and delivery support for teams that need to move faster without adding every discipline in-house.",
+    services: [
+      ["Dedicated Teams", "Embedded iGaming development capacity for providers, platforms and startups.", "Frontend, backend, game art, QA, product and technical leadership support."],
+      ["QA", "Structured release confidence for games and product builds.", "Functional testing, regression, device checks, integration scenarios and acceptance support."],
+      ["Certification Preparation Support", "Implementation and documentation support before independent review.", "Documentation, QA evidence and implementation support without claiming certification ownership."],
+      ["Product & Technical Advisory", "Clarify what to build before committing to production.", "Scope definition, architecture review, delivery planning and product risk review."]
     ]
   }
 ];
 
+const gameProductionProof = [playableGames[0], portfolioGames[0], playableGames[1]].filter(Boolean) as Game[];
+const portfolioProof = portfolioGames.slice(0, 3);
+
+function GameProofCard({ game, portfolio = false }: { game: Game; portfolio?: boolean }) {
+  return (
+    <Link
+      href={`/games/${game.slug}`}
+      className="group relative overflow-hidden rounded-[1.1rem] border border-white/10 bg-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+    >
+      <div className="relative aspect-[10/7] overflow-hidden">
+        <Image
+          src={getOptimizedGameArtwork(game)}
+          alt={`${game.title} artwork`}
+          fill
+          sizes="(min-width:1280px) 18vw,(min-width:640px) 31vw,100vw"
+          className="object-cover transition duration-500 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-transparent to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-4">
+          <span className={`text-[0.52rem] font-semibold uppercase tracking-[0.13em] ${portfolio ? "text-slate-300" : "text-emerald"}`}>
+            {getGameStatusLabel(game)} · {getGameDemoStatusLabel(game)}
+          </span>
+          <strong className="mt-1 block text-sm text-white sm:text-base">{game.title}</strong>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export default function ServicesPage() {
   return (
     <SiteShell atmosphere="solutions">
-      <section className="border-b border-white/10 bg-black/15 py-16 sm:py-24">
-        <Container>
-          <SectionHeader
-            eyebrow="Solutions"
-            title="iGaming Development Solutions"
-            description="OpenGamer provides modular and full-cycle production support for casino games, live products, technical integrations and dedicated development teams."
-            headingLevel="h1"
-          />
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/contact">Discuss a Project</Button>
-            <Button href="/games" variant="secondary">
-              Explore Games
-            </Button>
+      <ServicesHero />
+
+      <Section className="relative overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_88%_18%,rgba(46,230,166,0.045),transparent_24rem)]" />
+        <div className="relative grid gap-12 xl:grid-cols-[0.62fr_1.38fr] xl:gap-24">
+          <div className="xl:sticky xl:top-28 xl:self-start">
+            <SectionHeader
+              eyebrow="Four ways to work with OpenGamer"
+              title="Choose the Outcome Before the Service List"
+              description="Most commercial conversations start with the result you need, not a catalogue of disciplines. Pick the engagement model first; define the detailed scope second."
+            />
+            <div className="mt-7 flex flex-wrap gap-2">
+              {["Full build", "Embedded capacity", "Technical scope", "Portfolio adaptation"].map((item) => (
+                <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-500">
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
-          <nav className="mt-10 flex gap-2 overflow-x-auto pb-1" aria-label="Solution areas">
-            {solutionGroups.map((group) => (
-              <a
-                key={group.id}
-                href={`#${group.id}`}
-                className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-sm text-slate-300 transition hover:border-emerald/45 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70"
+
+          <div className="border-t border-white/10">
+            {buyerJobs.map((job) => (
+              <Link
+                key={job.title}
+                href={job.href}
+                className="group grid gap-5 border-b border-white/10 py-7 transition duration-300 hover:border-emerald/30 md:grid-cols-[3.2rem_0.8fr_1.2fr_auto] md:items-start md:gap-6 md:py-9 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070a] motion-reduce:transition-none"
               >
-                {group.title}
-              </a>
+                <span className="text-[0.68rem] font-semibold tracking-[0.2em] text-emerald/90">{job.number}</span>
+                <div>
+                  <h2 className="text-2xl font-semibold tracking-[-0.015em] text-white transition group-hover:text-emerald motion-reduce:transition-none">{job.title}</h2>
+                  <span className="mt-3 inline-flex text-sm font-semibold text-white/75 transition group-hover:text-white motion-reduce:transition-none">View relevant scope →</span>
+                </div>
+                <div>
+                  <p className="max-w-2xl text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{job.description}</p>
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
+                    {job.items.map((item) => (
+                      <span key={item} className="flex items-center gap-2 text-xs text-slate-500 sm:text-sm">
+                        <span aria-hidden="true" className="h-1 w-1 shrink-0 rounded-full bg-emerald/80" />
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="hidden items-center md:flex">
+                  <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-slate-500 transition duration-300 group-hover:translate-x-1 group-hover:border-emerald/30 group-hover:text-emerald motion-reduce:transform-none motion-reduce:transition-none">→</span>
+                </div>
+              </Link>
             ))}
-          </nav>
-        </Container>
-      </section>
+          </div>
+        </div>
+      </Section>
 
       {solutionGroups.map((group, index) => (
         <Section key={group.id} id={group.id} className={index % 2 ? "bg-black/20" : ""}>
-          <div className="grid gap-8 lg:grid-cols-[0.36fr_1fr]">
-            <SectionHeader eyebrow={group.eyebrow} title={group.title} description={group.description} />
-            <div className="grid gap-5 md:grid-cols-2" data-reveal-group="cards">
-              {group.items.map(([title, clientType, deliverables]) => (
-                <Card key={title} className="h-full">
-                  <h3 className="text-xl font-semibold text-white">{title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">{clientType}</p>
-                  <p className="mt-4 border-t border-white/10 pt-4 text-sm leading-6 text-slate-400">{deliverables}</p>
-                  <a href={`/contact?service=${encodeURIComponent(title)}`} className="mt-5 inline-flex text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70">
-                    Discuss This Service
-                  </a>
-                </Card>
-              ))}
+          <div className="grid gap-10 xl:grid-cols-[0.4fr_1fr] xl:gap-14">
+            <div className="xl:sticky xl:top-28 xl:self-start">
+              <SectionHeader eyebrow={group.eyebrow} title={group.title} description={group.description} />
+              <Button href={`/contact?interest=${group.interest}#project-enquiry`} variant="secondary" className="mt-7">Discuss This Scope</Button>
+            </div>
+
+            <div>
+              {group.id === "game-production" && gameProductionProof.length ? (
+                <div className="mb-8 grid gap-3 sm:grid-cols-3">
+                  {gameProductionProof.map((game) => <GameProofCard key={game.slug} game={game} portfolio={getGameStatusLabel(game) === "Portfolio Title"} />)}
+                </div>
+              ) : null}
+
+              {group.id === "technology-and-integration" ? <ServicesTechnologyFlow /> : null}
+
+              {group.id === "portfolio-services" ? (
+                <div className="mb-9 grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {portfolioProof.map((game) => <GameProofCard key={game.slug} game={game} portfolio />)}
+                  </div>
+                  <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.025] p-5 sm:p-6">
+                    <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Commercial routes</p>
+                    <div className="mt-5 space-y-4">
+                      {[
+                        ["License", "Evaluate existing OpenGamer content where a licensing model fits."],
+                        ["Reskin", "Rework theme, assets and presentation around a new brief."],
+                        ["Brand", "Develop a branded variant or new game around supplied requirements."],
+                        ["Modernise", "Refresh older content for stronger UX, maintainability or integration readiness."]
+                      ].map(([title, text]) => (
+                        <div key={title} className="border-t border-white/10 pt-4 first:border-t-0 first:pt-0">
+                          <h3 className="text-sm font-semibold text-white">{title}</h3>
+                          <p className="mt-1.5 text-sm leading-6 text-slate-400">{text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
+              {group.id === "live-casino" ? (
+                <div className="relative mb-9 overflow-hidden rounded-[1.45rem] border border-white/10 bg-black/40 shadow-[0_28px_90px_rgba(0,0,0,0.28)]">
+                  <div className="relative min-h-[390px] sm:min-h-[470px]">
+                    <Image src="/assets/projects/elementals/expositions/nexus-studio-wheel.webp" alt="ELEMENTALS original Live Casino IP concept" fill sizes="(min-width:1280px) 58vw,100vw" className="object-cover" />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,10,0.03)_18%,rgba(5,7,10,0.92)_100%)]" />
+                    <div className="absolute left-5 top-5 flex flex-wrap gap-2 sm:left-7 sm:top-7">
+                      <span className="rounded-full border border-emerald/25 bg-[#07100d]/80 px-3 py-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.15em] text-emerald backdrop-blur">Original Live Casino IP</span>
+                      <span className="rounded-full border border-white/12 bg-black/45 px-3 py-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.15em] text-slate-300 backdrop-blur">In development</span>
+                    </div>
+                    <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
+                      <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Product concept · Mechanics · UX · Interface direction</p>
+                      <h3 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">ELEMENTALS</h3>
+                      <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base sm:leading-7">A concrete OpenGamer reference for Live Casino product thinking: a cinematic show-game concept built around a central wheel and an elemental world system.</p>
+                      <Link href="/portfolio/elementals" className="mt-5 inline-flex text-sm font-semibold text-white/85 transition hover:text-emerald focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">Explore ELEMENTALS →</Link>
+                    </div>
+                  </div>
+                  <div className="grid border-t border-white/10 sm:grid-cols-2 xl:grid-cols-4">
+                    {[
+                      ["Game format", "Rules, round flow and bonus structure"],
+                      ["Presenter UX", "Host prompts, states and studio-facing flow"],
+                      ["Player interface", "Betting, live-session and result communication"],
+                      ["Delivery scope", "Product documentation and integration preparation"]
+                    ].map(([title, text], itemIndex) => (
+                      <div key={title} className={`p-4 sm:p-5 ${itemIndex ? "border-t border-white/10 sm:border-l sm:border-t-0" : ""}`}>
+                        <h4 className="text-sm font-semibold text-white">{title}</h4>
+                        <p className="mt-2 text-xs leading-5 text-slate-500 sm:text-sm sm:leading-6">{text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              {group.id === "delivery-and-support" ? (
+                <div className="relative mb-9 overflow-hidden rounded-[1.4rem] border border-white/10 bg-[#06090b] p-5 sm:p-7">
+                  <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(46,230,166,0.055),transparent_20rem),radial-gradient(circle_at_90%_80%,rgba(93,156,255,0.035),transparent_18rem)]" />
+                  <div className="relative grid gap-7 xl:grid-cols-[0.8fr_1.2fr] xl:items-start">
+                    <div>
+                      <p className="text-[0.6rem] font-semibold uppercase tracking-[0.17em] text-emerald">Embedded capacity</p>
+                      <h3 className="mt-3 text-2xl font-semibold tracking-[-0.015em] text-white sm:text-3xl">Add the disciplines the roadmap is missing.</h3>
+                      <p className="mt-4 text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">The engagement can be shaped around a focused specialist scope or a broader dedicated team. The point is to fill a delivery gap without forcing the client team to recreate every role internally.</p>
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {["Frontend", "Backend", "Game art", "QA", "Product", "Technical leadership"].map((item) => (
+                          <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.1em] text-slate-400">{item}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {[
+                        ["Focused scope", "Add one missing discipline or a tightly defined delivery package."],
+                        ["Dedicated team", "Combine several disciplines around an agreed product or engineering roadmap."],
+                        ["Release confidence", "Use QA, regression and integration scenarios to support acceptance."],
+                        ["Advisory", "Clarify scope, architecture and delivery risk before committing to a larger build."]
+                      ].map(([title, text]) => (
+                        <div key={title} className="rounded-xl border border-white/[0.08] bg-white/[0.025] p-4 sm:p-5">
+                          <h4 className="text-sm font-semibold text-white">{title}</h4>
+                          <p className="mt-2 text-sm leading-6 text-slate-500">{text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="relative mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-slate-500">Certification preparation support means implementation, documentation and QA support before independent review. It does not imply that OpenGamer owns or issues a certification.</div>
+                </div>
+              ) : null}
+
+              <div className="divide-y divide-white/10 border-y border-white/10">
+                {group.services.map(([title, clientType, deliverables], serviceIndex) => (
+                  <article key={title} className="grid gap-4 py-6 md:grid-cols-[3rem_0.9fr_1.1fr] md:gap-6 md:py-7">
+                    <span className="text-xs font-semibold tracking-[0.16em] text-emerald/80">{String(serviceIndex + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">{title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-300">{clientType}</p>
+                    </div>
+                    <div className="md:border-l md:border-white/10 md:pl-6">
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Typical scope</p>
+                      <p className="mt-2 text-sm leading-6 text-slate-400">{deliverables}</p>
+                      <Link href={`/contact?interest=${group.interest}&service=${encodeURIComponent(title)}#project-enquiry`} className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-emerald transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 motion-reduce:transition-none">Discuss service →</Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </Section>
       ))}
 
-      <Section>
-        <SectionHeader eyebrow="Product proof" title="References from the OpenGamer Ecosystem" description="Services are connected to actual OpenGamer games, live casino concepts and product-interface work." />
-        <div className="mt-10">
-          <RelatedProductStrip
-            items={[
-              { eyebrow: "Game production", title: "Forest Fortune", description: "A portfolio slot reference for custom game production discussions.", image: "/assets/games/forest-fortune/artwork.webp", href: "/games/forest-fortune", actionLabel: "View Game" },
-              { eyebrow: "Live Casino", title: "ELEMENTALS", description: "A show-game concept for live casino product-development scope.", image: "/assets/projects/elementals/expositions/nexus-stage.webp", href: "/portfolio/elementals", actionLabel: "View Concept", accent: "#dca45f" },
-              { eyebrow: "Product interface", title: "LC App", description: "A B2B social product concept for live casino engagement layers.", image: "/assets/projects/lc-app/optimized/lc-app-mobile-community.webp", href: "/portfolio/lc-app", actionLabel: "View Product", accent: "#6ccfde" }
-            ]}
-          />
+      <Section className="relative overflow-hidden bg-black/20">
+        <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(46,230,166,0.05),transparent_25rem)]" />
+        <div className="relative grid gap-12 xl:grid-cols-[0.7fr_1.3fr] xl:gap-24">
+          <div>
+            <SectionHeader eyebrow="Before we scope it" title="A Useful First Conversation Needs Four Things" description="A short brief is enough when it explains the current situation and the gap that needs to be closed." />
+            <div className="mt-7 flex flex-wrap gap-2" aria-label="OpenGamer project entry points">
+              {["New build", "Existing product", "Technical gap", "Capacity gap"].map((item) => (
+                <span key={item} className="rounded-full border border-white/[0.09] bg-white/[0.025] px-3 py-1.5 text-[0.61rem] font-semibold uppercase tracking-[0.12em] text-slate-500">{item}</span>
+              ))}
+            </div>
+          </div>
+          <div className="border-t border-white/10">
+            {[
+              ["01", "What are you building?", "A new game, existing portfolio, product interface, engineering module or another defined iGaming scope."],
+              ["02", "Where is it now?", "Concept, design, existing codebase, integration stage, release preparation or another current state."],
+              ["03", "What does it depend on?", "Platform, APIs, wallet flows, existing architecture, third-party review, internal stakeholders or launch constraints."],
+              ["04", "What is missing internally?", "A complete build, one specialist discipline, several embedded roles, QA, integration support or product and technical guidance."]
+            ].map(([number, title, text]) => (
+              <div key={number} className="grid gap-3 border-b border-white/10 py-7 md:grid-cols-[3rem_0.8fr_1.2fr] md:gap-6 md:py-8">
+                <span className="text-[0.66rem] font-semibold tracking-[0.18em] text-emerald">{number}</span>
+                <h3 className="text-lg font-semibold text-white sm:text-xl">{title}</h3>
+                <p className="text-sm leading-6 text-slate-400 sm:text-base sm:leading-7">{text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </Section>
 
       <CTASection
-        title="Need a Defined Scope or an Embedded Team?"
-        description="Share the project type, target platform, integration requirements and launch stage. OpenGamer will suggest the right engagement model."
+        title="Bring the Gap. We’ll Define the Smallest Useful Scope."
+        description="Share the project type, current stage, technical dependencies and what is missing internally. The first conversation can stay focused on the work that actually needs to happen."
         ctaLabel="Discuss a Project"
+        ctaHref="/contact#project-enquiry"
         secondaryLabel="Explore Games"
         secondaryHref="/games"
       />

@@ -1,7 +1,9 @@
 export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://open-gamer.com").replace(/\/$/, "");
 
+const deploymentEnv = process.env.VERCEL_ENV ?? process.env.NEXT_PUBLIC_DEPLOYMENT_ENV;
+
 export const isIndexableProduction =
-  process.env.VERCEL_ENV === "production" && siteUrl === "https://open-gamer.com";
+  deploymentEnv === "production" && siteUrl === "https://open-gamer.com";
 
 export const robotsConfig = isIndexableProduction
   ? {

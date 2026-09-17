@@ -1,0 +1,67 @@
+@media (max-width: 1023px) {
+  .mobile-nav-panel {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+  }
+
+  .mobile-nav-panel[data-state="closed"] {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .mobile-nav-panel[data-state="open"] {
+    visibility: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body[data-scroll-reveal-ready] [data-scroll-reveal],
+  body[data-scroll-reveal-ready] [data-reveal-group] > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .solutions-dropdown__link:hover,
+  .solutions-dropdown__link:focus-visible,
+  .game-card:hover,
+  .game-card:focus-within {
+    transform: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid CanvasText !important;
+    outline-offset: 3px !important;
+  }
+
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  a {
+    forced-color-adjust: auto;
+  }
+
+  [aria-current="page"],
+  [aria-pressed="true"] {
+    outline: 1px solid CanvasText;
+    outline-offset: 1px;
+  }
+}
