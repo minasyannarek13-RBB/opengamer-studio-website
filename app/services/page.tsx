@@ -60,7 +60,8 @@ const solutionGroups = [
       ["Turnkey Slot Development", "A complete game build managed through one delivery structure.", "Product design, math support, art, animation, frontend, backend coordination and QA."],
       ["Game Art & Animation", "Production assets for new mechanics or existing codebases.", "Visual direction, symbols, UI, animation, effects and promotional asset support."],
       ["Mathematics & Game Design", "Mechanics, feature logic and balancing preparation for new or adapted games.", "Paytable support, feature logic, balancing preparation and documentation."],
-      ["Frontend Development", "Production HTML5 game clients across desktop and mobile.", "Responsive UI, animation integration, state rendering, performance and device QA."]
+      ["Frontend Development", "Production HTML5 game clients across desktop and mobile.", "Responsive UI, animation integration, state rendering, performance and device QA."],
+      ["OpenGamer Bonus Engine", "A distinct Slots-related product capability available for commercial scoping.", "Current public materials do not claim a fixed feature set, integration footprint or production-readiness status; scope is defined for the relevant partner discussion."]
     ]
   },
   {
