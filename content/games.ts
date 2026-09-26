@@ -16,6 +16,7 @@ export type Game = {
   seriesSlug?: string;
   isVariant?: boolean;
   visualAccent?: string;
+  conceptStages?: string[];
   artwork?: {
     catalogue: string;
     hero: string;
@@ -57,7 +58,7 @@ export function getGameEnquiryHref(game: Game) {
 function artwork(image: string): Game["artwork"] { return { catalogue: image, hero: image, thumbnail: image, screenshots: [] }; }
 
 const rawGames: Game[] = [
-  { title: "LIFETIME", slug: "lifetime", image: "/assets/brand/opengamer-og.png", imageWidth: 1200, imageHeight: 630, shortDescription: "A crash-game concept in pre-production, built around a character progressing through a lifetime as the multiplier advances.", longDescription: "LIFETIME follows one character through Birth, Childhood, Teen, Young Adult, Career, Success, Maturity, Old Age and Beyond. The round uses a life-stage multiplier timeline and a colorful cinematic 3D/cartoon direction. The title is currently presented as in development; gameplay parameters, mathematics, certification, integrations and launch timing are not published as final.", category: ["Crash Game", "In Development"], status: "in-development", visualAccent: "#f2b45f" },
+  { title: "LIFETIME", slug: "lifetime", image: "/assets/brand/opengamer-og.png", imageWidth: 1200, imageHeight: 630, shortDescription: "A crash-game concept in pre-production, built around a character progressing through a lifetime as the multiplier advances.", longDescription: "LIFETIME follows one character through Birth, Childhood, Teen, Young Adult, Career, Success, Maturity, Old Age and Beyond. The round uses a life-stage multiplier timeline and a colorful cinematic 3D/cartoon direction. The title is currently presented as in development; gameplay parameters, mathematics, certification, integrations and launch timing are not published as final.", category: ["Crash Game", "In Development"], status: "in-development", visualAccent: "#f2b45f", conceptStages: ["Birth", "Childhood", "Teen", "Young Adult", "Career", "Success", "Maturity", "Old Age", "Beyond"] },
   { title: "Cake Bonanza", slug: "cake-bonanza", image: "/assets/games/cake-bonanza/artwork.webp", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "playable", demoUrl: `${officialGamesBaseUrl}cake-bonanza` },
   { title: "Captain Boom", slug: "captain-boom", image: "/assets/games/captain-boom/artwork-inline-small.svg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed OpenGamer slot title.", category: ["Slot Game"], status: "portfolio" },
   { title: "Nuclear Blast", slug: "nuclear-blast", image: "/assets/games/nuclear-blast/artwork.svg", imageWidth: 600, imageHeight: 420, shortDescription: "A confirmed slot title in the OpenGamer catalogue.", category: ["Slot Game"], status: "portfolio" },
