@@ -168,7 +168,6 @@ export function Header({ locale }: { locale: Locale }) {
                 <button
                   ref={solutionsButtonRef}
                   type="button"
-                  aria-haspopup="menu"
                   aria-expanded={isSolutionsOpen}
                   aria-controls="solutions-navigation"
                   aria-current={isSolutionsActive ? "page" : undefined}
@@ -185,7 +184,6 @@ export function Header({ locale }: { locale: Locale }) {
                     id="solutions-navigation"
                     ref={solutionsMenuRef}
                     className="solutions-dropdown absolute left-1/2 top-full z-[100] mt-0 w-[min(68rem,calc(100vw-3rem))] -translate-x-1/2 rounded-[var(--radius-feature)] p-4"
-                    role="menu"
                   >
                     <div className="solutions-dropdown__bridge" aria-hidden="true" />
                     <div className="grid gap-4 lg:grid-cols-[repeat(3,minmax(0,1fr))_minmax(13rem,0.8fr)]">
@@ -194,7 +192,7 @@ export function Header({ locale }: { locale: Locale }) {
                           <p className="solutions-dropdown__heading">{group.title}</p>
                           <div className="mt-3 grid gap-1.5">
                             {group.items.map((item) => (
-                              <Link key={item.label} href={getLocalizedHomePath(locale, item.href)} role="menuitem" className="solutions-dropdown__link">
+                              <Link key={item.label} href={getLocalizedHomePath(locale, item.href)} className="solutions-dropdown__link">
                                 <span>{item.label}</span>
                                 <small>{item.description}</small>
                               </Link>
@@ -202,7 +200,7 @@ export function Header({ locale }: { locale: Locale }) {
                           </div>
                         </div>
                       ))}
-                      <Link href={getLocalizedHomePath(locale, "/portfolio/elementals")} role="menuitem" className="solutions-dropdown__feature">
+                      <Link href={getLocalizedHomePath(locale, "/portfolio/elementals")} className="solutions-dropdown__feature">
                         <Image src="/assets/projects/elementals/expositions/nexus-stage.webp" alt="" width={600} height={420} sizes="220px" className="solutions-dropdown__feature-image" />
                         <span>Featured work</span>
                         <strong>ELEMENTALS</strong>
