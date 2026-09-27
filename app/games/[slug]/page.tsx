@@ -121,7 +121,7 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
             <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 p-5 min-[520px]:flex-row min-[520px]:items-end min-[520px]:justify-between sm:p-7">
               <div>
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-emerald">{statusLabel}</p>
-                <p className="mt-1 text-sm text-slate-300">Artwork from the OpenGamer game catalogue.</p>
+                <p className="mt-1 text-sm text-slate-300">{game.artwork?.screenshots?.length || game.slug !== "lifetime" ? "Artwork from the OpenGamer game catalogue." : "OpenGamer presentation visual · final LIFETIME artwork is not published here yet."}</p>
               </div>
               <span className="shrink-0 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-xs font-semibold text-slate-300">{availabilityLabel}</span>
             </div>
@@ -151,6 +151,22 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
               <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">{game.title}</h2>
               <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{game.longDescription || game.shortDescription}</p>
             </div>
+
+            {game.conceptStages?.length ? (
+              <div className="border-b border-white/10 pb-10">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald">Concept progression</p>
+                <h2 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">One round across a lifetime</h2>
+                <p className="mt-3 max-w-3xl leading-7 text-slate-400">The current concept advances through life stages as the multiplier timeline progresses. Final gameplay parameters and mathematics are not published as complete.</p>
+                <ol className="mt-6 grid gap-2 sm:grid-cols-3" aria-label="LIFETIME concept stages">
+                  {game.conceptStages.map((stage, index) => (
+                    <li key={stage} className="flex min-h-14 items-center gap-3 rounded-xl border border-white/10 bg-white/[0.025] px-4 py-3">
+                      <span className="text-[0.62rem] font-semibold tabular-nums text-emerald">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="text-sm font-semibold text-slate-200">{stage}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ) : null}
 
             {game.variants?.length ? (
               <div className="border-b border-white/10 pb-10">
