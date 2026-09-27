@@ -161,7 +161,7 @@ export function Header({ locale }: { locale: Locale }) {
           />
         </Link>
 
-        <nav className="hidden items-center gap-2 lg:flex">
+        <nav className="hidden items-center gap-2 xl:flex">
           {navRoutes.map((route) => (
             route.path === "/services" ? (
               <div key={route.path} className="relative">
@@ -245,7 +245,7 @@ export function Header({ locale }: { locale: Locale }) {
           <button
             ref={menuButtonRef}
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.055] text-white transition duration-200 hover:border-emerald/50 hover:bg-white/[0.09] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 active:scale-[0.99] lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.055] text-white transition duration-200 hover:border-emerald/50 hover:bg-white/[0.09] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 active:scale-[0.99] xl:hidden"
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
@@ -263,7 +263,7 @@ export function Header({ locale }: { locale: Locale }) {
         <nav
           id="mobile-navigation"
           ref={mobileNavRef}
-          className="mobile-nav-panel max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain border-t border-white/10 bg-ink/96 shadow-[0_22px_60px_rgba(0,0,0,0.36)] lg:hidden"
+          className="mobile-nav-panel max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain border-t border-white/10 bg-ink/96 shadow-[0_22px_60px_rgba(0,0,0,0.36)] xl:hidden"
           data-state={isOpen ? "open" : "closed"}
           aria-label="Mobile navigation"
           aria-hidden={!isOpen}
