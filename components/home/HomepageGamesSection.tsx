@@ -1,0 +1,85 @@
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
+import { getGameDemoStatusLabel, getGameStatusLabel, type Game } from "@/content/games";
+import { getOptimizedGameArtwork } from "@/lib/gameAssets";
+import { getHomepageGameProof } from "@/lib/gameShowcase";
+
+const gameProof = getHomepageGameProof();
+
+function statusClass(game: Game) {
+  return getGameStatusLabel(game) === "Playable" ? "text-emerald" : "text-slate-300";
+}
+
+function GameProofCard({ game, large = false }: { game: Game; large?: boolean }) {
+  return (
+    <Link
+      href={`/games/${game.slug}`}
+      className={`group relative overflow-hidden border border-white/12 bg-black/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald/70 ${large ? "min-h-[420px] rounded-[1.55rem] shadow-[0_28px_90px_rgba(0,0,0,0.28)] lg:col-span-6 lg:row-span-2" : "min-h-[250px] rounded-[1.45rem] lg:col-span-6"}`}
+    >
+      <Image
+        src={getOptimizedGameArtwork(game)}
+        alt={`${game.title} artwork`}
+        fill
+        sizes="(min-width:1024px) 48vw,100vw"
+        className="object-cover transition duration-700 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+      />
+      <div className={`absolute inset-0 ${large ? "bg-[linear-gradient(180deg,rgba(3,5,7,0.02)_30%,rgba(3,5,7,0.9)_100%)]" : "bg-gradient-to-r from-black/80 via-black/20 to-black/5"}`} />
+      {large ? (
+        <div className="absolute left-5 top-5 flex flex-wrap items-center gap-2">
+          <span className="rounded-full border border-emerald/25 bg-[#07100d]/80 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-emerald backdrop-blur">{getGameStatusLabel(game)}</span>
+          <span className="rounded-full border border-white/10 bg-black/45 px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-slate-300 backdrop-blur">{getGameDemoStatusLabel(game)}</span>
+        </div>
+      ) : null}
+      <div className={`absolute inset-x-0 bottom-0 ${large ? "p-6 sm:p-8" : "p-6 sm:p-7"}`}>
+        <span className={`text-[0.62rem] font-semibold uppercase tracking-[0.17em] ${statusClass(game)}`}>{large ? game.category?.[0] || "Game title" : `${getGameStatusLabel(game)} · ${getGameDemoStatusLabel(game)}`}</span>
+        <h3 className={`mt-2 font-semibold tracking-[-0.02em] text-white ${large ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl"}`}>{game.title}</h3>
+        <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">{game.shortDescription}</p>
+        <span className="mt-5 inline-flex text-sm font-semibold text-white/85 transition group-hover:text-emerald motion-reduce:transition-none">View title →</span>
+      </div>
+    </Link>
+  );
+}
+
+export function HomepageGamesSection() {
+  const { primaryPlayable, portfolioTitle, secondaryPlayable, supporting } = gameProof;
+
+  return (
+    <section className="relative overflow-hidden border-b border-white/10 py-20 sm:py-28">
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_24%_60%,rgba(46,230,166,0.05),transparent_28rem),radial-gradient(circle_at_86%_30%,rgba(93,156,255,0.045),transparent_24rem)]" />
+      <Container className="relative">
+        <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="premium-kicker text-xs font-semibold uppercase">Selected game work</p>
+            <h2 className="mt-4 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.025em] sm:text-5xl">Playable titles and portfolio work, side by side.</h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-400">Selected OpenGamer titles across verified public demos and confirmed portfolio entries. Demo availability is explicit; portfolio titles stay visible even when there is no public demo.</p>
+          </div>
+          <div className="flex flex-wrap gap-3"><Button href="/games" variant="secondary">View All Games</Button><Button href="/contact?interest=portfolio#project-enquiry" variant="secondary">Discuss Portfolio</Button></div>
+        </div>
+
+        <div className="mt-12 grid gap-4 lg:grid-cols-12 lg:grid-rows-2">
+          {primaryPlayable ? <GameProofCard game={primaryPlayable} large /> : null}
+          {portfolioTitle ? <GameProofCard game={portfolioTitle} /> : null}
+          {secondaryPlayable ? <GameProofCard game={secondaryPlayable} /> : null}
+        </div>
+
+        <div className="mt-6 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            {supporting.length ? (
+              <div className="flex -space-x-2" aria-hidden="true">
+                {supporting.map((game) => (
+                  <span key={game.slug} className="relative h-9 w-9 overflow-hidden rounded-lg border border-[#05070a] bg-black">
+                    <Image src={getOptimizedGameArtwork(game)} alt="" fill sizes="36px" className="object-cover" />
+                  </span>
+                ))}
+              </div>
+            ) : null}
+            <p className="text-sm text-slate-400">More playable, portfolio and in-development titles continue in the full games catalogue.</p>
+          </div>
+          <Button href="/contact?interest=game#project-enquiry" variant="secondary">Discuss Custom Production</Button>
+        </div>
+      </Container>
+    </section>
+  );
+}

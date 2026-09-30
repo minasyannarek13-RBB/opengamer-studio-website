@@ -1,4 +1,13 @@
 import { NextResponse } from "next/server";
+import {
+  budgetRangeOptions,
+  companyTypes,
+  contactMethods,
+  expectedLaunchOptions,
+  numberOfGamesOptions,
+  projectStages,
+  serviceInterests
+} from "@/content/contact";
 import { deliverLead, type LeadPayload } from "@/lib/leadDelivery";
 
 const requiredFields = [
@@ -10,18 +19,65 @@ const requiredFields = [
   "consent"
 ];
 
+const fieldLimits: Record<string, number> = {
+  fullName: 120,
+  company: 160,
+  email: 254,
+  jobTitle: 160,
+  companyType: 120,
+  serviceInterest: 160,
+  projectDescription: 5_000,
+  website: 500,
+  preferredContactMethod: 40,
+  phone: 40,
+  projectStage: 120,
+  expectedLaunch: 120,
+  numberOfGames: 120,
+  existingPlatform: 240,
+  targetMarkets: 240,
+  requiredIntegration: 500,
+  budgetRange: 120,
+  sourcePage: 500,
+  contextParameter: 500,
+  referrer: 500,
+  utmSource: 200,
+  utmMedium: 200,
+  utmCampaign: 200,
+  utmContent: 200,
+  utmTerm: 200
+};
+
+const allowedOptions: Record<string, readonly string[]> = {
+  companyType: companyTypes,
+  serviceInterest: serviceInterests,
+  projectStage: projectStages,
+  expectedLaunch: expectedLaunchOptions,
+  numberOfGames: numberOfGamesOptions,
+  budgetRange: budgetRangeOptions,
+  preferredContactMethod: contactMethods
+};
+
 const rateWindowMs = 60_000;
 const rateLimit = 5;
+const maxRateBuckets = 1_000;
 const rateBuckets = new Map<string, { count: number; resetAt: number }>();
 
 export async function POST(request: Request) {
-  let payload: Record<string, string>;
+  let rawPayload: unknown;
 
   try {
-    payload = (await request.json()) as Record<string, string>;
+    rawPayload = await request.json();
   } catch {
     return NextResponse.json({ message: "Invalid request body." }, { status: 400 });
   }
+
+  if (!rawPayload || typeof rawPayload !== "object" || Array.isArray(rawPayload)) {
+    return NextResponse.json({ message: "Invalid request body." }, { status: 400 });
+  }
+
+  const payload: Record<string, string> = Object.fromEntries(
+    Object.entries(rawPayload).map(([key, value]) => [key, typeof value === "string" ? value.trim() : ""])
+  );
 
   if (payload.website_url) {
     return NextResponse.json({ message: "Request received." });
@@ -31,14 +87,47 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Too many requests. Please wait and try again." }, { status: 429 });
   }
 
-  payload = Object.fromEntries(Object.entries(payload).map(([key, value]) => [key, typeof value === "string" ? value.trim() : value]));
-
   const missing = requiredFields.filter((field) => !payload[field]);
   if (missing.length) {
     return NextResponse.json(
       {
         message: "Please complete all required fields.",
         errors: Object.fromEntries(missing.map((field) => [field, "Required"]))
+      },
+      { status: 400 }
+    );
+  }
+
+  if (payload.consent !== "on") {
+    return NextResponse.json(
+      { message: "Please confirm consent before submitting.", errors: { consent: "Consent is required." } },
+      { status: 400 }
+    );
+  }
+
+  const tooLong = Object.entries(fieldLimits)
+    .filter(([field, limit]) => (payload[field] || "").length > limit)
+    .map(([field]) => field);
+
+  if (tooLong.length) {
+    return NextResponse.json(
+      {
+        message: "Please shorten the highlighted fields and try again.",
+        errors: Object.fromEntries(tooLong.map((field) => [field, "This field is too long."]))
+      },
+      { status: 400 }
+    );
+  }
+
+  const invalidOptions = Object.entries(allowedOptions)
+    .filter(([field, options]) => payload[field] && !options.includes(payload[field]))
+    .map(([field]) => field);
+
+  if (invalidOptions.length) {
+    return NextResponse.json(
+      {
+        message: "Please select valid form options and try again.",
+        errors: Object.fromEntries(invalidOptions.map((field) => [field, "Select a valid option."]))
       },
       { status: 400 }
     );
@@ -75,8 +164,23 @@ function isRateLimited(request: Request) {
   const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   const ip = forwardedFor || request.headers.get("x-real-ip") || "unknown";
   const now = Date.now();
-  const bucket = rateBuckets.get(ip);
 
+  if (rateBuckets.size >= maxRateBuckets) {
+    for (const [key, value] of rateBuckets) {
+      if (value.resetAt <= now) {
+        rateBuckets.delete(key);
+      }
+    }
+
+    if (rateBuckets.size >= maxRateBuckets) {
+      const oldestKey = rateBuckets.keys().next().value as string | undefined;
+      if (oldestKey) {
+        rateBuckets.delete(oldestKey);
+      }
+    }
+  }
+
+  const bucket = rateBuckets.get(ip);
   if (!bucket || bucket.resetAt <= now) {
     rateBuckets.set(ip, { count: 1, resetAt: now + rateWindowMs });
     return false;
