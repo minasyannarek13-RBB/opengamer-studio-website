@@ -23,7 +23,11 @@ export const company = {
   email: publicEmail,
   description:
     "OpenGamer is an iGaming game and product development studio creating original casino games, custom content, Live Casino product concepts and integration-oriented engineering for B2B gaming teams.",
-  social: isValidLinkedInUrl(configuredLinkedInUrl) ? [{ label: "LinkedIn", href: configuredLinkedInUrl }] : [],
+  social: [
+    ...(isValidLinkedInUrl(configuredLinkedInUrl) ? [{ label: "LinkedIn", href: configuredLinkedInUrl }] : []),
+    { label: "WhatsApp Business", href: "https://wa.me/37444014422" },
+    { label: "Telegram", href: "https://t.me/+37444014422" }
+  ],
   leadership: [
     { name: "Hayk", role: "CEO" },
     { name: "Narek", role: "Business Development & Strategy" },
