@@ -48,7 +48,7 @@
 }
 
 /* Mobile navigation must behave as a true opaque navigation surface, not a translucent layer over page copy. */
-@media (max-width: 1023px) {
+@media (max-width: 1279px) {
   .mobile-nav-panel {
     position: fixed;
     inset: 5rem 0 0;
