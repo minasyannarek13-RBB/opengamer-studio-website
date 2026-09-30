@@ -115,15 +115,16 @@ export default async function GameDetailPage({ params }: GameDetailProps) {
             </div>
           </div>
 
-          <div className="relative min-h-[22rem] overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-[#050609] shadow-[0_30px_100px_rgba(0,0,0,0.35)] sm:min-h-[28rem] xl:min-h-[32rem]">
-            <Image src={game.artwork?.hero || game.image} alt={`${game.title} artwork`} fill priority className="object-cover" sizes="(min-width:1280px) 54vw,100vw" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10" />
-            <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 p-5 min-[520px]:flex-row min-[520px]:items-end min-[520px]:justify-between sm:p-7">
-              <div>
+          <div className="overflow-hidden rounded-[var(--radius-feature)] border border-white/10 bg-[#050609] shadow-[0_30px_100px_rgba(0,0,0,0.35)]">
+            <div className="relative aspect-[16/10] min-h-[22rem] sm:min-h-[28rem] xl:min-h-[32rem]">
+              <Image src={game.artwork?.hero || game.image} alt={`${game.title} artwork`} fill priority className="object-cover object-center" sizes="(min-width:1280px) 54vw,100vw" />
+            </div>
+            <div className="flex flex-col items-start gap-3 border-t border-white/10 bg-[#080a0d] p-5 min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between sm:px-7 sm:py-5">
+              <div className="min-w-0">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-emerald">{statusLabel}</p>
-                <p className="mt-1 text-sm text-slate-300">{game.artwork?.screenshots?.length || game.slug !== "lifetime" ? "Artwork from the OpenGamer game catalogue." : "OpenGamer presentation visual · final LIFETIME artwork is not published here yet."}</p>
+                <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-400">{game.artwork?.screenshots?.length || game.slug !== "lifetime" ? "Artwork from the OpenGamer game catalogue." : "LIFETIME concept artwork. Final gameplay presentation remains in development."}</p>
               </div>
-              <span className="shrink-0 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-xs font-semibold text-slate-300">{availabilityLabel}</span>
+              <span className="shrink-0 rounded-full border border-white/15 bg-white/[0.035] px-3 py-1.5 text-xs font-semibold text-slate-300">{availabilityLabel}</span>
             </div>
           </div>
         </Container>
