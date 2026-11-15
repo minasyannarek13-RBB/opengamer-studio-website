@@ -31,7 +31,7 @@ export function Header({ locale }: { locale: Locale }) {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-2 xl:gap-4 lg:flex">
           {mainNavigation.map((route) => (
             <Link
               key={route.href}
