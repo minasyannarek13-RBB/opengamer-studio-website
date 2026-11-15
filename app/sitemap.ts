@@ -13,6 +13,7 @@ const routes = [
   "/technology",
   "/about",
   "/contact",
+  "/become-an-agent",
   "/privacy-policy",
   "/terms-of-use",
   "/cookie-policy"
