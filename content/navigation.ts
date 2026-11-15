@@ -5,6 +5,7 @@ export const mainNavigation = [
   { label: "Portfolio", href: "/portfolio" },
   { label: "Technology", href: "/technology" },
   { label: "About", href: "/about" },
+  { label: "Agents", href: "/become-an-agent" },
   { label: "Contact", href: "/contact" }
 ];
 
@@ -16,6 +17,7 @@ export const footerCompanyNavigation = [
   { label: "Portfolio", href: "/portfolio" },
   { label: "Technology", href: "/technology" },
   { label: "About", href: "/about" },
+  { label: "Become an Agent", href: "/become-an-agent" },
   { label: "Contact", href: "/contact" }
 ];
 
